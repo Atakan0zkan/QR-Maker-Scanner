@@ -15,6 +15,8 @@ class HistoryScreen extends StatefulWidget {
 
 class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  bool _isSelectionMode = false;
+  final Set<String> _selectedIds = {};
 
   @override
   void initState() {
@@ -28,12 +30,69 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
     super.dispose();
   }
 
+  void _toggleSelectionMode() {
+    setState(() {
+      _isSelectionMode = !_isSelectionMode;
+      if (!_isSelectionMode) {
+        _selectedIds.clear();
+      }
+    });
+  }
+
+  void _deleteSelected(QRProvider provider) {
+    for (var id in _selectedIds) {
+      if (_tabController.index == 0) {
+        provider.deleteScannedQR(id);
+      } else {
+        provider.deleteGeneratedQR(id);
+      }
+    }
+    setState(() {
+      _selectedIds.clear();
+      _isSelectionMode = false;
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('${_selectedIds.length} QR kod silindi'),
+        backgroundColor: AppColors.success,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Geçmiş'),
+        title: Text(_isSelectionMode ? '${_selectedIds.length} seçildi' : 'Geçmiş'),
         centerTitle: true,
+        leading: _isSelectionMode
+            ? IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: _toggleSelectionMode,
+              )
+            : null,
+        actions: [
+          if (!_isSelectionMode)
+            IconButton(
+              icon: const Icon(Icons.checklist),
+              tooltip: 'Seç',
+              onPressed: _toggleSelectionMode,
+            ),
+          if (_isSelectionMode)
+            IconButton(
+              icon: const Icon(Icons.delete_outline),
+              tooltip: 'Sil',
+              onPressed: _selectedIds.isEmpty
+                  ? null
+                  : () {
+                      _showDeleteDialog(
+                        context,
+                        onConfirm: () => _deleteSelected(context.read<QRProvider>()),
+                        count: _selectedIds.length,
+                      );
+                    },
+            ),
+        ],
         bottom: TabBar(
           controller: _tabController,
           tabs: const [
@@ -66,21 +125,34 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
           itemCount: scannedQRs.length,
           itemBuilder: (context, index) {
             final qr = scannedQRs[index];
+            final isSelected = _selectedIds.contains(qr.id);
             return _buildQRCard(
+              id: qr.id,
               type: qr.type,
               content: qr.content,
               date: qr.scannedAt,
+              isSelected: isSelected,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => QRDetailScreen(
-                      content: qr.content,
-                      type: qr.type,
-                      isScanned: true,
+                if (_isSelectionMode) {
+                  setState(() {
+                    if (isSelected) {
+                      _selectedIds.remove(qr.id);
+                    } else {
+                      _selectedIds.add(qr.id);
+                    }
+                  });
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => QRDetailScreen(
+                        content: qr.content,
+                        type: qr.type,
+                        isScanned: true,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
               },
               onDelete: () {
                 _showDeleteDialog(
@@ -109,22 +181,35 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
           itemCount: generatedQRs.length,
           itemBuilder: (context, index) {
             final qr = generatedQRs[index];
+            final isSelected = _selectedIds.contains(qr.id);
             return _buildQRCard(
+              id: qr.id,
               type: qr.type,
               content: qr.content,
               date: qr.createdAt,
               title: qr.title,
+              isSelected: isSelected,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => QRDetailScreen(
-                      content: qr.content,
-                      type: qr.type,
-                      isScanned: false,
+                if (_isSelectionMode) {
+                  setState(() {
+                    if (isSelected) {
+                      _selectedIds.remove(qr.id);
+                    } else {
+                      _selectedIds.add(qr.id);
+                    }
+                  });
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => QRDetailScreen(
+                        content: qr.content,
+                        type: qr.type,
+                        isScanned: false,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
               },
               onDelete: () {
                 _showDeleteDialog(
@@ -165,15 +250,18 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
   }
 
   Widget _buildQRCard({
+    required String id,
     required QRType type,
     required String content,
     required DateTime date,
     String? title,
+    required bool isSelected,
     required VoidCallback onTap,
     required VoidCallback onDelete,
   }) {
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
+      color: isSelected ? AppColors.primary.withValues(alpha: 0.1) : null,
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(12),
@@ -181,18 +269,24 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
+              if (_isSelectionMode)
+                Checkbox(
+                  value: isSelected,
+                  onChanged: (_) => onTap(),
+                )
+              else
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    _getIconForType(type),
+                    color: AppColors.primary,
+                    size: 24,
+                  ),
                 ),
-                child: Icon(
-                  _getIconForType(type),
-                  color: AppColors.primary,
-                  size: 24,
-                ),
-              ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -212,11 +306,12 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
                   ],
                 ),
               ),
-              IconButton(
-                icon: const Icon(Icons.delete_outline),
-                onPressed: onDelete,
-                color: AppColors.error,
-              ),
+              if (!_isSelectionMode)
+                IconButton(
+                  icon: const Icon(Icons.delete_outline),
+                  onPressed: onDelete,
+                  color: AppColors.error,
+                ),
             ],
           ),
         ),
@@ -270,12 +365,14 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
     }
   }
 
-  void _showDeleteDialog(BuildContext context, {required VoidCallback onConfirm}) {
+  void _showDeleteDialog(BuildContext context, {required VoidCallback onConfirm, int? count}) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Silme Onayı'),
-        content: const Text('Bu öğeyi silmek istediğinizden emin misiniz?'),
+        content: Text(count != null && count > 1
+            ? '$count öğeyi silmek istediğinizden emin misiniz?'
+            : 'Bu öğeyi silmek istediğinizden emin misiniz?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),

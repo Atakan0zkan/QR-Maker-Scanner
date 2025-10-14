@@ -6,9 +6,11 @@ import 'l10n/app_localizations.dart';
 
 import 'core/theme/app_theme.dart';
 import 'providers/theme_provider.dart';
+import 'providers/locale_provider.dart';
 import 'providers/qr_provider.dart';
 import 'services/database_service.dart';
 import 'services/ad_service.dart';
+import 'services/network_service.dart';
 import 'screens/main_screen.dart';
 
 void main() async {
@@ -17,6 +19,9 @@ void main() async {
   // Initialize services
   await DatabaseService.init();
   await AdService.initialize();
+  
+  // Start network monitoring
+  NetworkService().startMonitoring();
   
   // Set system UI overlay style
   SystemChrome.setSystemUIOverlayStyle(
@@ -36,16 +41,18 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
         ChangeNotifierProvider(create: (_) => QRProvider()),
       ],
-      child: Consumer<ThemeProvider>(
-        builder: (context, themeProvider, _) {
+      child: Consumer2<ThemeProvider, LocaleProvider>(
+        builder: (context, themeProvider, localeProvider, _) {
           return MaterialApp(
             title: 'QR Scanner',
             debugShowCheckedModeBanner: false,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: themeProvider.themeMode,
+            locale: localeProvider.locale,
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -60,6 +67,9 @@ class MyApp extends StatelessWidget {
               Locale('fr'),
               Locale('it'),
               Locale('el'),
+              Locale('ar'),
+              Locale('zh'),
+              Locale('ja'),
             ],
             home: const MainScreen(),
           );

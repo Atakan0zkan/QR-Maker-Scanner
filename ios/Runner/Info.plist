@@ -45,5 +45,41 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	
+	<!-- Camera Permission -->
+	<key>NSCameraUsageDescription</key>
+	<string>QR kodları taramak için kamera erişimine ihtiyacımız var.</string>
+	
+	<!-- Photo Library Permission -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>QR kodlarını kaydetmek için fotoğraf kütüphanesine erişim gerekli.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>QR kodlarını fotoğraf kütüphanesine kaydetmek için izin gerekli.</string>
+	
+	<!-- App Transport Security -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	
+	<!-- Supported Orientations -->
+	<key>UIStatusBarHidden</key>
+	<false/>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	
+	<!-- Google Mobile Ads -->
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<!-- TODO: AdMob konsoldan iOS app oluştur ve gerçek App ID'yi buraya ekle -->
+	
+	<key>SKAdNetworkItems</key>
+	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>cstr6suwn9.skadnetwork</string>
+		</dict>
+	</array>
 </dict>
 </plist>

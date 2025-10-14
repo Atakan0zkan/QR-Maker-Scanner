@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
+import 'dart:io';
+import 'dart:ui' as ui;
+import 'package:flutter/rendering.dart';
+import 'package:path_provider/path_provider.dart';
 import '../models/qr_type.dart';
 import '../providers/qr_provider.dart';
 import '../services/qr_helper.dart';
@@ -16,6 +22,7 @@ class CreateScreen extends StatefulWidget {
 class _CreateScreenState extends State<CreateScreen> {
   QRType _selectedType = QRType.url;
   final _formKey = GlobalKey<FormState>();
+  final _qrKey = GlobalKey();
   
   // Common fields
   final _urlController = TextEditingController();
@@ -289,14 +296,6 @@ class _CreateScreenState extends State<CreateScreen> {
           ),
           keyboardType: TextInputType.emailAddress,
         ),
-        const SizedBox(height: 16),
-        TextFormField(
-          controller: _companyController,
-          decoration: const InputDecoration(
-            labelText: 'Şirket (Opsiyonel)',
-            prefixIcon: Icon(Icons.business),
-          ),
-        ),
       ],
     );
   }
@@ -391,35 +390,92 @@ class _CreateScreenState extends State<CreateScreen> {
       children: [
         TextFormField(
           controller: _latitudeController,
-          decoration: const InputDecoration(
-            labelText: 'Enlem (Latitude)',
-            prefixIcon: Icon(Icons.location_on),
+          decoration: InputDecoration(
+            labelText: 'Konum Ara (Google Maps)',
+            hintText: 'Örn: Galata Kulesi, İstanbul',
+            prefixIcon: const Icon(Icons.search),
+            suffixIcon: IconButton(
+              icon: const Icon(Icons.map),
+              tooltip: 'Google Maps\'te Ara',
+              onPressed: _openGoogleMapsSearch,
+            ),
           ),
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          keyboardType: TextInputType.text,
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'Enlem gerekli';
+              return 'Konum gerekli';
             }
             return null;
           },
         ),
-        const SizedBox(height: 16),
-        TextFormField(
-          controller: _longitudeController,
-          decoration: const InputDecoration(
-            labelText: 'Boylam (Longitude)',
-            prefixIcon: Icon(Icons.location_on),
+        const SizedBox(height: 8),
+        Text(
+          'Google Maps\'te arama yapın ve konumu seçin',
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.grey[600],
           ),
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Boylam gerekli';
-            }
-            return null;
-          },
+        ),
+        const SizedBox(height: 16),
+        ExpansionTile(
+          title: const Text('Veya Koordinat Gir'),
+          children: [
+            const SizedBox(height: 8),
+            TextFormField(
+              controller: _longitudeController,
+              decoration: const InputDecoration(
+                labelText: 'Enlem, Boylam',
+                hintText: '41.0082, 28.9784',
+                prefixIcon: Icon(Icons.location_on),
+              ),
+              keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Format: enlem, boylam (örn: 41.0082, 28.9784)',
+              style: TextStyle(
+                fontSize: 11,
+                color: Colors.grey[600],
+              ),
+            ),
+          ],
         ),
       ],
     );
+  }
+  
+  Future<void> _openGoogleMapsSearch() async {
+    final query = _latitudeController.text.trim();
+    if (query.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Lütfen bir konum adı girin')),
+      );
+      return;
+    }
+    
+    // Google Maps arama URL'i
+    final encodedQuery = Uri.encodeComponent(query);
+    final url = Uri.parse('https://www.google.com/maps/search/?api=1&query=$encodedQuery');
+    
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+      
+      // Kullanıcıya bilgi ver
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Google Maps\'te konumu seçtikten sonra URL\'yi kopyalayıp buraya yapıştırın'),
+            duration: Duration(seconds: 4),
+          ),
+        );
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Google Maps açılamadı')),
+        );
+      }
+    }
   }
 
   Widget _buildSocialForm() {
@@ -446,17 +502,20 @@ class _CreateScreenState extends State<CreateScreen> {
         padding: const EdgeInsets.all(24),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: QrImageView(
-                data: _generatedQRData!,
-                version: QrVersions.auto,
-                size: 250,
-                backgroundColor: Colors.white,
+            RepaintBoundary(
+              key: _qrKey,
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: QrImageView(
+                  data: _generatedQRData!,
+                  version: QrVersions.auto,
+                  size: 250,
+                  backgroundColor: Colors.white,
+                ),
               ),
             ),
             const SizedBox(height: 24),
@@ -507,7 +566,6 @@ class _CreateScreenState extends State<CreateScreen> {
           name: _nameController.text,
           phone: _phoneController.text.isEmpty ? null : _phoneController.text,
           email: _emailController.text.isEmpty ? null : _emailController.text,
-          company: _companyController.text.isEmpty ? null : _companyController.text,
         );
         break;
       case QRType.email:
@@ -527,16 +585,34 @@ class _CreateScreenState extends State<CreateScreen> {
         qrData = QRHelper.formatPhoneQR(_phoneNumberController.text);
         break;
       case QRType.location:
-        try {
-          qrData = QRHelper.formatLocationQR(
-            latitude: double.parse(_latitudeController.text),
-            longitude: double.parse(_longitudeController.text),
-          );
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Geçersiz koordinat formatı')),
-          );
-          return;
+        final locationInput = _latitudeController.text.trim();
+        
+        // Google Maps linki mi kontrol et
+        if (locationInput.contains('google.com/maps') || locationInput.contains('goo.gl/maps')) {
+          qrData = locationInput;
+        } 
+        // Koordinat girişi mi kontrol et
+        else if (_longitudeController.text.isNotEmpty) {
+          try {
+            final coords = _longitudeController.text.split(',');
+            if (coords.length == 2) {
+              final lat = double.parse(coords[0].trim());
+              final lon = double.parse(coords[1].trim());
+              qrData = QRHelper.formatLocationQR(latitude: lat, longitude: lon);
+            } else {
+              throw FormatException('Geçersiz format');
+            }
+          } catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Geçersiz koordinat formatı. Örnek: 41.0082, 28.9784')),
+            );
+            return;
+          }
+        }
+        // Konum adı girilmiş, Google Maps linki oluştur
+        else {
+          final encodedQuery = Uri.encodeComponent(locationInput);
+          qrData = 'https://www.google.com/maps/search/?api=1&query=$encodedQuery';
         }
         break;
       case QRType.social:
@@ -589,9 +665,41 @@ class _CreateScreenState extends State<CreateScreen> {
     }
   }
 
-  void _shareQR() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Paylaşım özelliği yakında eklenecek')),
-    );
+  Future<void> _shareQR() async {
+    if (_generatedQRData == null) return;
+    
+    try {
+      // QR kod widget'ını resme dönüştür
+      final boundary = _qrKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final image = await boundary.toImage(pixelRatio: 3.0);
+      final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      final pngBytes = byteData!.buffer.asUint8List();
+      
+      // Geçici dosya oluştur
+      final tempDir = await getTemporaryDirectory();
+      final file = File('${tempDir.path}/qr_code.png');
+      await file.writeAsBytes(pngBytes);
+      
+      // Paylaş
+      await Share.shareXFiles(
+        [XFile(file.path)],
+        text: 'QR Kod: ${_getQRTitle()}\n\n$_generatedQRData',
+      );
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('QR kod paylaşıldı'),
+            backgroundColor: AppColors.success,
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Paylaşım hatası: $e')),
+        );
+      }
+    }
   }
 }

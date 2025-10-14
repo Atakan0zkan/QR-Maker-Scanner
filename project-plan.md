@@ -3,7 +3,8 @@
 **Proje Başlangıç Tarihi:** 10 Ekim 2025  
 **Platform:** Flutter  
 **Test Ortamı:** Android Studio  
-**Durum:** 🚧 Geliştirme Aşamasında
+**Durum:** ✅ Temel Özellikler Tamamlandı  
+**Son Güncelleme:** 14 Ekim 2025
 
 ---
 
@@ -91,8 +92,8 @@ Kullanıcı dostu, hızlı ve sağlam bir QR kod tarayıcı ve oluşturucu mobil
 
 ## 🌍 Dil Desteği
 
-1. 🇹🇷 Türkçe (Varsayılan)
-2. 🇬🇧 İngilizce
+1. 🇬🇧 İngilizce (Varsayılan)
+2. 🇹🇷 Türkçe
 3. 🇪🇸 İspanyolca
 4. 🇩🇪 Almanca
 5. 🇫🇷 Fransızca
@@ -308,13 +309,68 @@ backgroundDark: #101922
 
 ## 🔨 Yapılacaklar
 
-- [ ] `flutter pub get` çalıştır
-- [ ] `flutter pub run build_runner build --delete-conflicting-outputs` çalıştır
-- [ ] `flutter gen-l10n` çalıştır
-- [ ] Uygulamayı test et
-- [ ] Hataları düzelt
+- [x] `flutter pub get` çalıştır
+- [x] `flutter pub run build_runner build --delete-conflicting-outputs` çalıştır
+- [x] `flutter gen-l10n` çalıştır
+- [x] Uygulamayı test et
+- [x] Hataları düzelt
+- [x] Default dil İngilizce yap
+- [x] Scanner ses problemi düzelt
 - [ ] Export/Import özellikleri ekle (opsiyonel)
+- [ ] Gelişmiş özellikler ekle (FEATURE_IDEAS.md'ye bakın)
 
 ---
 
-**Son Güncelleme:** 10 Ekim 2025, 10:47
+## 📝 Son Değişiklikler (14 Ekim 2025)
+
+### ✅ v1.1.0 - Yeni Özellikler ve İyileştirmeler
+
+#### 🆕 Yeni Özellikler
+1. **QR Kod Paylaşma:** QR kodları resim ve metin olarak paylaşılabilir
+2. **Google Maps Entegrasyonu:** Konum QR kodları için kullanıcı dostu arama
+3. **Genişletilmiş Dil Desteği:** Arapça, Çince, Japonca eklendi (toplam 10 dil)
+4. **Basitleştirilmiş Kişi Formu:** Şirket alanı kaldırıldı
+
+#### 🐛 Düzeltilen Hatalar
+1. **Default Dil:** Uygulama artık İngilizce ile başlıyor
+2. **Scanner Sesi:** "Tara" butonuna basınca çoklu ses sorunu çözüldü
+3. **Bildirimler Butonu:** Gereksiz "Bildirimler" butonu kaldırıldı
+4. **Otomatik Dil Algılama:** Uygulama sistem diline göre otomatik açılıyor
+
+### 📄 Yeni Dosyalar
+- `FEATURE_IDEAS.md` - 20 adet özellik fikri ve roadmap (güncellenmiş)
+- `lib/l10n/app_ar.arb` - Arapça çeviriler
+- `lib/l10n/app_zh.arb` - Çince çeviriler
+- `lib/l10n/app_ja.arb` - Japonca çeviriler
+
+### 🔧 Değiştirilen Dosyalar
+- `lib/screens/create_screen.dart` - QR paylaşma, Google Maps entegrasyonu
+- `lib/screens/qr_detail_screen.dart` - QR içerik paylaşma
+- `lib/services/qr_helper.dart` - Şirket parametresi kaldırıldı
+- `lib/providers/locale_provider.dart` - 3 yeni dil eklendi
+- `lib/main.dart` - supportedLocales güncellendi
+- `README.md` - Yeni özellikler eklendi
+- `bug-log.md` - v1.1.0 özellikleri eklendi
+- `FEATURE_IDEAS.md` - Gereksiz özellikler silindi
+
+### 🌍 Dil Sistemi
+- **Otomatik Algılama:** Kullanıcının sistem dili otomatik tespit ediliyor
+- **Desteklenen Diller:** İngilizce, Türkçe, İspanyolca, Almanca, Fransızca, İtalyanca, Yunanca, Arapça, Çince, Japonca (10 dil)
+- **Fallback:** Desteklenmeyen diller için İngilizce
+- **Manuel Seçim:** Kaldırıldı (daha basit UX)
+
+### 📍 Google Maps Entegrasyonu
+- Konum adı ile arama (örn: "Galata Kulesi, İstanbul")
+- Google Maps'te konum seçme
+- Koordinat girişi (opsiyonel)
+- Otomatik Google Maps linki oluşturma
+
+### 📤 QR Paylaşma Özellikleri
+- QR kodunu resim olarak paylaşma
+- QR içeriğini metin olarak paylaşma
+- WhatsApp, Telegram, Email, vb. entegrasyonu
+- Yüksek çözünürlüklü PNG export
+
+---
+
+**Son Güncelleme:** 14 Ekim 2025, 14:42

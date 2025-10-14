@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
+import '../services/network_service.dart';
 import '../core/constants/app_colors.dart';
+import 'privacy_policy_screen.dart';
+import 'terms_of_service_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -16,28 +19,62 @@ class SettingsScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          // Network Status Indicator
+          StreamBuilder<bool>(
+            stream: NetworkService().connectivityStream,
+            initialData: NetworkService().isOnline,
+            builder: (context, snapshot) {
+              final isOnline = snapshot.data ?? true;
+              return Container(
+                margin: const EdgeInsets.only(bottom: 16),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: isOnline 
+                      ? Colors.green.withValues(alpha: 0.1)
+                      : Colors.orange.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: isOnline ? Colors.green : Colors.orange,
+                    width: 1,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      isOnline ? Icons.wifi : Icons.wifi_off,
+                      color: isOnline ? Colors.green : Colors.orange,
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            isOnline ? 'Çevrimiçi' : 'Çevrimdışı Mod',
+                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: isOnline ? Colors.green : Colors.orange,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            isOnline 
+                                ? 'İnternet bağlantısı aktif'
+                                : 'Tüm özellikler çevrimdışı çalışıyor',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
           _buildSection(
             context,
             title: 'Genel',
             children: [
-              _buildSettingTile(
-                context,
-                icon: Icons.notifications_outlined,
-                title: 'Bildirimler',
-                subtitle: 'Uygulama içi bildirimleri yönetin',
-                onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Bildirim ayarları yakında eklenecek')),
-                  );
-                },
-              ),
-              _buildSettingTile(
-                context,
-                icon: Icons.language,
-                title: 'Dil',
-                subtitle: 'Uygulama dilini değiştirin',
-                onTap: () => _showLanguageDialog(context),
-              ),
               _buildThemeTile(context),
             ],
           ),
@@ -52,8 +89,11 @@ class SettingsScreen extends StatelessWidget {
                 title: 'Gizlilik Politikası',
                 subtitle: 'Gizlilik politikasını görüntüleyin',
                 onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Gizlilik politikası yakında eklenecek')),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PrivacyPolicyScreen(),
+                    ),
                   );
                 },
               ),
@@ -63,8 +103,11 @@ class SettingsScreen extends StatelessWidget {
                 title: 'Hizmet Şartları',
                 subtitle: 'Kullanım koşullarını görüntüleyin',
                 onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Hizmet şartları yakında eklenecek')),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TermsOfServiceScreen(),
+                    ),
                   );
                 },
               ),
@@ -126,7 +169,7 @@ class SettingsScreen extends StatelessWidget {
       leading: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: AppColors.primary.withOpacity(0.1),
+          color: AppColors.primary.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Icon(
@@ -149,7 +192,7 @@ class SettingsScreen extends StatelessWidget {
           leading: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.1),
+              color: AppColors.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Icon(
@@ -183,72 +226,50 @@ class SettingsScreen extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Tema Seç'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            RadioListTile<ThemeMode>(
-              title: const Text('Açık'),
-              value: ThemeMode.light,
-              groupValue: themeProvider.themeMode,
-              onChanged: (value) {
-                themeProvider.setThemeMode(value!);
-                Navigator.pop(context);
-              },
-            ),
-            RadioListTile<ThemeMode>(
-              title: const Text('Koyu'),
-              value: ThemeMode.dark,
-              groupValue: themeProvider.themeMode,
-              onChanged: (value) {
-                themeProvider.setThemeMode(value!);
-                Navigator.pop(context);
-              },
-            ),
-            RadioListTile<ThemeMode>(
-              title: const Text('Sistem'),
-              value: ThemeMode.system,
-              groupValue: themeProvider.themeMode,
-              onChanged: (value) {
-                themeProvider.setThemeMode(value!);
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _showLanguageDialog(BuildContext context) {
-    final languages = {
-      'tr': 'Türkçe',
-      'en': 'English',
-      'es': 'Español',
-      'de': 'Deutsch',
-      'fr': 'Français',
-      'it': 'Italiano',
-      'el': 'Ελληνικά',
-    };
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Dil Seç'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: languages.entries.map((entry) {
-            return ListTile(
-              title: Text(entry.value),
-              onTap: () {
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('${entry.value} seçildi')),
-                );
-              },
+        content: StatefulBuilder(
+          builder: (context, setState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                RadioListTile<ThemeMode>(
+                  title: const Text('Açık'),
+                  value: ThemeMode.light,
+                  groupValue: themeProvider.themeMode,
+                  onChanged: (value) {
+                    if (value != null) {
+                      themeProvider.setThemeMode(value);
+                      Navigator.pop(context);
+                    }
+                  },
+                ),
+                RadioListTile<ThemeMode>(
+                  title: const Text('Koyu'),
+                  value: ThemeMode.dark,
+                  groupValue: themeProvider.themeMode,
+                  onChanged: (value) {
+                    if (value != null) {
+                      themeProvider.setThemeMode(value);
+                      Navigator.pop(context);
+                    }
+                  },
+                ),
+                RadioListTile<ThemeMode>(
+                  title: const Text('Sistem'),
+                  value: ThemeMode.system,
+                  groupValue: themeProvider.themeMode,
+                  onChanged: (value) {
+                    if (value != null) {
+                      themeProvider.setThemeMode(value);
+                      Navigator.pop(context);
+                    }
+                  },
+                ),
+              ],
             );
-          }).toList(),
+          },
         ),
       ),
     );
   }
+
 }

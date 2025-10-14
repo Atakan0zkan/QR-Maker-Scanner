@@ -45,7 +45,7 @@ class _ScannerOverlayState extends State<ScannerOverlay>
         // Dark overlay
         ColorFiltered(
           colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.5),
+            Colors.black.withValues(alpha: 0.5),
             BlendMode.srcOut,
           ),
           child: Stack(
@@ -163,7 +163,7 @@ class _ScannerOverlayState extends State<ScannerOverlay>
                           color: AppColors.primary,
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.primary.withOpacity(0.7),
+                              color: AppColors.primary.withValues(alpha: 0.7),
                               blurRadius: 10,
                               spreadRadius: 2,
                             ),

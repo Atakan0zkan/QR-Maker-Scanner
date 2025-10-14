@@ -20,6 +20,8 @@ class _ScannerScreenState extends State<ScannerScreen>
   MobileScannerController? _controller;
   bool _hasPermission = false;
   bool _isProcessing = false;
+  bool _isMultiScanMode = false;
+  final List<Map<String, dynamic>> _scannedCodes = [];
 
   @override
   void initState() {
@@ -66,6 +68,8 @@ class _ScannerScreenState extends State<ScannerScreen>
   }
 
   void _initializeController() {
+    if (_controller != null) return; // Zaten var ise yeniden oluşturma
+    
     _controller = MobileScannerController(
       detectionSpeed: DetectionSpeed.noDuplicates,
     );
@@ -80,7 +84,7 @@ class _ScannerScreenState extends State<ScannerScreen>
   }
 
   void _onDetect(BarcodeCapture capture) {
-    if (_isProcessing) return;
+    if (_isProcessing && !_isMultiScanMode) return;
 
     final List<Barcode> barcodes = capture.barcodes;
     if (barcodes.isEmpty) return;
@@ -90,33 +94,175 @@ class _ScannerScreenState extends State<ScannerScreen>
 
     if (code == null || code.isEmpty) return;
 
-    setState(() {
-      _isProcessing = true;
-    });
-
     final qrType = QRHelper.detectQRType(code);
 
-    // Save to database
-    context.read<QRProvider>().addScannedQR(content: code, type: qrType);
-
-    // Navigate to detail screen
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) =>
-            QRDetailScreen(content: code, type: qrType, isScanned: true),
-      ),
-    ).then((_) {
+    if (_isMultiScanMode) {
+      // Toplu tarama modu - listeye ekle
+      final alreadyScanned = _scannedCodes.any((item) => item['content'] == code);
+      if (!alreadyScanned) {
+        setState(() {
+          _scannedCodes.add({
+            'content': code,
+            'type': qrType,
+            'timestamp': DateTime.now(),
+          });
+        });
+        
+        // Save to database
+        context.read<QRProvider>().addScannedQR(content: code, type: qrType);
+      }
+    } else {
+      // Normal tarama modu
       setState(() {
-        _isProcessing = false;
+        _isProcessing = true;
       });
+
+      // Save to database
+      context.read<QRProvider>().addScannedQR(content: code, type: qrType);
+
+      // Navigate to detail screen
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              QRDetailScreen(content: code, type: qrType, isScanned: true),
+        ),
+      ).then((_) {
+        setState(() {
+          _isProcessing = false;
+        });
+      });
+    }
+  }
+
+  void _toggleMultiScanMode() {
+    setState(() {
+      _isMultiScanMode = !_isMultiScanMode;
+      if (!_isMultiScanMode) {
+        _scannedCodes.clear();
+      }
     });
+  }
+
+  void _showScannedList() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.7,
+        minChildSize: 0.5,
+        maxChildSize: 0.95,
+        expand: false,
+        builder: (context, scrollController) {
+          return Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+            ),
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 12),
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Taranan QR Kodlar (${_scannedCodes.length})',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: _scannedCodes.isEmpty
+                      ? const Center(child: Text('Henüz QR kod taranmadı'))
+                      : ListView.builder(
+                          controller: scrollController,
+                          itemCount: _scannedCodes.length,
+                          itemBuilder: (context, index) {
+                            final item = _scannedCodes[index];
+                            return ListTile(
+                              leading: Icon(QRHelper.getQRIcon(item['type'])),
+                              title: Text(
+                                item['content'],
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              subtitle: Text(QRHelper.getQRTypeLabel(item['type'])),
+                              trailing: IconButton(
+                                icon: const Icon(Icons.delete_outline),
+                                onPressed: () {
+                                  setState(() {
+                                    _scannedCodes.removeAt(index);
+                                  });
+                                  Navigator.pop(context);
+                                  if (_scannedCodes.isNotEmpty) {
+                                    _showScannedList();
+                                  }
+                                },
+                              ),
+                              onTap: () {
+                                Navigator.pop(context);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => QRDetailScreen(
+                                      content: item['content'],
+                                      type: item['type'],
+                                      isScanned: true,
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('QR Scanner'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text('QR Scanner'),
+        centerTitle: true,
+        actions: [
+          if (_hasPermission)
+            IconButton(
+              icon: Icon(_isMultiScanMode ? Icons.qr_code_scanner : Icons.qr_code_2),
+              tooltip: _isMultiScanMode ? 'Normal Mod' : 'Toplu Tarama',
+              onPressed: _toggleMultiScanMode,
+            ),
+          if (_isMultiScanMode && _scannedCodes.isNotEmpty)
+            IconButton(
+              icon: Badge(
+                label: Text('${_scannedCodes.length}'),
+                child: const Icon(Icons.list),
+              ),
+              tooltip: 'Taranan Kodlar',
+              onPressed: _showScannedList,
+            ),
+        ],
+      ),
       body: !_hasPermission
           ? Center(
               child: Column(
@@ -164,7 +310,7 @@ class _ScannerScreenState extends State<ScannerScreen>
                         vertical: 12,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.6),
+                        color: Colors.black.withValues(alpha: 0.6),
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: Text(

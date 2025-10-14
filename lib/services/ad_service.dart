@@ -1,38 +1,60 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdService {
+  // Android ve iOS destekleniyor
   static String get bannerAdUnitId {
     if (Platform.isAndroid) {
-      // Test ID for development
-      return 'ca-app-pub-3940256099942544/6300978111';
-      // Replace with your actual AdMob ID for production:
-      // return 'ca-app-pub-XXXXXXXXXXXXXXXX/YYYYYYYYYY';
+      // Production AdMob ID (Android)
+      return 'ca-app-pub-8966682109895515/8906178061';
     } else if (Platform.isIOS) {
-      // Test ID for development
-      return 'ca-app-pub-3940256099942544/2934735716';
-      // Replace with your actual AdMob ID for production:
-      // return 'ca-app-pub-XXXXXXXXXXXXXXXX/YYYYYYYYYY';
+      // TODO: AdMob konsoldan iOS app oluştur ve gerçek ID'yi buraya ekle
+      // Şimdilik test ID kullanılıyor
+      return 'ca-app-pub-3940256099942544/2934735716'; // Test ID
     }
-    throw UnsupportedError('Unsupported platform');
+    throw UnsupportedError('Desteklenmeyen platform');
   }
 
   static Future<void> initialize() async {
-    await MobileAds.instance.initialize();
+    if (Platform.isAndroid || Platform.isIOS) {
+      await MobileAds.instance.initialize();
+      if (kDebugMode) {
+        print('✅ AdMob initialized successfully (${Platform.isAndroid ? "Android" : "iOS"})');
+      }
+    }
   }
 
   static BannerAd createBannerAd() {
+    if (kDebugMode) {
+      print('🔄 Creating banner ad with ID: $bannerAdUnitId');
+    }
+    
     return BannerAd(
       adUnitId: bannerAdUnitId,
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (ad) {
-          print('Banner ad loaded');
+          if (kDebugMode) {
+            print('✅ Banner ad loaded successfully');
+          }
         },
         onAdFailedToLoad: (ad, error) {
-          print('Banner ad failed to load: $error');
+          if (kDebugMode) {
+            print('❌ Banner ad failed to load: ${error.message} (Code: ${error.code})');
+          }
           ad.dispose();
+        },
+        onAdOpened: (ad) {
+          if (kDebugMode) {
+            print('📱 Banner ad opened');
+          }
+        },
+        onAdClosed: (ad) {
+          if (kDebugMode) {
+            print('🔒 Banner ad closed');
+          }
         },
       ),
     );

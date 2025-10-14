@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import '../models/qr_type.dart';
 
 class QRHelper {
@@ -38,8 +39,9 @@ class QRHelper {
       return QRType.phone;
     }
     
-    // Location detection
-    if (content.startsWith('geo:') || content.startsWith('GEO:')) {
+    // Location detection (geo:, Google Maps, Apple Maps)
+    if (content.startsWith('geo:') || content.startsWith('GEO:') ||
+        _isGoogleMapsLink(content) || _isAppleMapsLink(content)) {
       return QRType.location;
     }
     
@@ -75,6 +77,18 @@ class QRHelper {
     return socialDomains.any((domain) => url.toLowerCase().contains(domain));
   }
 
+  static bool _isGoogleMapsLink(String url) {
+    return url.contains('google.com/maps') || 
+           url.contains('goo.gl/maps') ||
+           url.contains('maps.app.goo.gl');
+  }
+
+  static bool _isAppleMapsLink(String url) {
+    return url.contains('maps.apple.com') || 
+           url.startsWith('http://maps.apple.com') ||
+           url.startsWith('https://maps.apple.com');
+  }
+
   static String formatWiFiQR({
     required String ssid,
     required String password,
@@ -87,7 +101,6 @@ class QRHelper {
     required String name,
     String? phone,
     String? email,
-    String? company,
   }) {
     final buffer = StringBuffer('BEGIN:VCARD\nVERSION:3.0\n');
     buffer.write('FN:$name\n');
@@ -96,9 +109,6 @@ class QRHelper {
     }
     if (email != null && email.isNotEmpty) {
       buffer.write('EMAIL:$email\n');
-    }
-    if (company != null && company.isNotEmpty) {
-      buffer.write('ORG:$company\n');
     }
     buffer.write('END:VCARD');
     return buffer.toString();
@@ -147,6 +157,59 @@ class QRHelper {
     return 'geo:$latitude,$longitude';
   }
 
+  /// Extract coordinates from Google Maps or Apple Maps link
+  static String? formatLocationFromMapsLink(String url) {
+    // Google Maps: https://maps.google.com/?q=41.0082,28.9784
+    // Google Maps: https://www.google.com/maps/place/41.0082,28.9784
+    // Apple Maps: https://maps.apple.com/?ll=41.0082,28.9784
+    
+    try {
+      final uri = Uri.parse(url);
+      
+      // Google Maps - q parameter
+      if (uri.queryParameters.containsKey('q')) {
+        final coords = uri.queryParameters['q']!.split(',');
+        if (coords.length == 2) {
+          final lat = double.tryParse(coords[0].trim());
+          final lng = double.tryParse(coords[1].trim());
+          if (lat != null && lng != null) {
+            return 'geo:$lat,$lng';
+          }
+        }
+      }
+      
+      // Apple Maps - ll parameter
+      if (uri.queryParameters.containsKey('ll')) {
+        final coords = uri.queryParameters['ll']!.split(',');
+        if (coords.length == 2) {
+          final lat = double.tryParse(coords[0].trim());
+          final lng = double.tryParse(coords[1].trim());
+          if (lat != null && lng != null) {
+            return 'geo:$lat,$lng';
+          }
+        }
+      }
+      
+      // Google Maps - path format /place/lat,lng
+      if (url.contains('/place/')) {
+        final placeMatch = RegExp(r'/place/(-?\d+\.\d+),(-?\d+\.\d+)').firstMatch(url);
+        if (placeMatch != null) {
+          return 'geo:${placeMatch.group(1)},${placeMatch.group(2)}';
+        }
+      }
+      
+      // Google Maps - @lat,lng format
+      final atMatch = RegExp(r'@(-?\d+\.\d+),(-?\d+\.\d+)').firstMatch(url);
+      if (atMatch != null) {
+        return 'geo:${atMatch.group(1)},${atMatch.group(2)}';
+      }
+    } catch (e) {
+      return null;
+    }
+    
+    return null;
+  }
+
   static Map<String, String>? parseWiFiQR(String content) {
     if (!content.startsWith('WIFI:')) return null;
     
@@ -164,9 +227,17 @@ class QRHelper {
   }
 
   static Map<String, String>? parseLocationQR(String content) {
-    if (!content.toLowerCase().startsWith('geo:')) return null;
+    String? geoContent = content;
     
-    final coords = content.substring(4).split(',');
+    // If it's a Maps link, convert to geo format first
+    if (_isGoogleMapsLink(content) || _isAppleMapsLink(content)) {
+      geoContent = formatLocationFromMapsLink(content);
+      if (geoContent == null) return null;
+    }
+    
+    if (!geoContent.toLowerCase().startsWith('geo:')) return null;
+    
+    final coords = geoContent.substring(4).split(',');
     if (coords.length >= 2) {
       return {
         'latitude': coords[0].trim(),
@@ -174,5 +245,53 @@ class QRHelper {
       };
     }
     return null;
+  }
+
+  // QR Type Icon
+  static IconData getQRIcon(QRType type) {
+    switch (type) {
+      case QRType.url:
+        return Icons.link;
+      case QRType.text:
+        return Icons.text_fields;
+      case QRType.wifi:
+        return Icons.wifi;
+      case QRType.contact:
+        return Icons.person;
+      case QRType.email:
+        return Icons.email;
+      case QRType.sms:
+        return Icons.sms;
+      case QRType.phone:
+        return Icons.phone;
+      case QRType.location:
+        return Icons.location_on;
+      case QRType.social:
+        return Icons.share;
+    }
+  }
+
+  // QR Type Label
+  static String getQRTypeLabel(QRType type) {
+    switch (type) {
+      case QRType.url:
+        return 'URL';
+      case QRType.text:
+        return 'Metin';
+      case QRType.wifi:
+        return 'WiFi';
+      case QRType.contact:
+        return 'Kişi';
+      case QRType.email:
+        return 'E-posta';
+      case QRType.sms:
+        return 'SMS';
+      case QRType.phone:
+        return 'Telefon';
+      case QRType.location:
+        return 'Konum';
+      case QRType.social:
+        return 'Sosyal Medya';
+    }
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../services/ad_service.dart';
@@ -28,16 +30,38 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    _loadBannerAd();
+    // Android ve iOS'ta reklam yükle
+    if (Platform.isAndroid || Platform.isIOS) {
+      _loadBannerAd();
+    }
   }
 
   void _loadBannerAd() {
-    _bannerAd = AdService.createBannerAd()
-      ..load().then((_) {
-        setState(() {
-          _isBannerAdLoaded = true;
-        });
+    try {
+      if (kDebugMode) {
+        print('🔄 Loading banner ad...');
+      }
+      
+      _bannerAd = AdService.createBannerAd();
+      _bannerAd!.load().then((_) {
+        if (mounted) {
+          setState(() {
+            _isBannerAdLoaded = true;
+          });
+          if (kDebugMode) {
+            print('✅ Banner ad loaded and displayed');
+          }
+        }
+      }).catchError((error) {
+        if (kDebugMode) {
+          print('❌ Error loading banner ad: $error');
+        }
       });
+    } catch (e) {
+      if (kDebugMode) {
+        print('❌ Exception while creating banner ad: $e');
+      }
+    }
   }
 
   @override
@@ -65,7 +89,7 @@ class _MainScreenState extends State<MainScreen> {
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: Theme.of(context).dividerColor.withOpacity(0.1),
+                  color: Theme.of(context).dividerColor.withValues(alpha: 0.1),
                   width: 1,
                 ),
               ),

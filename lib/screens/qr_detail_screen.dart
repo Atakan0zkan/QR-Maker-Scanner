@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
 import '../models/qr_type.dart';
 import '../services/qr_helper.dart';
 import '../core/constants/app_colors.dart';
@@ -104,7 +105,7 @@ class QRDetailScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.1),
+                color: AppColors.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
@@ -314,9 +315,16 @@ class QRDetailScreen extends StatelessWidget {
   }
 
   void _share(BuildContext context) {
-    // Implement share functionality
+    Share.share(
+      content,
+      subject: 'QR Kod - ${_getTitle()}',
+    );
+    
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Paylaşım özelliği yakında eklenecek')),
+      const SnackBar(
+        content: Text('QR kod içeriği paylaşıldı'),
+        backgroundColor: AppColors.success,
+      ),
     );
   }
 

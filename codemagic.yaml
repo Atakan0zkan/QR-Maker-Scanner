@@ -1,0 +1,181 @@
+workflows:
+  # Android Build Workflow
+  android-workflow:
+    name: Android Build
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      android_signing:
+        - qr_scanner_keystore
+      groups:
+        - google_play # Google Play Console credentials
+      vars:
+        PACKAGE_NAME: "com.aozka.qrscannerapp"
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Set up local.properties
+        script: | 
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Get Flutter packages
+        script: | 
+          flutter packages pub get
+      - name: Flutter analyze
+        script: | 
+          flutter analyze
+      - name: Build APK
+        script: | 
+          flutter build apk --release
+      - name: Build App Bundle
+        script: | 
+          flutter build appbundle --release
+    artifacts:
+      - build/**/outputs/**/*.apk
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com
+        notify:
+          success: true
+          failure: true
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+        submit_as_draft: true
+
+  # iOS Build Workflow
+  ios-workflow:
+    name: iOS Build
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.aozka.qrscannerapp
+      groups:
+        - app_store_connect # App Store Connect credentials
+      vars:
+        APP_ID: 1234567890 # App Store Connect App ID
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Set up code signing settings on Xcode project
+        script: | 
+          xcode-project use-profiles
+      - name: Get Flutter packages
+        script: | 
+          flutter packages pub get
+      - name: Install pods
+        script: | 
+          find . -name "Podfile" -execdir pod install \;
+      - name: Flutter analyze
+        script: | 
+          flutter analyze
+      - name: Build ipa
+        script: | 
+          flutter build ipa --release \
+            --export-options-plist=/Users/builder/export_options.plist
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com
+        notify:
+          success: true
+          failure: true
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        beta_groups:
+          - Beta Testers
+        submit_to_app_store: false
+
+  # Both Platforms Workflow
+  all-platforms-workflow:
+    name: Build All Platforms
+    max_build_duration: 120
+    instance_type: mac_mini_m1
+    triggering:
+      events:
+        - push
+        - tag
+      branch_patterns:
+        - pattern: 'main'
+          include: true
+          source: true
+        - pattern: 'release/*'
+          include: true
+          source: true
+      tag_patterns:
+        - pattern: 'v*'
+          include: true
+    environment:
+      android_signing:
+        - qr_scanner_keystore
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.aozka.qrscannerapp
+      groups:
+        - google_play
+        - app_store_connect
+      vars:
+        PACKAGE_NAME: "com.aozka.qrscannerapp"
+        APP_ID: 1234567890
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Set up local.properties
+        script: | 
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Get Flutter packages
+        script: | 
+          flutter packages pub get
+      - name: Install pods
+        script: | 
+          find . -name "Podfile" -execdir pod install \;
+      - name: Flutter analyze
+        script: | 
+          flutter analyze
+      - name: Build Android APK
+        script: | 
+          flutter build apk --release
+      - name: Build Android App Bundle
+        script: | 
+          flutter build appbundle --release
+      - name: Build iOS
+        script: | 
+          flutter build ipa --release \
+            --export-options-plist=/Users/builder/export_options.plist
+    artifacts:
+      - build/**/outputs/**/*.apk
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com
+        notify:
+          success: true
+          failure: true
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+        submit_as_draft: true
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        beta_groups:
+          - Beta Testers
+        submit_to_app_store: false
