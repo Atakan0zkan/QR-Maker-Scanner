@@ -35,16 +35,18 @@
 - 📊 Detaylı görüntüleme
 
 ### 🎨 Modern Tasarım
-- 🌓 Koyu/Açık/Sistem teması
-- 🌍 **10 dil desteği**
+- 🌓 **Koyu/Açık tema** (Koyu tema varsayılan)
+- 🌍 **10 dil desteği** (Eksiksiz çeviriler)
 - 📱 Responsive tasarım
 - ♿ Erişilebilirlik desteği
+- 🎨 **Renkli QR kodlar** (10 renk paleti)
 
 ### 🔒 Güvenlik & Gizlilik
-- 🔌 **Çevrimdışı çalışır**
-- 🔐 Veri gizliliği
-- ✅ İzin yönetimi
-- 🛡️ Güvenli veri saklama
+- 🔌 **%100 Çevrimdışı çalışır** (İnternet gerektirmez)
+- 🔐 Veri gizliliği (Tüm veriler cihazda)
+- ✅ Minimal izin yönetimi (Sadece kamera)
+- 🛡️ Güvenli veri saklama (Hive encryption)
+- 🚫 Reklam tracking yok
 
 ## 📱 Desteklenen QR Türleri
 
@@ -113,21 +115,28 @@ flutter build ipa --release
 
 | Dosya | Açıklama |
 |-------|----------|
-| [CHANGELOG.md](CHANGELOG.md) | Versiyon geçmişi |
-| [RELEASE_NOTES.md](RELEASE_NOTES.md) | Sürüm notları |
-| [NEW_FEATURES_v1.2.0.md](NEW_FEATURES_v1.2.0.md) | Yeni özellikler |
-| [CODEMAGIC_SETUP.md](CODEMAGIC_SETUP.md) | CI/CD kurulumu |
-| [IOS_DEPLOYMENT_GUIDE.md](IOS_DEPLOYMENT_GUIDE.md) | iOS deployment |
-| [ANDROID_KEYSTORE_SETUP.md](ANDROID_KEYSTORE_SETUP.md) | Android signing |
-| [ADMOB_SETUP.md](ADMOB_SETUP.md) | AdMob konfigürasyonu |
+| [CHANGELOG.md](CHANGELOG.md) | Versiyon geçmişi ve güncellemeler |
+| [SECURITY.md](SECURITY.md) | Güvenlik politikası ve raporlama |
+| [LICENSE](LICENSE) | MIT Lisans detayları |
+| [ADMOB_PRODUCTION_NOTES.md](ADMOB_PRODUCTION_NOTES.md) | AdMob production rehberi |
+| [QR_COLOR_FEATURE.md](QR_COLOR_FEATURE.md) | Renkli QR kod özelliği |
+| [UI_UX_IMPROVEMENTS_v1.2.2.md](UI_UX_IMPROVEMENTS_v1.2.2.md) | UI/UX iyileştirmeleri |
+| [PRODUCTION_CHECKLIST.md](PRODUCTION_CHECKLIST.md) | Production hazırlık listesi |
 
 ## 🔐 Güvenlik
 
-- ✅ Hassas veriler `.env` dosyasında saklanır
-- ✅ `.gitignore` ile secret'lar korunur
-- ✅ Çevrimdışı çalışma - veri gizliliği
-- ✅ İzin yönetimi - sadece gerekli izinler
-- ✅ Güvenli veri saklama - Hive encryption
+Güvenlik bizim için önceliklidir. Detaylı bilgi için [SECURITY.md](SECURITY.md) dosyasına bakın.
+
+**Güvenlik Özellikleri:**
+- ✅ **%100 Offline:** İnternet bağlantısı gerektirmez
+- ✅ **Lokal Veri:** Tüm veriler cihazınızda saklanır
+- ✅ **Minimal İzinler:** Sadece kamera izni gereklidir
+- ✅ **Şifreleme:** Hive database encryption
+- ✅ **Gizlilik:** Hiçbir veri toplanmaz veya paylaşılmaz
+- ✅ **Açık Kaynak:** Kod tamamen şeffaf
+
+**Güvenlik Açığı Bildirimi:**
+Güvenlik açığı bulursanız lütfen [SECURITY.md](SECURITY.md) dosyasındaki talimatları takip edin.
 
 ## 🤝 Katkıda Bulunma
 

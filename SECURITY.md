@@ -2,25 +2,30 @@
 
 ## Supported Versions
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.2.x   | :white_check_mark: |
-| 1.1.x   | :x:                |
-| < 1.0   | :x:                |
+| Version | Supported          | Status |
+| ------- | ------------------ | ------ |
+| 1.2.2   | :white_check_mark: | Current - Production Ready |
+| 1.2.1   | :white_check_mark: | Supported |
+| 1.2.0   | :white_check_mark: | Supported |
+| 1.1.x   | :x:                | Deprecated |
+| < 1.0   | :x:                | Not Supported |
 
 ## Security Features
 
 ### Data Privacy
-- ✅ **Offline-First**: Uygulama çevrimdışı çalışır, veriler cihazda saklanır
+- ✅ **%100 Offline**: Uygulama tamamen çevrimdışı çalışır, internet gerektirmez
 - ✅ **No Cloud Storage**: Kullanıcı verileri bulutta saklanmaz
-- ✅ **Local Database**: Hive ile güvenli yerel veri saklama
+- ✅ **Local Database**: Hive ile güvenli yerel veri saklama (encryption)
 - ✅ **No Analytics**: Kullanıcı davranışları izlenmez
+- ✅ **No Tracking**: Hiçbir kullanıcı verisi toplanmaz veya paylaşılmaz
 
 ### Permissions
-- ✅ **Camera**: Sadece QR kod tarama için kullanılır
-- ✅ **Photo Library**: Sadece QR kod kaydetme için kullanılır
-- ✅ **Network**: Sadece AdMob reklamları için kullanılır
-- ✅ **No Location**: Konum izni istenmez
+- ✅ **Camera Only**: Sadece QR kod tarama için kullanılır
+- ✅ **Storage (Optional)**: Sadece QR kod kaydetme için kullanılır
+- ✅ **Internet (Optional)**: Sadece AdMob reklamları için (opsiyonel)
+- ✅ **No Location**: Konum izni ASLA istenmez
+- ✅ **No Contacts**: Kişi listesine erişim yok
+- ✅ **No Phone**: Telefon özelliklerine erişim yok
 
 ### Code Security
 - ✅ **No Hardcoded Secrets**: API keys environment variables'da
@@ -34,8 +39,8 @@ Güvenlik açığı bulursanız lütfen **hemen** bildirin:
 
 ### Bildirme Yöntemi
 1. **GitHub Issues kullanmayın** (public görünür)
-2. Email gönderin: [security@yourcompany.com](mailto:security@yourcompany.com)
-3. Veya GitHub Security Advisory kullanın
+2. Email gönderin: [GitHub Profile](https://github.com/Atakan0zkan)
+3. Veya GitHub Security Advisory kullanın: [Security Advisories](https://github.com/Atakan0zkan/QR-Maker-Scanner/security/advisories)
 
 ### Bildirimde Bulunması Gerekenler
 - Açığın detaylı açıklaması
@@ -77,15 +82,27 @@ dart analyze
 ## Known Issues
 
 ### Non-Security Issues
-- Deprecated warnings (12 adet) - Kritik değil, çalışıyor
+- Deprecated warnings (9 adet) - Kritik değil, çalışıyor
 - Share API deprecated - Yeni versiyonda güncellenecek
+- RadioListTile deprecated - Flutter SDK güncellemesinde düzelecek
 
 ### No Known Security Issues
-✅ Bilinen güvenlik açığı yok
+✅ Bilinen güvenlik açığı yok (Son kontrol: 15 Ekim 2025)
 
 ## Security Updates
 
-### v1.2.0 (Current)
+### v1.2.2 (Current)
+- ✅ Network monitoring kaldırıldı (gereksiz)
+- ✅ %100 offline çalışma garantisi
+- ✅ Minimal izin yapısı
+- ✅ Temiz codebase (-130 satır)
+
+### v1.2.1
+- ✅ Renkli QR kod özelliği
+- ✅ Deprecated uyarıları düzeltildi
+- ✅ Güvenli renk seçimi
+
+### v1.2.0
 - ✅ Environment variables support
 - ✅ Improved permission handling
 - ✅ Secure offline storage
@@ -111,24 +128,34 @@ dart analyze
 
 ## Third-Party Services
 
-### Google AdMob
-- **Purpose**: Display ads
-- **Data Collected**: Device info, ad interaction
+### Google AdMob (Optional)
+- **Purpose**: Display ads (opsiyonel, internet gerektirmez)
+- **Data Collected**: Device info, ad interaction (sadece reklam görüntülenirse)
 - **Privacy Policy**: [Google AdMob Privacy](https://support.google.com/admob/answer/6128543)
+- **Note**: Reklam görünmese bile uygulama tam özellikli çalışır
 
 ### No Other Services
-- ✅ No analytics
-- ✅ No crash reporting
-- ✅ No cloud storage
-- ✅ No user accounts
+- ✅ No analytics (hiçbir analitik servisi yok)
+- ✅ No crash reporting (crash raporlama yok)
+- ✅ No cloud storage (bulut depolama yok)
+- ✅ No user accounts (kullanıcı hesabı yok)
+- ✅ No network monitoring (ağ izleme yok)
 
 ## Contact
 
 For security concerns:
-- Email: security@yourcompany.com
-- GitHub: [@Atakan0zkan](https://github.com/Atakan0zkan)
+- **GitHub:** [@Atakan0zkan](https://github.com/Atakan0zkan)
+- **Repository:** [QR-Maker-Scanner](https://github.com/Atakan0zkan/QR-Maker-Scanner)
+- **Security Advisories:** [Report Vulnerability](https://github.com/Atakan0zkan/QR-Maker-Scanner/security/advisories)
+
+## Additional Resources
+
+- [Privacy Policy](https://github.com/Atakan0zkan/QR-Maker-Scanner/blob/main/PRIVACY_POLICY.md)
+- [Terms of Service](https://github.com/Atakan0zkan/QR-Maker-Scanner/blob/main/TERMS_OF_SERVICE.md)
+- [CHANGELOG](https://github.com/Atakan0zkan/QR-Maker-Scanner/blob/main/CHANGELOG.md)
 
 ---
 
-**Last Updated:** October 14, 2025  
-**Version:** 1.2.0
+**Last Updated:** October 15, 2025  
+**Version:** 1.2.2  
+**Status:** ✅ Production Ready
