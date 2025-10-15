@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
-import '../services/network_service.dart';
 import '../core/constants/app_colors.dart';
 import 'privacy_policy_screen.dart';
 import 'terms_of_service_screen.dart';
@@ -13,64 +12,15 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ayarlar'),
+        title: const Text(
+          'Ayarlar',
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // Network Status Indicator
-          StreamBuilder<bool>(
-            stream: NetworkService().connectivityStream,
-            initialData: NetworkService().isOnline,
-            builder: (context, snapshot) {
-              final isOnline = snapshot.data ?? true;
-              return Container(
-                margin: const EdgeInsets.only(bottom: 16),
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: isOnline 
-                      ? Colors.green.withValues(alpha: 0.1)
-                      : Colors.orange.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: isOnline ? Colors.green : Colors.orange,
-                    width: 1,
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      isOnline ? Icons.wifi : Icons.wifi_off,
-                      color: isOnline ? Colors.green : Colors.orange,
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            isOnline ? 'Çevrimiçi' : 'Çevrimdışı Mod',
-                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: isOnline ? Colors.green : Colors.orange,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            isOnline 
-                                ? 'İnternet bağlantısı aktif'
-                                : 'Tüm özellikler çevrimdışı çalışıyor',
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
           _buildSection(
             context,
             title: 'Genel',
@@ -216,8 +166,8 @@ class SettingsScreen extends StatelessWidget {
         return 'Açık';
       case ThemeMode.dark:
         return 'Koyu';
-      case ThemeMode.system:
-        return 'Sistem';
+      default:
+        return 'Koyu';
     }
   }
 
@@ -245,17 +195,6 @@ class SettingsScreen extends StatelessWidget {
                 RadioListTile<ThemeMode>(
                   title: const Text('Koyu'),
                   value: ThemeMode.dark,
-                  groupValue: themeProvider.themeMode,
-                  onChanged: (value) {
-                    if (value != null) {
-                      themeProvider.setThemeMode(value);
-                      Navigator.pop(context);
-                    }
-                  },
-                ),
-                RadioListTile<ThemeMode>(
-                  title: const Text('Sistem'),
-                  value: ThemeMode.system,
                   groupValue: themeProvider.themeMode,
                   onChanged: (value) {
                     if (value != null) {

@@ -2,7 +2,7 @@ name: qr_scanner_app
 description: "QR Scanner & Generator - Fast and reliable QR code scanner and creator"
 publish_to: 'none'
 
-version: 1.2.0+2
+version: 1.2.2+4
 
 environment:
   sdk: ^3.9.2

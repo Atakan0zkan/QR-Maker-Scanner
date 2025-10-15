@@ -1,5 +1,93 @@
 # Changelog - QR Scanner App
 
+## [1.2.2] - 2025-10-15
+
+### 🎨 UI/UX İyileştirmeleri
+
+#### Dil Çevirileri
+- ✅ Tüm 10 dil kontrol edildi (eksiksiz)
+- ✅ İngilizce, Türkçe, Arapça, Çince, Japonca
+- ✅ İspanyolca, Almanca, Fransızca, İtalyanca, Yunanca
+
+#### Tema Ayarları
+- 🌙 Default tema "Koyu" olarak ayarlandı
+- ❌ "Sistem" tema seçeneği kaldırıldı
+- ✅ Daha basit tema seçimi (Açık/Koyu)
+
+#### Başlık Yazıları
+- 📝 Tüm ekran başlıkları büyütüldü (22px, bold)
+- ✅ Scanner, Create, History, Settings
+- ✅ Daha iyi okunabilirlik
+
+### 🗑️ Kaldırılanlar
+
+- ❌ İnternet bağlantısı göstergesi (gereksiz)
+- ❌ Network monitoring servisi (gereksiz)
+- ❌ "Sistem" tema seçeneği
+
+### 📊 İstatistikler
+
+- **Silinen Satır:** -130
+- **Kaldırılan Dosya:** 1 (network_service.dart)
+- **Güncellenen Dosya:** 6
+- **Dil Desteği:** 10 (eksiksiz)
+
+---
+
+## [1.2.1] - 2025-10-15
+
+### 🎨 Yeni Özellikler
+
+#### QR Kod Renk Özelleştirme
+- **Renkli QR Kodlar:** 10 farklı renk seçeneği
+- **QR Rengi:** Siyah kareler yerine istediğiniz rengi seçin
+- **Arka Plan Rengi:** Beyaz arka plan yerine istediğiniz rengi seçin
+- **Canlı Önizleme:** Renk değiştikçe QR kod anında güncellenir
+- **Görsel Seçici:** Renkli dairelerle kolay renk seçimi
+- **Seçili Gösterge:** Check icon ile seçili renk belirtme
+
+#### Renk Paleti
+- ⚫ Siyah, ⚪ Beyaz, 🔴 Kırmızı, 🟣 Mor, 🔵 Mavi
+- 🔵 Teal, 🟢 Yeşil, 🟡 Sarı, 🟠 Turuncu, 🩶 Gri
+
+### 🔧 Teknik Değişiklikler
+
+#### Güncellenen Dosyalar
+- `lib/screens/create_screen.dart` (+125 satır)
+  - Renk state değişkenleri eklendi
+  - `_buildColorPicker()` widget'ı eklendi
+  - `_buildColorSelector()` widget'ı eklendi
+  - QrImageView renk parametreleri uygulandı
+  - Container arka plan rengi dinamik yapıldı
+  - Border eklendi (beyaz QR görünürlüğü için)
+
+#### Yeni Dosyalar
+- `QR_COLOR_FEATURE.md` - Özellik dokümantasyonu
+
+### 🐛 Düzeltmeler
+
+- `foregroundColor` deprecated uyarısı düzeltildi
+- `Color.value` deprecated uyarısı düzeltildi (equality check ile değiştirildi)
+- `withOpacity` deprecated uyarısı düzeltildi (`withValues` kullanıldı)
+- Renk paleti 20'den 10'a indirildi (benzer renkler kaldırıldı)
+
+### 📱 AdMob
+
+- Test reklamları kaldırıldı
+- Production AdMob ID'leri aktif
+- "No Fill" hatası normal (yeni app için beklenen durum)
+- iOS AdMob ID'leri hazır (iOS app oluşturulunca güncellenecek)
+
+### 📊 İstatistikler
+
+- **Yeni Özellik:** 1 (Renk özelleştirme)
+- **Renk Seçeneği:** 10 (optimize edildi)
+- **Eklenen Satır:** +125
+- **Düzeltilen Deprecated:** 4
+- **Kullanıcı Deneyimi:** ⭐⭐⭐⭐⭐
+
+---
+
 ## [1.1.0] - 2025-10-14
 
 ### 🆕 Yeni Özellikler

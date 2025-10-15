@@ -3,15 +3,16 @@ import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdService {
-  // Android ve iOS destekleniyor
+  // Production AdMob IDs
   static String get bannerAdUnitId {
     if (Platform.isAndroid) {
       // Production AdMob ID (Android)
       return 'ca-app-pub-8966682109895515/8906178061';
     } else if (Platform.isIOS) {
+      // Production AdMob ID (iOS)
       // TODO: AdMob konsoldan iOS app oluştur ve gerçek ID'yi buraya ekle
-      // Şimdilik test ID kullanılıyor
-      return 'ca-app-pub-3940256099942544/2934735716'; // Test ID
+      // Şimdilik Android ID kullanılıyor (iOS app oluşturulunca güncellenecek)
+      return 'ca-app-pub-8966682109895515/8906178061';
     }
     throw UnsupportedError('Desteklenmeyen platform');
   }

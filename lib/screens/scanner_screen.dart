@@ -243,7 +243,10 @@ class _ScannerScreenState extends State<ScannerScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('QR Scanner'),
+        title: const Text(
+          'QR Scanner',
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
         actions: [
           if (_hasPermission)

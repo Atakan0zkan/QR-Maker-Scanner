@@ -63,7 +63,10 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isSelectionMode ? '${_selectedIds.length} seçildi' : 'Geçmiş'),
+        title: Text(
+          _isSelectionMode ? '${_selectedIds.length} seçildi' : 'Geçmiş',
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
         leading: _isSelectionMode
             ? IconButton(

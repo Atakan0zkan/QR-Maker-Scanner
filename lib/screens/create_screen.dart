@@ -59,6 +59,10 @@ class _CreateScreenState extends State<CreateScreen> {
   final _profileUrlController = TextEditingController();
 
   String? _generatedQRData;
+  
+  // QR Color customization
+  Color _qrForegroundColor = Colors.black;
+  Color _qrBackgroundColor = Colors.white;
 
   @override
   void dispose() {
@@ -86,7 +90,10 @@ class _CreateScreenState extends State<CreateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('QR Kod Oluştur'),
+        title: const Text(
+          'QR Kod Oluştur',
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -507,17 +514,31 @@ class _CreateScreenState extends State<CreateScreen> {
               child: Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _qrBackgroundColor,
                   borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: Colors.grey.shade300,
+                    width: 1,
+                  ),
                 ),
                 child: QrImageView(
                   data: _generatedQRData!,
                   version: QrVersions.auto,
                   size: 250,
-                  backgroundColor: Colors.white,
+                  backgroundColor: _qrBackgroundColor,
+                  eyeStyle: QrEyeStyle(
+                    eyeShape: QrEyeShape.square,
+                    color: _qrForegroundColor,
+                  ),
+                  dataModuleStyle: QrDataModuleStyle(
+                    dataModuleShape: QrDataModuleShape.square,
+                    color: _qrForegroundColor,
+                  ),
                 ),
               ),
             ),
+            const SizedBox(height: 24),
+            _buildColorPicker(),
             const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -701,5 +722,118 @@ class _CreateScreenState extends State<CreateScreen> {
         );
       }
     }
+  }
+
+  Widget _buildColorPicker() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'QR Kod Renkleri',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('QR Rengi', style: TextStyle(fontSize: 14)),
+                  const SizedBox(height: 8),
+                  _buildColorSelector(
+                    selectedColor: _qrForegroundColor,
+                    onColorSelected: (color) {
+                      setState(() {
+                        _qrForegroundColor = color;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Arka Plan', style: TextStyle(fontSize: 14)),
+                  const SizedBox(height: 8),
+                  _buildColorSelector(
+                    selectedColor: _qrBackgroundColor,
+                    onColorSelected: (color) {
+                      setState(() {
+                        _qrBackgroundColor = color;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildColorSelector({
+    required Color selectedColor,
+    required Function(Color) onColorSelected,
+  }) {
+    final colors = [
+      Colors.black,
+      Colors.white,
+      Colors.red,
+      Colors.purple,
+      Colors.blue,
+      Colors.teal,
+      Colors.green,
+      Colors.yellow,
+      Colors.orange,
+      Colors.grey,
+    ];
+
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: colors.map((color) {
+        final isSelected = selectedColor == color;
+        return GestureDetector(
+          onTap: () => onColorSelected(color),
+          child: Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: color,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: isSelected ? AppColors.primary : Colors.grey.shade300,
+                width: isSelected ? 3 : 1,
+              ),
+              boxShadow: isSelected
+                  ? [
+                      BoxShadow(
+                        color: AppColors.primary.withValues(alpha: 0.3),
+                        blurRadius: 8,
+                        spreadRadius: 2,
+                      ),
+                    ]
+                  : null,
+            ),
+            child: isSelected
+                ? Icon(
+                    Icons.check,
+                    color: color == Colors.white || color == Colors.yellow
+                        ? Colors.black
+                        : Colors.white,
+                    size: 20,
+                  )
+                : null,
+          ),
+        );
+      }).toList(),
+    );
   }
 }

@@ -6,7 +6,7 @@
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.24.0-02569B?logo=flutter)](https://flutter.dev)
 [![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-blue)](https://github.com/Atakan0zkan/QR-Maker-Scanner)
-[![Version](https://img.shields.io/badge/Version-1.2.0-green)](https://github.com/Atakan0zkan/QR-Maker-Scanner/releases)
+[![Version](https://img.shields.io/badge/Version-1.2.2-green)](https://github.com/Atakan0zkan/QR-Maker-Scanner/releases)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
 </div>
@@ -23,7 +23,8 @@
 
 ### ✏️ QR Kod Oluşturma
 - 🌐 **9 farklı QR kod türü**
-- 🎨 Özelleştirilebilir tasarım
+- 🎨 **Renkli QR kodlar** - 10 renk seçeneği
+- 🖌️ Özelleştirilebilir tasarım
 - 💾 Otomatik kaydetme
 - 📤 Resim ve metin olarak paylaşma
 

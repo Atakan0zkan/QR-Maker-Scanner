@@ -10,7 +10,6 @@ import 'providers/locale_provider.dart';
 import 'providers/qr_provider.dart';
 import 'services/database_service.dart';
 import 'services/ad_service.dart';
-import 'services/network_service.dart';
 import 'screens/main_screen.dart';
 
 void main() async {
@@ -19,9 +18,6 @@ void main() async {
   // Initialize services
   await DatabaseService.init();
   await AdService.initialize();
-  
-  // Start network monitoring
-  NetworkService().startMonitoring();
   
   // Set system UI overlay style
   SystemChrome.setSystemUIOverlayStyle(
