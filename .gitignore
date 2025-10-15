@@ -43,3 +43,24 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+*.jks
+*.keystore
+android/key.properties
+
+# Development logs and plans
+bug-log.md
+project-plan.md
+flutter_log.txt
+*_SUMMARY.md
+DEVELOPMENT_*.md
+LOG_ANALYSIS.md
+DEPRECATED_WARNINGS.md
+BUG_FIX_*.md
+QUICK_START.md
+setup.md
+v*.md

@@ -128,7 +128,7 @@ class _CreateScreenState extends State<CreateScreen> {
             ),
             const SizedBox(height: 12),
             DropdownButtonFormField<QRType>(
-              value: _selectedType,
+              initialValue: _selectedType,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
