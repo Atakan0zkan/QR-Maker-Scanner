@@ -6,6 +6,7 @@ import '../services/qr_helper.dart';
 import '../services/permission_service.dart';
 import '../widgets/permission_dialog.dart';
 import '../widgets/scanner_overlay.dart';
+import '../l10n/app_localizations.dart';
 import 'qr_detail_screen.dart';
 
 class ScannerScreen extends StatefulWidget {
@@ -21,6 +22,7 @@ class _ScannerScreenState extends State<ScannerScreen>
   bool _hasPermission = false;
   bool _isProcessing = false;
   bool _isMultiScanMode = false;
+  bool _isTorchOn = false;
   final List<Map<String, dynamic>> _scannedCodes = [];
 
   @override
@@ -95,6 +97,7 @@ class _ScannerScreenState extends State<ScannerScreen>
     if (code == null || code.isEmpty) return;
 
     final qrType = QRHelper.detectQRType(code);
+    final isBarcode = barcode.format != BarcodeFormat.qrCode;
 
     if (_isMultiScanMode) {
       // Toplu tarama modu - listeye ekle
@@ -105,11 +108,12 @@ class _ScannerScreenState extends State<ScannerScreen>
             'content': code,
             'type': qrType,
             'timestamp': DateTime.now(),
+            'isBarcode': isBarcode,
           });
         });
         
         // Save to database
-        context.read<QRProvider>().addScannedQR(content: code, type: qrType);
+        context.read<QRProvider>().addScannedQR(content: code, type: qrType, isBarcode: isBarcode);
       }
     } else {
       // Normal tarama modu
@@ -118,7 +122,7 @@ class _ScannerScreenState extends State<ScannerScreen>
       });
 
       // Save to database
-      context.read<QRProvider>().addScannedQR(content: code, type: qrType);
+      context.read<QRProvider>().addScannedQR(content: code, type: qrType, isBarcode: isBarcode);
 
       // Navigate to detail screen
       Navigator.push(
@@ -142,6 +146,21 @@ class _ScannerScreenState extends State<ScannerScreen>
         _scannedCodes.clear();
       }
     });
+  }
+
+  Future<void> _toggleTorch() async {
+    try {
+      await _controller?.toggleTorch();
+      setState(() {
+        _isTorchOn = !_isTorchOn;
+      });
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Flaş kontrolü başarısız: $e')),
+        );
+      }
+    }
   }
 
   void _showScannedList() {
@@ -241,14 +260,21 @@ class _ScannerScreenState extends State<ScannerScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'QR Scanner',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        title: Text(
+          l10n.appName,
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         actions: [
+          if (_hasPermission)
+            IconButton(
+              icon: Icon(_isTorchOn ? Icons.flash_on : Icons.flash_off),
+              tooltip: _isTorchOn ? 'Işığı Kapat' : 'Işığı Aç',
+              onPressed: _toggleTorch,
+            ),
           if (_hasPermission)
             IconButton(
               icon: Icon(_isMultiScanMode ? Icons.qr_code_scanner : Icons.qr_code_2),
@@ -317,7 +343,7 @@ class _ScannerScreenState extends State<ScannerScreen>
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: Text(
-                        'QR kodunu taramak için kamerayı hizalayın',
+                        l10n.scanQROrBarcode,
                         style: Theme.of(
                           context,
                         ).textTheme.bodyMedium?.copyWith(color: Colors.white),

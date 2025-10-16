@@ -284,4 +284,76 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shortMessage => 'Short Message';
+
+  @override
+  String get selectTheme => 'Select Theme';
+
+  @override
+  String get selectLanguage => 'Select Language';
+
+  @override
+  String get selected => 'selected';
+
+  @override
+  String get noScannedQR => 'No scanned QR codes yet';
+
+  @override
+  String get noScannedBarcode => 'No scanned barcodes yet';
+
+  @override
+  String get noGeneratedQR => 'No generated QR codes yet';
+
+  @override
+  String get noGeneratedBarcode => 'No generated barcodes yet';
+
+  @override
+  String get selectItems => 'Select';
+
+  @override
+  String get qrCodes => 'QR Codes';
+
+  @override
+  String get barcodes => 'Barcodes';
+
+  @override
+  String deleteMultipleMessage(Object count) {
+    return 'Are you sure you want to delete $count items?';
+  }
+
+  @override
+  String get deleteSingleMessage =>
+      'Are you sure you want to delete this item?';
+
+  @override
+  String get scanQROrBarcode => 'Align camera to scan QR code or barcode';
+
+  @override
+  String get qrColorSettings => 'QR Code Colors';
+
+  @override
+  String get qrColor => 'QR Color';
+
+  @override
+  String get backgroundColor => 'Background';
+
+  @override
+  String get bodyShape => 'Body Shape';
+
+  @override
+  String get square => 'Square';
+
+  @override
+  String get circle => 'Circle';
+
+  @override
+  String get roundedSquare => 'Rounded Square';
+
+  @override
+  String get diamond => 'Diamond';
+
+  @override
+  String get qrLogo => 'QR Logo';
+
+  @override
+  String get gallery => 'Gallery';
 }

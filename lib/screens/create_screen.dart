@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -63,6 +64,10 @@ class _CreateScreenState extends State<CreateScreen> {
   // QR Color customization
   Color _qrForegroundColor = Colors.black;
   Color _qrBackgroundColor = Colors.white;
+  
+  // QR Logo/Image
+  String? _selectedLogo; // asset path veya 'gallery'
+  File? _customLogoFile; // Galeriden seçilen dosya
 
   @override
   void dispose() {
@@ -88,11 +93,12 @@ class _CreateScreenState extends State<CreateScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'QR Kod Oluştur',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        title: Text(
+          l10n.createQRCode,
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -109,7 +115,7 @@ class _CreateScreenState extends State<CreateScreen> {
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: _generateQR,
-                child: const Text('Oluştur'),
+                child: Text(l10n.generate),
               ),
               if (_generatedQRData != null) ...[
                 const SizedBox(height: 32),
@@ -123,6 +129,7 @@ class _CreateScreenState extends State<CreateScreen> {
   }
 
   Widget _buildTypeSelector() {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -130,7 +137,7 @@ class _CreateScreenState extends State<CreateScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Kod Türü',
+              l10n.codeType,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 12),
@@ -140,16 +147,16 @@ class _CreateScreenState extends State<CreateScreen> {
                 border: OutlineInputBorder(),
                 contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               ),
-              items: const [
-                DropdownMenuItem(value: QRType.url, child: Text('URL')),
-                DropdownMenuItem(value: QRType.text, child: Text('Metin')),
-                DropdownMenuItem(value: QRType.wifi, child: Text('WiFi')),
-                DropdownMenuItem(value: QRType.contact, child: Text('Kişi')),
-                DropdownMenuItem(value: QRType.email, child: Text('E-posta')),
-                DropdownMenuItem(value: QRType.sms, child: Text('SMS')),
-                DropdownMenuItem(value: QRType.phone, child: Text('Telefon')),
-                DropdownMenuItem(value: QRType.location, child: Text('Konum')),
-                DropdownMenuItem(value: QRType.social, child: Text('Sosyal Medya')),
+              items: [
+                DropdownMenuItem(value: QRType.url, child: Text(l10n.url)),
+                DropdownMenuItem(value: QRType.text, child: Text(l10n.text)),
+                DropdownMenuItem(value: QRType.wifi, child: Text(l10n.wifi)),
+                DropdownMenuItem(value: QRType.contact, child: Text(l10n.contact)),
+                DropdownMenuItem(value: QRType.email, child: Text(l10n.email)),
+                DropdownMenuItem(value: QRType.sms, child: Text(l10n.sms)),
+                DropdownMenuItem(value: QRType.phone, child: Text(l10n.phone)),
+                DropdownMenuItem(value: QRType.location, child: Text(l10n.location)),
+                DropdownMenuItem(value: QRType.social, child: Text(l10n.social)),
               ],
               onChanged: (value) {
                 setState(() {
@@ -224,17 +231,18 @@ class _CreateScreenState extends State<CreateScreen> {
   }
 
   Widget _buildWiFiForm() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         TextFormField(
           controller: _ssidController,
-          decoration: const InputDecoration(
-            labelText: 'Ağ Adı (SSID)',
-            prefixIcon: Icon(Icons.wifi),
+          decoration: InputDecoration(
+            labelText: l10n.ssid,
+            prefixIcon: const Icon(Icons.wifi),
           ),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'SSID gerekli';
+              return 'SSID required';
             }
             return null;
           },
@@ -242,22 +250,22 @@ class _CreateScreenState extends State<CreateScreen> {
         const SizedBox(height: 16),
         TextFormField(
           controller: _passwordController,
-          decoration: const InputDecoration(
-            labelText: 'Şifre',
-            prefixIcon: Icon(Icons.lock),
+          decoration: InputDecoration(
+            labelText: l10n.password,
+            prefixIcon: const Icon(Icons.lock),
           ),
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<String>(
-          value: _securityType,
-          decoration: const InputDecoration(
-            labelText: 'Güvenlik Türü',
-            prefixIcon: Icon(Icons.security),
+          initialValue: _securityType,
+          decoration: InputDecoration(
+            labelText: l10n.securityType,
+            prefixIcon: const Icon(Icons.security),
           ),
-          items: const [
-            DropdownMenuItem(value: 'WPA', child: Text('WPA/WPA2')),
-            DropdownMenuItem(value: 'WEP', child: Text('WEP')),
-            DropdownMenuItem(value: 'nopass', child: Text('Yok')),
+          items: [
+            DropdownMenuItem(value: 'WPA', child: Text(l10n.wpa)),
+            DropdownMenuItem(value: 'WEP', child: Text(l10n.wep)),
+            DropdownMenuItem(value: 'nopass', child: Text(l10n.none)),
           ],
           onChanged: (value) {
             setState(() {
@@ -702,6 +710,7 @@ class _CreateScreenState extends State<CreateScreen> {
       await file.writeAsBytes(pngBytes);
       
       // Paylaş
+      // ignore: deprecated_member_use
       await Share.shareXFiles(
         [XFile(file.path)],
         text: 'QR Kod: ${_getQRTitle()}\n\n$_generatedQRData',
@@ -725,60 +734,65 @@ class _CreateScreenState extends State<CreateScreen> {
   }
 
   Widget _buildColorPicker() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'QR Kod Renkleri',
+          l10n.qrColorSettings,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
         const SizedBox(height: 16),
-        Row(
+        // QR Color
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('QR Rengi', style: TextStyle(fontSize: 14)),
-                  const SizedBox(height: 8),
-                  _buildColorSelector(
-                    selectedColor: _qrForegroundColor,
-                    onColorSelected: (color) {
-                      setState(() {
-                        _qrForegroundColor = color;
-                      });
-                    },
-                  ),
-                ],
-              ),
+            Text(l10n.qrColor, style: const TextStyle(fontSize: 14)),
+            const SizedBox(height: 8),
+            _buildHorizontalColorSelector(
+              selectedColor: _qrForegroundColor,
+              onColorSelected: (color) {
+                setState(() {
+                  _qrForegroundColor = color;
+                });
+              },
             ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Arka Plan', style: TextStyle(fontSize: 14)),
-                  const SizedBox(height: 8),
-                  _buildColorSelector(
-                    selectedColor: _qrBackgroundColor,
-                    onColorSelected: (color) {
-                      setState(() {
-                        _qrBackgroundColor = color;
-                      });
-                    },
-                  ),
-                ],
-              ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        // Background Color
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.backgroundColor, style: const TextStyle(fontSize: 14)),
+            const SizedBox(height: 8),
+            _buildHorizontalColorSelector(
+              selectedColor: _qrBackgroundColor,
+              onColorSelected: (color) {
+                setState(() {
+                  _qrBackgroundColor = color;
+                });
+              },
             ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        // Logo Selector
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.qrLogo, style: const TextStyle(fontSize: 14)),
+            const SizedBox(height: 8),
+            _buildLogoSelector(),
           ],
         ),
       ],
     );
   }
 
-  Widget _buildColorSelector({
+  Widget _buildHorizontalColorSelector({
     required Color selectedColor,
     required Function(Color) onColorSelected,
   }) {
@@ -795,45 +809,220 @@ class _CreateScreenState extends State<CreateScreen> {
       Colors.grey,
     ];
 
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: colors.map((color) {
-        final isSelected = selectedColor == color;
-        return GestureDetector(
-          onTap: () => onColorSelected(color),
-          child: Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: color,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: isSelected ? AppColors.primary : Colors.grey.shade300,
-                width: isSelected ? 3 : 1,
+    return SizedBox(
+      height: 50,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: colors.length,
+        itemBuilder: (context, index) {
+          final color = colors[index];
+          final isSelected = selectedColor == color;
+          return Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: GestureDetector(
+              onTap: () => onColorSelected(color),
+              child: Container(
+                width: 45,
+                height: 45,
+                decoration: BoxDecoration(
+                  color: color,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: isSelected ? AppColors.primary : Colors.grey.shade300,
+                    width: isSelected ? 3 : 1,
+                  ),
+                  boxShadow: isSelected
+                      ? [
+                          BoxShadow(
+                            color: AppColors.primary.withValues(alpha: 0.3),
+                            blurRadius: 8,
+                            spreadRadius: 2,
+                          ),
+                        ]
+                      : null,
+                ),
+                child: isSelected
+                    ? Icon(
+                        Icons.check,
+                        color: color == Colors.white || color == Colors.yellow
+                            ? Colors.black
+                            : Colors.white,
+                        size: 20,
+                      )
+                    : null,
               ),
-              boxShadow: isSelected
-                  ? [
-                      BoxShadow(
-                        color: AppColors.primary.withValues(alpha: 0.3),
-                        blurRadius: 8,
-                        spreadRadius: 2,
-                      ),
-                    ]
-                  : null,
             ),
-            child: isSelected
-                ? Icon(
-                    Icons.check,
-                    color: color == Colors.white || color == Colors.yellow
-                        ? Colors.black
-                        : Colors.white,
-                    size: 20,
-                  )
-                : null,
-          ),
-        );
-      }).toList(),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildLogoSelector() {
+    final l10n = AppLocalizations.of(context)!;
+    
+    // Hazır logolar (asset paths)
+    final presetLogos = {
+      'assets/logos/instagram.png': 'Instagram',
+      'assets/logos/facebook.png': 'Facebook',
+      'assets/logos/twitter.png': 'Twitter',
+      'assets/logos/linkedin.png': 'LinkedIn',
+      'assets/logos/youtube.png': 'YouTube',
+      'assets/logos/tiktok.png': 'TikTok',
+      'assets/logos/whatsapp.png': 'WhatsApp',
+      'assets/logos/telegram.png': 'Telegram',
+    };
+
+    return SizedBox(
+      height: 80,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: presetLogos.length + 2, // +2 for "None" and "Gallery"
+        itemBuilder: (context, index) {
+          // İlk item: Logo Yok
+          if (index == 0) {
+            final isSelected = _selectedLogo == null;
+            return Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _selectedLogo = null;
+                    _customLogoFile = null;
+                  });
+                },
+                child: Container(
+                  width: 70,
+                  decoration: BoxDecoration(
+                    color: isSelected ? AppColors.primary.withValues(alpha: 0.1) : Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: isSelected ? AppColors.primary : Colors.grey.shade300,
+                      width: isSelected ? 2 : 1,
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.block,
+                        color: isSelected ? AppColors.primary : Colors.grey.shade600,
+                        size: 28,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        l10n.none,
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: isSelected ? AppColors.primary : Colors.grey.shade700,
+                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
+          
+          // Son item: Galeriden Seç
+          if (index == presetLogos.length + 1) {
+            final isSelected = _selectedLogo == 'gallery';
+            return Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: GestureDetector(
+                onTap: () async {
+                  // TODO: Image picker eklenecek
+                  setState(() {
+                    _selectedLogo = 'gallery';
+                  });
+                },
+                child: Container(
+                  width: 70,
+                  decoration: BoxDecoration(
+                    color: isSelected ? AppColors.primary.withValues(alpha: 0.1) : Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: isSelected ? AppColors.primary : Colors.grey.shade300,
+                      width: isSelected ? 2 : 1,
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.add_photo_alternate,
+                        color: isSelected ? AppColors.primary : Colors.grey.shade600,
+                        size: 28,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        l10n.gallery,
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: isSelected ? AppColors.primary : Colors.grey.shade700,
+                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
+          
+          // Preset logolar
+          final logoIndex = index - 1;
+          final logoPath = presetLogos.keys.elementAt(logoIndex);
+          final logoName = presetLogos[logoPath]!;
+          final isSelected = _selectedLogo == logoPath;
+          
+          return Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedLogo = logoPath;
+                  _customLogoFile = null;
+                });
+              },
+              child: Container(
+                width: 70,
+                decoration: BoxDecoration(
+                  color: isSelected ? AppColors.primary.withValues(alpha: 0.1) : Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: isSelected ? AppColors.primary : Colors.grey.shade300,
+                    width: isSelected ? 2 : 1,
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // TODO: Asset image eklenecek
+                    Icon(
+                      Icons.image,
+                      color: isSelected ? AppColors.primary : Colors.grey.shade600,
+                      size: 32,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      logoName,
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: isSelected ? AppColors.primary : Colors.grey.shade700,
+                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

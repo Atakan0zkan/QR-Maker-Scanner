@@ -283,4 +283,75 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get shortMessage => '短消息';
+
+  @override
+  String get selectTheme => '选择主题';
+
+  @override
+  String get selectLanguage => '选择语言';
+
+  @override
+  String get selected => '已选择';
+
+  @override
+  String get noScannedQR => '尚无扫描的二维码';
+
+  @override
+  String get noScannedBarcode => '尚无扫描的条形码';
+
+  @override
+  String get noGeneratedQR => '尚无生成的二维码';
+
+  @override
+  String get noGeneratedBarcode => '尚无生成的条形码';
+
+  @override
+  String get selectItems => '选择';
+
+  @override
+  String get qrCodes => '二维码';
+
+  @override
+  String get barcodes => '条形码';
+
+  @override
+  String deleteMultipleMessage(Object count) {
+    return '您确定要删除 $count 个项目吗？';
+  }
+
+  @override
+  String get deleteSingleMessage => '您确定要删除此项目吗？';
+
+  @override
+  String get scanQROrBarcode => '对准相机扫描二维码或条形码';
+
+  @override
+  String get qrColorSettings => '二维码颜色';
+
+  @override
+  String get qrColor => '二维码颜色';
+
+  @override
+  String get backgroundColor => '背景';
+
+  @override
+  String get bodyShape => '主体形状';
+
+  @override
+  String get square => '方形';
+
+  @override
+  String get circle => '圆形';
+
+  @override
+  String get roundedSquare => '圆角方形';
+
+  @override
+  String get diamond => '菱形';
+
+  @override
+  String get qrLogo => '二维码标志';
+
+  @override
+  String get gallery => '图库';
 }

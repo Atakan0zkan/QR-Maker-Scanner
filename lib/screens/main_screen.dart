@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../services/ad_service.dart';
+import '../l10n/app_localizations.dart';
 import 'scanner_screen.dart';
 import 'create_screen.dart';
 import 'history_screen.dart';
@@ -101,26 +102,26 @@ class _MainScreenState extends State<MainScreen> {
                   _currentIndex = index;
                 });
               },
-              destinations: const [
+              destinations: [
                 NavigationDestination(
-                  icon: Icon(Icons.qr_code_scanner_outlined),
-                  selectedIcon: Icon(Icons.qr_code_scanner),
-                  label: 'Tara',
+                  icon: const Icon(Icons.qr_code_scanner_outlined),
+                  selectedIcon: const Icon(Icons.qr_code_scanner),
+                  label: AppLocalizations.of(context)!.scan,
                 ),
                 NavigationDestination(
-                  icon: Icon(Icons.add_box_outlined),
-                  selectedIcon: Icon(Icons.add_box),
-                  label: 'Oluştur',
+                  icon: const Icon(Icons.add_box_outlined),
+                  selectedIcon: const Icon(Icons.add_box),
+                  label: AppLocalizations.of(context)!.create,
                 ),
                 NavigationDestination(
-                  icon: Icon(Icons.history_outlined),
-                  selectedIcon: Icon(Icons.history),
-                  label: 'Geçmiş',
+                  icon: const Icon(Icons.history_outlined),
+                  selectedIcon: const Icon(Icons.history),
+                  label: AppLocalizations.of(context)!.history,
                 ),
                 NavigationDestination(
-                  icon: Icon(Icons.settings_outlined),
-                  selectedIcon: Icon(Icons.settings),
-                  label: 'Ayarlar',
+                  icon: const Icon(Icons.settings_outlined),
+                  selectedIcon: const Icon(Icons.settings),
+                  label: AppLocalizations.of(context)!.settings,
                 ),
               ],
             ),

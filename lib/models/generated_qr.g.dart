@@ -23,13 +23,14 @@ class GeneratedQRAdapter extends TypeAdapter<GeneratedQR> {
       createdAt: fields[3] as DateTime,
       title: fields[4] as String?,
       qrImage: fields[5] as Uint8List?,
+      isBarcode: fields[6] == null ? false : fields[6] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, GeneratedQR obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class GeneratedQRAdapter extends TypeAdapter<GeneratedQR> {
       ..writeByte(4)
       ..write(obj.title)
       ..writeByte(5)
-      ..write(obj.qrImage);
+      ..write(obj.qrImage)
+      ..writeByte(6)
+      ..write(obj.isBarcode);
   }
 
   @override

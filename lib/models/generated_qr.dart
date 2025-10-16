@@ -24,6 +24,9 @@ class GeneratedQR extends HiveObject {
   @HiveField(5)
   Uint8List? qrImage;
 
+  @HiveField(6, defaultValue: false)
+  bool isBarcode;
+
   GeneratedQR({
     required this.id,
     required this.content,
@@ -31,5 +34,6 @@ class GeneratedQR extends HiveObject {
     required this.createdAt,
     this.title,
     this.qrImage,
+    this.isBarcode = false,
   });
 }

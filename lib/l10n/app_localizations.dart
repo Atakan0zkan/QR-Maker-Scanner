@@ -665,6 +665,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Short Message'**
   String get shortMessage;
+
+  /// No description provided for @selectTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Theme'**
+  String get selectTheme;
+
+  /// No description provided for @selectLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Language'**
+  String get selectLanguage;
+
+  /// No description provided for @selected.
+  ///
+  /// In en, this message translates to:
+  /// **'selected'**
+  String get selected;
+
+  /// No description provided for @noScannedQR.
+  ///
+  /// In en, this message translates to:
+  /// **'No scanned QR codes yet'**
+  String get noScannedQR;
+
+  /// No description provided for @noScannedBarcode.
+  ///
+  /// In en, this message translates to:
+  /// **'No scanned barcodes yet'**
+  String get noScannedBarcode;
+
+  /// No description provided for @noGeneratedQR.
+  ///
+  /// In en, this message translates to:
+  /// **'No generated QR codes yet'**
+  String get noGeneratedQR;
+
+  /// No description provided for @noGeneratedBarcode.
+  ///
+  /// In en, this message translates to:
+  /// **'No generated barcodes yet'**
+  String get noGeneratedBarcode;
+
+  /// No description provided for @selectItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Select'**
+  String get selectItems;
+
+  /// No description provided for @qrCodes.
+  ///
+  /// In en, this message translates to:
+  /// **'QR Codes'**
+  String get qrCodes;
+
+  /// No description provided for @barcodes.
+  ///
+  /// In en, this message translates to:
+  /// **'Barcodes'**
+  String get barcodes;
+
+  /// No description provided for @deleteMultipleMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete {count} items?'**
+  String deleteMultipleMessage(Object count);
+
+  /// No description provided for @deleteSingleMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this item?'**
+  String get deleteSingleMessage;
+
+  /// No description provided for @scanQROrBarcode.
+  ///
+  /// In en, this message translates to:
+  /// **'Align camera to scan QR code or barcode'**
+  String get scanQROrBarcode;
+
+  /// No description provided for @qrColorSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'QR Code Colors'**
+  String get qrColorSettings;
+
+  /// No description provided for @qrColor.
+  ///
+  /// In en, this message translates to:
+  /// **'QR Color'**
+  String get qrColor;
+
+  /// No description provided for @backgroundColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Background'**
+  String get backgroundColor;
+
+  /// No description provided for @bodyShape.
+  ///
+  /// In en, this message translates to:
+  /// **'Body Shape'**
+  String get bodyShape;
+
+  /// No description provided for @square.
+  ///
+  /// In en, this message translates to:
+  /// **'Square'**
+  String get square;
+
+  /// No description provided for @circle.
+  ///
+  /// In en, this message translates to:
+  /// **'Circle'**
+  String get circle;
+
+  /// No description provided for @roundedSquare.
+  ///
+  /// In en, this message translates to:
+  /// **'Rounded Square'**
+  String get roundedSquare;
+
+  /// No description provided for @diamond.
+  ///
+  /// In en, this message translates to:
+  /// **'Diamond'**
+  String get diamond;
+
+  /// No description provided for @qrLogo.
+  ///
+  /// In en, this message translates to:
+  /// **'QR Logo'**
+  String get qrLogo;
+
+  /// No description provided for @gallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery'**
+  String get gallery;
 }
 
 class _AppLocalizationsDelegate

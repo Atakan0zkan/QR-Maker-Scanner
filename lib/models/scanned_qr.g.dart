@@ -22,13 +22,14 @@ class ScannedQRAdapter extends TypeAdapter<ScannedQR> {
       type: fields[2] as QRType,
       scannedAt: fields[3] as DateTime,
       metadata: (fields[4] as Map?)?.cast<String, dynamic>(),
+      isBarcode: fields[5] == null ? false : fields[5] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, ScannedQR obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class ScannedQRAdapter extends TypeAdapter<ScannedQR> {
       ..writeByte(3)
       ..write(obj.scannedAt)
       ..writeByte(4)
-      ..write(obj.metadata);
+      ..write(obj.metadata)
+      ..writeByte(5)
+      ..write(obj.isBarcode);
   }
 
   @override

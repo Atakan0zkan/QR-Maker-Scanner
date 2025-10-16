@@ -285,4 +285,77 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get shortMessage => 'Mensaje corto';
+
+  @override
+  String get selectTheme => 'Seleccionar Tema';
+
+  @override
+  String get selectLanguage => 'Seleccionar Idioma';
+
+  @override
+  String get selected => 'seleccionado';
+
+  @override
+  String get noScannedQR => 'No hay códigos QR escaneados todavía';
+
+  @override
+  String get noScannedBarcode => 'No hay códigos de barras escaneados todavía';
+
+  @override
+  String get noGeneratedQR => 'No hay códigos QR generados todavía';
+
+  @override
+  String get noGeneratedBarcode => 'No hay códigos de barras generados todavía';
+
+  @override
+  String get selectItems => 'Seleccionar';
+
+  @override
+  String get qrCodes => 'Códigos QR';
+
+  @override
+  String get barcodes => 'Códigos de Barras';
+
+  @override
+  String deleteMultipleMessage(Object count) {
+    return '¿Estás seguro de que quieres eliminar $count elementos?';
+  }
+
+  @override
+  String get deleteSingleMessage =>
+      '¿Estás seguro de que quieres eliminar este elemento?';
+
+  @override
+  String get scanQROrBarcode =>
+      'Alinea la cámara para escanear código QR o código de barras';
+
+  @override
+  String get qrColorSettings => 'Colores del Código QR';
+
+  @override
+  String get qrColor => 'Color QR';
+
+  @override
+  String get backgroundColor => 'Fondo';
+
+  @override
+  String get bodyShape => 'Forma del Cuerpo';
+
+  @override
+  String get square => 'Cuadrado';
+
+  @override
+  String get circle => 'Círculo';
+
+  @override
+  String get roundedSquare => 'Cuadrado Redondeado';
+
+  @override
+  String get diamond => 'Diamante';
+
+  @override
+  String get qrLogo => 'Logo QR';
+
+  @override
+  String get gallery => 'Galería';
 }

@@ -282,8 +282,82 @@ class AppLocalizationsEl extends AppLocalizations {
   String get exportOptions => 'Επιλογές εξαγωγής';
 
   @override
-  String get website => 'Ιστοσελίδα';
+  String get website => 'Ιστότοπος';
 
   @override
   String get shortMessage => 'Σύντομο μήνυμα';
+
+  @override
+  String get selectTheme => 'Επιλογή Θέματος';
+
+  @override
+  String get selectLanguage => 'Επιλογή Γλώσσας';
+
+  @override
+  String get selected => 'επιλεγμένο';
+
+  @override
+  String get noScannedQR => 'Δεν υπάρχουν σαρωμένοι κώδικες QR ακόμη';
+
+  @override
+  String get noScannedBarcode => 'Δεν υπάρχουν σαρωμένοι κωδικοί γραμμών ακόμη';
+
+  @override
+  String get noGeneratedQR => 'Δεν υπάρχουν δημιουργημένοι κώδικες QR ακόμη';
+
+  @override
+  String get noGeneratedBarcode =>
+      'Δεν υπάρχουν δημιουργημένοι κωδικοί γραμμών ακόμη';
+
+  @override
+  String get selectItems => 'Επιλογή';
+
+  @override
+  String get qrCodes => 'Κώδικες QR';
+
+  @override
+  String get barcodes => 'Κωδικοί γραμμών';
+
+  @override
+  String deleteMultipleMessage(Object count) {
+    return 'Είστε βέβαιοι ότι θέλετε να διαγράψετε $count στοιχεία;';
+  }
+
+  @override
+  String get deleteSingleMessage =>
+      'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το στοιχείο;';
+
+  @override
+  String get scanQROrBarcode =>
+      'Ευθυγραμμίστε την κάμερα για σάρωση κώδικα QR ή κωδικού γραμμών';
+
+  @override
+  String get qrColorSettings => 'QR Code Colors';
+
+  @override
+  String get qrColor => 'QR Color';
+
+  @override
+  String get backgroundColor => 'Background';
+
+  @override
+  String get bodyShape => 'Body Shape';
+
+  @override
+  String get square => 'Square';
+
+  @override
+  String get circle => 'Circle';
+
+  @override
+  String get roundedSquare => 'Rounded Square';
+
+  @override
+  String get diamond => 'Diamond';
+
+  @override
+  String get qrLogo => 'QR Logo';
+
+  @override
+  String get gallery => 'Gallery';
 }

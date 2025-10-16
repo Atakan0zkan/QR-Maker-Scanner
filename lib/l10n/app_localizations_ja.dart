@@ -284,4 +284,75 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get shortMessage => 'ショートメッセージ';
+
+  @override
+  String get selectTheme => 'テーマを選択';
+
+  @override
+  String get selectLanguage => '言語を選択';
+
+  @override
+  String get selected => '選択済み';
+
+  @override
+  String get noScannedQR => 'スキャンされたQRコードはまだありません';
+
+  @override
+  String get noScannedBarcode => 'スキャンされたバーコードはまだありません';
+
+  @override
+  String get noGeneratedQR => '生成されたQRコードはまだありません';
+
+  @override
+  String get noGeneratedBarcode => '生成されたバーコードはまだありません';
+
+  @override
+  String get selectItems => '選択';
+
+  @override
+  String get qrCodes => 'QRコード';
+
+  @override
+  String get barcodes => 'バーコード';
+
+  @override
+  String deleteMultipleMessage(Object count) {
+    return '$count個のアイテムを削除してもよろしいですか？';
+  }
+
+  @override
+  String get deleteSingleMessage => 'このアイテムを削除してもよろしいですか？';
+
+  @override
+  String get scanQROrBarcode => 'カメラを合わせてQRコードまたはバーコードをスキャン';
+
+  @override
+  String get qrColorSettings => 'QRコードの色';
+
+  @override
+  String get qrColor => 'QRの色';
+
+  @override
+  String get backgroundColor => '背景';
+
+  @override
+  String get bodyShape => 'ボディシェイプ';
+
+  @override
+  String get square => '正方形';
+
+  @override
+  String get circle => '円';
+
+  @override
+  String get roundedSquare => '角丸四角';
+
+  @override
+  String get diamond => 'ダイヤモンド';
+
+  @override
+  String get qrLogo => 'QRロゴ';
+
+  @override
+  String get gallery => 'ギャラリー';
 }

@@ -20,11 +20,15 @@ class ScannedQR extends HiveObject {
   @HiveField(4)
   Map<String, dynamic>? metadata;
 
+  @HiveField(5, defaultValue: false)
+  bool isBarcode;
+
   ScannedQR({
     required this.id,
     required this.content,
     required this.type,
     required this.scannedAt,
     this.metadata,
+    this.isBarcode = false,
   });
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import '../providers/qr_provider.dart';
@@ -17,6 +18,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
   late TabController _tabController;
   bool _isSelectionMode = false;
   final Set<String> _selectedIds = {};
+  bool _showBarcodes = false;
 
   @override
   void initState() {
@@ -61,10 +63,11 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _isSelectionMode ? '${_selectedIds.length} seçildi' : 'Geçmiş',
+          _isSelectionMode ? '${_selectedIds.length} ${l10n.selected}' : l10n.history,
           style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -73,18 +76,26 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
                 icon: const Icon(Icons.close),
                 onPressed: _toggleSelectionMode,
               )
-            : null,
+            : IconButton(
+                icon: Icon(_showBarcodes ? Icons.qr_code_2 : Icons.barcode_reader),
+                tooltip: _showBarcodes ? l10n.qrCodes : l10n.barcodes,
+                onPressed: () {
+                  setState(() {
+                    _showBarcodes = !_showBarcodes;
+                  });
+                },
+              ),
         actions: [
           if (!_isSelectionMode)
             IconButton(
               icon: const Icon(Icons.checklist),
-              tooltip: 'Seç',
+              tooltip: l10n.selectItems,
               onPressed: _toggleSelectionMode,
             ),
           if (_isSelectionMode)
             IconButton(
               icon: const Icon(Icons.delete_outline),
-              tooltip: 'Sil',
+              tooltip: l10n.delete,
               onPressed: _selectedIds.isEmpty
                   ? null
                   : () {
@@ -98,9 +109,9 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
         ],
         bottom: TabBar(
           controller: _tabController,
-          tabs: const [
-            Tab(text: 'Taranan'),
-            Tab(text: 'Oluşturulan'),
+          tabs: [
+            Tab(text: l10n.scanned),
+            Tab(text: l10n.generated),
           ],
         ),
       ),
@@ -117,10 +128,12 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
   Widget _buildScannedList() {
     return Consumer<QRProvider>(
       builder: (context, provider, _) {
-        final scannedQRs = provider.scannedQRs;
+        final l10n = AppLocalizations.of(context)!;
+        final allScannedQRs = provider.scannedQRs;
+        final scannedQRs = allScannedQRs.where((qr) => qr.isBarcode == _showBarcodes).toList();
 
         if (scannedQRs.isEmpty) {
-          return _buildEmptyState('Henüz taranan QR kod yok');
+          return _buildEmptyState(_showBarcodes ? l10n.noScannedBarcode : l10n.noScannedQR);
         }
 
         return ListView.builder(
@@ -173,10 +186,12 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
   Widget _buildGeneratedList() {
     return Consumer<QRProvider>(
       builder: (context, provider, _) {
-        final generatedQRs = provider.generatedQRs;
+        final l10n = AppLocalizations.of(context)!;
+        final allGeneratedQRs = provider.generatedQRs;
+        final generatedQRs = allGeneratedQRs.where((qr) => qr.isBarcode == _showBarcodes).toList();
 
         if (generatedQRs.isEmpty) {
-          return _buildEmptyState('Henüz oluşturulan QR kod yok');
+          return _buildEmptyState(_showBarcodes ? l10n.noGeneratedBarcode : l10n.noGeneratedQR);
         }
 
         return ListView.builder(

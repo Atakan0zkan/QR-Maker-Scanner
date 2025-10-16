@@ -284,4 +284,77 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get shortMessage => 'Kısa mesaj';
+
+  @override
+  String get selectTheme => 'Tema Seç';
+
+  @override
+  String get selectLanguage => 'Dil Seçin';
+
+  @override
+  String get selected => 'seçildi';
+
+  @override
+  String get noScannedQR => 'Henüz taranan QR kod yok';
+
+  @override
+  String get noScannedBarcode => 'Henüz taranan barkod yok';
+
+  @override
+  String get noGeneratedQR => 'Henüz oluşturulan QR kod yok';
+
+  @override
+  String get noGeneratedBarcode => 'Henüz oluşturulan barkod yok';
+
+  @override
+  String get selectItems => 'Seç';
+
+  @override
+  String get qrCodes => 'QR Kodlar';
+
+  @override
+  String get barcodes => 'Barkodlar';
+
+  @override
+  String deleteMultipleMessage(Object count) {
+    return '$count öğeyi silmek istediğinizden emin misiniz?';
+  }
+
+  @override
+  String get deleteSingleMessage =>
+      'Bu öğeyi silmek istediğinizden emin misiniz?';
+
+  @override
+  String get scanQROrBarcode =>
+      'QR kod veya barkod taramak için kamerayı hizalayın';
+
+  @override
+  String get qrColorSettings => 'QR Kod Renkleri';
+
+  @override
+  String get qrColor => 'QR Rengi';
+
+  @override
+  String get backgroundColor => 'Arka Plan';
+
+  @override
+  String get bodyShape => 'Gövde Şekli';
+
+  @override
+  String get square => 'Kare';
+
+  @override
+  String get circle => 'Daire';
+
+  @override
+  String get roundedSquare => 'Yuvarlatılmış Kare';
+
+  @override
+  String get diamond => 'Elmas';
+
+  @override
+  String get qrLogo => 'QR Logosu';
+
+  @override
+  String get gallery => 'Galeri';
 }

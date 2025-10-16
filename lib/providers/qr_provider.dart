@@ -26,6 +26,7 @@ class QRProvider extends ChangeNotifier {
     required String content,
     required QRType type,
     Map<String, dynamic>? metadata,
+    bool isBarcode = false,
   }) async {
     final qr = ScannedQR(
       id: const Uuid().v4(),
@@ -33,6 +34,7 @@ class QRProvider extends ChangeNotifier {
       type: type,
       scannedAt: DateTime.now(),
       metadata: metadata,
+      isBarcode: isBarcode,
     );
 
     await DatabaseService.saveScannedQR(qr);
@@ -44,6 +46,7 @@ class QRProvider extends ChangeNotifier {
     required QRType type,
     String? title,
     dynamic qrImage,
+    bool isBarcode = false,
   }) async {
     final qr = GeneratedQR(
       id: const Uuid().v4(),
@@ -52,6 +55,7 @@ class QRProvider extends ChangeNotifier {
       createdAt: DateTime.now(),
       title: title,
       qrImage: qrImage,
+      isBarcode: isBarcode,
     );
 
     await DatabaseService.saveGeneratedQR(qr);

@@ -315,6 +315,7 @@ class QRDetailScreen extends StatelessWidget {
   }
 
   void _share(BuildContext context) {
+    // ignore: deprecated_member_use
     Share.share(
       content,
       subject: 'QR Kod - ${_getTitle()}',
