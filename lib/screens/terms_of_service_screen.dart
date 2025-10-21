@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 
 class TermsOfServiceScreen extends StatelessWidget {
   const TermsOfServiceScreen({super.key});
@@ -7,7 +8,7 @@ class TermsOfServiceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hizmet Şartları'),
+        title: Text(AppLocalizations.of(context)!.termsOfServiceTitle),
         centerTitle: true,
       ),
       body: ListView(

@@ -4,6 +4,7 @@ import '../models/scanned_qr.dart';
 import '../models/generated_qr.dart';
 import '../models/qr_type.dart';
 import '../services/database_service.dart';
+import '../services/analytics_service.dart';
 
 class QRProvider extends ChangeNotifier {
   List<ScannedQR> _scannedQRs = [];
@@ -22,7 +23,7 @@ class QRProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addScannedQR({
+  Future<bool> addScannedQR({
     required String content,
     required QRType type,
     Map<String, dynamic>? metadata,
@@ -37,11 +38,19 @@ class QRProvider extends ChangeNotifier {
       isBarcode: isBarcode,
     );
 
-    await DatabaseService.saveScannedQR(qr);
-    loadData();
+    final success = await DatabaseService.saveScannedQR(qr);
+    if (success) {
+      loadData();
+      // Log analytics
+      AnalyticsService.logEvent('qr_scanned', {
+        'type': type.toString(),
+        'is_barcode': isBarcode,
+      });
+    }
+    return success;
   }
 
-  Future<void> addGeneratedQR({
+  Future<bool> addGeneratedQR({
     required String content,
     required QRType type,
     String? title,
@@ -58,18 +67,32 @@ class QRProvider extends ChangeNotifier {
       isBarcode: isBarcode,
     );
 
-    await DatabaseService.saveGeneratedQR(qr);
-    loadData();
+    final success = await DatabaseService.saveGeneratedQR(qr);
+    if (success) {
+      loadData();
+      // Log analytics
+      AnalyticsService.logEvent('qr_generated', {
+        'type': type.toString(),
+        'has_title': title != null,
+      });
+    }
+    return success;
   }
 
-  Future<void> deleteScannedQR(String id) async {
-    await DatabaseService.deleteScannedQR(id);
-    loadData();
+  Future<bool> deleteScannedQR(String id) async {
+    final success = await DatabaseService.deleteScannedQR(id);
+    if (success) {
+      loadData();
+    }
+    return success;
   }
 
-  Future<void> deleteGeneratedQR(String id) async {
-    await DatabaseService.deleteGeneratedQR(id);
-    loadData();
+  Future<bool> deleteGeneratedQR(String id) async {
+    final success = await DatabaseService.deleteGeneratedQR(id);
+    if (success) {
+      loadData();
+    }
+    return success;
   }
 
   Future<void> clearAllScanned() async {

@@ -5,6 +5,7 @@ import 'package:share_plus/share_plus.dart';
 import '../models/qr_type.dart';
 import '../services/qr_helper.dart';
 import '../core/constants/app_colors.dart';
+import '../l10n/app_localizations.dart';
 
 class QRDetailScreen extends StatelessWidget {
   final String content;
@@ -97,6 +98,7 @@ class QRDetailScreen extends StatelessWidget {
   }
 
   Widget _buildTypeCard(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -125,7 +127,7 @@ class QRDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    isScanned ? 'Taranan' : 'Oluşturulan',
+                    isScanned ? l10n.scannedLabel : l10n.generatedLabel,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
@@ -308,9 +310,10 @@ class QRDetailScreen extends StatelessWidget {
   }
 
   void _copyToClipboard(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     Clipboard.setData(ClipboardData(text: content));
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Panoya kopyalandı')),
+      SnackBar(content: Text(l10n.copiedToClipboard)),
     );
   }
 
@@ -330,13 +333,14 @@ class QRDetailScreen extends StatelessWidget {
   }
 
   Future<void> _openURL(BuildContext context) async {
+    final l10n = AppLocalizations.of(context)!;
     final uri = Uri.parse(content);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('URL açılamadı')),
+          SnackBar(content: Text(l10n.urlCannotOpen)),
         );
       }
     }

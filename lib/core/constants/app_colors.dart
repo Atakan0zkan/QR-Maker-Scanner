@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  // Primary
-  static const Color primary = Color(0xFF137FEC);
+  // Primary - Biraz daha canlı mavi
+  static const Color primary = Color(0xFF2196F3);
   
   // Background
   static const Color backgroundLight = Color(0xFFF6F7F8);

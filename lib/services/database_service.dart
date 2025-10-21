@@ -23,8 +23,14 @@ class DatabaseService {
   // Scanned QR operations
   static Box<ScannedQR> get scannedBox => Hive.box<ScannedQR>(scannedBoxName);
 
-  static Future<void> saveScannedQR(ScannedQR qr) async {
-    await scannedBox.put(qr.id, qr);
+  static Future<bool> saveScannedQR(ScannedQR qr) async {
+    try {
+      await scannedBox.put(qr.id, qr);
+      return true;
+    } catch (e) {
+      print('Error saving scanned QR: $e');
+      return false;
+    }
   }
 
   static List<ScannedQR> getAllScannedQRs() {
@@ -32,19 +38,37 @@ class DatabaseService {
       ..sort((a, b) => b.scannedAt.compareTo(a.scannedAt));
   }
 
-  static Future<void> deleteScannedQR(String id) async {
-    await scannedBox.delete(id);
+  static Future<bool> deleteScannedQR(String id) async {
+    try {
+      await scannedBox.delete(id);
+      return true;
+    } catch (e) {
+      print('Error deleting scanned QR: $e');
+      return false;
+    }
   }
 
-  static Future<void> clearAllScannedQRs() async {
-    await scannedBox.clear();
+  static Future<bool> clearAllScannedQRs() async {
+    try {
+      await scannedBox.clear();
+      return true;
+    } catch (e) {
+      print('Error clearing scanned QRs: $e');
+      return false;
+    }
   }
 
   // Generated QR operations
   static Box<GeneratedQR> get generatedBox => Hive.box<GeneratedQR>(generatedBoxName);
 
-  static Future<void> saveGeneratedQR(GeneratedQR qr) async {
-    await generatedBox.put(qr.id, qr);
+  static Future<bool> saveGeneratedQR(GeneratedQR qr) async {
+    try {
+      await generatedBox.put(qr.id, qr);
+      return true;
+    } catch (e) {
+      print('Error saving generated QR: $e');
+      return false;
+    }
   }
 
   static List<GeneratedQR> getAllGeneratedQRs() {
@@ -52,11 +76,23 @@ class DatabaseService {
       ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
   }
 
-  static Future<void> deleteGeneratedQR(String id) async {
-    await generatedBox.delete(id);
+  static Future<bool> deleteGeneratedQR(String id) async {
+    try {
+      await generatedBox.delete(id);
+      return true;
+    } catch (e) {
+      print('Error deleting generated QR: $e');
+      return false;
+    }
   }
 
-  static Future<void> clearAllGeneratedQRs() async {
-    await generatedBox.clear();
+  static Future<bool> clearAllGeneratedQRs() async {
+    try {
+      await generatedBox.clear();
+      return true;
+    } catch (e) {
+      print('Error clearing generated QRs: $e');
+      return false;
+    }
   }
 }

@@ -1,73 +1,48 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
   const PrivacyPolicyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Gizlilik Politikası'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text(l10n.privacyPolicyTitle), centerTitle: true),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           _buildSection(
-            title: '1. Toplanan Bilgiler',
-            content: '''
-QR Scanner uygulaması, kullanıcı deneyimini iyileştirmek için aşağıdaki bilgileri toplar:
-
-• Taradığınız QR kodların içeriği (cihazınızda yerel olarak saklanır)
-• Oluşturduğunuz QR kodlar (cihazınızda yerel olarak saklanır)
-• Uygulama kullanım tercihleri (tema, dil vb.)
-
-Tüm veriler cihazınızda yerel olarak saklanır ve sunucularımıza gönderilmez.
-''',
+            title: l10n.ppSection1Title,
+            content: l10n.ppSection1Content,
           ),
           _buildSection(
-            title: '2. Kamera İzni',
-            content: '''
-QR kod tarama özelliğini kullanabilmek için kamera erişim izni gereklidir. Kamera sadece QR kod tarama sırasında kullanılır ve hiçbir görüntü kaydedilmez veya paylaşılmaz.
-''',
+            title: l10n.ppSection2Title,
+            content: l10n.ppSection2Content,
           ),
           _buildSection(
-            title: '3. Depolama İzni',
-            content: '''
-QR kodları resim olarak kaydetmek için depolama izni gerekebilir. Bu izin yalnızca sizin isteğiniz üzerine QR kod görsellerini kaydetmek için kullanılır.
-''',
+            title: l10n.ppSection3Title,
+            content: l10n.ppSection3Content,
           ),
           _buildSection(
-            title: '4. Veri Güvenliği',
-            content: '''
-Tüm verileriniz cihazınızda şifrelenerek saklanır. Hiçbir kişisel bilginiz üçüncü taraflarla paylaşılmaz.
-''',
+            title: l10n.ppSection4Title,
+            content: l10n.ppSection4Content,
           ),
           _buildSection(
-            title: '5. Reklamlar',
-            content: '''
-Uygulama, Google AdMob üzerinden reklamlar gösterebilir. AdMob, reklam gösterimi için cihaz bilgilerini kullanabilir. Daha fazla bilgi için Google'ın gizlilik politikasını inceleyebilirsiniz.
-''',
+            title: l10n.ppSection5Title,
+            content: l10n.ppSection5Content,
           ),
           _buildSection(
-            title: '6. Çocukların Gizliliği',
-            content: '''
-Uygulamamız 13 yaşın altındaki çocuklardan bilerek kişisel bilgi toplamaz. Ebeveynler, çocuklarının uygulamayı kullanımını denetlemelidir.
-''',
+            title: l10n.ppSection6Title,
+            content: l10n.ppSection6Content,
           ),
           _buildSection(
-            title: '7. Değişiklikler',
-            content: '''
-Bu gizlilik politikası zaman zaman güncellenebilir. Önemli değişiklikler olduğunda uygulama içinde bildirim yapılacaktır.
-''',
+            title: l10n.ppSection7Title,
+            content: l10n.ppSection7Content,
           ),
           _buildSection(
-            title: '8. İletişim',
-            content: '''
-Gizlilik politikası ile ilgili sorularınız için bizimle iletişime geçebilirsiniz.
-
-Son Güncelleme: 10 Ekim 2025
-''',
+            title: l10n.ppSection8Title,
+            content: l10n.ppSection8Content,
           ),
           const SizedBox(height: 32),
         ],
@@ -81,19 +56,10 @@ Son Güncelleme: 10 Ekim 2025
       children: [
         Text(
           title,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
-        Text(
-          content,
-          style: const TextStyle(
-            fontSize: 14,
-            height: 1.5,
-          ),
-        ),
+        Text(content, style: const TextStyle(fontSize: 14, height: 1.5)),
         const SizedBox(height: 24),
       ],
     );

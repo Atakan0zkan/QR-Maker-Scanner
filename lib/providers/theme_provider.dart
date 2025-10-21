@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../services/analytics_service.dart';
 
 class ThemeProvider extends ChangeNotifier {
   static const String _themeKey = 'theme_mode';
@@ -24,6 +25,11 @@ class ThemeProvider extends ChangeNotifier {
     
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_themeKey, mode.index);
+    
+    // Log analytics
+    AnalyticsService.logEvent('theme_changed', {
+      'theme': mode.toString(),
+    });
   }
 
   bool isDarkMode(BuildContext context) {

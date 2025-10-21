@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:ui' as ui;
+import '../services/analytics_service.dart';
 
 class LocaleProvider extends ChangeNotifier {
   static const String _localeKey = 'locale';
@@ -59,5 +60,10 @@ class LocaleProvider extends ChangeNotifier {
     
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_localeKey, locale.languageCode);
+    
+    // Log analytics
+    AnalyticsService.logEvent('language_changed', {
+      'language': locale.languageCode,
+    });
   }
 }

@@ -149,6 +149,7 @@ class _ScannerScreenState extends State<ScannerScreen>
   }
 
   Future<void> _toggleTorch() async {
+    final l10n = AppLocalizations.of(context)!;
     try {
       await _controller?.toggleTorch();
       setState(() {
@@ -157,13 +158,14 @@ class _ScannerScreenState extends State<ScannerScreen>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Flaş kontrolü başarısız: $e')),
+          SnackBar(content: Text('${l10n.flashControlFailed}: $e')),
         );
       }
     }
   }
 
   void _showScannedList() {
+    final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -195,7 +197,7 @@ class _ScannerScreenState extends State<ScannerScreen>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Taranan QR Kodlar (${_scannedCodes.length})',
+                        '${l10n.scannedQRCodes} (${_scannedCodes.length})',
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       IconButton(
@@ -207,7 +209,7 @@ class _ScannerScreenState extends State<ScannerScreen>
                 ),
                 Expanded(
                   child: _scannedCodes.isEmpty
-                      ? const Center(child: Text('Henüz QR kod taranmadı'))
+                      ? Center(child: Text(l10n.noQRScannedYet))
                       : ListView.builder(
                           controller: scrollController,
                           itemCount: _scannedCodes.length,
@@ -272,13 +274,13 @@ class _ScannerScreenState extends State<ScannerScreen>
           if (_hasPermission)
             IconButton(
               icon: Icon(_isTorchOn ? Icons.flash_on : Icons.flash_off),
-              tooltip: _isTorchOn ? 'Işığı Kapat' : 'Işığı Aç',
+              tooltip: _isTorchOn ? l10n.flashOn : l10n.flashOff,
               onPressed: _toggleTorch,
             ),
           if (_hasPermission)
             IconButton(
               icon: Icon(_isMultiScanMode ? Icons.qr_code_scanner : Icons.qr_code_2),
-              tooltip: _isMultiScanMode ? 'Normal Mod' : 'Toplu Tarama',
+              tooltip: _isMultiScanMode ? l10n.normalMode : l10n.batchScanMode,
               onPressed: _toggleMultiScanMode,
             ),
           if (_isMultiScanMode && _scannedCodes.isNotEmpty)
@@ -287,7 +289,7 @@ class _ScannerScreenState extends State<ScannerScreen>
                 label: Text('${_scannedCodes.length}'),
                 child: const Icon(Icons.list),
               ),
-              tooltip: 'Taranan Kodlar',
+              tooltip: l10n.scannedCodesLabel,
               onPressed: _showScannedList,
             ),
         ],
@@ -304,7 +306,7 @@ class _ScannerScreenState extends State<ScannerScreen>
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Kamera izni gerekli',
+                    l10n.cameraPermissionNeeded,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 8),
@@ -319,7 +321,7 @@ class _ScannerScreenState extends State<ScannerScreen>
                   const SizedBox(height: 24),
                   ElevatedButton(
                     onPressed: _checkPermission,
-                    child: const Text('İzin Ver'),
+                    child: Text(l10n.grantPermission),
                   ),
                 ],
               ),

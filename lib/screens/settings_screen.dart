@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../providers/theme_provider.dart';
 import '../providers/locale_provider.dart';
 import '../core/constants/app_colors.dart';
 import '../l10n/app_localizations.dart';
@@ -29,7 +28,6 @@ class SettingsScreen extends StatelessWidget {
             context,
             title: l10n.general,
             children: [
-              _buildThemeTile(context),
               _buildLanguageTile(context),
             ],
           ),
@@ -83,8 +81,8 @@ class SettingsScreen extends StatelessWidget {
               _buildSettingTile(
                 context,
                 icon: Icons.bug_report_outlined,
-                title: 'Bug Report',
-                subtitle: 'Report bugs via email',
+                title: l10n.bugReport,
+                subtitle: l10n.reportBugsViaEmail,
                 onTap: () async {
                   final Uri emailUri = Uri(
                     scheme: 'mailto',
@@ -96,7 +94,7 @@ class SettingsScreen extends StatelessWidget {
                   } else {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Email uygulaması açılamadı')),
+                        SnackBar(content: Text(l10n.emailAppCannotOpen)),
                       );
                     }
                   }
@@ -159,89 +157,6 @@ class SettingsScreen extends StatelessWidget {
       subtitle: Text(subtitle),
       trailing: onTap != null ? const Icon(Icons.chevron_right) : null,
       onTap: onTap,
-    );
-  }
-
-  Widget _buildThemeTile(BuildContext context) {
-    return Consumer<ThemeProvider>(
-      builder: (context, themeProvider, _) {
-        return ListTile(
-          leading: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: AppColors.primary.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: const Icon(
-              Icons.brightness_6_outlined,
-              color: AppColors.primary,
-              size: 24,
-            ),
-          ),
-          title: Text(AppLocalizations.of(context)!.theme),
-          subtitle: Text(_getThemeLabel(context, themeProvider.themeMode)),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () => _showThemeDialog(context, themeProvider),
-        );
-      },
-    );
-  }
-
-  String _getThemeLabel(BuildContext context, ThemeMode mode) {
-    final l10n = AppLocalizations.of(context)!;
-    switch (mode) {
-      case ThemeMode.light:
-        return l10n.light;
-      case ThemeMode.dark:
-        return l10n.dark;
-      default:
-        return l10n.dark;
-    }
-  }
-
-  void _showThemeDialog(BuildContext context, ThemeProvider themeProvider) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.selectTheme),
-        content: StatefulBuilder(
-          builder: (context, setState) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // ignore: deprecated_member_use
-                RadioListTile<ThemeMode>(
-                  title: Text(AppLocalizations.of(context)!.light),
-                  value: ThemeMode.light,
-                  // ignore: deprecated_member_use
-                  groupValue: themeProvider.themeMode,
-                  // ignore: deprecated_member_use
-                  onChanged: (value) {
-                    if (value != null) {
-                      themeProvider.setThemeMode(value);
-                      Navigator.pop(context);
-                    }
-                  },
-                ),
-                // ignore: deprecated_member_use
-                RadioListTile<ThemeMode>(
-                  title: Text(AppLocalizations.of(context)!.dark),
-                  value: ThemeMode.dark,
-                  // ignore: deprecated_member_use
-                  groupValue: themeProvider.themeMode,
-                  // ignore: deprecated_member_use
-                  onChanged: (value) {
-                    if (value != null) {
-                      themeProvider.setThemeMode(value);
-                      Navigator.pop(context);
-                    }
-                  },
-                ),
-              ],
-            );
-          },
-        ),
-      ),
     );
   }
 

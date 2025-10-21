@@ -10,6 +10,7 @@ import 'providers/locale_provider.dart';
 import 'providers/qr_provider.dart';
 import 'services/database_service.dart';
 import 'services/ad_service.dart';
+import 'services/analytics_service.dart';
 import 'screens/main_screen.dart';
 
 void main() async {
@@ -18,6 +19,10 @@ void main() async {
   // Initialize services
   await DatabaseService.init();
   await AdService.initialize();
+  await AnalyticsService.init();
+  
+  // Log app opened
+  await AnalyticsService.logEvent('app_opened');
   
   // Set system UI overlay style
   SystemChrome.setSystemUIOverlayStyle(
@@ -45,9 +50,9 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'QR Scanner',
             debugShowCheckedModeBanner: false,
-            theme: AppTheme.lightTheme,
+            theme: AppTheme.darkTheme,
             darkTheme: AppTheme.darkTheme,
-            themeMode: themeProvider.themeMode,
+            themeMode: ThemeMode.dark,
             locale: localeProvider.locale,
             localizationsDelegates: const [
               AppLocalizations.delegate,

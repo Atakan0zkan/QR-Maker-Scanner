@@ -1,7 +1,9 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import '../providers/qr_provider.dart';
 import '../models/qr_type.dart';
 import '../core/constants/app_colors.dart';
@@ -67,7 +69,11 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _isSelectionMode ? '${_selectedIds.length} ${l10n.selected}' : l10n.history,
+          _isSelectionMode 
+              ? '${_selectedIds.length} ${l10n.selected}' 
+              : _showBarcodes 
+                  ? l10n.barcodes 
+                  : l10n.history,
           style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -107,7 +113,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
                     },
             ),
         ],
-        bottom: TabBar(
+        bottom: _showBarcodes ? null : TabBar(
           controller: _tabController,
           tabs: [
             Tab(text: l10n.scanned),
@@ -115,13 +121,15 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
           ],
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          _buildScannedList(),
-          _buildGeneratedList(),
-        ],
-      ),
+      body: _showBarcodes
+          ? _buildScannedList()
+          : TabBarView(
+              controller: _tabController,
+              children: [
+                _buildScannedList(),
+                _buildGeneratedList(),
+              ],
+            ),
     );
   }
 
@@ -148,6 +156,8 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
               content: qr.content,
               date: qr.scannedAt,
               isSelected: isSelected,
+              isBarcode: qr.isBarcode,
+              showQRPreview: false,
               onTap: () {
                 if (_isSelectionMode) {
                   setState(() {
@@ -207,6 +217,9 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
               date: qr.createdAt,
               title: qr.title,
               isSelected: isSelected,
+              isBarcode: qr.isBarcode,
+              showQRPreview: true,
+              qrImage: qr.qrImage,
               onTap: () {
                 if (_isSelectionMode) {
                   setState(() {
@@ -248,7 +261,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            Icons.qr_code_2_outlined,
+            _showBarcodes ? Icons.qr_code_scanner : Icons.qr_code_2_outlined,
             size: 80,
             color: Theme.of(context).disabledColor,
           ),
@@ -274,8 +287,11 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
     required DateTime date,
     String? title,
     required bool isSelected,
+    required bool isBarcode,
+    required bool showQRPreview,
     required VoidCallback onTap,
     required VoidCallback onDelete,
+    Uint8List? qrImage,
   }) {
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
@@ -292,6 +308,37 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
                   value: isSelected,
                   onChanged: (_) => onTap(),
                 )
+              else if (showQRPreview && !isBarcode)
+                Container(
+                  width: 60,
+                  height: 60,
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: Colors.grey.shade300,
+                      width: 1,
+                    ),
+                  ),
+                  child: qrImage != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: Image.memory(
+                            qrImage,
+                            width: 52,
+                            height: 52,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : QrImageView(
+                          data: content,
+                          version: QrVersions.auto,
+                          size: 52,
+                          backgroundColor: Colors.white,
+                          errorCorrectionLevel: QrErrorCorrectLevel.L,
+                        ),
+                )
               else
                 Container(
                   padding: const EdgeInsets.all(12),
@@ -300,7 +347,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
-                    _getIconForType(type),
+                    isBarcode ? Icons.qr_code_scanner : _getIconForType(type),
                     color: AppColors.primary,
                     size: 24,
                   ),
@@ -384,30 +431,31 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
   }
 
   void _showDeleteDialog(BuildContext context, {required VoidCallback onConfirm, int? count}) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Silme Onayı'),
+        title: Text(l10n.deleteConfirmationTitle),
         content: Text(count != null && count > 1
-            ? '$count öğeyi silmek istediğinizden emin misiniz?'
-            : 'Bu öğeyi silmek istediğinizden emin misiniz?'),
+            ? l10n.deleteMultipleMessage(count)
+            : l10n.deleteSingleMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('İptal'),
+            child: Text(l10n.cancel),
           ),
           ElevatedButton(
             onPressed: () {
               onConfirm();
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Silindi')),
+                SnackBar(content: Text(l10n.deleted)),
               );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.error,
             ),
-            child: const Text('Sil'),
+            child: Text(l10n.delete),
           ),
         ],
       ),

@@ -75,6 +75,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enterText => 'أدخل النص';
 
   @override
+  String get textLabel => 'Text';
+
+  @override
+  String get textHint => 'Enter your text';
+
+  @override
+  String get textRequired => 'Text is required';
+
+  @override
   String get ssid => 'اسم الشبكة (SSID)';
 
   @override
@@ -356,4 +365,278 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get gallery => 'Gallery';
+
+  @override
+  String get eyeStyle => 'Eye Style';
+
+  @override
+  String get dataModuleShape => 'Data Shape';
+
+  @override
+  String get backgroundStyle => 'Background';
+
+  @override
+  String get gradient => 'Gradient';
+
+  @override
+  String get rounded => 'Rounded';
+
+  @override
+  String get instagramGradient => 'Instagram';
+
+  @override
+  String get sunsetGradient => 'Sunset';
+
+  @override
+  String get oceanGradient => 'Ocean';
+
+  @override
+  String get fireGradient => 'Fire';
+
+  @override
+  String itemsDeleted(Object count) {
+    return '$count items deleted';
+  }
+
+  @override
+  String get deleteConfirmationTitle => 'Delete Confirmation';
+
+  @override
+  String get deleted => 'Deleted';
+
+  @override
+  String get privacyPolicyTitle => 'Privacy Policy';
+
+  @override
+  String get termsOfServiceTitle => 'Terms of Service';
+
+  @override
+  String get ppSection1Title => '1. Collected Information';
+
+  @override
+  String get ppSection1Content =>
+      'QR Scanner collects information to improve user experience. All data is stored locally on your device.';
+
+  @override
+  String get ppSection2Title => '2. Camera Permission';
+
+  @override
+  String get ppSection2Content =>
+      'Camera permission is required to scan QR codes. The camera is only used during scanning.';
+
+  @override
+  String get ppSection3Title => '3. Storage Permission';
+
+  @override
+  String get ppSection3Content =>
+      'Storage permission may be required to save QR codes as images.';
+
+  @override
+  String get ppSection4Title => '4. Data Security';
+
+  @override
+  String get ppSection4Content =>
+      'All your data is stored encrypted on your device. No personal information is shared with third parties.';
+
+  @override
+  String get ppSection5Title => '5. Advertisements';
+
+  @override
+  String get ppSection5Content =>
+      'The app may display advertisements through Google AdMob.';
+
+  @override
+  String get ppSection6Title => '6. Children\'s Privacy';
+
+  @override
+  String get ppSection6Content =>
+      'Our app does not knowingly collect personal information from children under 13.';
+
+  @override
+  String get ppSection7Title => '7. Changes';
+
+  @override
+  String get ppSection7Content =>
+      'This privacy policy may be updated from time to time.';
+
+  @override
+  String get ppSection8Title => '8. Contact';
+
+  @override
+  String get ppSection8Content =>
+      'For questions about this privacy policy, please contact us.\n\nLast Updated: October 10, 2025';
+
+  @override
+  String get tosSection1Title => '1. Acceptance';
+
+  @override
+  String get tosSection1Content =>
+      'By using QR Scanner, you agree to these terms of service.';
+
+  @override
+  String get tosSection2Title => '2. License';
+
+  @override
+  String get tosSection2Content =>
+      'You are granted a limited license for personal, non-commercial use.';
+
+  @override
+  String get tosSection3Title => '3. Terms of Use';
+
+  @override
+  String get tosSection3Content =>
+      'You will not create QR codes with illegal content nor violate the rights of others.';
+
+  @override
+  String get tosSection4Title => '4. Disclaimer';
+
+  @override
+  String get tosSection4Content =>
+      'The app is provided \"as is\". We are not responsible for damages arising from the use of QR codes.';
+
+  @override
+  String get tosSection5Title => '5. Content Responsibility';
+
+  @override
+  String get tosSection5Content =>
+      'You are responsible for the content of the QR codes you create and scan.';
+
+  @override
+  String get tosSection6Title => '6. Service Changes';
+
+  @override
+  String get tosSection6Content =>
+      'We reserve the right to change the app\'s features without prior notice.';
+
+  @override
+  String get tosSection7Title => '7. Account Suspension';
+
+  @override
+  String get tosSection7Content =>
+      'We reserve the right to suspend your access if you violate these terms.';
+
+  @override
+  String get tosSection8Title => '8. Intellectual Property';
+
+  @override
+  String get tosSection8Content =>
+      'All content of the app is protected by copyright.';
+
+  @override
+  String get tosSection9Title => '9. Third-Party Links';
+
+  @override
+  String get tosSection9Content =>
+      'The app may contain links to third-party websites.';
+
+  @override
+  String get tosSection10Title => '10. Warranty Disclaimer';
+
+  @override
+  String get tosSection10Content => 'The app is provided without any warranty.';
+
+  @override
+  String get tosSection11Title => '11. Changes to Terms';
+
+  @override
+  String get tosSection11Content =>
+      'We reserve the right to change these terms at any time.';
+
+  @override
+  String get tosSection12Title => '12. Contact';
+
+  @override
+  String get tosSection12Content =>
+      'للاستفسارات حول شروط الخدمة هذه، يرجى الاتصال بنا.\n\nآخر تحديث: 10 أكتوبر 2025';
+
+  @override
+  String get emailAppCannotOpen => 'لا يمكن فتح تطبيق البريد الإلكتروني';
+
+  @override
+  String get flashControlFailed => 'فشل التحكم في الفلاش';
+
+  @override
+  String get cameraPermissionNeeded => 'مطلوب إذن الكاميرا';
+
+  @override
+  String get grantPermission => 'منح الإذن';
+
+  @override
+  String get scannedQRCodes => 'رموز QR الممسوحة ضوئياً';
+
+  @override
+  String get noQRScannedYet => 'لم يتم مسح أي رموز QR بعد';
+
+  @override
+  String get scannedLabel => 'ممسوح ضوئياً';
+
+  @override
+  String get generatedLabel => 'تم إنشاؤه';
+
+  @override
+  String get flashOn => 'الفلاش مفعل';
+
+  @override
+  String get flashOff => 'الفلاش معطل';
+
+  @override
+  String get normalMode => 'الوضع العادي';
+
+  @override
+  String get batchScanMode => 'المسح الدفعي';
+
+  @override
+  String get scannedCodesLabel => 'الرموز الممسوحة';
+
+  @override
+  String get enterCoordinates => 'أو أدخل الإحداثيات';
+
+  @override
+  String get enterLocationName => 'الرجاء إدخال اسم الموقع';
+
+  @override
+  String get cannotOpenMaps => 'لا يمكن فتح خرائط جوجل';
+
+  @override
+  String get invalidCoordinateFormat =>
+      'تنسيق الإحداثيات غير صحيح. مثال: 41.0082, 28.9784';
+
+  @override
+  String get shareError => 'خطأ في المشاركة';
+
+  @override
+  String get urlCannotOpen => 'لا يمكن فتح الرابط';
+
+  @override
+  String get bugReport => 'الإبلاغ عن خطأ';
+
+  @override
+  String get reportBugsViaEmail => 'الإبلاغ عن الأخطاء عبر البريد الإلكتروني';
+
+  @override
+  String get analytics => 'Analytics';
+
+  @override
+  String get usageStatistics => 'Usage Statistics';
+
+  @override
+  String get totalEvents => 'Total Events';
+
+  @override
+  String get eventTypes => 'Event Types';
+
+  @override
+  String get mostCommon => 'Most Common';
+
+  @override
+  String get firstEvent => 'First Event';
+
+  @override
+  String get lastEvent => 'Last Event';
+
+  @override
+  String get clearAnalytics => 'Clear Analytics';
+
+  @override
+  String get analyticsCleared => 'Analytics data cleared';
 }
