@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:developer' as developer;
 import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -21,14 +22,14 @@ class AdService {
     if (Platform.isAndroid || Platform.isIOS) {
       await MobileAds.instance.initialize();
       if (kDebugMode) {
-        print('✅ AdMob initialized successfully (${Platform.isAndroid ? "Android" : "iOS"})');
+        developer.log('AdMob initialized successfully (${Platform.isAndroid ? "Android" : "iOS"})', name: 'AdService');
       }
     }
   }
 
   static BannerAd createBannerAd() {
     if (kDebugMode) {
-      print('🔄 Creating banner ad with ID: $bannerAdUnitId');
+      developer.log('Creating banner ad with ID: $bannerAdUnitId', name: 'AdService');
     }
     
     return BannerAd(
@@ -38,23 +39,23 @@ class AdService {
       listener: BannerAdListener(
         onAdLoaded: (ad) {
           if (kDebugMode) {
-            print('✅ Banner ad loaded successfully');
+            developer.log('Banner ad loaded successfully', name: 'AdService');
           }
         },
         onAdFailedToLoad: (ad, error) {
           if (kDebugMode) {
-            print('❌ Banner ad failed to load: ${error.message} (Code: ${error.code})');
+            developer.log('Banner ad failed to load: ${error.message} (Code: ${error.code})', name: 'AdService');
           }
           ad.dispose();
         },
         onAdOpened: (ad) {
           if (kDebugMode) {
-            print('📱 Banner ad opened');
+            developer.log('Banner ad opened', name: 'AdService');
           }
         },
         onAdClosed: (ad) {
           if (kDebugMode) {
-            print('🔒 Banner ad closed');
+            developer.log('Banner ad closed', name: 'AdService');
           }
         },
       ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:feedback/feedback.dart';
 import '../providers/locale_provider.dart';
 import '../core/constants/app_colors.dart';
 import '../l10n/app_localizations.dart';
+import '../services/feedback_service.dart';
 import 'privacy_policy_screen.dart';
 import 'terms_of_service_screen.dart';
 
@@ -82,22 +83,43 @@ class SettingsScreen extends StatelessWidget {
                 context,
                 icon: Icons.bug_report_outlined,
                 title: l10n.bugReport,
-                subtitle: l10n.reportBugsViaEmail,
-                onTap: () async {
-                  final Uri emailUri = Uri(
-                    scheme: 'mailto',
-                    path: 'reportbugstomebro@gmail.com',
-                    query: 'subject=QR Scanner Bug Report&body=Please describe the bug:',
-                  );
-                  if (await canLaunchUrl(emailUri)) {
-                    await launchUrl(emailUri);
-                  } else {
+                subtitle: '',
+                onTap: () {
+                  BetterFeedback.of(context).show((UserFeedback feedback) async {
+                    // Show loading
                     if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(l10n.emailAppCannotOpen)),
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
                       );
                     }
-                  }
+                    
+                    // Send feedback
+                    final success = await FeedbackService.sendFeedback(
+                      userFeedback: feedback.text,
+                      screenshot: feedback.screenshot,
+                    );
+                    
+                    // Close loading
+                    if (context.mounted) {
+                      Navigator.pop(context);
+                      
+                      // Show result
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            success
+                                ? '✅ Geri bildirim gönderildi!'
+                                : '❌ ${l10n.emailAppCannotOpen}',
+                          ),
+                          backgroundColor: success ? Colors.green : Colors.red,
+                        ),
+                      );
+                    }
+                  });
                 },
               ),
             ],

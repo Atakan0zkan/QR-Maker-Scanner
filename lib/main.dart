@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:feedback/feedback.dart';
 import 'l10n/app_localizations.dart';
 
 import 'core/theme/app_theme.dart';
@@ -31,7 +32,27 @@ void main() async {
     ),
   );
   
-  runApp(const MyApp());
+  runApp(
+    BetterFeedback(
+      theme: FeedbackThemeData(
+        background: Colors.grey,
+        feedbackSheetColor: Colors.grey[850]!,
+        drawColors: [
+          Colors.red,
+          Colors.green,
+          Colors.blue,
+          Colors.yellow,
+        ],
+      ),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      localeOverride: const Locale('en'),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

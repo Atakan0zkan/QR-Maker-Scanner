@@ -195,10 +195,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get privacyPolicy => 'Privacy Policy';
 
   @override
+  String get privacyPolicyTitle => 'Privacy Policy';
+
+  @override
   String get viewPrivacyPolicy => 'View privacy policy';
 
   @override
   String get termsOfService => 'Terms of Service';
+
+  @override
+  String get termsOfServiceTitle => 'Terms of Service';
 
   @override
   String get viewTermsOfService => 'View terms of service';
@@ -325,7 +331,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get barcodes => 'Barcodes';
 
   @override
-  String deleteMultipleMessage(Object count) {
+  String deleteMultipleMessage(int count) {
     return 'Are you sure you want to delete $count items?';
   }
 
@@ -353,6 +359,45 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get circle => 'Circle';
+
+  @override
+  String get nameLabel => 'Name';
+
+  @override
+  String get nameRequired => 'Name is required';
+
+  @override
+  String get phoneLabel => 'Phone';
+
+  @override
+  String get emailLabel => 'Email';
+
+  @override
+  String get emailRequired => 'Email is required';
+
+  @override
+  String get subjectOptional => 'Subject (Optional)';
+
+  @override
+  String get messageOptional => 'Message (Optional)';
+
+  @override
+  String get phoneNumberLabel => 'Phone Number';
+
+  @override
+  String get phoneNumberRequired => 'Phone number is required';
+
+  @override
+  String get locationSearch => 'Search Location (Google Maps)';
+
+  @override
+  String get locationExample => 'e.g., Galata Tower, Istanbul';
+
+  @override
+  String get locationRequired => 'Location is required';
+
+  @override
+  String get locationTitle => 'Location';
 
   @override
   String get roundedSquare => 'Rounded Square';
@@ -405,10 +450,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleted => 'Deleted';
 
   @override
-  String get privacyPolicyTitle => 'Privacy Policy';
+  String get oneTimeQR => 'One-Time QR';
 
   @override
-  String get termsOfServiceTitle => 'Terms of Service';
+  String get oneTimeQRActive => 'QR code can be scanned once';
+
+  @override
+  String get oneTimeQRDefault => 'Unlimited scans';
+
+  @override
+  String get qrAnalyticsDashboard => 'QR Analytics Dashboard';
+
+  @override
+  String get totalScans => 'Total Scans';
+
+  @override
+  String get lastScan => 'Last Scan';
+
+  @override
+  String get neverScanned => 'Never scanned';
+
+  @override
+  String get activeStatus => 'Active in use';
+
+  @override
+  String get notScannedYet => 'Not scanned yet';
+
+  @override
+  String get createdDate => 'Created Date';
+
+  @override
+  String get oneTimeQRUsed => 'Used';
+
+  @override
+  String get oneTimeQRActiveStatus => 'Active';
+
+  @override
+  String get analyticsNote => 'Analytics stored locally';
 
   @override
   String get ppSection1Title => '1. Collected Information';
@@ -563,7 +641,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get grantPermission => 'Grant Permission';
 
   @override
-  String get scannedQRCodes => 'Scanned QR Codes';
+  String scanHistoryDesc(int count) {
+    return 'See $count scanned codes';
+  }
+
+  @override
+  String generateHistoryDesc(int count) {
+    return 'See $count generated codes';
+  }
 
   @override
   String get noQRScannedYet => 'No QR codes scanned yet';

@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _MainScreenState extends State<MainScreen> {
   void _loadBannerAd() {
     try {
       if (kDebugMode) {
-        print('🔄 Loading banner ad...');
+        developer.log('Loading banner ad...', name: 'MainScreen');
       }
       
       _bannerAd = AdService.createBannerAd();
@@ -50,17 +51,17 @@ class _MainScreenState extends State<MainScreen> {
             _isBannerAdLoaded = true;
           });
           if (kDebugMode) {
-            print('✅ Banner ad loaded and displayed');
+            developer.log('Banner ad loaded and displayed', name: 'MainScreen');
           }
         }
       }).catchError((error) {
         if (kDebugMode) {
-          print('❌ Error loading banner ad: $error');
+          developer.log('Error loading banner ad: $error', name: 'MainScreen');
         }
       });
     } catch (e) {
       if (kDebugMode) {
-        print('❌ Exception while creating banner ad: $e');
+        developer.log('Exception while creating banner ad: $e', name: 'MainScreen');
       }
     }
   }

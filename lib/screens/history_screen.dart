@@ -230,6 +230,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
                     }
                   });
                 } else {
+                  // Basit detail screen'e git
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -303,39 +304,55 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              if (_isSelectionMode)
+              if (_isSelectionMode && showQRPreview && !isBarcode)
+                // Selection mode + QR preview
+                Row(
+                  children: [
+                    Checkbox(
+                      value: isSelected,
+                      onChanged: (_) => onTap(),
+                    ),
+                    SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: qrImage != null
+                          ? Image.memory(
+                              qrImage,
+                              width: 60,
+                              height: 60,
+                              fit: BoxFit.contain,
+                            )
+                          : QrImageView(
+                              data: content,
+                              version: QrVersions.auto,
+                              size: 60,
+                              backgroundColor: Colors.transparent,
+                              errorCorrectionLevel: QrErrorCorrectLevel.L,
+                            ),
+                    ),
+                  ],
+                )
+              else if (_isSelectionMode)
                 Checkbox(
                   value: isSelected,
                   onChanged: (_) => onTap(),
                 )
               else if (showQRPreview && !isBarcode)
-                Container(
+                SizedBox(
                   width: 60,
                   height: 60,
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: Colors.grey.shade300,
-                      width: 1,
-                    ),
-                  ),
                   child: qrImage != null
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: Image.memory(
-                            qrImage,
-                            width: 52,
-                            height: 52,
-                            fit: BoxFit.cover,
-                          ),
+                      ? Image.memory(
+                          qrImage,
+                          width: 60,
+                          height: 60,
+                          fit: BoxFit.contain,
                         )
                       : QrImageView(
                           data: content,
                           version: QrVersions.auto,
-                          size: 52,
-                          backgroundColor: Colors.white,
+                          size: 60,
+                          backgroundColor: Colors.transparent,
                           errorCorrectionLevel: QrErrorCorrectLevel.L,
                         ),
                 )

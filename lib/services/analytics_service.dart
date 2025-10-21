@@ -1,4 +1,6 @@
-import 'package:hive/hive.dart';
+import 'dart:developer' as developer;
+import 'package:flutter/foundation.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import '../models/analytics_event.dart';
 
 class AnalyticsService {
@@ -13,7 +15,7 @@ class AnalyticsService {
       }
       _box = await Hive.openBox<AnalyticsEvent>(_boxName);
     } catch (e) {
-      print('Analytics init error: $e');
+      if (kDebugMode) developer.log('Analytics init error: $e', name: 'AnalyticsService');
     }
   }
 
@@ -34,7 +36,7 @@ class AnalyticsService {
         await _box?.deleteAt(0);
       }
     } catch (e) {
-      print('Analytics error: $e');
+      if (kDebugMode) developer.log('Analytics error: $e', name: 'AnalyticsService');
     }
   }
 
@@ -91,7 +93,7 @@ class AnalyticsService {
         await event.delete();
       }
     } catch (e) {
-      print('Analytics cleanup error: $e');
+      if (kDebugMode) developer.log('Analytics cleanup error: $e', name: 'AnalyticsService');
     }
   }
 
@@ -99,7 +101,7 @@ class AnalyticsService {
     try {
       await _box?.clear();
     } catch (e) {
-      print('Analytics clear error: $e');
+      if (kDebugMode) developer.log('Analytics clear error: $e', name: 'AnalyticsService');
     }
   }
 }

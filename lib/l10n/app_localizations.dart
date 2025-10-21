@@ -486,6 +486,12 @@ abstract class AppLocalizations {
   /// **'Privacy Policy'**
   String get privacyPolicy;
 
+  /// No description provided for @privacyPolicyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicyTitle;
+
   /// No description provided for @viewPrivacyPolicy.
   ///
   /// In en, this message translates to:
@@ -497,6 +503,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Terms of Service'**
   String get termsOfService;
+
+  /// No description provided for @termsOfServiceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Service'**
+  String get termsOfServiceTitle;
 
   /// No description provided for @viewTermsOfService.
   ///
@@ -748,7 +760,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Are you sure you want to delete {count} items?'**
-  String deleteMultipleMessage(Object count);
+  String deleteMultipleMessage(int count);
 
   /// No description provided for @deleteSingleMessage.
   ///
@@ -797,6 +809,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Circle'**
   String get circle;
+
+  /// No description provided for @nameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get nameLabel;
+
+  /// No description provided for @nameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Name is required'**
+  String get nameRequired;
+
+  /// No description provided for @phoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get phoneLabel;
+
+  /// No description provided for @emailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get emailLabel;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get emailRequired;
+
+  /// No description provided for @subjectOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject (Optional)'**
+  String get subjectOptional;
+
+  /// No description provided for @messageOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Message (Optional)'**
+  String get messageOptional;
+
+  /// No description provided for @phoneNumberLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phoneNumberLabel;
+
+  /// No description provided for @phoneNumberRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number is required'**
+  String get phoneNumberRequired;
+
+  /// No description provided for @locationSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Location (Google Maps)'**
+  String get locationSearch;
+
+  /// No description provided for @locationExample.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Galata Tower, Istanbul'**
+  String get locationExample;
+
+  /// No description provided for @locationRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Location is required'**
+  String get locationRequired;
+
+  /// No description provided for @locationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get locationTitle;
 
   /// No description provided for @roundedSquare.
   ///
@@ -894,17 +984,83 @@ abstract class AppLocalizations {
   /// **'Deleted'**
   String get deleted;
 
-  /// No description provided for @privacyPolicyTitle.
+  /// No description provided for @oneTimeQR.
   ///
   /// In en, this message translates to:
-  /// **'Privacy Policy'**
-  String get privacyPolicyTitle;
+  /// **'One-Time QR'**
+  String get oneTimeQR;
 
-  /// No description provided for @termsOfServiceTitle.
+  /// No description provided for @oneTimeQRActive.
   ///
   /// In en, this message translates to:
-  /// **'Terms of Service'**
-  String get termsOfServiceTitle;
+  /// **'QR code can be scanned once'**
+  String get oneTimeQRActive;
+
+  /// No description provided for @oneTimeQRDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited scans'**
+  String get oneTimeQRDefault;
+
+  /// No description provided for @qrAnalyticsDashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'QR Analytics Dashboard'**
+  String get qrAnalyticsDashboard;
+
+  /// No description provided for @totalScans.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Scans'**
+  String get totalScans;
+
+  /// No description provided for @lastScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Scan'**
+  String get lastScan;
+
+  /// No description provided for @neverScanned.
+  ///
+  /// In en, this message translates to:
+  /// **'Never scanned'**
+  String get neverScanned;
+
+  /// No description provided for @activeStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Active in use'**
+  String get activeStatus;
+
+  /// No description provided for @notScannedYet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not scanned yet'**
+  String get notScannedYet;
+
+  /// No description provided for @createdDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Created Date'**
+  String get createdDate;
+
+  /// No description provided for @oneTimeQRUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Used'**
+  String get oneTimeQRUsed;
+
+  /// No description provided for @oneTimeQRActiveStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get oneTimeQRActiveStatus;
+
+  /// No description provided for @analyticsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Analytics stored locally'**
+  String get analyticsNote;
 
   /// No description provided for @ppSection1Title.
   ///
@@ -1170,11 +1326,17 @@ abstract class AppLocalizations {
   /// **'Grant Permission'**
   String get grantPermission;
 
-  /// No description provided for @scannedQRCodes.
+  /// No description provided for @scanHistoryDesc.
   ///
   /// In en, this message translates to:
-  /// **'Scanned QR Codes'**
-  String get scannedQRCodes;
+  /// **'See {count} scanned codes'**
+  String scanHistoryDesc(int count);
+
+  /// No description provided for @generateHistoryDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'See {count} generated codes'**
+  String generateHistoryDesc(int count);
 
   /// No description provided for @noQRScannedYet.
   ///

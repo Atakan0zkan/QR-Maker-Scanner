@@ -113,7 +113,8 @@ class _ScannerScreenState extends State<ScannerScreen>
         });
         
         // Save to database
-        context.read<QRProvider>().addScannedQR(content: code, type: qrType, isBarcode: isBarcode);
+        final provider = context.read<QRProvider>();
+        provider.addScannedQR(content: code, type: qrType, isBarcode: isBarcode);
       }
     } else {
       // Normal tarama modu
@@ -122,7 +123,8 @@ class _ScannerScreenState extends State<ScannerScreen>
       });
 
       // Save to database
-      context.read<QRProvider>().addScannedQR(content: code, type: qrType, isBarcode: isBarcode);
+      final provider = context.read<QRProvider>();
+      provider.addScannedQR(content: code, type: qrType, isBarcode: isBarcode);
 
       // Navigate to detail screen
       Navigator.push(
@@ -197,7 +199,7 @@ class _ScannerScreenState extends State<ScannerScreen>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${l10n.scannedQRCodes} (${_scannedCodes.length})',
+                        '${l10n.scannedCodesLabel} (${_scannedCodes.length})',
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       IconButton(

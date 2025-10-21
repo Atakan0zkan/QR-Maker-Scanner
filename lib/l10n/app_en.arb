@@ -62,8 +62,10 @@
   "customizeTheme": "Customize app theme",
   "privacy": "Privacy",
   "privacyPolicy": "Privacy Policy",
+  "privacyPolicyTitle": "Privacy Policy",
   "viewPrivacyPolicy": "View privacy policy",
   "termsOfService": "Terms of Service",
+  "termsOfServiceTitle": "Terms of Service",
   "viewTermsOfService": "View terms of service",
   "about": "About",
   "version": "Version",
@@ -106,6 +108,13 @@
   "qrCodes": "QR Codes",
   "barcodes": "Barcodes",
   "deleteMultipleMessage": "Are you sure you want to delete {count} items?",
+  "@deleteMultipleMessage": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "deleteSingleMessage": "Are you sure you want to delete this item?",
   "scanQROrBarcode": "Align camera to scan QR code or barcode",
   "qrColorSettings": "QR Code Colors",
@@ -114,6 +123,19 @@
   "bodyShape": "Body Shape",
   "square": "Square",
   "circle": "Circle",
+  "nameLabel": "Name",
+  "nameRequired": "Name is required",
+  "phoneLabel": "Phone",
+  "emailLabel": "Email",
+  "emailRequired": "Email is required",
+  "subjectOptional": "Subject (Optional)",
+  "messageOptional": "Message (Optional)",
+  "phoneNumberLabel": "Phone Number",
+  "phoneNumberRequired": "Phone number is required",
+  "locationSearch": "Search Location (Google Maps)",
+  "locationExample": "e.g., Galata Tower, Istanbul",
+  "locationRequired": "Location is required",
+  "locationTitle": "Location",
   "roundedSquare": "Rounded Square",
   "diamond": "Diamond",
   "qrLogo": "QR Logo",
@@ -130,8 +152,19 @@
   "itemsDeleted": "{count} items deleted",
   "deleteConfirmationTitle": "Delete Confirmation",
   "deleted": "Deleted",
-  "privacyPolicyTitle": "Privacy Policy",
-  "termsOfServiceTitle": "Terms of Service",
+  "oneTimeQR": "One-Time QR",
+  "oneTimeQRActive": "QR code can be scanned once",
+  "oneTimeQRDefault": "Unlimited scans",
+  "qrAnalyticsDashboard": "QR Analytics Dashboard",
+  "totalScans": "Total Scans",
+  "lastScan": "Last Scan",
+  "neverScanned": "Never scanned",
+  "activeStatus": "Active in use",
+  "notScannedYet": "Not scanned yet",
+  "createdDate": "Created Date",
+  "oneTimeQRUsed": "Used",
+  "oneTimeQRActiveStatus": "Active",
+  "analyticsNote": "Analytics stored locally",
   "ppSection1Title": "1. Collected Information",
   "ppSection1Content": "QR Scanner app collects the following information to improve user experience:\n\n• Content of QR codes you scan (stored locally on your device)\n• QR codes you create (stored locally on your device)\n• App usage preferences (theme, language, etc.)\n\nAll data is stored locally on your device and is not sent to our servers.",
   "ppSection2Title": "2. Camera Permission",
@@ -176,7 +209,22 @@
   "flashControlFailed": "Flash control failed",
   "cameraPermissionNeeded": "Camera permission required",
   "grantPermission": "Grant Permission",
-  "scannedQRCodes": "Scanned QR Codes",
+  "scanHistoryDesc": "See {count} scanned codes",
+  "@scanHistoryDesc": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "generateHistoryDesc": "See {count} generated codes",
+  "@generateHistoryDesc": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "noQRScannedYet": "No QR codes scanned yet",
   "scannedLabel": "Scanned",
   "generatedLabel": "Generated",

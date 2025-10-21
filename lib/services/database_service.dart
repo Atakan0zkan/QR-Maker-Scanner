@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../models/scanned_qr.dart';
 import '../models/generated_qr.dart';
@@ -28,7 +30,7 @@ class DatabaseService {
       await scannedBox.put(qr.id, qr);
       return true;
     } catch (e) {
-      print('Error saving scanned QR: $e');
+      if (kDebugMode) developer.log('Error saving scanned QR: $e', name: 'DatabaseService');
       return false;
     }
   }
@@ -43,7 +45,7 @@ class DatabaseService {
       await scannedBox.delete(id);
       return true;
     } catch (e) {
-      print('Error deleting scanned QR: $e');
+      if (kDebugMode) developer.log('Error deleting scanned QR: $e', name: 'DatabaseService');
       return false;
     }
   }
@@ -53,7 +55,7 @@ class DatabaseService {
       await scannedBox.clear();
       return true;
     } catch (e) {
-      print('Error clearing scanned QRs: $e');
+      if (kDebugMode) developer.log('Error clearing scanned QRs: $e', name: 'DatabaseService');
       return false;
     }
   }
@@ -66,7 +68,7 @@ class DatabaseService {
       await generatedBox.put(qr.id, qr);
       return true;
     } catch (e) {
-      print('Error saving generated QR: $e');
+      if (kDebugMode) developer.log('Error saving generated QR: $e', name: 'DatabaseService');
       return false;
     }
   }
@@ -81,7 +83,7 @@ class DatabaseService {
       await generatedBox.delete(id);
       return true;
     } catch (e) {
-      print('Error deleting generated QR: $e');
+      if (kDebugMode) developer.log('Error deleting generated QR: $e', name: 'DatabaseService');
       return false;
     }
   }
@@ -91,7 +93,7 @@ class DatabaseService {
       await generatedBox.clear();
       return true;
     } catch (e) {
-      print('Error clearing generated QRs: $e');
+      if (kDebugMode) developer.log('Error clearing generated QRs: $e', name: 'DatabaseService');
       return false;
     }
   }

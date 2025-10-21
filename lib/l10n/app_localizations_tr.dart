@@ -195,10 +195,16 @@ class AppLocalizationsTr extends AppLocalizations {
   String get privacyPolicy => 'Gizlilik Politikası';
 
   @override
+  String get privacyPolicyTitle => 'Gizlilik Politikası';
+
+  @override
   String get viewPrivacyPolicy => 'Gizlilik politikasını görüntüleyin';
 
   @override
-  String get termsOfService => 'Hizmet Şartları';
+  String get termsOfService => 'Kullanım Koşulları';
+
+  @override
+  String get termsOfServiceTitle => 'Kullanım Koşulları';
 
   @override
   String get viewTermsOfService => 'Kullanım koşullarını görüntüleyin';
@@ -325,7 +331,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get barcodes => 'Barkodlar';
 
   @override
-  String deleteMultipleMessage(Object count) {
+  String deleteMultipleMessage(int count) {
     return '$count öğeyi silmek istediğinizden emin misiniz?';
   }
 
@@ -354,6 +360,45 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get circle => 'Daire';
+
+  @override
+  String get nameLabel => 'İsim';
+
+  @override
+  String get nameRequired => 'İsim gerekli';
+
+  @override
+  String get phoneLabel => 'Telefon';
+
+  @override
+  String get emailLabel => 'E-posta';
+
+  @override
+  String get emailRequired => 'E-posta gerekli';
+
+  @override
+  String get subjectOptional => 'Konu (Opsiyonel)';
+
+  @override
+  String get messageOptional => 'Mesaj (Opsiyonel)';
+
+  @override
+  String get phoneNumberLabel => 'Telefon Numarası';
+
+  @override
+  String get phoneNumberRequired => 'Telefon numarası gerekli';
+
+  @override
+  String get locationSearch => 'Konum Ara (Google Maps)';
+
+  @override
+  String get locationExample => 'Örn: Galata Kulesi, İstanbul';
+
+  @override
+  String get locationRequired => 'Konum gerekli';
+
+  @override
+  String get locationTitle => 'Konum';
 
   @override
   String get roundedSquare => 'Yuvarlatılmış Kare';
@@ -406,10 +451,43 @@ class AppLocalizationsTr extends AppLocalizations {
   String get deleted => 'Silindi';
 
   @override
-  String get privacyPolicyTitle => 'Gizlilik Politikası';
+  String get oneTimeQR => 'Tek Kullanımlık QR';
 
   @override
-  String get termsOfServiceTitle => 'Hizmet Şartları';
+  String get oneTimeQRActive => 'QR kod 1 kez taranabilir';
+
+  @override
+  String get oneTimeQRDefault => 'Sınırsız tarama';
+
+  @override
+  String get qrAnalyticsDashboard => 'QR Analytics Dashboard';
+
+  @override
+  String get totalScans => 'Toplam Tarama';
+
+  @override
+  String get lastScan => 'Son Tarama';
+
+  @override
+  String get neverScanned => 'Henüz taranmadı';
+
+  @override
+  String get activeStatus => 'Aktif kullanımda';
+
+  @override
+  String get notScannedYet => 'Henüz taranmadı';
+
+  @override
+  String get createdDate => 'Oluşturulma Tarihi';
+
+  @override
+  String get oneTimeQRUsed => 'Kullanıldı';
+
+  @override
+  String get oneTimeQRActiveStatus => 'Aktif';
+
+  @override
+  String get analyticsNote => 'Analytics lokal olarak saklanır';
 
   @override
   String get ppSection1Title => '1. Toplanan Bilgiler';
@@ -564,7 +642,14 @@ class AppLocalizationsTr extends AppLocalizations {
   String get grantPermission => 'İzin Ver';
 
   @override
-  String get scannedQRCodes => 'Taranan QR Kodlar';
+  String scanHistoryDesc(int count) {
+    return 'See $count scanned codes';
+  }
+
+  @override
+  String generateHistoryDesc(int count) {
+    return 'See $count generated codes';
+  }
 
   @override
   String get noQRScannedYet => 'Henüz QR kod taranmadı';

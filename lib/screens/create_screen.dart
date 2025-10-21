@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 import 'dart:io';
@@ -286,17 +286,18 @@ class _CreateScreenState extends State<CreateScreen> {
   }
 
   Widget _buildContactForm() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         TextFormField(
           controller: _nameController,
-          decoration: const InputDecoration(
-            labelText: 'İsim',
-            prefixIcon: Icon(Icons.person),
+          decoration: InputDecoration(
+            labelText: l10n.nameLabel,
+            prefixIcon: const Icon(Icons.person),
           ),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'İsim gerekli';
+              return l10n.nameRequired;
             }
             return null;
           },
@@ -304,18 +305,18 @@ class _CreateScreenState extends State<CreateScreen> {
         const SizedBox(height: 16),
         TextFormField(
           controller: _phoneController,
-          decoration: const InputDecoration(
-            labelText: 'Telefon',
-            prefixIcon: Icon(Icons.phone),
+          decoration: InputDecoration(
+            labelText: l10n.phoneLabel,
+            prefixIcon: const Icon(Icons.phone),
           ),
           keyboardType: TextInputType.phone,
         ),
         const SizedBox(height: 16),
         TextFormField(
           controller: _emailController,
-          decoration: const InputDecoration(
-            labelText: 'E-posta',
-            prefixIcon: Icon(Icons.email),
+          decoration: InputDecoration(
+            labelText: l10n.emailLabel,
+            prefixIcon: const Icon(Icons.email),
           ),
           keyboardType: TextInputType.emailAddress,
         ),
@@ -324,18 +325,19 @@ class _CreateScreenState extends State<CreateScreen> {
   }
 
   Widget _buildEmailForm() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         TextFormField(
           controller: _emailAddressController,
-          decoration: const InputDecoration(
-            labelText: 'E-posta Adresi',
-            prefixIcon: Icon(Icons.email),
+          decoration: InputDecoration(
+            labelText: l10n.emailLabel,
+            prefixIcon: const Icon(Icons.email),
           ),
           keyboardType: TextInputType.emailAddress,
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'E-posta gerekli';
+              return l10n.emailRequired;
             }
             return null;
           },
@@ -343,17 +345,17 @@ class _CreateScreenState extends State<CreateScreen> {
         const SizedBox(height: 16),
         TextFormField(
           controller: _subjectController,
-          decoration: const InputDecoration(
-            labelText: 'Konu (Opsiyonel)',
-            prefixIcon: Icon(Icons.subject),
+          decoration: InputDecoration(
+            labelText: l10n.subjectOptional,
+            prefixIcon: const Icon(Icons.subject),
           ),
         ),
         const SizedBox(height: 16),
         TextFormField(
           controller: _messageController,
-          decoration: const InputDecoration(
-            labelText: 'Mesaj (Opsiyonel)',
-            prefixIcon: Icon(Icons.message),
+          decoration: InputDecoration(
+            labelText: l10n.messageOptional,
+            prefixIcon: const Icon(Icons.message),
           ),
           maxLines: 3,
         ),
@@ -362,18 +364,19 @@ class _CreateScreenState extends State<CreateScreen> {
   }
 
   Widget _buildSMSForm() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         TextFormField(
           controller: _smsPhoneController,
-          decoration: const InputDecoration(
-            labelText: 'Telefon Numarası',
-            prefixIcon: Icon(Icons.phone),
+          decoration: InputDecoration(
+            labelText: l10n.phoneNumberLabel,
+            prefixIcon: const Icon(Icons.phone),
           ),
           keyboardType: TextInputType.phone,
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'Telefon numarası gerekli';
+              return l10n.phoneNumberRequired;
             }
             return null;
           },
@@ -381,9 +384,9 @@ class _CreateScreenState extends State<CreateScreen> {
         const SizedBox(height: 16),
         TextFormField(
           controller: _smsMessageController,
-          decoration: const InputDecoration(
-            labelText: 'Mesaj (Opsiyonel)',
-            prefixIcon: Icon(Icons.message),
+          decoration: InputDecoration(
+            labelText: l10n.messageOptional,
+            prefixIcon: const Icon(Icons.message),
           ),
           maxLines: 3,
         ),
@@ -392,16 +395,17 @@ class _CreateScreenState extends State<CreateScreen> {
   }
 
   Widget _buildPhoneForm() {
+    final l10n = AppLocalizations.of(context)!;
     return TextFormField(
       controller: _phoneNumberController,
-      decoration: const InputDecoration(
-        labelText: 'Telefon Numarası',
-        prefixIcon: Icon(Icons.phone),
+      decoration: InputDecoration(
+        labelText: l10n.phoneNumberLabel,
+        prefixIcon: const Icon(Icons.phone),
       ),
       keyboardType: TextInputType.phone,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Telefon numarası gerekli';
+          return l10n.phoneNumberRequired;
         }
         return null;
       },
@@ -415,8 +419,8 @@ class _CreateScreenState extends State<CreateScreen> {
         TextFormField(
           controller: _latitudeController,
           decoration: InputDecoration(
-            labelText: 'Konum Ara (Google Maps)',
-            hintText: 'Örn: Galata Kulesi, İstanbul',
+            labelText: l10n.locationSearch,
+            hintText: l10n.locationExample,
             prefixIcon: const Icon(Icons.search),
             suffixIcon: IconButton(
               icon: const Icon(Icons.map),
@@ -427,7 +431,7 @@ class _CreateScreenState extends State<CreateScreen> {
           keyboardType: TextInputType.text,
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'Konum gerekli';
+              return l10n.locationRequired;
             }
             return null;
           },
@@ -554,29 +558,27 @@ class _CreateScreenState extends State<CreateScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    // QR Kod
-                    QrImageView(
-                      data: _generatedQRData!,
-                      version: QrVersions.auto,
-                      size: 220,
-                      backgroundColor: Colors.transparent,
-                      errorCorrectionLevel: QrErrorCorrectLevel.H, // Yüksek tolerans (logo için)
-                      eyeStyle: QrEyeStyle(
-                        eyeShape: _getEyeShape(),
-                        color: _qrForegroundColor,
+                    // QR Kod - PrettyQr ile! ✨ Rounded corners support!
+                    SizedBox(
+                      width: 220,
+                      height: 220,
+                      child: PrettyQrView.data(
+                        key: ValueKey('$_eyeStyle-$_dataModuleShape'), // Force rebuild!
+                        data: _generatedQRData!,
+                        errorCorrectLevel: QrErrorCorrectLevel.H,
+                        decoration: PrettyQrDecoration(
+                          // Shape - both eyes and data modules
+                          // Eye style öncelikli (daha görünür)
+                          shape: _getCombinedShape(),
+                          // Logo image
+                          image: _selectedLogo != null 
+                              ? PrettyQrDecorationImage(
+                                  image: AssetImage(_selectedLogo!),
+                                  position: PrettyQrDecorationImagePosition.embedded,
+                                )
+                              : null,
+                        ),
                       ),
-                      dataModuleStyle: QrDataModuleStyle(
-                        dataModuleShape: _getDataModuleShape(),
-                        color: _qrForegroundColor,
-                      ),
-                      embeddedImage: _selectedLogo != null
-                          ? AssetImage(_selectedLogo!)
-                          : null,
-                      embeddedImageStyle: _selectedLogo != null
-                          ? const QrEmbeddedImageStyle(
-                              size: Size(50, 50), // Logo boyutu (~20% QR alanı)
-                            )
-                          : null,
                     ),
                   ],
                 ),
@@ -693,7 +695,7 @@ class _CreateScreenState extends State<CreateScreen> {
   }
 
   Future<void> _saveQR() async {
-    if (_generatedQRData == null) return;
+    if (_generatedQRData == null || !mounted) return;
 
     try {
       // QR kod widget'ını resme dönüştür ve byte array olarak al
@@ -702,15 +704,20 @@ class _CreateScreenState extends State<CreateScreen> {
       final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       final pngBytes = byteData!.buffer.asUint8List();
 
+      if (!mounted) return;
+
       // QR kod görüntüsü ile birlikte kaydet
-      await context.read<QRProvider>().addGeneratedQR(
+      final provider = context.read<QRProvider>();
+      final success = await provider.addGeneratedQR(
         content: _generatedQRData!,
         type: _selectedType,
         title: _getQRTitle(),
         qrImage: pngBytes, // QR kod görüntüsünü ekle!
       );
 
-      if (mounted) {
+      if (!mounted) return;
+      
+      if (success) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('QR kod kaydedildi'),
@@ -728,6 +735,7 @@ class _CreateScreenState extends State<CreateScreen> {
   }
 
   String _getQRTitle() {
+    final l10n = AppLocalizations.of(context)!;
     switch (_selectedType) {
       case QRType.url:
         return _urlController.text;
@@ -744,7 +752,7 @@ class _CreateScreenState extends State<CreateScreen> {
       case QRType.phone:
         return _phoneNumberController.text;
       case QRType.location:
-        return 'Konum';
+        return l10n.locationTitle;
       case QRType.social:
         return _profileUrlController.text;
     }
@@ -1117,6 +1125,7 @@ class _CreateScreenState extends State<CreateScreen> {
     final eyeStyles = {
       'square': (l10n.square, Icons.crop_square),
       'circle': (l10n.circle, Icons.circle_outlined),
+      'rounded': ('Rounded', Icons.rounded_corner), // ✨ Custom Painter ile artık gerçek rounded!
     };
 
     return SizedBox(
@@ -1184,9 +1193,11 @@ class _CreateScreenState extends State<CreateScreen> {
 
   Widget _buildDataModuleShapeSelector() {
     final l10n = AppLocalizations.of(context)!;
+    // Body Shape patterns - Screenshot'taki gibi görsel preview ile!
     final shapes = {
-      'square': (l10n.square, Icons.crop_square),
-      'circle': (l10n.circle, Icons.circle),
+      'square': (l10n.square, _buildShapePreviewIcon('square')),
+      'circle': (l10n.circle, _buildShapePreviewIcon('circle')),
+      'rounded': ('Rounded', _buildShapePreviewIcon('rounded')), // 🆕 YENİ!
     };
 
     return SizedBox(
@@ -1208,7 +1219,8 @@ class _CreateScreenState extends State<CreateScreen> {
                 });
               },
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                width: 70,
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: isSelected 
                       ? AppColors.primary.withValues(alpha: 0.12)
@@ -1227,20 +1239,20 @@ class _CreateScreenState extends State<CreateScreen> {
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      shape.$2,
-                      color: isSelected ? AppColors.primary : Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.grey.shade600,
-                      size: 24,
-                    ),
+                    // Pattern Preview (Screenshot tarzı)
+                    shape.$2,
                     const SizedBox(height: 4),
                     Text(
                       shape.$1,
                       style: TextStyle(
-                        fontSize: 11,
+                        fontSize: 10,
                         color: isSelected ? AppColors.primary : Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.grey.shade700,
                         fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
@@ -1250,6 +1262,71 @@ class _CreateScreenState extends State<CreateScreen> {
         },
       ),
     );
+  }
+
+  // Body Shape preview widget - Screenshot'taki gibi pattern gösterimi
+  Widget _buildShapePreviewIcon(String shapeType) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final dotColor = isDark ? Colors.white70 : Colors.grey.shade800;
+    
+    if (shapeType == 'circle') {
+      // Circle pattern preview
+      return SizedBox(
+        width: 40,
+        height: 24,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: List.generate(4, (i) => 
+            Container(
+              width: 5,
+              height: 5,
+              decoration: BoxDecoration(
+                color: dotColor,
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+        ),
+      );
+    } else if (shapeType == 'rounded') {
+      // Rounded pattern preview
+      return SizedBox(
+        width: 40,
+        height: 24,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: List.generate(4, (i) => 
+            Container(
+              width: 5,
+              height: 5,
+              decoration: BoxDecoration(
+                color: dotColor,
+                borderRadius: BorderRadius.circular(1.5), // Yumuşak köşeler
+              ),
+            ),
+          ),
+        ),
+      );
+    } else {
+      // Square pattern preview (default)
+      return SizedBox(
+        width: 40,
+        height: 24,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: List.generate(4, (i) => 
+            Container(
+              width: 5,
+              height: 5,
+              decoration: BoxDecoration(
+                color: dotColor,
+                shape: BoxShape.rectangle,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
   }
 
   Widget _buildBackgroundTypeSelector() {
@@ -1525,24 +1602,33 @@ class _CreateScreenState extends State<CreateScreen> {
     return gradients[_selectedGradient] ?? gradients['instagram']!;
   }
 
-  QrEyeShape _getEyeShape() {
-    switch (_eyeStyle) {
-      case 'circle':
-        return QrEyeShape.circle;
-      case 'square':
-      default:
-        return QrEyeShape.square;
+  // Get combined shape for pretty_qr_code
+  // NOT: pretty_qr_code'da eye ve data module ayrı customization yok
+  // Tek shape parametresi hem eye'ları hem module'leri etkiliyor
+  PrettyQrSmoothSymbol _getCombinedShape() {
+    // Eye style öncelikli (daha belirgin ve önemli)
+    double roundFactor = 0.0;
+    
+    // Eye style belirleme
+    if (_eyeStyle == 'circle') {
+      roundFactor = 1.0; // Tam yuvarlak
+    } else if (_eyeStyle == 'rounded') {
+      roundFactor = 0.5; // Yumuşak
+    } else {
+      // Square eye - data module shape'e bak
+      if (_dataModuleShape == 'circle') {
+        roundFactor = 1.0;
+      } else if (_dataModuleShape == 'rounded') {
+        roundFactor = 0.5;
+      } else {
+        roundFactor = 0.0; // Tam kare
+      }
     }
+    
+    return PrettyQrSmoothSymbol(
+      color: _qrForegroundColor,
+      roundFactor: roundFactor,
+    );
   }
 
-  QrDataModuleShape _getDataModuleShape() {
-    switch (_dataModuleShape) {
-      case 'circle':
-        return QrDataModuleShape.circle;
-      case 'square':
-      default:
-        return QrDataModuleShape.square;
-    }
-  }
 }
-
