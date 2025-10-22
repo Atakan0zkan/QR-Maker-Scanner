@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:feedback/feedback.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'l10n/app_localizations.dart';
 
 import 'core/theme/app_theme.dart';
@@ -12,47 +12,37 @@ import 'providers/qr_provider.dart';
 import 'services/database_service.dart';
 import 'services/ad_service.dart';
 import 'services/analytics_service.dart';
+import 'services/firebase_analytics_service.dart';
+import 'firebase_options.dart';
 import 'screens/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Initialize services
-  await DatabaseService.init();
-  await AdService.initialize();
-  await AnalyticsService.init();
-  
-  // Log app opened
-  await AnalyticsService.logEvent('app_opened');
-  
-  // Set system UI overlay style
+  // Set system UI overlay style early
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ),
   );
   
-  runApp(
-    BetterFeedback(
-      theme: FeedbackThemeData(
-        background: Colors.grey,
-        feedbackSheetColor: Colors.grey[850]!,
-        drawColors: [
-          Colors.red,
-          Colors.green,
-          Colors.blue,
-          Colors.yellow,
-        ],
-      ),
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      localeOverride: const Locale('en'),
-      child: const MyApp(),
-    ),
-  );
+  // Initialize critical services in parallel
+  await Future.wait([
+    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
+    DatabaseService.init(),
+  ]);
+  
+  // Initialize Firebase Analytics
+  await FirebaseAnalyticsService.initialize();
+  
+  // Initialize non-critical services lazily (don't wait)
+  AdService.initialize().ignore();
+  AnalyticsService.init().ignore();
+  
+  // Log app opened to Firebase only (single source)
+  FirebaseAnalyticsService.logEvent(name: 'app_opened').ignore();
+  
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

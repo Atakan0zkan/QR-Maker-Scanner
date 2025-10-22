@@ -7,8 +7,9 @@
   "settings": "Ayarlar",
   "scanQRCode": "QR Kod Tara",
   "createQRCode": "QR Kod Oluştur",
-  "alignCameraToScan": "QR kodunu taramak için kamerayı hizalayın",
+  "alignCameraToScan": "QR kodu taramak için kamerayı hizalayın",
   "scanned": "Taranan",
+  "scannedQRCodes": "Taranan QR Kodlar",
   "generated": "Oluşturulan",
   "codeType": "Kod Türü",
   "url": "URL",
@@ -202,7 +203,6 @@
   "flashControlFailed": "Flaş kontrolü başarısız",
   "cameraPermissionNeeded": "Kamera izni gerekli",
   "grantPermission": "İzin Ver",
-  "scannedQRCodes": "Taranan QR Kodlar",
   "noQRScannedYet": "Henüz QR kod taranmadı",
   "scannedLabel": "Taranan",
   "generatedLabel": "Oluşturulan",
@@ -216,9 +216,12 @@
   "cannotOpenMaps": "Google Maps açılamadı",
   "invalidCoordinateFormat": "Geçersiz koordinat formatı. Örnek: 41.0082, 28.9784",
   "shareError": "Paylaşım hatası",
-  "urlCannotOpen": "URL açılamadı",
+  "saveToGallery": "Galeriye Kaydet",
+  "savedToGallery": "✅ QR kod galeriye kaydedildi!",
+  "saveToGalleryError": "Galeriye kaydetme başarısız",
+  "urlCannotOpen": "URL açılamıyor",
   "bugReport": "Hata Bildir",
-  "reportBugsViaEmail": "Email ile hata bildirin",
+  "reportBugsViaEmail": "Hataları email ile bildir",
   "analytics": "İstatistikler",
   "usageStatistics": "Kullanım İstatistikleri",
   "totalEvents": "Toplam Olay",
@@ -227,5 +230,21 @@
   "firstEvent": "İlk Olay",
   "lastEvent": "Son Olay",
   "clearAnalytics": "İstatistikleri Temizle",
-  "analyticsCleared": "İstatistikler temizlendi"
+  "analyticsCleared": "İstatistikler temizlendi",
+  "scanHistoryDesc": "{count} taranan kodu gör",
+  "@scanHistoryDesc": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "generateHistoryDesc": "{count} oluşturulan kodu gör",
+  "@generateHistoryDesc": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

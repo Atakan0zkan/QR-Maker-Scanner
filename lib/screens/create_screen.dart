@@ -64,6 +64,7 @@ class _CreateScreenState extends State<CreateScreen> {
   // QR Color customization
   Color _qrForegroundColor = Colors.black;
   Color _qrBackgroundColor = Colors.white;
+  String _qrColorType = 'solid'; // solid, gradient
   
   // QR Logo/Image
   String? _selectedLogo; // asset path
@@ -814,16 +815,40 @@ class _CreateScreenState extends State<CreateScreen> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(l10n.qrColor, style: const TextStyle(fontSize: 13)),
-            const SizedBox(height: 6),
-            _buildHorizontalColorSelector(
-              selectedColor: _qrForegroundColor,
-              onColorSelected: (color) {
-                setState(() {
-                  _qrForegroundColor = color;
-                });
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(l10n.qrColor, style: const TextStyle(fontSize: 13)),
+                // Solid/Gradient toggle
+                Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white.withValues(alpha: 0.05)
+                        : Colors.black.withValues(alpha: 0.03),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _buildColorTypeButton('solid', Icons.palette, 'Solid'),
+                      _buildColorTypeButton('gradient', Icons.gradient, 'Gradient'),
+                    ],
+                  ),
+                ),
+              ],
             ),
+            const SizedBox(height: 6),
+            if (_qrColorType == 'solid')
+              _buildHorizontalColorSelector(
+                selectedColor: _qrForegroundColor,
+                onColorSelected: (color) {
+                  setState(() {
+                    _qrForegroundColor = color;
+                  });
+                },
+              )
+            else
+              _buildQrGradientSelector(),
           ],
         ),
         const SizedBox(height: 12),
@@ -1625,10 +1650,167 @@ class _CreateScreenState extends State<CreateScreen> {
       }
     }
     
+    // QR Code color: solid or gradient
+    final qrColor = _qrColorType == 'gradient'
+        ? PrettyQrBrush.gradient(
+            gradient: _getQrGradient(),
+          )
+        : _qrForegroundColor;
+    
     return PrettyQrSmoothSymbol(
-      color: _qrForegroundColor,
+      color: qrColor,
       roundFactor: roundFactor,
     );
+  }
+  
+  // Build color type toggle button
+  Widget _buildColorTypeButton(String type, IconData icon, String label) {
+    final isSelected = _qrColorType == type;
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _qrColorType = type;
+          if (type == 'gradient' && _selectedGradient == 'none') {
+            _selectedGradient = 'instagram';
+          }
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        decoration: BoxDecoration(
+          color: isSelected 
+              ? AppColors.primary.withValues(alpha: 0.2)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              size: 16,
+              color: isSelected ? AppColors.primary : Colors.grey,
+            ),
+            const SizedBox(width: 4),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                color: isSelected ? AppColors.primary : Colors.grey,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Build QR gradient selector (horizontal scroll)
+  Widget _buildQrGradientSelector() {
+    final gradients = {
+      'instagram': ('Instagram', [const Color(0xFFf09433), const Color(0xFFdc2743), const Color(0xFFbc1888)]),
+      'facebook': ('Facebook', [const Color(0xFF0084ff), const Color(0xFF00C6FF), const Color(0xFF667eea)]),
+      'sunset': ('Sunset', [const Color(0xFFFF512F), const Color(0xFFDD2476), const Color(0xFFFF6B6B)]),
+      'ocean': ('Ocean', [const Color(0xFF2E3192), const Color(0xFF1BFFFF), const Color(0xFF00D4FF)]),
+      'fire': ('Fire', [const Color(0xFFf12711), const Color(0xFFf5af19), const Color(0xFFFF9500)]),
+      'purple': ('Purple', [const Color(0xFF667eea), const Color(0xFF764ba2), const Color(0xFFa8edea)]),
+      'mint': ('Mint', [const Color(0xFF00b09b), const Color(0xFF96c93d), const Color(0xFFB4EC51)]),
+    };
+
+    return SizedBox(
+      height: 50,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: gradients.length,
+        itemBuilder: (context, index) {
+          final gradientKey = gradients.keys.elementAt(index);
+          final gradient = gradients[gradientKey]!;
+          final isSelected = _selectedGradient == gradientKey;
+          
+          return Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedGradient = gradientKey;
+                });
+              },
+              child: Container(
+                width: 60,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: gradient.$2,
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: isSelected ? AppColors.primary : Colors.white.withValues(alpha: 0.3),
+                    width: isSelected ? 2.5 : 1,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    gradient.$1,
+                    style: const TextStyle(
+                      fontSize: 9,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      shadows: [Shadow(color: Colors.black45, blurRadius: 2)],
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  // Get gradient for QR code
+  LinearGradient _getQrGradient() {
+    // Simplified gradient list for QR codes (better readability)
+    final gradients = {
+      'instagram': const LinearGradient(
+        colors: [Color(0xFFf09433), Color(0xFFdc2743), Color(0xFFbc1888)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      'facebook': const LinearGradient(
+        colors: [Color(0xFF0084ff), Color(0xFF00C6FF), Color(0xFF667eea)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      'sunset': const LinearGradient(
+        colors: [Color(0xFFFF512F), Color(0xFFDD2476), Color(0xFFFF6B6B)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      'ocean': const LinearGradient(
+        colors: [Color(0xFF2E3192), Color(0xFF1BFFFF), Color(0xFF00D4FF)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      'fire': const LinearGradient(
+        colors: [Color(0xFFf12711), Color(0xFFf5af19), Color(0xFFFF9500)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      'purple': const LinearGradient(
+        colors: [Color(0xFF667eea), Color(0xFF764ba2), Color(0xFFa8edea)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      'mint': const LinearGradient(
+        colors: [Color(0xFF00b09b), Color(0xFF96c93d), Color(0xFFB4EC51)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+    };
+    return gradients[_selectedGradient] ?? gradients['instagram']!;
   }
 
 }

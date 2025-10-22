@@ -36,6 +36,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get scanned => 'تم المسح';
 
   @override
+  String get scannedQRCodes => 'رموز QR الممسوحة';
+
+  @override
   String get generated => 'تم الإنشاء';
 
   @override
@@ -75,13 +78,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enterText => 'أدخل النص';
 
   @override
-  String get textLabel => 'Text';
+  String get textLabel => 'النص';
 
   @override
-  String get textHint => 'Enter your text';
+  String get textHint => 'أدخل نصك';
 
   @override
-  String get textRequired => 'Text is required';
+  String get textRequired => 'النص مطلوب';
 
   @override
   String get ssid => 'اسم الشبكة (SSID)';
@@ -195,7 +198,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get privacyPolicy => 'سياسة الخصوصية';
 
   @override
-  String get privacyPolicyTitle => 'Privacy Policy';
+  String get privacyPolicyTitle => 'سياسة الخصوصية';
 
   @override
   String get viewPrivacyPolicy => 'عرض سياسة الخصوصية';
@@ -204,7 +207,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get termsOfService => 'شروط الخدمة';
 
   @override
-  String get termsOfServiceTitle => 'Terms of Service';
+  String get termsOfServiceTitle => 'شروط الخدمة';
 
   @override
   String get viewTermsOfService => 'عرض شروط الخدمة';
@@ -220,10 +223,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cameraPermissionMessage =>
-      'لا يمكن لهذا التطبيق العمل بدون إذن الكاميرا. يرجى منح الإذن في الإعدادات.';
+      'لا يمكن للتطبيق العمل بدون إذن الكاميرا. يرجى منح الإذن من الإعدادات.';
 
   @override
-  String get goToSettings => 'الذهاب إلى الإعدادات';
+  String get goToSettings => 'الانتقال إلى الإعدادات';
 
   @override
   String get cancel => 'إلغاء';
@@ -235,7 +238,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get error => 'خطأ';
 
   @override
-  String get success => 'نجح';
+  String get success => 'نجاح';
 
   @override
   String get qrCodeSaved => 'تم حفظ رمز QR بنجاح';
@@ -289,7 +292,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get saveAsImage => 'حفظ كصورة';
 
   @override
-  String get saveAsPDF => 'حفظ كـ PDF';
+  String get saveAsPDF => 'حفظ كملف PDF';
 
   @override
   String get exportOptions => 'خيارات التصدير';
@@ -301,7 +304,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shortMessage => 'رسالة قصيرة';
 
   @override
-  String get selectTheme => 'اختر السمة';
+  String get selectTheme => 'اختر المظهر';
 
   @override
   String get selectLanguage => 'اختر اللغة';
@@ -310,322 +313,322 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selected => 'محدد';
 
   @override
-  String get noScannedQR => 'No scanned QR codes yet';
+  String get noScannedQR => 'لم يتم مسح أي رموز QR بعد';
 
   @override
-  String get noScannedBarcode => 'No scanned barcodes yet';
+  String get noScannedBarcode => 'لم يتم مسح أي رموز شريطية بعد';
 
   @override
-  String get noGeneratedQR => 'No generated QR codes yet';
+  String get noGeneratedQR => 'لم يتم إنشاء أي رموز QR بعد';
 
   @override
-  String get noGeneratedBarcode => 'No generated barcodes yet';
+  String get noGeneratedBarcode => 'لم يتم إنشاء أي رموز شريطية بعد';
 
   @override
-  String get selectItems => 'Select';
+  String get selectItems => 'تحديد';
 
   @override
-  String get qrCodes => 'QR Codes';
+  String get qrCodes => 'رموز QR';
 
   @override
-  String get barcodes => 'Barcodes';
+  String get barcodes => 'الرموز الشريطية';
 
   @override
   String deleteMultipleMessage(int count) {
-    return 'Are you sure you want to delete $count items?';
+    return 'هل أنت متأكد من حذف $count عنصر؟';
   }
 
   @override
-  String get deleteSingleMessage =>
-      'Are you sure you want to delete this item?';
+  String get deleteSingleMessage => 'هل أنت متأكد من حذف هذا العنصر؟';
 
   @override
-  String get scanQROrBarcode => 'Align camera to scan QR code or barcode';
+  String get scanQROrBarcode => 'قم بمحاذاة الكاميرا لمسح رمز QR أو رمز شريطي';
 
   @override
-  String get qrColorSettings => 'QR Code Colors';
+  String get qrColorSettings => 'ألوان رمز QR';
 
   @override
-  String get qrColor => 'QR Color';
+  String get qrColor => 'لون رمز QR';
 
   @override
-  String get backgroundColor => 'Background';
+  String get backgroundColor => 'لون الخلفية';
 
   @override
-  String get bodyShape => 'Body Shape';
+  String get bodyShape => 'شكل الجسم';
 
   @override
-  String get square => 'Square';
+  String get square => 'مربع';
 
   @override
-  String get circle => 'Circle';
+  String get circle => 'دائرة';
 
   @override
-  String get nameLabel => 'Name';
+  String get nameLabel => 'الاسم';
 
   @override
-  String get nameRequired => 'Name is required';
+  String get nameRequired => 'الاسم مطلوب';
 
   @override
-  String get phoneLabel => 'Phone';
+  String get phoneLabel => 'الهاتف';
 
   @override
-  String get emailLabel => 'Email';
+  String get emailLabel => 'البريد الإلكتروني';
 
   @override
-  String get emailRequired => 'Email is required';
+  String get emailRequired => 'البريد الإلكتروني مطلوب';
 
   @override
-  String get subjectOptional => 'Subject (Optional)';
+  String get subjectOptional => 'الموضوع (اختياري)';
 
   @override
-  String get messageOptional => 'Message (Optional)';
+  String get messageOptional => 'الرسالة (اختياري)';
 
   @override
-  String get phoneNumberLabel => 'Phone Number';
+  String get phoneNumberLabel => 'رقم الهاتف';
 
   @override
-  String get phoneNumberRequired => 'Phone number is required';
+  String get phoneNumberRequired => 'رقم الهاتف مطلوب';
 
   @override
-  String get locationSearch => 'Search Location (Google Maps)';
+  String get locationSearch => 'ابحث عن موقع (خرائط جوجل)';
 
   @override
-  String get locationExample => 'e.g., Galata Tower, Istanbul';
+  String get locationExample => 'مثال: برج إيفل، باريس';
 
   @override
-  String get locationRequired => 'Location is required';
+  String get locationRequired => 'الموقع مطلوب';
 
   @override
-  String get locationTitle => 'Location';
+  String get locationTitle => 'الموقع';
 
   @override
-  String get roundedSquare => 'Rounded Square';
+  String get roundedSquare => 'مربع مستدير';
 
   @override
-  String get diamond => 'Diamond';
+  String get diamond => 'معين';
 
   @override
-  String get qrLogo => 'QR Logo';
+  String get qrLogo => 'شعار QR';
 
   @override
-  String get gallery => 'Gallery';
+  String get gallery => 'المعرض';
 
   @override
-  String get eyeStyle => 'Eye Style';
+  String get eyeStyle => 'نمط العين';
 
   @override
-  String get dataModuleShape => 'Data Shape';
+  String get dataModuleShape => 'شكل البيانات';
 
   @override
-  String get backgroundStyle => 'Background';
+  String get backgroundStyle => 'نوع الخلفية';
 
   @override
-  String get gradient => 'Gradient';
+  String get gradient => 'تدرج';
 
   @override
-  String get rounded => 'Rounded';
+  String get rounded => 'مستدير';
 
   @override
-  String get instagramGradient => 'Instagram';
+  String get instagramGradient => 'إنستغرام';
 
   @override
-  String get sunsetGradient => 'Sunset';
+  String get sunsetGradient => 'غروب الشمس';
 
   @override
-  String get oceanGradient => 'Ocean';
+  String get oceanGradient => 'المحيط';
 
   @override
-  String get fireGradient => 'Fire';
+  String get fireGradient => 'النار';
 
   @override
   String itemsDeleted(Object count) {
-    return '$count items deleted';
+    return 'تم حذف $count عنصر';
   }
 
   @override
-  String get deleteConfirmationTitle => 'Delete Confirmation';
+  String get deleteConfirmationTitle => 'تأكيد الحذف';
 
   @override
-  String get deleted => 'Deleted';
+  String get deleted => 'تم الحذف';
 
   @override
-  String get oneTimeQR => 'One-Time QR';
+  String get oneTimeQR => 'رمز QR لمرة واحدة';
 
   @override
-  String get oneTimeQRActive => 'QR code can be scanned once';
+  String get oneTimeQRActive => 'يمكن مسح هذا الرمز مرة واحدة فقط';
 
   @override
-  String get oneTimeQRDefault => 'Unlimited scans';
+  String get oneTimeQRDefault => 'عدد غير محدود من المسحات';
 
   @override
-  String get qrAnalyticsDashboard => 'QR Analytics Dashboard';
+  String get qrAnalyticsDashboard => 'لوحة تحليلات QR';
 
   @override
-  String get totalScans => 'Total Scans';
+  String get totalScans => 'إجمالي المسحات';
 
   @override
-  String get lastScan => 'Last Scan';
+  String get lastScan => 'آخر مسح';
 
   @override
-  String get neverScanned => 'Never scanned';
+  String get neverScanned => 'لم يتم المسح';
 
   @override
-  String get activeStatus => 'Active in use';
+  String get activeStatus => 'نشط قيد الاستخدام';
 
   @override
-  String get notScannedYet => 'Not scanned yet';
+  String get notScannedYet => 'لم يتم المسح بعد';
 
   @override
-  String get createdDate => 'Created Date';
+  String get createdDate => 'تاريخ الإنشاء';
 
   @override
-  String get oneTimeQRUsed => 'Used';
+  String get oneTimeQRUsed => 'مستخدم';
 
   @override
-  String get oneTimeQRActiveStatus => 'Active';
+  String get oneTimeQRActiveStatus => 'نشط';
 
   @override
-  String get analyticsNote => 'Analytics stored locally';
+  String get analyticsNote => 'يتم تخزين بيانات التحليلات محلياً';
 
   @override
-  String get ppSection1Title => '1. Collected Information';
+  String get ppSection1Title => '1. المعلومات التي نجمعها';
 
   @override
   String get ppSection1Content =>
-      'QR Scanner collects information to improve user experience. All data is stored locally on your device.';
+      'يجمع تطبيق ماسح QR المعلومات التالية لتحسين تجربة المستخدم:\n\n• محتوى رموز QR التي تقوم بمسحها (يُحفظ محلياً على جهازك)\n• رموز QR التي تقوم بإنشائها (يُحفظ محلياً على جهازك)\n• تفضيلات استخدام التطبيق (المظهر، اللغة، إلخ)\n\nتُحفظ جميع البيانات محلياً على جهازك ولا تُرسل إلى خوادمنا.';
 
   @override
-  String get ppSection2Title => '2. Camera Permission';
+  String get ppSection2Title => '2. إذن الكاميرا';
 
   @override
   String get ppSection2Content =>
-      'Camera permission is required to scan QR codes. The camera is only used during scanning.';
+      'يلزم إذن الوصول إلى الكاميرا لاستخدام ميزة مسح رموز QR. تُستخدم الكاميرا فقط أثناء المسح ولا يتم تسجيل أي صور أو مشاركتها.';
 
   @override
-  String get ppSection3Title => '3. Storage Permission';
+  String get ppSection3Title => '3. إذن التخزين';
 
   @override
   String get ppSection3Content =>
-      'Storage permission may be required to save QR codes as images.';
+      'قد تحتاج إلى إذن التخزين لحفظ رموز QR كصور. يُستخدم هذا الإذن فقط عند طلبك حفظ الرموز.';
 
   @override
-  String get ppSection4Title => '4. Data Security';
+  String get ppSection4Title => '4. أمان البيانات';
 
   @override
   String get ppSection4Content =>
-      'All your data is stored encrypted on your device. No personal information is shared with third parties.';
+      'تُخزن جميع بياناتك مشفرة على جهازك. لا تتم مشاركة أي معلومات شخصية مع أطراف ثالثة.';
 
   @override
-  String get ppSection5Title => '5. Advertisements';
+  String get ppSection5Title => '5. الإعلانات';
 
   @override
   String get ppSection5Content =>
-      'The app may display advertisements through Google AdMob.';
+      'قد يعرض التطبيق إعلانات عبر Google AdMob. قد يستخدم AdMob معلومات الجهاز لعرض الإعلانات. لمزيد من المعلومات راجع سياسة خصوصية Google.';
 
   @override
-  String get ppSection6Title => '6. Children\'s Privacy';
+  String get ppSection6Title => '6. خصوصية الأطفال';
 
   @override
   String get ppSection6Content =>
-      'Our app does not knowingly collect personal information from children under 13.';
+      'لا يجمع تطبيقنا عمداً معلومات شخصية من الأطفال دون سن 13 عاماً. ينبغي على الوالدين مراقبة استخدام أطفالهم للتطبيق.';
 
   @override
-  String get ppSection7Title => '7. Changes';
+  String get ppSection7Title => '7. التغييرات';
 
   @override
   String get ppSection7Content =>
-      'This privacy policy may be updated from time to time.';
+      'قد يتم تحديث سياسة الخصوصية هذه من وقت لآخر. سيتم إعلامك داخل التطبيق في حال حدوث تغييرات مهمة.';
 
   @override
-  String get ppSection8Title => '8. Contact';
+  String get ppSection8Title => '8. تواصل معنا';
 
   @override
   String get ppSection8Content =>
-      'For questions about this privacy policy, please contact us.\n\nLast Updated: October 10, 2025';
+      'للاستفسار عن سياسة الخصوصية هذه، يرجى الاتصال بنا.\n\nآخر تحديث: 10 أكتوبر 2025';
 
   @override
-  String get tosSection1Title => '1. Acceptance';
+  String get tosSection1Title => '1. القبول';
 
   @override
   String get tosSection1Content =>
-      'By using QR Scanner, you agree to these terms of service.';
+      'باستخدامك لتطبيق ماسح QR فإنك توافق على شروط الخدمة هذه. إذا لم توافق، يرجى عدم استخدام التطبيق.';
 
   @override
-  String get tosSection2Title => '2. License';
+  String get tosSection2Title => '2. الترخيص';
 
   @override
   String get tosSection2Content =>
-      'You are granted a limited license for personal, non-commercial use.';
+      'يُمنح لك ترخيص محدود وغير قابل للنقل وغير حصري لاستخدام التطبيق لأغراض شخصية وغير تجارية.';
 
   @override
-  String get tosSection3Title => '3. Terms of Use';
+  String get tosSection3Title => '3. شروط الاستخدام';
 
   @override
   String get tosSection3Content =>
-      'You will not create QR codes with illegal content nor violate the rights of others.';
+      'عند استخدام التطبيق:\n\n• لن تنشئ رموز QR لمحتوى غير قانوني\n• لن تنتهك حقوق الآخرين\n• لن تستخدم التطبيق لأغراض خبيثة\n• لن تشارك محتوى عشوائياً أو ضاراً';
 
   @override
-  String get tosSection4Title => '4. Disclaimer';
+  String get tosSection4Title => '4. إخلاء المسؤولية';
 
   @override
   String get tosSection4Content =>
-      'The app is provided \"as is\". We are not responsible for damages arising from the use of QR codes.';
+      'يتم تقديم التطبيق \"كما هو\". لسنا مسؤولين عن أي أضرار قد تنتج عن محتوى رموز QR أو استخدامها.\n\nتأكد من أن رموز QR التي تمسحها آمنة، واحذر من الرموز من مصادر غير معروفة.';
 
   @override
-  String get tosSection5Title => '5. Content Responsibility';
+  String get tosSection5Title => '5. مسؤولية المحتوى';
 
   @override
   String get tosSection5Content =>
-      'You are responsible for the content of the QR codes you create and scan.';
+      'أنت المسؤول الوحيد عن محتوى رموز QR التي تنشئها وتمسحها. لا تنشئ محتوى غير قانوني أو ضار.';
 
   @override
-  String get tosSection6Title => '6. Service Changes';
+  String get tosSection6Title => '6. تغييرات الخدمة';
 
   @override
   String get tosSection6Content =>
-      'We reserve the right to change the app\'s features without prior notice.';
+      'نحتفظ بالحق في تغيير ميزات التطبيق أو محتواه أو توفره دون إشعار مسبق.';
 
   @override
-  String get tosSection7Title => '7. Account Suspension';
+  String get tosSection7Title => '7. تعليق الحساب';
 
   @override
   String get tosSection7Content =>
-      'We reserve the right to suspend your access if you violate these terms.';
+      'نحتفظ بالحق في تعليق أو إنهاء وصولك إلى التطبيق إذا انتهكت هذه الشروط.';
 
   @override
-  String get tosSection8Title => '8. Intellectual Property';
+  String get tosSection8Title => '8. الملكية الفكرية';
 
   @override
   String get tosSection8Content =>
-      'All content of the app is protected by copyright.';
+      'جميع محتويات التطبيق وتصميمه وكوده محمية بحقوق الملكية الفكرية. يحظر النسخ أو التوزيع أو التعديل بدون إذن.';
 
   @override
-  String get tosSection9Title => '9. Third-Party Links';
+  String get tosSection9Title => '9. روابط الجهات الخارجية';
 
   @override
   String get tosSection9Content =>
-      'The app may contain links to third-party websites.';
+      'قد يحتوي التطبيق على روابط لمواقع أو خدمات جهات خارجية. لسنا مسؤولين عن محتواها أو ممارسات الخصوصية فيها.';
 
   @override
-  String get tosSection10Title => '10. Warranty Disclaimer';
+  String get tosSection10Title => '10. إخلاء الضمان';
 
   @override
-  String get tosSection10Content => 'The app is provided without any warranty.';
+  String get tosSection10Content =>
+      'يُقدم التطبيق بدون أي ضمانات. لا نضمن أن يعمل دون انقطاع أو خالياً من الأخطاء.';
 
   @override
-  String get tosSection11Title => '11. Changes to Terms';
+  String get tosSection11Title => '11. تغيير الشروط';
 
   @override
   String get tosSection11Content =>
-      'We reserve the right to change these terms at any time.';
+      'نحتفظ بالحق في تغيير شروط الخدمة هذه في أي وقت. سيتم إعلامك بالتغييرات المهمة داخل التطبيق.';
 
   @override
-  String get tosSection12Title => '12. Contact';
+  String get tosSection12Title => '12. الاتصال';
 
   @override
   String get tosSection12Content =>
-      'للاستفسارات حول شروط الخدمة هذه، يرجى الاتصال بنا.\n\nآخر تحديث: 10 أكتوبر 2025';
+      'للاستفسار حول شروط الخدمة هذه، يرجى الاتصال بنا.\n\nآخر تحديث: 10 أكتوبر 2025';
 
   @override
   String get emailAppCannotOpen => 'لا يمكن فتح تطبيق البريد الإلكتروني';
@@ -641,28 +644,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String scanHistoryDesc(int count) {
-    return 'See $count scanned codes';
+    return 'عرض $count رمزاً ممسوحاً';
   }
 
   @override
   String generateHistoryDesc(int count) {
-    return 'See $count generated codes';
+    return 'عرض $count رمزاً منشأ';
   }
 
   @override
   String get noQRScannedYet => 'لم يتم مسح أي رموز QR بعد';
 
   @override
-  String get scannedLabel => 'ممسوح ضوئياً';
+  String get scannedLabel => 'ممسوح';
 
   @override
-  String get generatedLabel => 'تم إنشاؤه';
+  String get generatedLabel => 'تم الإنشاء';
 
   @override
-  String get flashOn => 'الفلاش مفعل';
+  String get flashOn => 'الفلاش قيد التشغيل';
 
   @override
-  String get flashOff => 'الفلاش معطل';
+  String get flashOff => 'الفلاش متوقف';
 
   @override
   String get normalMode => 'الوضع العادي';
@@ -684,10 +687,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get invalidCoordinateFormat =>
-      'تنسيق الإحداثيات غير صحيح. مثال: 41.0082, 28.9784';
+      'تنسيق الإحداثيات غير صالح. مثال: 41.0082, 28.9784';
 
   @override
   String get shareError => 'خطأ في المشاركة';
+
+  @override
+  String get saveToGallery => 'حفظ في المعرض';
+
+  @override
+  String get savedToGallery => '✅ تم حفظ رمز QR في المعرض!';
+
+  @override
+  String get saveToGalleryError => 'فشل الحفظ في المعرض';
 
   @override
   String get urlCannotOpen => 'لا يمكن فتح الرابط';
@@ -699,29 +711,29 @@ class AppLocalizationsAr extends AppLocalizations {
   String get reportBugsViaEmail => 'الإبلاغ عن الأخطاء عبر البريد الإلكتروني';
 
   @override
-  String get analytics => 'Analytics';
+  String get analytics => 'التحليلات';
 
   @override
-  String get usageStatistics => 'Usage Statistics';
+  String get usageStatistics => 'إحصائيات الاستخدام';
 
   @override
-  String get totalEvents => 'Total Events';
+  String get totalEvents => 'إجمالي الأحداث';
 
   @override
-  String get eventTypes => 'Event Types';
+  String get eventTypes => 'أنواع الأحداث';
 
   @override
-  String get mostCommon => 'Most Common';
+  String get mostCommon => 'الأكثر شيوعاً';
 
   @override
-  String get firstEvent => 'First Event';
+  String get firstEvent => 'أول حدث';
 
   @override
-  String get lastEvent => 'Last Event';
+  String get lastEvent => 'آخر حدث';
 
   @override
-  String get clearAnalytics => 'Clear Analytics';
+  String get clearAnalytics => 'مسح التحليلات';
 
   @override
-  String get analyticsCleared => 'Analytics data cleared';
+  String get analyticsCleared => 'تم مسح بيانات التحليلات';
 }

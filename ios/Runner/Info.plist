@@ -1,85 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>CFBundleDisplayName</key>
-	<string>Qr Scanner App</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>qr_scanner_app</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	
-	<!-- Camera Permission -->
-	<key>NSCameraUsageDescription</key>
-	<string>QR kodları taramak için kamera erişimine ihtiyacımız var.</string>
-	
-	<!-- Photo Library Permission -->
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>QR kodlarını kaydetmek için fotoğraf kütüphanesine erişim gerekli.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>QR kodlarını fotoğraf kütüphanesine kaydetmek için izin gerekli.</string>
-	
-	<!-- App Transport Security -->
-	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
+		<key>CFBundleDevelopmentRegion</key>
+		<string>$(DEVELOPMENT_LANGUAGE)</string>
+		<key>CFBundleDisplayName</key>
+		<string>Qr Scanner App</string>
+		<key>CFBundleExecutable</key>
+		<string>$(EXECUTABLE_NAME)</string>
+		<key>CFBundleIdentifier</key>
+		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+		<key>CFBundleInfoDictionaryVersion</key>
+		<string>6.0</string>
+		<key>CFBundleName</key>
+		<string>qr_scanner_app</string>
+		<key>CFBundlePackageType</key>
+		<string>APPL</string>
+		<key>CFBundleShortVersionString</key>
+		<string>$(FLUTTER_BUILD_NAME)</string>
+		<key>CFBundleSignature</key>
+		<string>????</string>
+		<key>CFBundleVersion</key>
+		<string>$(FLUTTER_BUILD_NUMBER)</string>
+		<key>LSRequiresIPhoneOS</key>
 		<true/>
-	</dict>
-	
-	<!-- Supported Orientations -->
-	<key>UIStatusBarHidden</key>
-	<false/>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	
-	<!-- Google Mobile Ads -->
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3940256099942544~1458002511</string>
-	<!-- TODO: AdMob konsoldan iOS app oluştur ve gerçek App ID'yi buraya ekle -->
-	
-	<key>SKAdNetworkItems</key>
-	<array>
+		<key>UILaunchStoryboardName</key>
+		<string>LaunchScreen</string>
+		<key>UIMainStoryboardFile</key>
+		<string>Main</string>
+		<key>UISupportedInterfaceOrientations</key>
+		<array>
+			<string>UIInterfaceOrientationPortrait</string>
+			<string>UIInterfaceOrientationLandscapeLeft</string>
+			<string>UIInterfaceOrientationLandscapeRight</string>
+		</array>
+		<key>UISupportedInterfaceOrientations~ipad</key>
+		<array>
+			<string>UIInterfaceOrientationPortrait</string>
+			<string>UIInterfaceOrientationPortraitUpsideDown</string>
+			<string>UIInterfaceOrientationLandscapeLeft</string>
+			<string>UIInterfaceOrientationLandscapeRight</string>
+		</array>
+		<key>CADisableMinimumFrameDurationOnPhone</key>
+		<true/>
+		<key>UIApplicationSupportsIndirectInputEvents</key>
+		<true/>
+		<!-- Camera Permission -->
+		<key>NSCameraUsageDescription</key>
+		<string>QR kodları taramak için kamera erişimine ihtiyacımız var.</string>
+		<!-- Photo Library Permission -->
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>QR kodlarını kaydetmek için fotoğraf kütüphanesine erişim gerekli.</string>
+		<key>NSPhotoLibraryAddUsageDescription</key>
+		<string>QR kodlarını fotoğraf kütüphanesine kaydetmek için izin gerekli.</string>
+		<!-- App Transport Security (Secure Configuration) -->
+		<key>NSAppTransportSecurity</key>
 		<dict>
-			<key>SKAdNetworkIdentifier</key>
-			<string>cstr6suwn9.skadnetwork</string>
+			<key>NSAllowsArbitraryLoads</key>
+			<false/>
 		</dict>
-	</array>
-</dict>
+		<!-- Supported Orientations -->
+		<key>UIStatusBarHidden</key>
+		<true/>
+		<key>UIViewControllerBasedStatusBarAppearance</key>
+		<false/>
+		<!-- Google Mobile Ads (iOS Production) -->
+		<key>GADApplicationIdentifier</key>
+		<string>ca-app-pub-8966682109895515~3591675540</string>
+		<!-- ✅ iOS App ID configured -->
+		<key>SKAdNetworkItems</key>
+		<array>
+			<dict>
+				<key>SKAdNetworkIdentifier</key>
+				<string>cstr6suwn9.skadnetwork</string>
+			</dict>
+		</array>
+	</dict>
 </plist>

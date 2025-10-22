@@ -3,6 +3,8 @@ plugins {
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+    // Google Services plugin for Firebase
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -22,12 +24,19 @@ android {
         applicationId = "com.qrscanner.qr_scanner_app"
         minSdk = flutter.minSdkVersion
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 4
+        versionName = "1.2.2"
     }
 
     buildTypes {
         release {
+            // Enable code shrinking, obfuscation, and optimization
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")

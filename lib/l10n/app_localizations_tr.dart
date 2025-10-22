@@ -30,10 +30,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get createQRCode => 'QR Kod Oluştur';
 
   @override
-  String get alignCameraToScan => 'QR kodunu taramak için kamerayı hizalayın';
+  String get alignCameraToScan => 'QR kodu taramak için kamerayı hizalayın';
 
   @override
   String get scanned => 'Taranan';
+
+  @override
+  String get scannedQRCodes => 'Taranan QR Kodlar';
 
   @override
   String get generated => 'Oluşturulan';
@@ -643,12 +646,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String scanHistoryDesc(int count) {
-    return 'See $count scanned codes';
+    return '$count taranan kodu gör';
   }
 
   @override
   String generateHistoryDesc(int count) {
-    return 'See $count generated codes';
+    return '$count oluşturulan kodu gör';
   }
 
   @override
@@ -692,13 +695,22 @@ class AppLocalizationsTr extends AppLocalizations {
   String get shareError => 'Paylaşım hatası';
 
   @override
-  String get urlCannotOpen => 'URL açılamadı';
+  String get saveToGallery => 'Galeriye Kaydet';
+
+  @override
+  String get savedToGallery => '✅ QR kod galeriye kaydedildi!';
+
+  @override
+  String get saveToGalleryError => 'Galeriye kaydetme başarısız';
+
+  @override
+  String get urlCannotOpen => 'URL açılamıyor';
 
   @override
   String get bugReport => 'Hata Bildir';
 
   @override
-  String get reportBugsViaEmail => 'Email ile hata bildirin';
+  String get reportBugsViaEmail => 'Hataları email ile bildir';
 
   @override
   String get analytics => 'İstatistikler';

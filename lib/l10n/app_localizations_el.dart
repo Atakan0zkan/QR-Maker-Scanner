@@ -31,10 +31,13 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get alignCameraToScan =>
-      'Ευθυγραμμίστε την κάμερα για σάρωση του κώδικα QR';
+      'Ευθυγραμμίστε την κάμερα για να σαρώσετε τον κώδικα QR';
 
   @override
   String get scanned => 'Σαρωμένο';
+
+  @override
+  String get scannedQRCodes => 'Σαρωμένοι κώδικες QR';
 
   @override
   String get generated => 'Δημιουργημένο';
@@ -70,19 +73,19 @@ class AppLocalizationsEl extends AppLocalizations {
   String get social => 'Κοινωνικά δίκτυα';
 
   @override
-  String get enterURL => 'Εισάγετε URL';
+  String get enterURL => 'Εισαγάγετε URL';
 
   @override
-  String get enterText => 'Εισάγετε κείμενο';
+  String get enterText => 'Εισαγάγετε κείμενο';
 
   @override
-  String get textLabel => 'Text';
+  String get textLabel => 'Κείμενο';
 
   @override
-  String get textHint => 'Enter your text';
+  String get textHint => 'Εισαγάγετε το κείμενό σας';
 
   @override
-  String get textRequired => 'Text is required';
+  String get textRequired => 'Το κείμενο είναι υποχρεωτικό';
 
   @override
   String get ssid => 'Όνομα δικτύου (SSID)';
@@ -148,16 +151,16 @@ class AppLocalizationsEl extends AppLocalizations {
   String get open => 'Άνοιγμα';
 
   @override
-  String get openInBrowser => 'Άνοιγμα στο πρόγραμμα περιήγησης';
+  String get openInBrowser => 'Άνοιγμα στον περιηγητή';
 
   @override
   String get addToContacts => 'Προσθήκη στις επαφές';
 
   @override
-  String get connectToWiFi => 'Σύνδεση στο WiFi';
+  String get connectToWiFi => 'Σύνδεση σε WiFi';
 
   @override
-  String get openInMaps => 'Άνοιγμα στους χάρτες';
+  String get openInMaps => 'Άνοιγμα στο Maps';
 
   @override
   String get call => 'Κλήση';
@@ -175,7 +178,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get notifications => 'Ειδοποιήσεις';
 
   @override
-  String get manageNotifications => 'Διαχείριση ειδοποιήσεων εφαρμογής';
+  String get manageNotifications => 'Διαχείριση ειδοποιήσεων στην εφαρμογή';
 
   @override
   String get language => 'Γλώσσα';
@@ -196,7 +199,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get privacyPolicy => 'Πολιτική απορρήτου';
 
   @override
-  String get privacyPolicyTitle => 'Privacy Policy';
+  String get privacyPolicyTitle => 'Πολιτική απορρήτου';
 
   @override
   String get viewPrivacyPolicy => 'Προβολή πολιτικής απορρήτου';
@@ -205,7 +208,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get termsOfService => 'Όροι χρήσης';
 
   @override
-  String get termsOfServiceTitle => 'Terms of Service';
+  String get termsOfServiceTitle => 'Όροι χρήσης';
 
   @override
   String get viewTermsOfService => 'Προβολή όρων χρήσης';
@@ -221,7 +224,7 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get cameraPermissionMessage =>
-      'Αυτή η εφαρμογή δεν μπορεί να λειτουργήσει χωρίς άδεια κάμερας. Παρακαλώ παραχωρήστε την άδεια στις ρυθμίσεις.';
+      'Η εφαρμογή δεν μπορεί να λειτουργήσει χωρίς άδεια κάμερας. Παρακαλώ παραχωρήστε την άδεια από τις ρυθμίσεις.';
 
   @override
   String get goToSettings => 'Μετάβαση στις ρυθμίσεις';
@@ -303,26 +306,26 @@ class AppLocalizationsEl extends AppLocalizations {
   String get shortMessage => 'Σύντομο μήνυμα';
 
   @override
-  String get selectTheme => 'Επιλογή Θέματος';
+  String get selectTheme => 'Επιλογή θέματος';
 
   @override
-  String get selectLanguage => 'Επιλογή Γλώσσας';
+  String get selectLanguage => 'Επιλογή γλώσσας';
 
   @override
   String get selected => 'επιλεγμένο';
 
   @override
-  String get noScannedQR => 'Δεν υπάρχουν σαρωμένοι κώδικες QR ακόμη';
+  String get noScannedQR => 'Δεν έχουν σαρωθεί ακόμη κώδικες QR';
 
   @override
-  String get noScannedBarcode => 'Δεν υπάρχουν σαρωμένοι κωδικοί γραμμών ακόμη';
+  String get noScannedBarcode => 'Δεν έχουν σαρωθεί ακόμη γραμμωτοί κώδικες';
 
   @override
-  String get noGeneratedQR => 'Δεν υπάρχουν δημιουργημένοι κώδικες QR ακόμη';
+  String get noGeneratedQR => 'Δεν έχουν δημιουργηθεί ακόμη κώδικες QR';
 
   @override
   String get noGeneratedBarcode =>
-      'Δεν υπάρχουν δημιουργημένοι κωδικοί γραμμών ακόμη';
+      'Δεν έχουν δημιουργηθεί ακόμη γραμμωτοί κώδικες';
 
   @override
   String get selectItems => 'Επιλογή';
@@ -331,7 +334,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get qrCodes => 'Κώδικες QR';
 
   @override
-  String get barcodes => 'Κωδικοί γραμμών';
+  String get barcodes => 'Γραμμωτοί κώδικες';
 
   @override
   String deleteMultipleMessage(int count) {
@@ -344,298 +347,300 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get scanQROrBarcode =>
-      'Ευθυγραμμίστε την κάμερα για σάρωση κώδικα QR ή κωδικού γραμμών';
+      'Ευθυγραμμίστε την κάμερα για να σαρώσετε κώδικα QR ή γραμμωτό κώδικα';
 
   @override
-  String get qrColorSettings => 'QR Code Colors';
+  String get qrColorSettings => 'Χρώματα κώδικα QR';
 
   @override
-  String get qrColor => 'QR Color';
+  String get qrColor => 'Χρώμα QR';
 
   @override
-  String get backgroundColor => 'Background';
+  String get backgroundColor => 'Φόντο';
 
   @override
-  String get bodyShape => 'Body Shape';
+  String get bodyShape => 'Σχήμα σώματος';
 
   @override
-  String get square => 'Square';
+  String get square => 'Τετράγωνο';
 
   @override
-  String get circle => 'Circle';
+  String get circle => 'Κύκλος';
 
   @override
-  String get nameLabel => 'Name';
+  String get nameLabel => 'Όνομα';
 
   @override
-  String get nameRequired => 'Name is required';
+  String get nameRequired => 'Το όνομα είναι υποχρεωτικό';
 
   @override
-  String get phoneLabel => 'Phone';
+  String get phoneLabel => 'Τηλέφωνο';
 
   @override
   String get emailLabel => 'Email';
 
   @override
-  String get emailRequired => 'Email is required';
+  String get emailRequired => 'Το email είναι υποχρεωτικό';
 
   @override
-  String get subjectOptional => 'Subject (Optional)';
+  String get subjectOptional => 'Θέμα (προαιρετικό)';
 
   @override
-  String get messageOptional => 'Message (Optional)';
+  String get messageOptional => 'Μήνυμα (προαιρετικό)';
 
   @override
-  String get phoneNumberLabel => 'Phone Number';
+  String get phoneNumberLabel => 'Αριθμός τηλεφώνου';
 
   @override
-  String get phoneNumberRequired => 'Phone number is required';
+  String get phoneNumberRequired => 'Ο αριθμός τηλεφώνου είναι υποχρεωτικός';
 
   @override
-  String get locationSearch => 'Search Location (Google Maps)';
+  String get locationSearch => 'Αναζήτηση τοποθεσίας (Google Maps)';
 
   @override
-  String get locationExample => 'e.g., Galata Tower, Istanbul';
+  String get locationExample => 'π.χ. Πύργος του Άιφελ, Παρίσι';
 
   @override
-  String get locationRequired => 'Location is required';
+  String get locationRequired => 'Η τοποθεσία είναι υποχρεωτική';
 
   @override
-  String get locationTitle => 'Location';
+  String get locationTitle => 'Τοποθεσία';
 
   @override
-  String get roundedSquare => 'Rounded Square';
+  String get roundedSquare => 'Στρογγυλεμένο τετράγωνο';
 
   @override
-  String get diamond => 'Diamond';
+  String get diamond => 'Ρόμβος';
 
   @override
-  String get qrLogo => 'QR Logo';
+  String get qrLogo => 'Λογότυπο QR';
 
   @override
-  String get gallery => 'Gallery';
+  String get gallery => 'Συλλογή';
 
   @override
-  String get eyeStyle => 'Eye Style';
+  String get eyeStyle => 'Στυλ ματιών';
 
   @override
-  String get dataModuleShape => 'Data Shape';
+  String get dataModuleShape => 'Σχήμα δεδομένων';
 
   @override
-  String get backgroundStyle => 'Background';
+  String get backgroundStyle => 'Τύπος φόντου';
 
   @override
-  String get gradient => 'Gradient';
+  String get gradient => 'Διαβάθμιση';
 
   @override
-  String get rounded => 'Rounded';
+  String get rounded => 'Στρογγυλεμένο';
 
   @override
   String get instagramGradient => 'Instagram';
 
   @override
-  String get sunsetGradient => 'Sunset';
+  String get sunsetGradient => 'Ηλιοβασίλεμα';
 
   @override
-  String get oceanGradient => 'Ocean';
+  String get oceanGradient => 'Ωκεανός';
 
   @override
-  String get fireGradient => 'Fire';
+  String get fireGradient => 'Φωτιά';
 
   @override
   String itemsDeleted(Object count) {
-    return '$count items deleted';
+    return 'Διαγράφηκαν $count στοιχεία';
   }
 
   @override
-  String get deleteConfirmationTitle => 'Delete Confirmation';
+  String get deleteConfirmationTitle => 'Επιβεβαίωση διαγραφής';
 
   @override
-  String get deleted => 'Deleted';
+  String get deleted => 'Διαγράφηκε';
 
   @override
-  String get oneTimeQR => 'One-Time QR';
+  String get oneTimeQR => 'Μοναδικός QR';
 
   @override
-  String get oneTimeQRActive => 'QR code can be scanned once';
+  String get oneTimeQRActive => 'Ο κώδικας QR μπορεί να σαρωθεί μία φορά';
 
   @override
-  String get oneTimeQRDefault => 'Unlimited scans';
+  String get oneTimeQRDefault => 'Απεριόριστες σαρώσεις';
 
   @override
-  String get qrAnalyticsDashboard => 'QR Analytics Dashboard';
+  String get qrAnalyticsDashboard => 'Πίνακας αναλυτικών QR';
 
   @override
-  String get totalScans => 'Total Scans';
+  String get totalScans => 'Συνολικές σαρώσεις';
 
   @override
-  String get lastScan => 'Last Scan';
+  String get lastScan => 'Τελευταία σάρωση';
 
   @override
-  String get neverScanned => 'Never scanned';
+  String get neverScanned => 'Δεν έχει σαρωθεί';
 
   @override
-  String get activeStatus => 'Active in use';
+  String get activeStatus => 'Ενεργό σε χρήση';
 
   @override
-  String get notScannedYet => 'Not scanned yet';
+  String get notScannedYet => 'Δεν έχει σαρωθεί ακόμη';
 
   @override
-  String get createdDate => 'Created Date';
+  String get createdDate => 'Ημερομηνία δημιουργίας';
 
   @override
-  String get oneTimeQRUsed => 'Used';
+  String get oneTimeQRUsed => 'Χρησιμοποιήθηκε';
 
   @override
-  String get oneTimeQRActiveStatus => 'Active';
+  String get oneTimeQRActiveStatus => 'Ενεργό';
 
   @override
-  String get analyticsNote => 'Analytics stored locally';
+  String get analyticsNote => 'Τα αναλυτικά αποθηκεύονται τοπικά';
 
   @override
-  String get ppSection1Title => '1. Collected Information';
+  String get ppSection1Title => '1. Συλλεγόμενες πληροφορίες';
 
   @override
   String get ppSection1Content =>
-      'QR Scanner collects information to improve user experience. All data is stored locally on your device.';
+      'Η εφαρμογή Σαρωτής QR συλλέγει τις ακόλουθες πληροφορίες για τη βελτίωση της εμπειρίας χρήστη:\n\n• Περιεχόμενο των κωδικών QR που σαρώνετε (αποθηκεύεται τοπικά στη συσκευή σας)\n• Κώδικες QR που δημιουργείτε (αποθηκεύονται τοπικά στη συσκευή σας)\n• Προτιμήσεις χρήσης εφαρμογής (θέμα, γλώσσα κ.λπ.)\n\nΌλα τα δεδομένα αποθηκεύονται τοπικά στη συσκευή σας και δεν αποστέλλονται στους διακομιστές μας.';
 
   @override
-  String get ppSection2Title => '2. Camera Permission';
+  String get ppSection2Title => '2. Άδεια κάμερας';
 
   @override
   String get ppSection2Content =>
-      'Camera permission is required to scan QR codes. The camera is only used during scanning.';
+      'Η άδεια πρόσβασης στην κάμερα απαιτείται για τη χρήση της λειτουργίας σάρωσης QR. Η κάμερα χρησιμοποιείται μόνο κατά τη σάρωση και δεν αποθηκεύονται ή κοινοποιούνται εικόνες.';
 
   @override
-  String get ppSection3Title => '3. Storage Permission';
+  String get ppSection3Title => '3. Άδεια αποθήκευσης';
 
   @override
   String get ppSection3Content =>
-      'Storage permission may be required to save QR codes as images.';
+      'Η άδεια αποθήκευσης μπορεί να απαιτηθεί για την αποθήκευση κωδικών QR ως εικόνες. Η άδεια αυτή χρησιμοποιείται μόνο για την αποθήκευση εικόνων κατόπιν αιτήματός σας.';
 
   @override
-  String get ppSection4Title => '4. Data Security';
+  String get ppSection4Title => '4. Ασφάλεια δεδομένων';
 
   @override
   String get ppSection4Content =>
-      'All your data is stored encrypted on your device. No personal information is shared with third parties.';
+      'Όλα τα δεδομένα σας αποθηκεύονται κρυπτογραφημένα στη συσκευή σας. Δεν κοινοποιείται καμία προσωπική πληροφορία σε τρίτους.';
 
   @override
-  String get ppSection5Title => '5. Advertisements';
+  String get ppSection5Title => '5. Διαφημίσεις';
 
   @override
   String get ppSection5Content =>
-      'The app may display advertisements through Google AdMob.';
+      'Η εφαρμογή μπορεί να προβάλλει διαφημίσεις μέσω του Google AdMob. Το AdMob μπορεί να χρησιμοποιεί πληροφορίες συσκευής για την προβολή διαφημίσεων. Για περισσότερες πληροφορίες, διαβάστε την πολιτική απορρήτου της Google.';
 
   @override
-  String get ppSection6Title => '6. Children\'s Privacy';
+  String get ppSection6Title => '6. Απόρρητο παιδιών';
 
   @override
   String get ppSection6Content =>
-      'Our app does not knowingly collect personal information from children under 13.';
+      'Η εφαρμογή μας δεν συλλέγει εν γνώσει της προσωπικές πληροφορίες από παιδιά κάτω των 13 ετών. Οι γονείς θα πρέπει να επιβλέπουν τη χρήση της εφαρμογής από τα παιδιά τους.';
 
   @override
-  String get ppSection7Title => '7. Changes';
+  String get ppSection7Title => '7. Αλλαγές';
 
   @override
   String get ppSection7Content =>
-      'This privacy policy may be updated from time to time.';
+      'Η παρούσα πολιτική απορρήτου ενδέχεται να ενημερώνεται περιοδικά. Θα ενημερώνεστε μέσα στην εφαρμογή όταν γίνονται σημαντικές αλλαγές.';
 
   @override
-  String get ppSection8Title => '8. Contact';
+  String get ppSection8Title => '8. Επικοινωνία';
 
   @override
   String get ppSection8Content =>
-      'For questions about this privacy policy, please contact us.\n\nLast Updated: October 10, 2025';
+      'Για ερωτήσεις σχετικά με αυτήν την πολιτική απορρήτου, επικοινωνήστε μαζί μας.\n\nΤελευταία ενημέρωση: 10 Οκτωβρίου 2025';
 
   @override
-  String get tosSection1Title => '1. Acceptance';
+  String get tosSection1Title => '1. Αποδοχή';
 
   @override
   String get tosSection1Content =>
-      'By using QR Scanner, you agree to these terms of service.';
+      'Χρησιμοποιώντας την εφαρμογή Σαρωτής QR αποδέχεστε τους παρόντες όρους χρήσης. Εάν δεν συμφωνείτε, μην χρησιμοποιείτε την εφαρμογή.';
 
   @override
-  String get tosSection2Title => '2. License';
+  String get tosSection2Title => '2. Άδεια';
 
   @override
   String get tosSection2Content =>
-      'You are granted a limited license for personal, non-commercial use.';
+      'Σας παραχωρείται περιορισμένη, μη μεταβιβάσιμη και μη αποκλειστική άδεια για προσωπική, μη εμπορική χρήση της εφαρμογής.';
 
   @override
-  String get tosSection3Title => '3. Terms of Use';
+  String get tosSection3Title => '3. Όροι χρήσης';
 
   @override
   String get tosSection3Content =>
-      'You will not create QR codes with illegal content nor violate the rights of others.';
+      'Κατά τη χρήση της εφαρμογής:\n\n• Δεν θα δημιουργείτε κώδικες QR με παράνομο περιεχόμενο\n• Δεν θα παραβιάζετε τα δικαιώματα τρίτων\n• Δεν θα χρησιμοποιείτε την εφαρμογή κακόβουλα\n• Δεν θα κοινοποιείτε spam ή επιβλαβές περιεχόμενο';
 
   @override
-  String get tosSection4Title => '4. Disclaimer';
+  String get tosSection4Title => '4. Αποποίηση ευθύνης';
 
   @override
   String get tosSection4Content =>
-      'The app is provided \"as is\". We are not responsible for damages arising from the use of QR codes.';
+      'Η εφαρμογή παρέχεται \"ως έχει\". Δεν φέρουμε ευθύνη για ζημίες που μπορεί να προκύψουν από το περιεχόμενο ή τη χρήση κωδικών QR.\n\nΒεβαιωθείτε ότι οι κώδικες QR που σαρώνετε είναι ασφαλείς. Να είστε προσεκτικοί με κώδικες από άγνωστες πηγές.';
 
   @override
-  String get tosSection5Title => '5. Content Responsibility';
+  String get tosSection5Title => '5. Ευθύνη περιεχομένου';
 
   @override
   String get tosSection5Content =>
-      'You are responsible for the content of the QR codes you create and scan.';
+      'Είστε αποκλειστικά υπεύθυνοι για το περιεχόμενο των κωδικών QR που δημιουργείτε και σαρώνετε. Μην δημιουργείτε παράνομο ή επιβλαβές περιεχόμενο.';
 
   @override
-  String get tosSection6Title => '6. Service Changes';
+  String get tosSection6Title => '6. Αλλαγές υπηρεσίας';
 
   @override
   String get tosSection6Content =>
-      'We reserve the right to change the app\'s features without prior notice.';
+      'Διατηρούμε το δικαίωμα να αλλάξουμε τις λειτουργίες, το περιεχόμενο ή τη διαθεσιμότητα της εφαρμογής χωρίς προειδοποίηση.';
 
   @override
-  String get tosSection7Title => '7. Account Suspension';
+  String get tosSection7Title => '7. Αναστολή λογαριασμού';
 
   @override
   String get tosSection7Content =>
-      'We reserve the right to suspend your access if you violate these terms.';
+      'Διατηρούμε το δικαίωμα να αναστείλουμε ή να τερματίσουμε την πρόσβασή σας εάν παραβιάσετε τους παρόντες όρους.';
 
   @override
-  String get tosSection8Title => '8. Intellectual Property';
+  String get tosSection8Title => '8. Πνευματική ιδιοκτησία';
 
   @override
   String get tosSection8Content =>
-      'All content of the app is protected by copyright.';
+      'Όλο το περιεχόμενο, η σχεδίαση και ο κώδικας της εφαρμογής προστατεύονται από δικαιώματα πνευματικής ιδιοκτησίας.';
 
   @override
-  String get tosSection9Title => '9. Third-Party Links';
+  String get tosSection9Title => '9. Σύνδεσμοι τρίτων';
 
   @override
   String get tosSection9Content =>
-      'The app may contain links to third-party websites.';
+      'Η εφαρμογή ενδέχεται να περιέχει συνδέσμους σε ιστότοπους ή υπηρεσίες τρίτων. Δεν φέρουμε ευθύνη για το περιεχόμενο ή τις πρακτικές απορρήτου τους.';
 
   @override
-  String get tosSection10Title => '10. Warranty Disclaimer';
+  String get tosSection10Title => '10. Αποποίηση εγγύησης';
 
   @override
-  String get tosSection10Content => 'The app is provided without any warranty.';
+  String get tosSection10Content =>
+      'Η εφαρμογή παρέχεται χωρίς καμία εγγύηση. Δεν εγγυόμαστε ότι θα λειτουργεί χωρίς διακοπές ή σφάλματα.';
 
   @override
-  String get tosSection11Title => '11. Changes to Terms';
+  String get tosSection11Title => '11. Αλλαγές όρων';
 
   @override
   String get tosSection11Content =>
-      'We reserve the right to change these terms at any time.';
+      'Διατηρούμε το δικαίωμα να αλλάξουμε τους παρόντες όρους χρήσης οποιαδήποτε στιγμή. Οι σημαντικές αλλαγές θα ανακοινώνονται στην εφαρμογή.';
 
   @override
-  String get tosSection12Title => '12. Contact';
+  String get tosSection12Title => '12. Επικοινωνία';
 
   @override
   String get tosSection12Content =>
       'Για ερωτήσεις σχετικά με αυτούς τους όρους χρήσης, επικοινωνήστε μαζί μας.\n\nΤελευταία ενημέρωση: 10 Οκτωβρίου 2025';
 
   @override
-  String get emailAppCannotOpen => 'Αδύνατο το άνοιγμα της εφαρμογής email';
+  String get emailAppCannotOpen =>
+      'Δεν είναι δυνατή η εκκίνηση της εφαρμογής email';
 
   @override
-  String get flashControlFailed => 'Ο έλεγχος φλας απέτυχε';
+  String get flashControlFailed => 'Αποτυχία ελέγχου φλας';
 
   @override
   String get cameraPermissionNeeded => 'Απαιτείται άδεια κάμερας';
@@ -645,16 +650,16 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String scanHistoryDesc(int count) {
-    return 'See $count scanned codes';
+    return 'Δείτε $count σαρωμένους κώδικες';
   }
 
   @override
   String generateHistoryDesc(int count) {
-    return 'See $count generated codes';
+    return 'Δείτε $count δημιουργημένους κώδικες';
   }
 
   @override
-  String get noQRScannedYet => 'Δεν έχουν σαρωθεί κωδικοί QR ακόμα';
+  String get noQRScannedYet => 'Δεν έχουν σαρωθεί ακόμη κώδικες QR';
 
   @override
   String get scannedLabel => 'Σαρωμένο';
@@ -675,16 +680,16 @@ class AppLocalizationsEl extends AppLocalizations {
   String get batchScanMode => 'Μαζική σάρωση';
 
   @override
-  String get scannedCodesLabel => 'Σαρωμένοι κωδικοί';
+  String get scannedCodesLabel => 'Σαρωμένοι κώδικες';
 
   @override
-  String get enterCoordinates => 'Ή εισάγετε συντεταγμένες';
+  String get enterCoordinates => 'Ή εισαγάγετε συντεταγμένες';
 
   @override
-  String get enterLocationName => 'Παρακαλώ εισάγετε όνομα τοποθεσίας';
+  String get enterLocationName => 'Εισαγάγετε όνομα τοποθεσίας';
 
   @override
-  String get cannotOpenMaps => 'Αδύνατο το άνοιγμα του Google Maps';
+  String get cannotOpenMaps => 'Δεν είναι δυνατό το άνοιγμα του Google Maps';
 
   @override
   String get invalidCoordinateFormat =>
@@ -694,7 +699,16 @@ class AppLocalizationsEl extends AppLocalizations {
   String get shareError => 'Σφάλμα κοινοποίησης';
 
   @override
-  String get urlCannotOpen => 'Αδύνατο το άνοιγμα URL';
+  String get saveToGallery => 'Αποθήκευση στη συλλογή';
+
+  @override
+  String get savedToGallery => '✅ Ο κώδικας QR αποθηκεύτηκε στη συλλογή!';
+
+  @override
+  String get saveToGalleryError => 'Αποτυχία αποθήκευσης στη συλλογή';
+
+  @override
+  String get urlCannotOpen => 'Δεν είναι δυνατό το άνοιγμα του URL';
 
   @override
   String get bugReport => 'Αναφορά σφάλματος';
@@ -703,29 +717,29 @@ class AppLocalizationsEl extends AppLocalizations {
   String get reportBugsViaEmail => 'Αναφορά σφαλμάτων μέσω email';
 
   @override
-  String get analytics => 'Analytics';
+  String get analytics => 'Αναλυτικά';
 
   @override
-  String get usageStatistics => 'Usage Statistics';
+  String get usageStatistics => 'Στατιστικά χρήσης';
 
   @override
-  String get totalEvents => 'Total Events';
+  String get totalEvents => 'Συνολικά συμβάντα';
 
   @override
-  String get eventTypes => 'Event Types';
+  String get eventTypes => 'Τύποι συμβάντων';
 
   @override
-  String get mostCommon => 'Most Common';
+  String get mostCommon => 'Πιο συνηθισμένο';
 
   @override
-  String get firstEvent => 'First Event';
+  String get firstEvent => 'Πρώτο συμβάν';
 
   @override
-  String get lastEvent => 'Last Event';
+  String get lastEvent => 'Τελευταίο συμβάν';
 
   @override
-  String get clearAnalytics => 'Clear Analytics';
+  String get clearAnalytics => 'Εκκαθάριση αναλυτικών';
 
   @override
-  String get analyticsCleared => 'Analytics data cleared';
+  String get analyticsCleared => 'Τα αναλυτικά διαγράφηκαν';
 }

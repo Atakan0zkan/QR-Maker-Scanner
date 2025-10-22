@@ -11,9 +11,7 @@ class AdService {
       return 'ca-app-pub-8966682109895515/8906178061';
     } else if (Platform.isIOS) {
       // Production AdMob ID (iOS)
-      // TODO: AdMob konsoldan iOS app oluştur ve gerçek ID'yi buraya ekle
-      // Şimdilik Android ID kullanılıyor (iOS app oluşturulunca güncellenecek)
-      return 'ca-app-pub-8966682109895515/8906178061';
+      return 'ca-app-pub-8966682109895515/3433174705';
     }
     throw UnsupportedError('Desteklenmeyen platform');
   }

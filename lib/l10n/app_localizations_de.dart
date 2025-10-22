@@ -30,11 +30,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get createQRCode => 'QR-Code erstellen';
 
   @override
-  String get alignCameraToScan =>
-      'Richten Sie die Kamera aus, um den QR-Code zu scannen';
+  String get alignCameraToScan => 'Kamera zum Scannen des QR-Codes ausrichten';
 
   @override
   String get scanned => 'Gescannt';
+
+  @override
+  String get scannedQRCodes => 'Gescannte QR-Codes';
 
   @override
   String get generated => 'Erstellt';
@@ -49,7 +51,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get text => 'Text';
 
   @override
-  String get wifi => 'WiFi';
+  String get wifi => 'WLAN';
 
   @override
   String get contact => 'Kontakt';
@@ -79,10 +81,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get textLabel => 'Text';
 
   @override
-  String get textHint => 'Enter your text';
+  String get textHint => 'Geben Sie Ihren Text ein';
 
   @override
-  String get textRequired => 'Text is required';
+  String get textRequired => 'Text ist erforderlich';
 
   @override
   String get ssid => 'Netzwerkname (SSID)';
@@ -130,7 +132,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get profileURL => 'Profil-URL';
 
   @override
-  String get generate => 'Erstellen';
+  String get generate => 'Generieren';
 
   @override
   String get save => 'Speichern';
@@ -154,10 +156,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get addToContacts => 'Zu Kontakten hinzufügen';
 
   @override
-  String get connectToWiFi => 'Mit WiFi verbinden';
+  String get connectToWiFi => 'Mit WLAN verbinden';
 
   @override
-  String get openInMaps => 'In Karten öffnen';
+  String get openInMaps => 'In Maps öffnen';
 
   @override
   String get call => 'Anrufen';
@@ -196,7 +198,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get privacyPolicy => 'Datenschutzrichtlinie';
 
   @override
-  String get privacyPolicyTitle => 'Privacy Policy';
+  String get privacyPolicyTitle => 'Datenschutzrichtlinie';
 
   @override
   String get viewPrivacyPolicy => 'Datenschutzrichtlinie anzeigen';
@@ -205,7 +207,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get termsOfService => 'Nutzungsbedingungen';
 
   @override
-  String get termsOfServiceTitle => 'Terms of Service';
+  String get termsOfServiceTitle => 'Nutzungsbedingungen';
 
   @override
   String get viewTermsOfService => 'Nutzungsbedingungen anzeigen';
@@ -270,8 +272,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get deleteConfirmation => 'Löschbestätigung';
 
   @override
-  String get deleteMessage =>
-      'Sind Sie sicher, dass Sie dieses Element löschen möchten?';
+  String get deleteMessage => 'Möchten Sie dieses Element wirklich löschen?';
 
   @override
   String get yes => 'Ja';
@@ -304,7 +305,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get shortMessage => 'Kurznachricht';
 
   @override
-  String get selectTheme => 'Thema auswählen';
+  String get selectTheme => 'Design auswählen';
 
   @override
   String get selectLanguage => 'Sprache auswählen';
@@ -335,7 +336,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String deleteMultipleMessage(int count) {
-    return 'Möchten Sie $count Elemente wirklich löschen?';
+    return 'Möchten Sie wirklich $count Elemente löschen?';
   }
 
   @override
@@ -344,7 +345,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get scanQROrBarcode =>
-      'Kamera ausrichten, um QR-Code oder Barcode zu scannen';
+      'Kamera zum Scannen von QR-Code oder Barcode ausrichten';
 
   @override
   String get qrColorSettings => 'QR-Code-Farben';
@@ -368,40 +369,40 @@ class AppLocalizationsDe extends AppLocalizations {
   String get nameLabel => 'Name';
 
   @override
-  String get nameRequired => 'Name is required';
+  String get nameRequired => 'Name ist erforderlich';
 
   @override
-  String get phoneLabel => 'Phone';
+  String get phoneLabel => 'Telefon';
 
   @override
-  String get emailLabel => 'Email';
+  String get emailLabel => 'E-Mail';
 
   @override
-  String get emailRequired => 'Email is required';
+  String get emailRequired => 'E-Mail ist erforderlich';
 
   @override
-  String get subjectOptional => 'Subject (Optional)';
+  String get subjectOptional => 'Betreff (Optional)';
 
   @override
-  String get messageOptional => 'Message (Optional)';
+  String get messageOptional => 'Nachricht (Optional)';
 
   @override
-  String get phoneNumberLabel => 'Phone Number';
+  String get phoneNumberLabel => 'Telefonnummer';
 
   @override
-  String get phoneNumberRequired => 'Phone number is required';
+  String get phoneNumberRequired => 'Telefonnummer ist erforderlich';
 
   @override
-  String get locationSearch => 'Search Location (Google Maps)';
+  String get locationSearch => 'Standort suchen (Google Maps)';
 
   @override
-  String get locationExample => 'e.g., Galata Tower, Istanbul';
+  String get locationExample => 'z.B. Brandenburger Tor, Berlin';
 
   @override
-  String get locationRequired => 'Location is required';
+  String get locationRequired => 'Standort ist erforderlich';
 
   @override
-  String get locationTitle => 'Location';
+  String get locationTitle => 'Standort';
 
   @override
   String get roundedSquare => 'Abgerundetes Quadrat';
@@ -416,227 +417,227 @@ class AppLocalizationsDe extends AppLocalizations {
   String get gallery => 'Galerie';
 
   @override
-  String get eyeStyle => 'Eye Style';
+  String get eyeStyle => 'Augenstil';
 
   @override
-  String get dataModuleShape => 'Data Shape';
+  String get dataModuleShape => 'Datenform';
 
   @override
-  String get backgroundStyle => 'Background';
+  String get backgroundStyle => 'Hintergrund';
 
   @override
-  String get gradient => 'Gradient';
+  String get gradient => 'Farbverlauf';
 
   @override
-  String get rounded => 'Rounded';
+  String get rounded => 'Abgerundet';
 
   @override
   String get instagramGradient => 'Instagram';
 
   @override
-  String get sunsetGradient => 'Sunset';
+  String get sunsetGradient => 'Sonnenuntergang';
 
   @override
-  String get oceanGradient => 'Ocean';
+  String get oceanGradient => 'Ozean';
 
   @override
-  String get fireGradient => 'Fire';
+  String get fireGradient => 'Feuer';
 
   @override
   String itemsDeleted(Object count) {
-    return '$count items deleted';
+    return '$count Elemente gelöscht';
   }
 
   @override
-  String get deleteConfirmationTitle => 'Delete Confirmation';
+  String get deleteConfirmationTitle => 'Löschbestätigung';
 
   @override
-  String get deleted => 'Deleted';
+  String get deleted => 'Gelöscht';
 
   @override
-  String get oneTimeQR => 'One-Time QR';
+  String get oneTimeQR => 'Einmal-QR';
 
   @override
-  String get oneTimeQRActive => 'QR code can be scanned once';
+  String get oneTimeQRActive => 'QR-Code kann einmal gescannt werden';
 
   @override
-  String get oneTimeQRDefault => 'Unlimited scans';
+  String get oneTimeQRDefault => 'Unbegrenzte Scans';
 
   @override
-  String get qrAnalyticsDashboard => 'QR Analytics Dashboard';
+  String get qrAnalyticsDashboard => 'QR-Analytics-Dashboard';
 
   @override
-  String get totalScans => 'Total Scans';
+  String get totalScans => 'Gesamtscans';
 
   @override
-  String get lastScan => 'Last Scan';
+  String get lastScan => 'Letzter Scan';
 
   @override
-  String get neverScanned => 'Never scanned';
+  String get neverScanned => 'Nie gescannt';
 
   @override
-  String get activeStatus => 'Active in use';
+  String get activeStatus => 'Aktiv in Verwendung';
 
   @override
-  String get notScannedYet => 'Not scanned yet';
+  String get notScannedYet => 'Noch nicht gescannt';
 
   @override
-  String get createdDate => 'Created Date';
+  String get createdDate => 'Erstellungsdatum';
 
   @override
-  String get oneTimeQRUsed => 'Used';
+  String get oneTimeQRUsed => 'Verwendet';
 
   @override
-  String get oneTimeQRActiveStatus => 'Active';
+  String get oneTimeQRActiveStatus => 'Aktiv';
 
   @override
-  String get analyticsNote => 'Analytics stored locally';
+  String get analyticsNote => 'Analytics lokal gespeichert';
 
   @override
-  String get ppSection1Title => '1. Collected Information';
+  String get ppSection1Title => '1. Gesammelte Informationen';
 
   @override
   String get ppSection1Content =>
-      'QR Scanner app collects the following information to improve user experience:\n\n• Content of QR codes you scan (stored locally on your device)\n• QR codes you create (stored locally on your device)\n• App usage preferences (theme, language, etc.)\n\nAll data is stored locally on your device and is not sent to our servers.';
+      'Die QR Scanner App sammelt die folgenden Informationen zur Verbesserung der Benutzererfahrung:\n\n• Inhalt der QR-Codes, die Sie scannen (lokal auf Ihrem Gerät gespeichert)\n• QR-Codes, die Sie erstellen (lokal auf Ihrem Gerät gespeichert)\n• App-Nutzungseinstellungen (Design, Sprache usw.)\n\nAlle Daten werden lokal auf Ihrem Gerät gespeichert und nicht an unsere Server gesendet.';
 
   @override
-  String get ppSection2Title => '2. Camera Permission';
+  String get ppSection2Title => '2. Kameraberechtigung';
 
   @override
   String get ppSection2Content =>
-      'Camera access permission is required to use the QR code scanning feature. The camera is only used during QR code scanning and no images are recorded or shared.';
+      'Für die Verwendung der QR-Code-Scanfunktion ist eine Kamerazugriffsberechtigung erforderlich. Die Kamera wird nur während des QR-Code-Scannens verwendet und es werden keine Bilder aufgezeichnet oder geteilt.';
 
   @override
-  String get ppSection3Title => '3. Storage Permission';
+  String get ppSection3Title => '3. Speicherberechtigung';
 
   @override
   String get ppSection3Content =>
-      'Storage permission may be required to save QR codes as images. This permission is only used to save QR code images upon your request.';
+      'Zum Speichern von QR-Codes als Bilder kann eine Speicherberechtigung erforderlich sein. Diese Berechtigung wird nur zum Speichern von QR-Code-Bildern auf Ihre Anfrage hin verwendet.';
 
   @override
-  String get ppSection4Title => '4. Data Security';
+  String get ppSection4Title => '4. Datensicherheit';
 
   @override
   String get ppSection4Content =>
-      'All your data is stored encrypted on your device. No personal information is shared with third parties.';
+      'Alle Ihre Daten werden verschlüsselt auf Ihrem Gerät gespeichert. Es werden keine persönlichen Informationen an Dritte weitergegeben.';
 
   @override
-  String get ppSection5Title => '5. Advertisements';
+  String get ppSection5Title => '5. Werbung';
 
   @override
   String get ppSection5Content =>
-      'The app may display advertisements through Google AdMob. AdMob may use device information for ad delivery. For more information, please review Google\'s privacy policy.';
+      'Die App kann Werbung über Google AdMob anzeigen. AdMob kann Geräteinformationen für die Anzeigenauslieferung verwenden. Weitere Informationen finden Sie in den Datenschutzrichtlinien von Google.';
 
   @override
-  String get ppSection6Title => '6. Children\'s Privacy';
+  String get ppSection6Title => '6. Datenschutz für Kinder';
 
   @override
   String get ppSection6Content =>
-      'Our app does not knowingly collect personal information from children under 13. Parents should supervise their children\'s use of the app.';
+      'Unsere App sammelt wissentlich keine personenbezogenen Daten von Kindern unter 13 Jahren. Eltern sollten die Nutzung der App durch ihre Kinder überwachen.';
 
   @override
-  String get ppSection7Title => '7. Changes';
+  String get ppSection7Title => '7. Änderungen';
 
   @override
   String get ppSection7Content =>
-      'This privacy policy may be updated from time to time. You will be notified within the app when significant changes occur.';
+      'Diese Datenschutzrichtlinie kann von Zeit zu Zeit aktualisiert werden. Sie werden innerhalb der App benachrichtigt, wenn wesentliche Änderungen auftreten.';
 
   @override
-  String get ppSection8Title => '8. Contact';
+  String get ppSection8Title => '8. Kontakt';
 
   @override
   String get ppSection8Content =>
-      'For questions about this privacy policy, please contact us.\n\nLast Updated: October 10, 2025';
+      'Bei Fragen zu dieser Datenschutzrichtlinie kontaktieren Sie uns bitte.\n\nLetzte Aktualisierung: 10. Oktober 2025';
 
   @override
-  String get tosSection1Title => '1. Acceptance';
+  String get tosSection1Title => '1. Akzeptanz';
 
   @override
   String get tosSection1Content =>
-      'By using the QR Scanner app, you agree to these terms of service. If you do not agree to these terms, please do not use the app.';
+      'Durch die Nutzung der QR Scanner App stimmen Sie diesen Nutzungsbedingungen zu. Wenn Sie diesen Bedingungen nicht zustimmen, verwenden Sie die App bitte nicht.';
 
   @override
-  String get tosSection2Title => '2. License';
+  String get tosSection2Title => '2. Lizenz';
 
   @override
   String get tosSection2Content =>
-      'You are granted a limited, non-transferable, non-exclusive license to use the QR Scanner app for personal, non-commercial use.';
+      'Ihnen wird eine eingeschränkte, nicht übertragbare, nicht exklusive Lizenz zur Nutzung der QR Scanner App für persönliche, nicht-kommerzielle Zwecke gewährt.';
 
   @override
-  String get tosSection3Title => '3. Terms of Use';
+  String get tosSection3Title => '3. Nutzungsbedingungen';
 
   @override
   String get tosSection3Content =>
-      'When using the app:\n\n• You will not create QR codes for illegal content\n• You will not violate the rights of others\n• You will not use the app maliciously\n• You will not share spam or harmful content';
+      'Bei der Nutzung der App:\n\n• Erstellen Sie keine QR-Codes für illegale Inhalte\n• Verletzen Sie nicht die Rechte anderer\n• Verwenden Sie die App nicht böswillig\n• Teilen Sie keinen Spam oder schädliche Inhalte';
 
   @override
-  String get tosSection4Title => '4. Disclaimer';
+  String get tosSection4Title => '4. Haftungsausschluss';
 
   @override
   String get tosSection4Content =>
-      'The app is provided \"as is\". We are not responsible for any damages that may arise from the content or use of QR codes.\n\nMake sure the QR codes you scan are safe. Be careful with QR codes from unknown sources.';
+      'Die App wird \"wie besehen\" bereitgestellt. Wir sind nicht verantwortlich für Schäden, die durch den Inhalt oder die Verwendung von QR-Codes entstehen können.\n\nStellen Sie sicher, dass die QR-Codes, die Sie scannen, sicher sind. Seien Sie vorsichtig mit QR-Codes aus unbekannten Quellen.';
 
   @override
-  String get tosSection5Title => '5. Content Responsibility';
+  String get tosSection5Title => '5. Verantwortung für Inhalte';
 
   @override
   String get tosSection5Content =>
-      'You are solely responsible for the content of the QR codes you create and scan. Do not create illegal or harmful content.';
+      'Sie sind allein verantwortlich für den Inhalt der QR-Codes, die Sie erstellen und scannen. Erstellen Sie keine illegalen oder schädlichen Inhalte.';
 
   @override
-  String get tosSection6Title => '6. Service Changes';
+  String get tosSection6Title => '6. Dienständerungen';
 
   @override
   String get tosSection6Content =>
-      'We reserve the right to change the app\'s features, content, or availability without prior notice.';
+      'Wir behalten uns das Recht vor, die Funktionen, Inhalte oder Verfügbarkeit der App ohne vorherige Ankündigung zu ändern.';
 
   @override
-  String get tosSection7Title => '7. Account Suspension';
+  String get tosSection7Title => '7. Kontosperrung';
 
   @override
   String get tosSection7Content =>
-      'We reserve the right to suspend or terminate your access to the app if you violate these terms.';
+      'Wir behalten uns das Recht vor, Ihren Zugang zur App zu sperren oder zu beenden, wenn Sie gegen diese Bedingungen verstoßen.';
 
   @override
-  String get tosSection8Title => '8. Intellectual Property';
+  String get tosSection8Title => '8. Geistiges Eigentum';
 
   @override
   String get tosSection8Content =>
-      'All content, design, and code of the app are protected by copyright. Unauthorized copying, distribution, or modification is prohibited.';
+      'Alle Inhalte, Designs und Codes der App sind urheberrechtlich geschützt. Unerlaubtes Kopieren, Verteilen oder Ändern ist verboten.';
 
   @override
-  String get tosSection9Title => '9. Third-Party Links';
+  String get tosSection9Title => '9. Links zu Dritten';
 
   @override
   String get tosSection9Content =>
-      'The app may contain links to third-party websites or services. We are not responsible for the content or privacy practices of these sites.';
+      'Die App kann Links zu Websites oder Diensten Dritter enthalten. Wir sind nicht verantwortlich für den Inhalt oder die Datenschutzpraktiken dieser Websites.';
 
   @override
-  String get tosSection10Title => '10. Warranty Disclaimer';
+  String get tosSection10Title => '10. Gewährleistungsausschluss';
 
   @override
   String get tosSection10Content =>
-      'The app is provided without any warranty. We do not guarantee that it will operate uninterrupted or error-free.';
+      'Die App wird ohne jegliche Gewährleistung bereitgestellt. Wir garantieren nicht, dass sie unterbrechungsfrei oder fehlerfrei funktioniert.';
 
   @override
-  String get tosSection11Title => '11. Changes to Terms';
+  String get tosSection11Title => '11. Änderungen der Bedingungen';
 
   @override
   String get tosSection11Content =>
-      'We reserve the right to change these terms of service at any time. Significant changes will be announced within the app.';
+      'Wir behalten uns das Recht vor, diese Nutzungsbedingungen jederzeit zu ändern. Wesentliche Änderungen werden innerhalb der App angekündigt.';
 
   @override
-  String get tosSection12Title => '12. Contact';
+  String get tosSection12Title => '12. Kontakt';
 
   @override
   String get tosSection12Content =>
-      'Bei Fragen zu diesen Nutzungsbedingungen kontaktieren Sie uns bitte.\n\nZuletzt aktualisiert: 10. Oktober 2025';
+      'Bei Fragen zu diesen Nutzungsbedingungen kontaktieren Sie uns bitte.\n\nLetzte Aktualisierung: 10. Oktober 2025';
 
   @override
   String get emailAppCannotOpen => 'E-Mail-App kann nicht geöffnet werden';
 
   @override
-  String get flashControlFailed => 'Blitzsteuerung fehlgeschlagen';
+  String get flashControlFailed => 'Flash-Steuerung fehlgeschlagen';
 
   @override
   String get cameraPermissionNeeded => 'Kameraberechtigung erforderlich';
@@ -646,12 +647,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String scanHistoryDesc(int count) {
-    return 'See $count scanned codes';
+    return '$count gescannte Codes anzeigen';
   }
 
   @override
   String generateHistoryDesc(int count) {
-    return 'See $count generated codes';
+    return '$count erstellte Codes anzeigen';
   }
 
   @override
@@ -661,7 +662,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get scannedLabel => 'Gescannt';
 
   @override
-  String get generatedLabel => 'Generiert';
+  String get generatedLabel => 'Erstellt';
 
   @override
   String get flashOn => 'Blitz an';
@@ -673,7 +674,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get normalMode => 'Normalmodus';
 
   @override
-  String get batchScanMode => 'Batch-Scan';
+  String get batchScanMode => 'Stapelscan';
 
   @override
   String get scannedCodesLabel => 'Gescannte Codes';
@@ -682,7 +683,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get enterCoordinates => 'Oder Koordinaten eingeben';
 
   @override
-  String get enterLocationName => 'Bitte geben Sie einen Ortsnamen ein';
+  String get enterLocationName => 'Bitte geben Sie einen Standortnamen ein';
 
   @override
   String get cannotOpenMaps => 'Google Maps kann nicht geöffnet werden';
@@ -692,13 +693,22 @@ class AppLocalizationsDe extends AppLocalizations {
       'Ungültiges Koordinatenformat. Beispiel: 41.0082, 28.9784';
 
   @override
-  String get shareError => 'Freigabefehler';
+  String get shareError => 'Fehler beim Teilen';
+
+  @override
+  String get saveToGallery => 'In Galerie speichern';
+
+  @override
+  String get savedToGallery => '✅ QR-Code in Galerie gespeichert!';
+
+  @override
+  String get saveToGalleryError => 'Fehler beim Speichern in Galerie';
 
   @override
   String get urlCannotOpen => 'URL kann nicht geöffnet werden';
 
   @override
-  String get bugReport => 'Fehler melden';
+  String get bugReport => 'Fehlerbericht';
 
   @override
   String get reportBugsViaEmail => 'Fehler per E-Mail melden';
@@ -707,26 +717,26 @@ class AppLocalizationsDe extends AppLocalizations {
   String get analytics => 'Analytics';
 
   @override
-  String get usageStatistics => 'Usage Statistics';
+  String get usageStatistics => 'Nutzungsstatistiken';
 
   @override
-  String get totalEvents => 'Total Events';
+  String get totalEvents => 'Gesamt-Events';
 
   @override
-  String get eventTypes => 'Event Types';
+  String get eventTypes => 'Event-Typen';
 
   @override
-  String get mostCommon => 'Most Common';
+  String get mostCommon => 'Häufigste';
 
   @override
-  String get firstEvent => 'First Event';
+  String get firstEvent => 'Erstes Event';
 
   @override
-  String get lastEvent => 'Last Event';
+  String get lastEvent => 'Letztes Event';
 
   @override
-  String get clearAnalytics => 'Clear Analytics';
+  String get clearAnalytics => 'Analytics löschen';
 
   @override
-  String get analyticsCleared => 'Analytics data cleared';
+  String get analyticsCleared => 'Analytics-Daten gelöscht';
 }

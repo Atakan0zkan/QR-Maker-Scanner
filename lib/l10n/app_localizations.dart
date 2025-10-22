@@ -168,6 +168,12 @@ abstract class AppLocalizations {
   /// **'Scanned'**
   String get scanned;
 
+  /// No description provided for @scannedQRCodes.
+  ///
+  /// In en, this message translates to:
+  /// **'Scanned QR Codes'**
+  String get scannedQRCodes;
+
   /// No description provided for @generated.
   ///
   /// In en, this message translates to:
@@ -1415,6 +1421,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Share error'**
   String get shareError;
+
+  /// No description provided for @saveToGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Save to Gallery'**
+  String get saveToGallery;
+
+  /// No description provided for @savedToGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'✅ QR code saved to gallery!'**
+  String get savedToGallery;
+
+  /// No description provided for @saveToGalleryError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save to gallery'**
+  String get saveToGalleryError;
 
   /// No description provided for @urlCannotOpen.
   ///

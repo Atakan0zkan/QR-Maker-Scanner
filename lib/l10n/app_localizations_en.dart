@@ -36,6 +36,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scanned => 'Scanned';
 
   @override
+  String get scannedQRCodes => 'Scanned QR Codes';
+
+  @override
   String get generated => 'Generated';
 
   @override
@@ -689,6 +692,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shareError => 'Share error';
+
+  @override
+  String get saveToGallery => 'Save to Gallery';
+
+  @override
+  String get savedToGallery => '✅ QR code saved to gallery!';
+
+  @override
+  String get saveToGalleryError => 'Failed to save to gallery';
 
   @override
   String get urlCannotOpen => 'Cannot open URL';
