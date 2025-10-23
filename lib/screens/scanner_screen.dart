@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
+import 'package:vibration/vibration.dart';
 import '../providers/qr_provider.dart';
 import '../services/qr_helper.dart';
 import '../services/permission_service.dart';
@@ -95,6 +96,13 @@ class _ScannerScreenState extends State<ScannerScreen>
     final String? code = barcode.rawValue;
 
     if (code == null || code.isEmpty) return;
+
+    // Haptic feedback - Hafif titreşim
+    Vibration.hasVibrator().then((hasVibrator) {
+      if (hasVibrator == true) {
+        Vibration.vibrate(duration: 50); // 50ms hafif titreşim
+      }
+    });
 
     final qrType = QRHelper.detectQRType(code);
     final isBarcode = barcode.format != BarcodeFormat.qrCode;

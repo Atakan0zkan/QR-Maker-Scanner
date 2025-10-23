@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:feedback/feedback.dart';
 import 'l10n/app_localizations.dart';
 
 import 'core/theme/app_theme.dart';
@@ -58,32 +59,44 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer2<ThemeProvider, LocaleProvider>(
         builder: (context, themeProvider, localeProvider, _) {
-          return MaterialApp(
-            title: 'QR Scanner',
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.darkTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.dark,
-            locale: localeProvider.locale,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('en'),
-              Locale('tr'),
-              Locale('es'),
-              Locale('de'),
-              Locale('fr'),
-              Locale('it'),
-              Locale('el'),
-              Locale('ar'),
-              Locale('zh'),
-              Locale('ja'),
-            ],
-            home: const MainScreen(),
+          return BetterFeedback(
+            theme: FeedbackThemeData(
+              background: Colors.black87,
+              feedbackSheetColor: const Color(0xFF1E1E1E),
+              drawColors: [
+                Colors.red,
+                Colors.green,
+                Colors.blue,
+                Colors.yellow,
+              ],
+            ),
+            child: MaterialApp(
+              title: 'QR Scanner',
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme.darkTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: ThemeMode.dark,
+              locale: localeProvider.locale,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('en'),
+                Locale('tr'),
+                Locale('es'),
+                Locale('de'),
+                Locale('fr'),
+                Locale('it'),
+                Locale('el'),
+                Locale('ar'),
+                Locale('zh'),
+                Locale('ja'),
+              ],
+              home: const MainScreen(),
+            ),
           );
         },
       ),

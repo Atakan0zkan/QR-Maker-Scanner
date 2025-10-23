@@ -1709,13 +1709,21 @@ class _CreateScreenState extends State<CreateScreen> {
   // Build QR gradient selector (horizontal scroll)
   Widget _buildQrGradientSelector() {
     final gradients = {
-      'instagram': ('Instagram', [const Color(0xFFf09433), const Color(0xFFdc2743), const Color(0xFFbc1888)]),
-      'facebook': ('Facebook', [const Color(0xFF0084ff), const Color(0xFF00C6FF), const Color(0xFF667eea)]),
-      'sunset': ('Sunset', [const Color(0xFFFF512F), const Color(0xFFDD2476), const Color(0xFFFF6B6B)]),
-      'ocean': ('Ocean', [const Color(0xFF2E3192), const Color(0xFF1BFFFF), const Color(0xFF00D4FF)]),
-      'fire': ('Fire', [const Color(0xFFf12711), const Color(0xFFf5af19), const Color(0xFFFF9500)]),
-      'purple': ('Purple', [const Color(0xFF667eea), const Color(0xFF764ba2), const Color(0xFFa8edea)]),
-      'mint': ('Mint', [const Color(0xFF00b09b), const Color(0xFF96c93d), const Color(0xFFB4EC51)]),
+      'instagram': ('Instagram', [const Color(0xFFf09433), const Color(0xFFe6683c), const Color(0xFFdc2743), const Color(0xFFcc2366), const Color(0xFFbc1888)]),
+      'tiktok': ('TikTok', [const Color(0xFF000000), const Color(0xFFFF0050), const Color(0xFF00F2EA), const Color(0xFFFFFFFF)]),
+      'facebook': ('Facebook', [const Color(0xFF0084ff), const Color(0xFF00C6FF), const Color(0xFF0051ff), const Color(0xFF667eea)]),
+      'whatsapp': ('WhatsApp', [const Color(0xFF25D366), const Color(0xFF128C7E), const Color(0xFF075E54), const Color(0xFF00BFA5)]),
+      'telegram': ('Telegram', [const Color(0xFF0088cc), const Color(0xFF00579C), const Color(0xFF64B5F6), const Color(0xFF2196F3)]),
+      'youtube': ('YouTube', [const Color(0xFFFF0000), const Color(0xFFFF5722), const Color(0xFFFF6F00), const Color(0xFF8B0000)]),
+      'spotify': ('Spotify', [const Color(0xFF1DB954), const Color(0xFF1ED760), const Color(0xFF191414), const Color(0xFF535353)]),
+      'linkedin': ('LinkedIn', [const Color(0xFF0077B5), const Color(0xFF00A0DC), const Color(0xFF004471), const Color(0xFF0073B1)]),
+      'twitter': ('Twitter', [const Color(0xFF1DA1F2), const Color(0xFF14B8FF), const Color(0xFF0e71c8), const Color(0xFF2196F3)]),
+      'netflix': ('Netflix', [const Color(0xFFE50914), const Color(0xFFFF0000), const Color(0xFF8B0000), const Color(0xFF000000)]),
+      'sunset': ('Sunset', [const Color(0xFFFF512F), const Color(0xFFFF8C42), const Color(0xFFDD2476), const Color(0xFFFF6B6B)]),
+      'ocean': ('Ocean', [const Color(0xFF2E3192), const Color(0xFF1BFFFF), const Color(0xFF00D4FF), const Color(0xFF0099CC)]),
+      'fire': ('Fire', [const Color(0xFFf12711), const Color(0xFFf5af19), const Color(0xFFFF6B6B), const Color(0xFFFF9500)]),
+      'purple': ('Purple Dream', [const Color(0xFF667eea), const Color(0xFF764ba2), const Color(0xFFa8edea), const Color(0xFFfed6e3)]),
+      'mint': ('Mint Fresh', [const Color(0xFF00b09b), const Color(0xFF96c93d), const Color(0xFF00D9A3), const Color(0xFFB4EC51)]),
     };
 
     return SizedBox(
@@ -1772,40 +1780,80 @@ class _CreateScreenState extends State<CreateScreen> {
 
   // Get gradient for QR code
   LinearGradient _getQrGradient() {
-    // Simplified gradient list for QR codes (better readability)
+    // Full gradient list matching the selector
     final gradients = {
       'instagram': const LinearGradient(
-        colors: [Color(0xFFf09433), Color(0xFFdc2743), Color(0xFFbc1888)],
+        colors: [Color(0xFFf09433), Color(0xFFe6683c), Color(0xFFdc2743), Color(0xFFcc2366), Color(0xFFbc1888)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      'tiktok': const LinearGradient(
+        colors: [Color(0xFF000000), Color(0xFFFF0050), Color(0xFF00F2EA), Color(0xFFFFFFFF)],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ),
       'facebook': const LinearGradient(
-        colors: [Color(0xFF0084ff), Color(0xFF00C6FF), Color(0xFF667eea)],
+        colors: [Color(0xFF0084ff), Color(0xFF00C6FF), Color(0xFF0051ff), Color(0xFF667eea)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      'whatsapp': const LinearGradient(
+        colors: [Color(0xFF25D366), Color(0xFF128C7E), Color(0xFF075E54), Color(0xFF00BFA5)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      'telegram': const LinearGradient(
+        colors: [Color(0xFF0088cc), Color(0xFF00579C), Color(0xFF64B5F6), Color(0xFF2196F3)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      'youtube': const LinearGradient(
+        colors: [Color(0xFFFF0000), Color(0xFFFF5722), Color(0xFFFF6F00), Color(0xFF8B0000)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      'spotify': const LinearGradient(
+        colors: [Color(0xFF1DB954), Color(0xFF1ED760), Color(0xFF191414), Color(0xFF535353)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      'linkedin': const LinearGradient(
+        colors: [Color(0xFF0077B5), Color(0xFF00A0DC), Color(0xFF004471), Color(0xFF0073B1)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      'twitter': const LinearGradient(
+        colors: [Color(0xFF1DA1F2), Color(0xFF14B8FF), Color(0xFF0e71c8), Color(0xFF2196F3)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      'netflix': const LinearGradient(
+        colors: [Color(0xFFE50914), Color(0xFFFF0000), Color(0xFF8B0000), Color(0xFF000000)],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ),
       'sunset': const LinearGradient(
-        colors: [Color(0xFFFF512F), Color(0xFFDD2476), Color(0xFFFF6B6B)],
+        colors: [Color(0xFFFF512F), Color(0xFFFF8C42), Color(0xFFDD2476), Color(0xFFFF6B6B)],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ),
       'ocean': const LinearGradient(
-        colors: [Color(0xFF2E3192), Color(0xFF1BFFFF), Color(0xFF00D4FF)],
+        colors: [Color(0xFF2E3192), Color(0xFF1BFFFF), Color(0xFF00D4FF), Color(0xFF0099CC)],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ),
       'fire': const LinearGradient(
-        colors: [Color(0xFFf12711), Color(0xFFf5af19), Color(0xFFFF9500)],
+        colors: [Color(0xFFf12711), Color(0xFFf5af19), Color(0xFFFF6B6B), Color(0xFFFF9500)],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ),
       'purple': const LinearGradient(
-        colors: [Color(0xFF667eea), Color(0xFF764ba2), Color(0xFFa8edea)],
+        colors: [Color(0xFF667eea), Color(0xFF764ba2), Color(0xFFa8edea), Color(0xFFfed6e3)],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ),
       'mint': const LinearGradient(
-        colors: [Color(0xFF00b09b), Color(0xFF96c93d), Color(0xFFB4EC51)],
+        colors: [Color(0xFF00b09b), Color(0xFF96c93d), Color(0xFF00D9A3), Color(0xFFB4EC51)],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ),

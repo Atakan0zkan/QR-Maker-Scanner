@@ -38,7 +38,9 @@ dependencies:
   # Share & Export
   share_plus: ^12.0.0
   path_provider: ^2.1.5
-  # image_gallery_saver: ^2.0.3  # Temporarily disabled - compatibility issue
+  
+  # Haptic Feedback
+  vibration: ^2.0.0
   
   # Ads
   google_mobile_ads: ^6.0.0
@@ -100,16 +102,17 @@ flutter_launcher_icons:
 
 # Splash Screen Configuration
 flutter_native_splash:
-  color: "#121212"  # AppColors.backgroundDark
+  color: "#121212"  # Arka plan rengi (koyu tema)
+  image: "assets/logos/splash_logo.png"  # Ana logo (ortada, otomatik boyutlandırılır)
   
-  # Branding mode: Logo'yu alt kısma küçük olarak koy
-  branding: "assets/logos/splash_logo.png"
-  branding_mode: bottom
-  
-  # NOT: Branding modu logo'yu otomatik küçültür ve alt kısma koyar
+  # Android ayarları
   android_screen_orientation: portrait
+  # android_gravity: center (varsayılan - logo ortada)
   
-  # Android 12+ için özel konfigürasyon (logo otomatik küçültülür)
+  # iOS ayarları  
+  # ios_content_mode: center (varsayılan - logo ortada)
+  
+  # Android 12+ için özel konfigürasyon
   android_12:
     color: "#121212"
     image: "assets/logos/splash_logo.png"

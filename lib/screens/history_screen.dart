@@ -257,6 +257,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
   }
 
   Widget _buildEmptyState(String message) {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -273,7 +274,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
           ),
           const SizedBox(height: 8),
           Text(
-            'İlk QR kodunuzu tarayın veya oluşturun',
+            l10n.scanOrCreateQR,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ],
