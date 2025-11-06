@@ -36,7 +36,7 @@ class TermsOfServiceScreen extends StatelessWidget {
           ),
           _buildSection(
             title: AppLocalizations.of(context)!.tosSection6Title,
-_            content: AppLocalizations.of(context)!.tosSection6Content,
+            content: AppLocalizations.of(context)!.tosSection6Content,
           ),
           _buildSection(
             title: AppLocalizations.of(context)!.tosSection7Title,
