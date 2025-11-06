@@ -129,9 +129,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get longitude => '経度';
 
   @override
-  String get profileURL => 'プロフィールURL';
-
-  @override
   String get generate => '生成';
 
   @override
@@ -162,13 +159,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get openInMaps => 'マップで開く';
 
   @override
-  String get call => '通話';
+  String get call => '電話をかける';
 
   @override
-  String get sendMessage => 'メッセージ送信';
-
-  @override
-  String get sendEmail => 'メール送信';
+  String get sendEmail => 'メールを送信';
 
   @override
   String get general => '一般';
@@ -189,7 +183,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get theme => 'テーマ';
 
   @override
-  String get customizeTheme => 'アプリテーマをカスタマイズ';
+  String get customizeTheme => 'アプリのテーマをカスタマイズ';
 
   @override
   String get privacy => 'プライバシー';
@@ -222,11 +216,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get cameraPermissionRequired => 'カメラの許可が必要です';
 
   @override
-  String get cameraPermissionMessage =>
-      'このアプリはカメラの許可なしでは動作しません。設定から許可を付与してください。';
+  String get cameraPermissionMessage => 'このアプリはカメラの許可なしでは動作できません。設定で許可してください。';
 
   @override
-  String get goToSettings => '設定へ移動';
+  String get goToSettings => '設定に移動';
 
   @override
   String get cancel => 'キャンセル';
@@ -241,7 +234,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get success => '成功';
 
   @override
-  String get qrCodeSaved => 'QRコードを保存しました';
+  String get qrCodeSaved => 'QRコードを正常に保存しました';
 
   @override
   String get qrCodeShared => 'QRコードを共有しました';
@@ -250,13 +243,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get copiedToClipboard => 'クリップボードにコピーしました';
 
   @override
-  String get invalidURL => '無効なURLです';
+  String get invalidURL => '無効なURL';
 
   @override
-  String get invalidEmail => '無効なメールアドレスです';
+  String get invalidEmail => '無効なメールアドレス';
 
   @override
-  String get invalidPhone => '無効な電話番号です';
+  String get invalidPhone => '無効な電話番号';
 
   @override
   String get fieldRequired => 'このフィールドは必須です';
@@ -265,7 +258,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get noHistoryYet => '履歴はまだありません';
 
   @override
-  String get scanOrCreateQR => '最初のQRコードをスキャンまたは作成しましょう';
+  String get scanOrCreateQR => '最初のQRコードをスキャンまたは作成してください';
 
   @override
   String get deleteConfirmation => '削除の確認';
@@ -301,7 +294,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get website => 'ウェブサイト';
 
   @override
-  String get shortMessage => '短いメッセージ';
+  String get shortMessage => 'ショートメッセージ';
 
   @override
   String get selectTheme => 'テーマを選択';
@@ -313,16 +306,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get selected => '選択済み';
 
   @override
-  String get noScannedQR => 'スキャンされたQRコードはありません';
+  String get noScannedQR => 'スキャンされたQRコードはまだありません';
 
   @override
-  String get noScannedBarcode => 'スキャンされたバーコードはありません';
+  String get noScannedBarcode => 'スキャンされたバーコードはまだありません';
 
   @override
-  String get noGeneratedQR => '作成されたQRコードはありません';
+  String get noGeneratedQR => '生成されたQRコードはまだありません';
 
   @override
-  String get noGeneratedBarcode => '作成されたバーコードはありません';
+  String get noGeneratedBarcode => '生成されたバーコードはまだありません';
 
   @override
   String get selectItems => '選択';
@@ -334,15 +327,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get barcodes => 'バーコード';
 
   @override
-  String deleteMultipleMessage(int count) {
-    return '$count 件の項目を削除してもよろしいですか？';
+  String deleteMultipleMessage(String count) {
+    return '$count個の項目を削除してもよろしいですか？';
   }
 
   @override
   String get deleteSingleMessage => 'この項目を削除してもよろしいですか？';
 
   @override
-  String get scanQROrBarcode => 'カメラを合わせてQRコードまたはバーコードをスキャン';
+  String get scanQROrBarcode => 'カメラを合わせてQRコードまたはバーコードをスキャンしてください';
 
   @override
   String get qrColorSettings => 'QRコードの色';
@@ -351,16 +344,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get qrColor => 'QRの色';
 
   @override
-  String get backgroundColor => '背景色';
+  String get backgroundColor => '背景';
 
   @override
-  String get bodyShape => 'ボディの形状';
+  String get bodyShape => '本体の形状';
 
   @override
-  String get square => '四角形';
+  String get square => '四角';
 
   @override
-  String get circle => '円形';
+  String get circle => '丸';
 
   @override
   String get nameLabel => '名前';
@@ -390,10 +383,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get phoneNumberRequired => '電話番号は必須です';
 
   @override
-  String get locationSearch => '場所を検索（Googleマップ）';
+  String get locationSearch => '場所を検索 (Googleマップ)';
 
   @override
-  String get locationExample => '例：東京タワー、東京';
+  String get locationExample => '例：ガラタ塔、イスタンブール';
 
   @override
   String get locationRequired => '場所は必須です';
@@ -402,10 +395,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get locationTitle => '場所';
 
   @override
-  String get roundedSquare => '角を丸めた四角';
+  String get roundedSquare => '角丸四角形';
 
   @override
-  String get diamond => 'ダイヤモンド';
+  String get diamond => 'ひし形';
 
   @override
   String get qrLogo => 'QRロゴ';
@@ -414,10 +407,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get gallery => 'ギャラリー';
 
   @override
-  String get eyeStyle => 'アイスタイル';
+  String get eyeStyle => '目のスタイル';
 
   @override
-  String get dataModuleShape => 'データ形状';
+  String get dataModuleShape => 'データの形状';
 
   @override
   String get backgroundStyle => '背景';
@@ -426,7 +419,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get gradient => 'グラデーション';
 
   @override
-  String get rounded => '丸み';
+  String get rounded => '角丸';
 
   @override
   String get instagramGradient => 'Instagram';
@@ -442,23 +435,23 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String itemsDeleted(Object count) {
-    return '$count 件の項目を削除しました';
+    return '$count個の項目を削除しました';
   }
 
   @override
   String get deleteConfirmationTitle => '削除の確認';
 
   @override
-  String get deleted => '削除しました';
+  String get deleted => '削除済み';
 
   @override
   String get oneTimeQR => 'ワンタイムQR';
 
   @override
-  String get oneTimeQRActive => 'このQRコードは1回のみスキャン可能';
+  String get oneTimeQRActive => 'QRコードは1回のみスキャンできます';
 
   @override
-  String get oneTimeQRDefault => 'スキャン回数無制限';
+  String get oneTimeQRDefault => '無制限スキャン';
 
   @override
   String get qrAnalyticsDashboard => 'QR分析ダッシュボード';
@@ -467,10 +460,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get totalScans => '総スキャン数';
 
   @override
-  String get lastScan => '最後のスキャン';
+  String get lastScan => '最終スキャン';
 
   @override
-  String get neverScanned => '未スキャン';
+  String get neverScanned => 'スキャンされていません';
 
   @override
   String get activeStatus => '使用中';
@@ -485,148 +478,150 @@ class AppLocalizationsJa extends AppLocalizations {
   String get oneTimeQRUsed => '使用済み';
 
   @override
-  String get oneTimeQRActiveStatus => 'アクティブ';
+  String get oneTimeQRActiveStatus => '有効';
 
   @override
-  String get analyticsNote => '分析データはローカルに保存されます';
+  String get analyticsNote => '分析はローカルに保存されます';
 
   @override
   String get ppSection1Title => '1. 収集される情報';
 
   @override
   String get ppSection1Content =>
-      'QRスキャナーアプリはユーザー体験を向上させるために以下の情報を収集します:\n\n• スキャンしたQRコードの内容（デバイスにローカル保存）\n• 作成したQRコード（デバイスにローカル保存）\n• アプリの利用設定（テーマ、言語など）\n\n全てのデータはデバイス内に保存され、当社サーバーには送信されません。';
+      'QRスキャナーアプリは、ユーザーエクスペリエンスを向上させるために次の情報を収集します。\n\n• スキャンするQRコードのコンテンツ（デバイスにローカルに保存）\n• 作成するQRコード（デバイスにローカルに保存）\n• アプリの使用設定（テーマ、言語など）\n\nすべてのデータはデバイスにローカルに保存され、当社のサーバーには送信されません。';
 
   @override
-  String get ppSection2Title => '2. カメラ許可';
+  String get ppSection2Title => '2. カメラの許可';
 
   @override
   String get ppSection2Content =>
-      'QRコード読み取り機能を使用するにはカメラへのアクセス許可が必要です。カメラはスキャン中のみ使用され、画像が保存・共有されることはありません。';
+      'QRコードスキャン機能を使用するには、カメラへのアクセス許可が必要です。カメラはQRコードのスキャン中にのみ使用され、画像は記録または共有されません。';
 
   @override
-  String get ppSection3Title => '3. ストレージ許可';
+  String get ppSection3Title => '3. ストレージの許可';
 
   @override
   String get ppSection3Content =>
-      'QRコードを画像として保存するためにストレージへのアクセス許可が必要な場合があります。この許可は、あなたのリクエストに基づいてQRコード画像を保存するためだけに使用されます。';
+      'QRコードを画像として保存するには、ストレージの許可が必要になる場合があります。この許可は、お客様の要求に応じてQRコード画像を保存するためにのみ使用されます。';
 
   @override
   String get ppSection4Title => '4. データセキュリティ';
 
   @override
   String get ppSection4Content =>
-      '全てのデータはデバイス内で暗号化されて保存されます。個人情報が第三者と共有されることはありません。';
+      'すべてのデータはデバイス上で暗号化されて保存されます。個人情報が第三者と共有されることはありません。';
 
   @override
   String get ppSection5Title => '5. 広告';
 
   @override
   String get ppSection5Content =>
-      '本アプリはGoogle AdMobを通じて広告を表示する場合があります。AdMobは広告配信のためにデバイス情報を利用することがあります。詳細はGoogleのプライバシーポリシーをご確認ください。';
+      'このアプリはGoogle AdMobを介して広告を表示する場合があります。AdMobは広告配信のためにデバイス情報を使用する場合があります。詳細については、Googleのプライバシーポリシーをご確認ください。';
 
   @override
-  String get ppSection6Title => '6. 子どものプライバシー';
+  String get ppSection6Title => '6. お子様のプライバシー';
 
   @override
   String get ppSection6Content =>
-      '本アプリは13歳未満の子どもから個人情報を意図的に取得することはありません。保護者はお子様の利用状況をご確認ください。';
+      '当社のアプリは、13歳未満のお子様から故意に個人情報を収集することはありません。保護者はお子様のアプリの使用を監督する必要があります。';
 
   @override
   String get ppSection7Title => '7. 変更';
 
   @override
   String get ppSection7Content =>
-      '本プライバシーポリシーは予告なく更新される場合があります。重要な変更がある場合はアプリ内でお知らせします。';
+      'このプライバシーポリシーは随時更新される場合があります。重要な変更があった場合は、アプリ内でお知らせします。';
 
   @override
   String get ppSection8Title => '8. お問い合わせ';
 
   @override
   String get ppSection8Content =>
-      'このプライバシーポリシーに関する質問がある場合はお問い合わせください。\n\n最終更新日: 2025年10月10日';
+      'このプライバシーポリシーに関するご質問は、お問い合わせください。\n\n最終更新日：2025年10月10日';
 
   @override
   String get tosSection1Title => '1. 同意';
 
   @override
   String get tosSection1Content =>
-      'QRスキャナーアプリをご利用いただくことで、本利用規約に同意したものとみなします。同意いただけない場合はご利用をお控えください。';
+      'QRスキャナーアプリを使用することにより、これらの利用規約に同意したことになります。これらの規約に同意しない場合は、アプリを使用しないでください。';
 
   @override
   String get tosSection2Title => '2. ライセンス';
 
   @override
   String get tosSection2Content =>
-      '本アプリの個人的かつ非商用目的の利用に限定した、譲渡不可・非独占的なライセンスが付与されます。';
+      '個人的、非商業的な使用のためにQRスキャナーアプリを使用するための限定的、譲渡不可、非独占的なライセンスが付与されます。';
 
   @override
-  String get tosSection3Title => '3. 利用条件';
+  String get tosSection3Title => '3. 利用規約';
 
   @override
   String get tosSection3Content =>
-      '本アプリを利用する際には以下を遵守してください:\n\n• 違法コンテンツのQRコードを作成しない\n• 他者の権利を侵害しない\n• 悪意ある利用をしない\n• スパムや有害な内容を共有しない';
+      'アプリを使用する場合：\n\n• 違法なコンテンツのQRコードを作成しません\n• 他人の権利を侵害しません\n• アプリを悪意を持って使用しません\n• スパムや有害なコンテンツを共有しません';
 
   @override
   String get tosSection4Title => '4. 免責事項';
 
   @override
   String get tosSection4Content =>
-      '本アプリは\"現状有姿\"で提供されます。QRコードの内容や利用によって発生した損害について当社は責任を負いません。\n\nスキャンするQRコードが安全であることを確認し、出所不明のコードには注意してください。';
+      'アプリは\"現状有姿\"で提供されます。QRコードのコンテンツまたは使用から生じる可能性のあるいかなる損害についても、当社は責任を負いません。\n\nスキャンするQRコードが安全であることを確認してください。不明なソースからのQRコードには注意してください。';
 
   @override
   String get tosSection5Title => '5. コンテンツの責任';
 
   @override
   String get tosSection5Content =>
-      '作成およびスキャンするQRコードの内容については利用者自身が全責任を負います。違法または有害なコンテンツを作成しないでください。';
+      '作成およびスキャンするQRコードのコンテンツについては、お客様が単独で責任を負います。違法または有害なコンテンツを作成しないでください。';
 
   @override
   String get tosSection6Title => '6. サービスの変更';
 
   @override
-  String get tosSection6Content => '当社は事前の通知なくアプリの機能、コンテンツ、提供状況を変更する権利を留保します。';
+  String get tosSection6Content =>
+      '当社は、事前の通知なしにアプリの機能、コンテンツ、または可用性を変更する権利を留保します。';
 
   @override
   String get tosSection7Title => '7. アカウントの停止';
 
   @override
-  String get tosSection7Content => '利用規約に違反した場合、当社はアプリへのアクセスを停止または終了する権利を有します。';
+  String get tosSection7Content =>
+      'お客様がこれらの規約に違反した場合、当社はアプリへのアクセスを一時停止または終了する権利を留保します。';
 
   @override
   String get tosSection8Title => '8. 知的財産';
 
   @override
   String get tosSection8Content =>
-      'アプリ内のすべてのコンテンツ、デザイン、コードは著作権で保護されています。許可なく複製・配布・改変することは禁止されています。';
+      'アプリのすべてのコンテンツ、デザイン、およびコードは著作権で保護されています。無断での複製、配布、または変更は禁止されています。';
 
   @override
-  String get tosSection9Title => '9. サードパーティへのリンク';
+  String get tosSection9Title => '9. 第三者のリンク';
 
   @override
   String get tosSection9Content =>
-      'アプリには第三者のウェブサイトやサービスへのリンクが含まれる場合があります。その内容やプライバシー慣行について当社は責任を負いません。';
+      'アプリには第三者のウェブサイトまたはサービスへのリンクが含まれる場合があります。これらのサイトのコンテンツまたはプライバシー慣行について、当社は責任を負いません。';
 
   @override
   String get tosSection10Title => '10. 保証の否認';
 
   @override
   String get tosSection10Content =>
-      '本アプリは一切の保証なしで提供されます。中断なく動作すること、エラーがないことを保証しません。';
+      'アプリは、いかなる保証もなく提供されます。中断なく、またはエラーなしで動作することを保証するものではありません。';
 
   @override
   String get tosSection11Title => '11. 規約の変更';
 
   @override
   String get tosSection11Content =>
-      '当社は本利用規約をいつでも変更する権利を有します。重要な変更がある場合はアプリ内でお知らせします。';
+      '当社は、これらの利用規約をいつでも変更する権利を留保します。重要な変更はアプリ内でお知らせします。';
 
   @override
   String get tosSection12Title => '12. お問い合わせ';
 
   @override
   String get tosSection12Content =>
-      '本利用規約に関するご質問がある場合はお問い合わせください。\n\n最終更新日: 2025年10月10日';
+      '本利用規約に関するご質問がある場合はお問い合わせください。\n\n最終更新日：2025年10月10日';
 
   @override
   String get emailAppCannotOpen => 'メールアプリを開けません';
@@ -641,13 +636,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get grantPermission => '許可を付与';
 
   @override
-  String scanHistoryDesc(int count) {
-    return '$count 件のスキャン済みコードを見る';
+  String scanHistoryDesc(String count) {
+    return '$count件のスキャン済みコードを見る';
   }
 
   @override
-  String generateHistoryDesc(int count) {
-    return '$count 件の作成済みコードを見る';
+  String generateHistoryDesc(String count) {
+    return '$count件の生成済みコードを見る';
   }
 
   @override
@@ -684,7 +679,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get cannotOpenMaps => 'Googleマップを開けません';
 
   @override
-  String get invalidCoordinateFormat => '座標形式が無効です。例: 41.0082, 28.9784';
+  String get invalidCoordinateFormat => '座標形式が無効です。例：41.0082, 28.9784';
 
   @override
   String get shareError => '共有エラー';
@@ -720,7 +715,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get eventTypes => 'イベントの種類';
 
   @override
-  String get mostCommon => '最も多い';
+  String get mostCommon => '最も一般的';
 
   @override
   String get firstEvent => '最初のイベント';
@@ -729,8 +724,62 @@ class AppLocalizationsJa extends AppLocalizations {
   String get lastEvent => '最後のイベント';
 
   @override
-  String get clearAnalytics => '分析データをクリア';
+  String get clearAnalytics => '分析をクリア';
 
   @override
-  String get analyticsCleared => '分析データを削除しました';
+  String get analyticsCleared => '分析データをクリアしました';
+
+  @override
+  String get feedbackSent => '✅ フィードバックを送信しました！';
+
+  @override
+  String get content => '内容';
+
+  @override
+  String get networkName => 'ネットワーク名';
+
+  @override
+  String get goToWiFiSettings => 'WiFi設定に移動';
+
+  @override
+  String get connectToWiFiManually => 'WiFi設定から手動で接続してください';
+
+  @override
+  String get searchInGoogleMaps => 'Googleマップで検索';
+
+  @override
+  String get searchAndSelectLocation => 'Googleマップで検索して場所を選択';
+
+  @override
+  String get latitudeLongitude => '緯度、経度';
+
+  @override
+  String get coordinateFormat => '形式：緯度、経度（例：41.0082, 28.9784）';
+
+  @override
+  String get profileURL => 'プロフィールURL';
+
+  @override
+  String get copyLocationUrlHint => 'Googleマップで場所を選択した後、URLをコピーしてここに貼り付けてください';
+
+  @override
+  String get profileUrlRequired => 'プロフィールURLは必須です';
+
+  @override
+  String get invalidFormat => '無効な形式';
+
+  @override
+  String get saveError => '保存エラー';
+
+  @override
+  String get openInMap => 'マップで開く';
+
+  @override
+  String get plainColor => '単色';
+
+  @override
+  String get security => 'セキュリティ';
+
+  @override
+  String get sendMessage => 'メッセージを送信';
 }

@@ -112,7 +112,7 @@ class SettingsScreen extends StatelessWidget {
                         SnackBar(
                           content: Text(
                             success
-                                ? '✅ Geri bildirim gönderildi!'
+                                ? l10n.feedbackSent
                                 : '❌ ${l10n.emailAppCannotOpen}',
                           ),
                           backgroundColor: success ? Colors.green : Colors.red,

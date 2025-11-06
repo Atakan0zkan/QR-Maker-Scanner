@@ -230,7 +230,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
                     }
                   });
                 } else {
-                  // Basit detail screen'e git
+                  // Tasarımlı QR ile detail screen'e git
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -238,6 +238,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
                         content: qr.content,
                         type: qr.type,
                         isScanned: false,
+                        qrImage: qr.qrImage, // Özelleştirilmiş QR'ı gönder
                       ),
                     ),
                   );
@@ -455,7 +456,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
       builder: (context) => AlertDialog(
         title: Text(l10n.deleteConfirmationTitle),
         content: Text(count != null && count > 1
-            ? l10n.deleteMultipleMessage(count)
+            ? l10n.deleteMultipleMessage(count.toString())
             : l10n.deleteSingleMessage),
         actions: [
           TextButton(

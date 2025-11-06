@@ -97,13 +97,15 @@ $deviceInfo
       
       // Try to share via email with attachment
       try {
-        final result = await Share.shareXFiles(
-          [XFile(screenshotFile.path)],
-          subject: '🐛 QR Scanner Bug Report',
-          text: emailBody,
+        final result = await SharePlus.instance.share(
+          ShareParams(
+            files: [XFile(screenshotFile.path)],
+            subject: '🐛 QR Scanner Bug Report',
+            text: emailBody,
+          ),
         );
-        return result.status == ShareResultStatus.success || 
-               result.status == ShareResultStatus.unavailable; // unavailable = dialog closed
+        return result.status == ShareResultStatus.success ||
+            result.status == ShareResultStatus.unavailable; // unavailable = dialog closed
       } catch (e) {
         // Fallback: Try mailto with just text
         final Uri emailUri = Uri(

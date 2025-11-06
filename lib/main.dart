@@ -26,6 +26,10 @@ void main() async {
       statusBarColor: Colors.transparent,
     ),
   );
+  await SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom],
+  );
   
   // Initialize critical services in parallel
   await Future.wait([

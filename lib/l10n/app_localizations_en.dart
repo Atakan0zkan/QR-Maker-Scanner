@@ -129,9 +129,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get longitude => 'Longitude';
 
   @override
-  String get profileURL => 'Profile URL';
-
-  @override
   String get generate => 'Generate';
 
   @override
@@ -163,9 +160,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get call => 'Call';
-
-  @override
-  String get sendMessage => 'Send Message';
 
   @override
   String get sendEmail => 'Send Email';
@@ -334,7 +328,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get barcodes => 'Barcodes';
 
   @override
-  String deleteMultipleMessage(int count) {
+  String deleteMultipleMessage(String count) {
     return 'Are you sure you want to delete $count items?';
   }
 
@@ -644,12 +638,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get grantPermission => 'Grant Permission';
 
   @override
-  String scanHistoryDesc(int count) {
+  String scanHistoryDesc(String count) {
     return 'See $count scanned codes';
   }
 
   @override
-  String generateHistoryDesc(int count) {
+  String generateHistoryDesc(String count) {
     return 'See $count generated codes';
   }
 
@@ -737,4 +731,62 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get analyticsCleared => 'Analytics data cleared';
+
+  @override
+  String get feedbackSent => '✅ Feedback sent!';
+
+  @override
+  String get content => 'Content';
+
+  @override
+  String get networkName => 'Network Name';
+
+  @override
+  String get goToWiFiSettings => 'Go to WiFi Settings';
+
+  @override
+  String get connectToWiFiManually =>
+      'Please connect manually from WiFi settings';
+
+  @override
+  String get searchInGoogleMaps => 'Search in Google Maps';
+
+  @override
+  String get searchAndSelectLocation =>
+      'Search in Google Maps and select location';
+
+  @override
+  String get latitudeLongitude => 'Latitude, Longitude';
+
+  @override
+  String get coordinateFormat =>
+      'Format: latitude, longitude (e.g: 41.0082, 28.9784)';
+
+  @override
+  String get profileURL => 'Profile URL';
+
+  @override
+  String get copyLocationUrlHint =>
+      'Copy URL after selecting location in Google Maps and paste here';
+
+  @override
+  String get profileUrlRequired => 'Profile URL required';
+
+  @override
+  String get invalidFormat => 'Invalid format';
+
+  @override
+  String get saveError => 'Save error';
+
+  @override
+  String get openInMap => 'Open in Map';
+
+  @override
+  String get plainColor => 'Plain Color';
+
+  @override
+  String get security => 'Security';
+
+  @override
+  String get sendMessage => 'Send Message';
 }

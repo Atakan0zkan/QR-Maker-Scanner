@@ -354,12 +354,6 @@ abstract class AppLocalizations {
   /// **'Longitude'**
   String get longitude;
 
-  /// No description provided for @profileURL.
-  ///
-  /// In en, this message translates to:
-  /// **'Profile URL'**
-  String get profileURL;
-
   /// No description provided for @generate.
   ///
   /// In en, this message translates to:
@@ -425,12 +419,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Call'**
   String get call;
-
-  /// No description provided for @sendMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Send Message'**
-  String get sendMessage;
 
   /// No description provided for @sendEmail.
   ///
@@ -766,7 +754,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Are you sure you want to delete {count} items?'**
-  String deleteMultipleMessage(int count);
+  String deleteMultipleMessage(String count);
 
   /// No description provided for @deleteSingleMessage.
   ///
@@ -1336,13 +1324,13 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'See {count} scanned codes'**
-  String scanHistoryDesc(int count);
+  String scanHistoryDesc(String count);
 
   /// No description provided for @generateHistoryDesc.
   ///
   /// In en, this message translates to:
   /// **'See {count} generated codes'**
-  String generateHistoryDesc(int count);
+  String generateHistoryDesc(String count);
 
   /// No description provided for @noQRScannedYet.
   ///
@@ -1511,6 +1499,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Analytics data cleared'**
   String get analyticsCleared;
+
+  /// No description provided for @feedbackSent.
+  ///
+  /// In en, this message translates to:
+  /// **'✅ Feedback sent!'**
+  String get feedbackSent;
+
+  /// No description provided for @content.
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get content;
+
+  /// No description provided for @networkName.
+  ///
+  /// In en, this message translates to:
+  /// **'Network Name'**
+  String get networkName;
+
+  /// No description provided for @goToWiFiSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to WiFi Settings'**
+  String get goToWiFiSettings;
+
+  /// No description provided for @connectToWiFiManually.
+  ///
+  /// In en, this message translates to:
+  /// **'Please connect manually from WiFi settings'**
+  String get connectToWiFiManually;
+
+  /// No description provided for @searchInGoogleMaps.
+  ///
+  /// In en, this message translates to:
+  /// **'Search in Google Maps'**
+  String get searchInGoogleMaps;
+
+  /// No description provided for @searchAndSelectLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Search in Google Maps and select location'**
+  String get searchAndSelectLocation;
+
+  /// No description provided for @latitudeLongitude.
+  ///
+  /// In en, this message translates to:
+  /// **'Latitude, Longitude'**
+  String get latitudeLongitude;
+
+  /// No description provided for @coordinateFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'Format: latitude, longitude (e.g: 41.0082, 28.9784)'**
+  String get coordinateFormat;
+
+  /// No description provided for @profileURL.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile URL'**
+  String get profileURL;
+
+  /// No description provided for @copyLocationUrlHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy URL after selecting location in Google Maps and paste here'**
+  String get copyLocationUrlHint;
+
+  /// No description provided for @profileUrlRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile URL required'**
+  String get profileUrlRequired;
+
+  /// No description provided for @invalidFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid format'**
+  String get invalidFormat;
+
+  /// No description provided for @saveError.
+  ///
+  /// In en, this message translates to:
+  /// **'Save error'**
+  String get saveError;
+
+  /// No description provided for @openInMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Open in Map'**
+  String get openInMap;
+
+  /// No description provided for @plainColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Plain Color'**
+  String get plainColor;
+
+  /// No description provided for @security.
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get security;
+
+  /// No description provided for @sendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Message'**
+  String get sendMessage;
 }
 
 class _AppLocalizationsDelegate

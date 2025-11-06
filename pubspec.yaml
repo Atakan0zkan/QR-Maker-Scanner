@@ -94,7 +94,7 @@ flutter_launcher_icons:
   # ios: "assets/logos/icon_ios.png"
   
   # Android adaptive icon (optional)
-  adaptive_icon_background: "#121212"  # AppColors.backgroundDark
+  adaptive_icon_background: "#101922"  # AppColors.backgroundDark
   adaptive_icon_foreground: "assets/logos/app_icon.png"
   
   # Remove alpha channel for iOS
@@ -102,8 +102,9 @@ flutter_launcher_icons:
 
 # Splash Screen Configuration
 flutter_native_splash:
-  color: "#121212"  # Arka plan rengi (koyu tema)
-  image: "assets/logos/splash_logo.png"  # Ana logo (ortada, otomatik boyutlandırılır)
+  color: "#101922"
+  color_dark: "#101922"
+  image: "assets/logos/splash_logo.png"
   
   # Android ayarları
   android_screen_orientation: portrait
@@ -114,11 +115,11 @@ flutter_native_splash:
   
   # Android 12+ için özel konfigürasyon
   android_12:
-    color: "#121212"
+    color: "#101922"
+    color_dark: "#101922"
     image: "assets/logos/splash_logo.png"
-    icon_background_color: "#121212"
-    image_dark: "assets/logos/splash_logo.png"
-    icon_background_color_dark: "#121212"
+    icon_background_color: "#101922"
+    icon_background_color_dark: "#101922"
   
   ios: true
   android: true

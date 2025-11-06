@@ -129,13 +129,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get longitude => 'Boylam';
 
   @override
-  String get profileURL => 'Profil URL';
+  String get generate => 'Generate';
 
   @override
-  String get generate => 'Oluştur';
-
-  @override
-  String get save => 'Kaydet';
+  String get save => 'Save';
 
   @override
   String get share => 'Paylaş';
@@ -147,49 +144,46 @@ class AppLocalizationsTr extends AppLocalizations {
   String get copy => 'Kopyala';
 
   @override
-  String get open => 'Aç';
+  String get open => 'Open';
 
   @override
-  String get openInBrowser => 'Tarayıcıda Aç';
+  String get openInBrowser => 'Open in Browser';
 
   @override
-  String get addToContacts => 'Rehbere Ekle';
+  String get addToContacts => 'Add to Contacts';
 
   @override
-  String get connectToWiFi => 'WiFi\'ye Bağlan';
+  String get connectToWiFi => 'Connect to WiFi';
 
   @override
-  String get openInMaps => 'Haritada Aç';
+  String get openInMaps => 'Open in Maps';
 
   @override
-  String get call => 'Ara';
+  String get call => 'Call';
 
   @override
-  String get sendMessage => 'Mesaj Gönder';
-
-  @override
-  String get sendEmail => 'E-posta Gönder';
+  String get sendEmail => 'Send Email';
 
   @override
   String get general => 'Genel';
 
   @override
-  String get notifications => 'Bildirimler';
+  String get notifications => 'Notifications';
 
   @override
-  String get manageNotifications => 'Uygulama içi bildirimleri yönetin';
+  String get manageNotifications => 'Manage in-app notifications';
 
   @override
   String get language => 'Dil';
 
   @override
-  String get changeLanguage => 'Uygulama dilini değiştirin';
+  String get changeLanguage => 'Change app language';
 
   @override
-  String get theme => 'Tema';
+  String get theme => 'Theme';
 
   @override
-  String get customizeTheme => 'Uygulama temasını özelleştirin';
+  String get customizeTheme => 'Customize app theme';
 
   @override
   String get privacy => 'Gizlilik';
@@ -219,122 +213,122 @@ class AppLocalizationsTr extends AppLocalizations {
   String get version => 'Sürüm';
 
   @override
-  String get cameraPermissionRequired => 'Kamera İzni Gerekli';
+  String get cameraPermissionRequired => 'Camera Permission Required';
 
   @override
   String get cameraPermissionMessage =>
-      'Bu uygulama kamera izni olmadan çalışamaz. Lütfen ayarlardan izin verin.';
+      'This app cannot work without camera permission. Please grant permission in settings.';
 
   @override
-  String get goToSettings => 'Ayarlara Git';
+  String get goToSettings => 'Go to Settings';
 
   @override
   String get cancel => 'İptal';
 
   @override
-  String get ok => 'Tamam';
+  String get ok => 'OK';
 
   @override
-  String get error => 'Hata';
+  String get error => 'Error';
 
   @override
-  String get success => 'Başarılı';
+  String get success => 'Success';
 
   @override
-  String get qrCodeSaved => 'QR kod başarıyla kaydedildi';
+  String get qrCodeSaved => 'QR code saved successfully';
 
   @override
-  String get qrCodeShared => 'QR kod paylaşıldı';
+  String get qrCodeShared => 'QR code shared';
 
   @override
   String get copiedToClipboard => 'Panoya kopyalandı';
 
   @override
-  String get invalidURL => 'Geçersiz URL';
+  String get invalidURL => 'Invalid URL';
 
   @override
-  String get invalidEmail => 'Geçersiz e-posta adresi';
+  String get invalidEmail => 'Invalid email address';
 
   @override
-  String get invalidPhone => 'Geçersiz telefon numarası';
+  String get invalidPhone => 'Invalid phone number';
 
   @override
-  String get fieldRequired => 'Bu alan zorunludur';
+  String get fieldRequired => 'This field is required';
 
   @override
-  String get noHistoryYet => 'Henüz geçmiş yok';
+  String get noHistoryYet => 'No history yet';
 
   @override
-  String get scanOrCreateQR => 'İlk QR kodunuzu tarayın veya oluşturun';
+  String get scanOrCreateQR => 'Scan or create your first QR code';
 
   @override
-  String get deleteConfirmation => 'Silme Onayı';
+  String get deleteConfirmation => 'Delete Confirmation';
 
   @override
-  String get deleteMessage => 'Bu öğeyi silmek istediğinizden emin misiniz?';
+  String get deleteMessage => 'Are you sure you want to delete this item?';
 
   @override
-  String get yes => 'Evet';
+  String get yes => 'Yes';
 
   @override
-  String get no => 'Hayır';
+  String get no => 'No';
 
   @override
-  String get light => 'Açık';
+  String get light => 'Light';
 
   @override
-  String get dark => 'Koyu';
+  String get dark => 'Dark';
 
   @override
-  String get system => 'Sistem';
+  String get system => 'System';
 
   @override
-  String get saveAsImage => 'Resim Olarak Kaydet';
+  String get saveAsImage => 'Save as Image';
 
   @override
-  String get saveAsPDF => 'PDF Olarak Kaydet';
+  String get saveAsPDF => 'Save as PDF';
 
   @override
-  String get exportOptions => 'Dışa Aktarma Seçenekleri';
+  String get exportOptions => 'Export Options';
 
   @override
-  String get website => 'Web sitesi';
+  String get website => 'Website';
 
   @override
-  String get shortMessage => 'Kısa mesaj';
+  String get shortMessage => 'Short Message';
 
   @override
-  String get selectTheme => 'Tema Seç';
+  String get selectTheme => 'Select Theme';
 
   @override
   String get selectLanguage => 'Dil Seçin';
 
   @override
-  String get selected => 'seçildi';
+  String get selected => 'selected';
 
   @override
-  String get noScannedQR => 'Henüz taranan QR kod yok';
+  String get noScannedQR => 'No scanned QR codes yet';
 
   @override
-  String get noScannedBarcode => 'Henüz taranan barkod yok';
+  String get noScannedBarcode => 'No scanned barcodes yet';
 
   @override
-  String get noGeneratedQR => 'Henüz oluşturulan QR kod yok';
+  String get noGeneratedQR => 'No generated QR codes yet';
 
   @override
-  String get noGeneratedBarcode => 'Henüz oluşturulan barkod yok';
+  String get noGeneratedBarcode => 'No generated barcodes yet';
 
   @override
-  String get selectItems => 'Seç';
+  String get selectItems => 'Select';
 
   @override
-  String get qrCodes => 'QR Kodlar';
+  String get qrCodes => 'QR Codes';
 
   @override
-  String get barcodes => 'Barkodlar';
+  String get barcodes => 'Barcodes';
 
   @override
-  String deleteMultipleMessage(int count) {
+  String deleteMultipleMessage(String count) {
     return '$count öğeyi silmek istediğinizden emin misiniz?';
   }
 
@@ -347,104 +341,104 @@ class AppLocalizationsTr extends AppLocalizations {
       'QR kod veya barkod taramak için kamerayı hizalayın';
 
   @override
-  String get qrColorSettings => 'QR Kod Renkleri';
+  String get qrColorSettings => 'QR Code Colors';
 
   @override
-  String get qrColor => 'QR Rengi';
+  String get qrColor => 'QR Color';
 
   @override
-  String get backgroundColor => 'Arka Plan';
+  String get backgroundColor => 'Background';
 
   @override
-  String get bodyShape => 'Gövde Şekli';
+  String get bodyShape => 'Body Shape';
 
   @override
-  String get square => 'Kare';
+  String get square => 'Square';
 
   @override
-  String get circle => 'Daire';
+  String get circle => 'Circle';
 
   @override
-  String get nameLabel => 'İsim';
+  String get nameLabel => 'Name';
 
   @override
-  String get nameRequired => 'İsim gerekli';
+  String get nameRequired => 'Name is required';
 
   @override
-  String get phoneLabel => 'Telefon';
+  String get phoneLabel => 'Phone';
 
   @override
-  String get emailLabel => 'E-posta';
+  String get emailLabel => 'Email';
 
   @override
-  String get emailRequired => 'E-posta gerekli';
+  String get emailRequired => 'Email is required';
 
   @override
-  String get subjectOptional => 'Konu (Opsiyonel)';
+  String get subjectOptional => 'Subject (Optional)';
 
   @override
-  String get messageOptional => 'Mesaj (Opsiyonel)';
+  String get messageOptional => 'Message (Optional)';
 
   @override
-  String get phoneNumberLabel => 'Telefon Numarası';
+  String get phoneNumberLabel => 'Phone Number';
 
   @override
-  String get phoneNumberRequired => 'Telefon numarası gerekli';
+  String get phoneNumberRequired => 'Phone number is required';
 
   @override
-  String get locationSearch => 'Konum Ara (Google Maps)';
+  String get locationSearch => 'Search Location (Google Maps)';
 
   @override
-  String get locationExample => 'Örn: Galata Kulesi, İstanbul';
+  String get locationExample => 'e.g., Galata Tower, Istanbul';
 
   @override
-  String get locationRequired => 'Konum gerekli';
+  String get locationRequired => 'Location is required';
 
   @override
-  String get locationTitle => 'Konum';
+  String get locationTitle => 'Location';
 
   @override
-  String get roundedSquare => 'Yuvarlatılmış Kare';
+  String get roundedSquare => 'Rounded Square';
 
   @override
-  String get diamond => 'Elmas';
+  String get diamond => 'Diamond';
 
   @override
-  String get qrLogo => 'QR Logosu';
+  String get qrLogo => 'QR Logo';
 
   @override
-  String get gallery => 'Galeri';
+  String get gallery => 'Gallery';
 
   @override
-  String get eyeStyle => 'Köşe Stili';
+  String get eyeStyle => 'Eye Style';
 
   @override
-  String get dataModuleShape => 'Nokta Şekli';
+  String get dataModuleShape => 'Data Shape';
 
   @override
-  String get backgroundStyle => 'Arka Plan';
+  String get backgroundStyle => 'Background';
 
   @override
   String get gradient => 'Gradient';
 
   @override
-  String get rounded => 'Yuvarlatılmış';
+  String get rounded => 'Rounded';
 
   @override
   String get instagramGradient => 'Instagram';
 
   @override
-  String get sunsetGradient => 'Gün Batımı';
+  String get sunsetGradient => 'Sunset';
 
   @override
-  String get oceanGradient => 'Okyanus';
+  String get oceanGradient => 'Ocean';
 
   @override
-  String get fireGradient => 'Ateş';
+  String get fireGradient => 'Fire';
 
   @override
   String itemsDeleted(Object count) {
-    return '$count öğe silindi';
+    return '$count items deleted';
   }
 
   @override
@@ -454,43 +448,43 @@ class AppLocalizationsTr extends AppLocalizations {
   String get deleted => 'Silindi';
 
   @override
-  String get oneTimeQR => 'Tek Kullanımlık QR';
+  String get oneTimeQR => 'One-Time QR';
 
   @override
-  String get oneTimeQRActive => 'QR kod 1 kez taranabilir';
+  String get oneTimeQRActive => 'QR code can be scanned once';
 
   @override
-  String get oneTimeQRDefault => 'Sınırsız tarama';
+  String get oneTimeQRDefault => 'Unlimited scans';
 
   @override
   String get qrAnalyticsDashboard => 'QR Analytics Dashboard';
 
   @override
-  String get totalScans => 'Toplam Tarama';
+  String get totalScans => 'Total Scans';
 
   @override
-  String get lastScan => 'Son Tarama';
+  String get lastScan => 'Last Scan';
 
   @override
-  String get neverScanned => 'Henüz taranmadı';
+  String get neverScanned => 'Never scanned';
 
   @override
-  String get activeStatus => 'Aktif kullanımda';
+  String get activeStatus => 'Active in use';
 
   @override
-  String get notScannedYet => 'Henüz taranmadı';
+  String get notScannedYet => 'Not scanned yet';
 
   @override
-  String get createdDate => 'Oluşturulma Tarihi';
+  String get createdDate => 'Created Date';
 
   @override
-  String get oneTimeQRUsed => 'Kullanıldı';
+  String get oneTimeQRUsed => 'Used';
 
   @override
-  String get oneTimeQRActiveStatus => 'Aktif';
+  String get oneTimeQRActiveStatus => 'Active';
 
   @override
-  String get analyticsNote => 'Analytics lokal olarak saklanır';
+  String get analyticsNote => 'Analytics stored locally';
 
   @override
   String get ppSection1Title => '1. Toplanan Bilgiler';
@@ -645,12 +639,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get grantPermission => 'İzin Ver';
 
   @override
-  String scanHistoryDesc(int count) {
+  String scanHistoryDesc(String count) {
     return '$count taranan kodu gör';
   }
 
   @override
-  String generateHistoryDesc(int count) {
+  String generateHistoryDesc(String count) {
     return '$count oluşturulan kodu gör';
   }
 
@@ -738,4 +732,62 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get analyticsCleared => 'İstatistikler temizlendi';
+
+  @override
+  String get feedbackSent => '✅ Geri bildirim gönderildi!';
+
+  @override
+  String get content => 'İçerik';
+
+  @override
+  String get networkName => 'Ağ Adı';
+
+  @override
+  String get goToWiFiSettings => 'WiFi Ayarlarına Git';
+
+  @override
+  String get connectToWiFiManually =>
+      'Lütfen WiFi ayarlarından manuel olarak bağlanın';
+
+  @override
+  String get searchInGoogleMaps => 'Google Maps\'te Ara';
+
+  @override
+  String get searchAndSelectLocation =>
+      'Google Maps\'te arama yapın ve konumu seçin';
+
+  @override
+  String get latitudeLongitude => 'Enlem, Boylam';
+
+  @override
+  String get coordinateFormat =>
+      'Format: enlem, boylam (örn: 41.0082, 28.9784)';
+
+  @override
+  String get profileURL => 'Profil URL';
+
+  @override
+  String get copyLocationUrlHint =>
+      'Google Maps\'te konumu seçtikten sonra URL\'yi kopyalayıp buraya yapıştırın';
+
+  @override
+  String get profileUrlRequired => 'Profil URL gerekli';
+
+  @override
+  String get invalidFormat => 'Geçersiz format';
+
+  @override
+  String get saveError => 'Kayıt hatası';
+
+  @override
+  String get openInMap => 'Haritada Aç';
+
+  @override
+  String get plainColor => 'Düz Renk';
+
+  @override
+  String get security => 'Güvenlik';
+
+  @override
+  String get sendMessage => 'Mesaj Gönder';
 }

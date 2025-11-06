@@ -21,6 +21,7 @@ class CreateScreen extends StatefulWidget {
 }
 
 class _CreateScreenState extends State<CreateScreen> {
+  late AppLocalizations l10n; // l10n'i State seviyesinde tanımla
   QRType _selectedType = QRType.url;
   final _formKey = GlobalKey<FormState>();
   final _qrKey = GlobalKey();
@@ -100,8 +101,13 @@ class _CreateScreenState extends State<CreateScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    l10n = AppLocalizations.of(context)!; // l10n'i burada initialize et
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -425,7 +431,7 @@ class _CreateScreenState extends State<CreateScreen> {
             prefixIcon: const Icon(Icons.search),
             suffixIcon: IconButton(
               icon: const Icon(Icons.map),
-              tooltip: 'Google Maps\'te Ara',
+              tooltip: l10n.searchInGoogleMaps,
               onPressed: _openGoogleMapsSearch,
             ),
           ),
@@ -439,7 +445,7 @@ class _CreateScreenState extends State<CreateScreen> {
         ),
         const SizedBox(height: 8),
         Text(
-          'Google Maps\'te arama yapın ve konumu seçin',
+          l10n.searchAndSelectLocation,
           style: TextStyle(
             fontSize: 12,
             color: Colors.grey[600],
@@ -452,8 +458,8 @@ class _CreateScreenState extends State<CreateScreen> {
             const SizedBox(height: 8),
             TextFormField(
               controller: _longitudeController,
-              decoration: const InputDecoration(
-                labelText: 'Enlem, Boylam',
+              decoration: InputDecoration(
+                labelText: l10n.latitudeLongitude,
                 hintText: '41.0082, 28.9784',
                 prefixIcon: Icon(Icons.location_on),
               ),
@@ -461,7 +467,7 @@ class _CreateScreenState extends State<CreateScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Format: enlem, boylam (örn: 41.0082, 28.9784)',
+              l10n.coordinateFormat,
               style: TextStyle(
                 fontSize: 11,
                 color: Colors.grey[600],
@@ -493,8 +499,8 @@ class _CreateScreenState extends State<CreateScreen> {
       // Kullanıcıya bilgi ver
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Google Maps\'te konumu seçtikten sonra URL\'yi kopyalayıp buraya yapıştırın'),
+          SnackBar(
+            content: Text(l10n.copyLocationUrlHint),
             duration: Duration(seconds: 4),
           ),
         );
@@ -511,15 +517,15 @@ class _CreateScreenState extends State<CreateScreen> {
   Widget _buildSocialForm() {
     return TextFormField(
       controller: _profileUrlController,
-      decoration: const InputDecoration(
-        labelText: 'Profil URL',
+      decoration: InputDecoration(
+        labelText: l10n.profileURL,
         hintText: 'https://instagram.com/username',
         prefixIcon: Icon(Icons.share),
       ),
       keyboardType: TextInputType.url,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Profil URL gerekli';
+          return l10n.profileUrlRequired;
         }
         return null;
       },
@@ -670,7 +676,7 @@ class _CreateScreenState extends State<CreateScreen> {
               final lon = double.parse(coords[1].trim());
               qrData = QRHelper.formatLocationQR(latitude: lat, longitude: lon);
             } else {
-              throw FormatException('Geçersiz format');
+              throw FormatException(l10n.invalidFormat);
             }
           } catch (e) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -729,7 +735,7 @@ class _CreateScreenState extends State<CreateScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Kayıt hatası: $e')),
+          SnackBar(content: Text('${l10n.saveError}: $e')),
         );
       }
     }
@@ -830,8 +836,8 @@ class _CreateScreenState extends State<CreateScreen> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      _buildColorTypeButton('solid', Icons.palette, 'Solid'),
-                      _buildColorTypeButton('gradient', Icons.gradient, 'Gradient'),
+                      _buildColorTypeButton('solid', Icons.palette, l10n.plainColor),
+                      _buildColorTypeButton('gradient', Icons.gradient, l10n.gradient),
                     ],
                   ),
                 ),
@@ -1295,7 +1301,7 @@ class _CreateScreenState extends State<CreateScreen> {
     final dotColor = isDark ? Colors.white70 : Colors.grey.shade800;
     
     if (shapeType == 'circle') {
-      // Circle pattern preview
+      // Circle pattern preview - Tam yuvarlak
       return SizedBox(
         width: 40,
         height: 24,
@@ -1303,8 +1309,8 @@ class _CreateScreenState extends State<CreateScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: List.generate(4, (i) => 
             Container(
-              width: 5,
-              height: 5,
+              width: 6,
+              height: 6,
               decoration: BoxDecoration(
                 color: dotColor,
                 shape: BoxShape.circle,
@@ -1314,7 +1320,7 @@ class _CreateScreenState extends State<CreateScreen> {
         ),
       );
     } else if (shapeType == 'rounded') {
-      // Rounded pattern preview
+      // Rounded pattern preview - Yumuşak köşeler (belirgin fark için)
       return SizedBox(
         width: 40,
         height: 24,
@@ -1322,18 +1328,18 @@ class _CreateScreenState extends State<CreateScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: List.generate(4, (i) => 
             Container(
-              width: 5,
-              height: 5,
+              width: 6,
+              height: 6,
               decoration: BoxDecoration(
                 color: dotColor,
-                borderRadius: BorderRadius.circular(1.5), // Yumuşak köşeler
+                borderRadius: BorderRadius.circular(3), // Daha belirgin yumuşak köşeler
               ),
             ),
           ),
         ),
       );
     } else {
-      // Square pattern preview (default)
+      // Square pattern preview - Keskin köşeler
       return SizedBox(
         width: 40,
         height: 24,
@@ -1341,11 +1347,12 @@ class _CreateScreenState extends State<CreateScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: List.generate(4, (i) => 
             Container(
-              width: 5,
-              height: 5,
+              width: 6,
+              height: 6,
               decoration: BoxDecoration(
                 color: dotColor,
                 shape: BoxShape.rectangle,
+                // Hiç borderRadius yok - tam kare
               ),
             ),
           ),

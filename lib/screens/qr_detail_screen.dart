@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import '../models/qr_type.dart';
 import '../services/qr_helper.dart';
 import '../core/constants/app_colors.dart';
@@ -11,16 +12,19 @@ class QRDetailScreen extends StatelessWidget {
   final String content;
   final QRType type;
   final bool isScanned;
+  final Uint8List? qrImage; // Özelleştirilmiş QR image
 
   const QRDetailScreen({
     super.key,
     required this.content,
     required this.type,
     this.isScanned = false,
+    this.qrImage, // Opsiyonel - varsa tasarımlı QR'ı göster
   });
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(_getTitle()),
@@ -42,9 +46,11 @@ class QRDetailScreen extends StatelessWidget {
           children: [
             _buildTypeCard(context),
             const SizedBox(height: 16),
-            _buildContentCard(context),
+            _buildQRPreview(context),
+            const SizedBox(height: 16),
+            _buildContentCard(context, l10n),
             const SizedBox(height: 24),
-            _buildActionButtons(context),
+            _buildActionButtons(context, l10n),
           ],
         ),
       ),
@@ -139,7 +145,35 @@ class QRDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContentCard(BuildContext context) {
+  Widget _buildQRPreview(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Center(
+          child: qrImage != null
+              // Özelleştirilmiş QR varsa göster
+              ? Image.memory(
+                  qrImage!,
+                  width: 250,
+                  height: 250,
+                  fit: BoxFit.contain,
+                )
+              // Yoksa basit QR oluştur
+              : QrImageView(
+                  data: content,
+                  version: QrVersions.auto,
+                  size: 250.0,
+                  backgroundColor: Colors.transparent,
+                  eyeStyle: const QrEyeStyle(color: Colors.white),
+                  dataModuleStyle: const QrDataModuleStyle(color: Colors.white),
+                  errorCorrectionLevel: QrErrorCorrectLevel.H,
+                ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContentCard(BuildContext context, AppLocalizations l10n) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -147,27 +181,27 @@ class QRDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'İçerik',
+              l10n.content,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 12),
-            _buildContentDisplay(context),
+            _buildContentDisplay(context, l10n),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildContentDisplay(BuildContext context) {
+  Widget _buildContentDisplay(BuildContext context, AppLocalizations l10n) {
     if (type == QRType.wifi) {
       final wifiData = QRHelper.parseWiFiQR(content);
       if (wifiData != null) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildInfoRow('Ağ Adı', wifiData['ssid'] ?? ''),
-            _buildInfoRow('Şifre', wifiData['password'] ?? ''),
-            _buildInfoRow('Güvenlik', wifiData['security'] ?? ''),
+            _buildInfoRow(l10n, l10n.networkName, wifiData['ssid'] ?? ''),
+            _buildInfoRow(l10n, l10n.password, wifiData['password'] ?? ''),
+            _buildInfoRow(l10n, l10n.security, wifiData['security'] ?? ''),
           ],
         );
       }
@@ -177,8 +211,8 @@ class QRDetailScreen extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildInfoRow('Enlem', locationData['latitude'] ?? ''),
-            _buildInfoRow('Boylam', locationData['longitude'] ?? ''),
+            _buildInfoRow(l10n, l10n.latitude, locationData['latitude'] ?? ''),
+            _buildInfoRow(l10n, l10n.longitude, locationData['longitude'] ?? ''),
           ],
         );
       }
@@ -190,7 +224,7 @@ class QRDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoRow(String label, String value) {
+Widget _buildInfoRow(AppLocalizations l10n, String label, String value) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Row(
@@ -211,7 +245,7 @@ class QRDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildActionButtons(BuildContext context) {
+  Widget _buildActionButtons(BuildContext context, AppLocalizations l10n) {
     final buttons = <Widget>[];
 
     switch (type) {
@@ -220,8 +254,9 @@ class QRDetailScreen extends StatelessWidget {
         buttons.add(
           _buildActionButton(
             context,
+            l10n,
             icon: Icons.open_in_browser,
-            label: 'Tarayıcıda Aç',
+            label: l10n.openInBrowser,
             onPressed: () => _openURL(context),
           ),
         );
@@ -230,8 +265,9 @@ class QRDetailScreen extends StatelessWidget {
         buttons.add(
           _buildActionButton(
             context,
+            l10n,
             icon: Icons.wifi,
-            label: 'WiFi Ayarlarına Git',
+            label: l10n.goToWiFiSettings,
             onPressed: () => _openWiFiSettings(context),
           ),
         );
@@ -240,15 +276,17 @@ class QRDetailScreen extends StatelessWidget {
         buttons.addAll([
           _buildActionButton(
             context,
+            l10n,
             icon: Icons.call,
-            label: 'Ara',
+            label: l10n.call,
             onPressed: () => _makeCall(context),
           ),
           const SizedBox(height: 12),
           _buildActionButton(
             context,
+            l10n,
             icon: Icons.message,
-            label: 'Mesaj Gönder',
+            label: l10n.sendMessage,
             onPressed: () => _sendSMS(context),
           ),
         ]);
@@ -257,6 +295,7 @@ class QRDetailScreen extends StatelessWidget {
         buttons.add(
           _buildActionButton(
             context,
+            l10n,
             icon: Icons.email,
             label: 'E-posta Gönder',
             onPressed: () => _sendEmail(context),
@@ -267,8 +306,9 @@ class QRDetailScreen extends StatelessWidget {
         buttons.add(
           _buildActionButton(
             context,
+            l10n,
             icon: Icons.message,
-            label: 'Mesaj Gönder',
+            label: l10n.sendMessage,
             onPressed: () => _sendSMS(context),
           ),
         );
@@ -277,8 +317,9 @@ class QRDetailScreen extends StatelessWidget {
         buttons.add(
           _buildActionButton(
             context,
+            l10n,
             icon: Icons.map,
-            label: 'Haritada Aç',
+            label: l10n.openInMap,
             onPressed: () => _openMap(context),
           ),
         );
@@ -294,7 +335,8 @@ class QRDetailScreen extends StatelessWidget {
   }
 
   Widget _buildActionButton(
-    BuildContext context, {
+    BuildContext context,
+    AppLocalizations l10n, {
     required IconData icon,
     required String label,
     required VoidCallback onPressed,
@@ -317,13 +359,15 @@ class QRDetailScreen extends StatelessWidget {
     );
   }
 
-  void _share(BuildContext context) {
+  Future<void> _share(BuildContext context) async {
     // ignore: deprecated_member_use
-    Share.share(
-      content,
-      subject: 'QR Kod - ${_getTitle()}',
+    await SharePlus.instance.share(
+      ShareParams(
+        text: content,
+        subject: 'QR Kod - ${_getTitle()}',
+      ),
     );
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('QR kod içeriği paylaşıldı'),
@@ -347,10 +391,11 @@ class QRDetailScreen extends StatelessWidget {
   }
 
   Future<void> _openWiFiSettings(BuildContext context) async {
+    final l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Lütfen WiFi ayarlarından manuel olarak bağlanın'),
-        duration: Duration(seconds: 3),
+      SnackBar(
+        content: Text(l10n.connectToWiFiManually),
+        duration: const Duration(seconds: 3),
       ),
     );
   }

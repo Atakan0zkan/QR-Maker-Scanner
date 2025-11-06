@@ -40,7 +40,6 @@
   "message": "Message",
   "latitude": "Latitude",
   "longitude": "Longitude",
-  "profileURL": "Profile URL",
   "generate": "Generate",
   "save": "Save",
   "share": "Share",
@@ -52,7 +51,6 @@
   "connectToWiFi": "Connect to WiFi",
   "openInMaps": "Open in Maps",
   "call": "Call",
-  "sendMessage": "Send Message",
   "sendEmail": "Send Email",
   "general": "General",
   "notifications": "Notifications",
@@ -112,7 +110,7 @@
   "@deleteMultipleMessage": {
     "placeholders": {
       "count": {
-        "type": "int"
+        "type": "String"
       }
     }
   },
@@ -214,7 +212,7 @@
   "@scanHistoryDesc": {
     "placeholders": {
       "count": {
-        "type": "int"
+        "type": "String"
       }
     }
   },
@@ -222,7 +220,7 @@
   "@generateHistoryDesc": {
     "placeholders": {
       "count": {
-        "type": "int"
+        "type": "String"
       }
     }
   },
@@ -253,5 +251,47 @@
   "firstEvent": "First Event",
   "lastEvent": "Last Event",
   "clearAnalytics": "Clear Analytics",
-  "analyticsCleared": "Analytics data cleared"
+  "analyticsCleared": "Analytics data cleared",
+  "feedbackSent": "✅ Feedback sent!",
+  "content": "Content",
+  "networkName": "Network Name",
+  "goToWiFiSettings": "Go to WiFi Settings",
+  "connectToWiFiManually": "Please connect manually from WiFi settings",
+  "searchInGoogleMaps": "Search in Google Maps",
+  "searchAndSelectLocation": "Search in Google Maps and select location",
+  "latitudeLongitude": "Latitude, Longitude",
+  "coordinateFormat": "Format: latitude, longitude (e.g: 41.0082, 28.9784)",
+  "profileURL": "Profile URL",
+  "copyLocationUrlHint": "Copy URL after selecting location in Google Maps and paste here",
+  "profileUrlRequired": "Profile URL required",
+  "invalidFormat": "Invalid format",
+  "saveError": "Save error",
+  "openInMap": "Open in Map",
+  "plainColor": "Plain Color",
+  "security": "Security",
+  "sendMessage": "Send Message",
+  "tosSection1Title": "1. Acceptance",
+  "tosSection1Content": "By using the QR Scanner app, you agree to these terms of service. If you do not agree to these terms, please do not use the app.",
+  "tosSection2Title": "2. License",
+  "tosSection2Content": "You are granted a limited, non-transferable, non-exclusive license to use the QR Scanner app for personal, non-commercial use.",
+  "tosSection3Title": "3. Terms of Use",
+  "tosSection3Content": "When using the app:\n\n• You will not create QR codes for illegal content\n• You will not violate the rights of others\n• You will not use the app maliciously\n• You will not share spam or harmful content",
+  "tosSection4Title": "4. Disclaimer",
+  "tosSection4Content": "The app is provided \"as is\". We are not responsible for any damages that may arise from the content or use of QR codes.\n\nMake sure the QR codes you scan are safe. Be careful with QR codes from unknown sources.",
+  "tosSection5Title": "5. Content Responsibility",
+  "tosSection5Content": "You are solely responsible for the content of the QR codes you create and scan. Do not create illegal or harmful content.",
+  "tosSection6Title": "6. Service Changes",
+  "tosSection6Content": "We reserve the right to change the app's features, content, or availability without prior notice.",
+  "tosSection7Title": "7. Account Suspension",
+  "tosSection7Content": "We reserve the right to suspend or terminate your access to the app if you violate these terms.",
+  "tosSection8Title": "8. Intellectual Property",
+  "tosSection8Content": "All content, design, and code of the app are protected by copyright. Unauthorized copying, distribution, or modification is prohibited.",
+  "tosSection9Title": "9. Third-Party Links",
+  "tosSection9Content": "The app may contain links to third-party websites or services. We are not responsible for the content or privacy practices of these sites.",
+  "tosSection10Title": "10. Warranty Disclaimer",
+  "tosSection10Content": "The app is provided without any warranty. We do not guarantee that it will operate uninterrupted or error-free.",
+  "tosSection11Title": "11. Changes to Terms",
+  "tosSection11Content": "We reserve the right to change these terms of service at any time. Significant changes will be announced within the app.",
+  "tosSection12Title": "12. Contact",
+  "tosSection12Content": "For questions about these terms of service, please contact us.\n\nLast Updated: October 10, 2025"
 }

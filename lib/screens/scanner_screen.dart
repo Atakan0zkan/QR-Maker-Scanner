@@ -323,7 +323,7 @@ class _ScannerScreenState extends State<ScannerScreen>
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 32),
                     child: Text(
-                      'QR kod taramak için kamera erişimine izin vermeniz gerekiyor',
+                      l10n.cameraPermissionMessage,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),

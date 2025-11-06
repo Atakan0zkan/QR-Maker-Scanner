@@ -15,85 +15,52 @@ class TermsOfServiceScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         children: [
           _buildSection(
-            title: '1. Kabul',
-            content: '''
-QR Scanner uygulamasını kullanarak bu hizmet şartlarını kabul etmiş sayılırsınız. Şartları kabul etmiyorsanız, lütfen uygulamayı kullanmayın.
-''',
+            title: AppLocalizations.of(context)!.tosSection1Title,
+            content: AppLocalizations.of(context)!.tosSection1Content,
           ),
           _buildSection(
-            title: '2. Lisans',
-            content: '''
-Size, QR Scanner uygulamasını kişisel, ticari olmayan kullanım için sınırlı, devredilemez, münhasır olmayan bir lisans verilmiştir.
-''',
+            title: AppLocalizations.of(context)!.tosSection2Title,
+            content: AppLocalizations.of(context)!.tosSection2Content,
           ),
           _buildSection(
-            title: '3. Kullanım Koşulları',
-            content: '''
-Uygulamayı kullanırken:
-
-• Yasa dışı içerikler için QR kod oluşturmayacaksınız
-• Başkalarının haklarını ihlal etmeyeceksiniz
-• Uygulamayı kötü amaçlı kullanmayacaksınız
-• Spam veya zararlı içerik paylaşmayacaksınız
-''',
+            title: AppLocalizations.of(context)!.tosSection3Title,
+            content: AppLocalizations.of(context)!.tosSection3Content,
           ),
           _buildSection(
-            title: '4. Sorumluluk Reddi',
-            content: '''
-Uygulama "olduğu gibi" sunulmaktadır. QR kodların içeriğinden veya kullanımından doğabilecek zararlardan sorumlu değiliz.
-
-Taradığınız QR kodların güvenli olduğundan emin olun. Bilinmeyen kaynaklardan gelen QR kodlara dikkat edin.
-''',
+            title: AppLocalizations.of(context)!.tosSection4Title,
+            content: AppLocalizations.of(context)!.tosSection4Content,
           ),
           _buildSection(
-            title: '5. İçerik Sorumluluğu',
-            content: '''
-Oluşturduğunuz ve taradığınız QR kodların içeriğinden tamamen siz sorumlusunuz. Yasalara aykırı veya zararlı içerik oluşturmayın.
-''',
+            title: AppLocalizations.of(context)!.tosSection5Title,
+            content: AppLocalizations.of(context)!.tosSection5Content,
           ),
           _buildSection(
-            title: '6. Hizmet Değişiklikleri',
-            content: '''
-Uygulamanın özelliklerini, içeriğini veya kullanılabilirliğini önceden haber vermeksizin değiştirme hakkını saklı tutarız.
-''',
+            title: AppLocalizations.of(context)!.tosSection6Title,
+_            content: AppLocalizations.of(context)!.tosSection6Content,
           ),
           _buildSection(
-            title: '7. Hesap Askıya Alma',
-            content: '''
-Bu şartları ihlal etmeniz durumunda, uygulamaya erişiminizi askıya alma veya sonlandırma hakkımız vardır.
-''',
+            title: AppLocalizations.of(context)!.tosSection7Title,
+            content: AppLocalizations.of(context)!.tosSection7Content,
           ),
           _buildSection(
-            title: '8. Fikri Mülkiyet',
-            content: '''
-Uygulamanın tüm içeriği, tasarımı ve kodu telif hakkı ile korunmaktadır. İzinsiz kopyalama, dağıtma veya değiştirme yasaktır.
-''',
+            title: AppLocalizations.of(context)!.tosSection8Title,
+            content: AppLocalizations.of(context)!.tosSection8Content,
           ),
           _buildSection(
-            title: '9. Üçüncü Taraf Bağlantılar',
-            content: '''
-Uygulama, üçüncü taraf web sitelerine veya hizmetlere bağlantılar içerebilir. Bu sitelerin içeriğinden veya gizlilik uygulamalarından sorumlu değiliz.
-''',
+            title: AppLocalizations.of(context)!.tosSection9Title,
+            content: AppLocalizations.of(context)!.tosSection9Content,
           ),
           _buildSection(
-            title: '10. Garanti Reddi',
-            content: '''
-Uygulama, hiçbir garanti olmaksızın sunulmaktadır. Kesintisiz veya hatasız çalışacağını garanti etmiyoruz.
-''',
+            title: AppLocalizations.of(context)!.tosSection10Title,
+            content: AppLocalizations.of(context)!.tosSection10Content,
           ),
           _buildSection(
-            title: '11. Şartlarda Değişiklik',
-            content: '''
-Bu hizmet şartlarını istediğimiz zaman değiştirme hakkını saklı tutarız. Önemli değişiklikler uygulama içinde duyurulacaktır.
-''',
+            title: AppLocalizations.of(context)!.tosSection11Title,
+            content: AppLocalizations.of(context)!.tosSection11Content,
           ),
           _buildSection(
-            title: '12. İletişim',
-            content: '''
-Hizmet şartları ile ilgili sorularınız için bizimle iletişime geçebilirsiniz.
-
-Son Güncelleme: 10 Ekim 2025
-''',
+            title: AppLocalizations.of(context)!.tosSection12Title,
+            content: AppLocalizations.of(context)!.tosSection12Content,
           ),
           const SizedBox(height: 32),
         ],
