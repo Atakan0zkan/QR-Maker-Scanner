@@ -9,6 +9,7 @@ workflows:
         - qr_scanner_keystore
       groups:
         - google_play # Google Play Console credentials
+        - signing     # Keystore passwords and alias
       vars:
         PACKAGE_NAME: "com.aozka.qrscannerapp"
       flutter: stable
@@ -129,6 +130,7 @@ workflows:
       groups:
         - google_play
         - app_store_connect
+        - signing
       vars:
         PACKAGE_NAME: "com.aozka.qrscannerapp"
         APP_ID: 1234567890
