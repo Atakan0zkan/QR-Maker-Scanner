@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../services/analytics_service.dart';
+import '../core/constants/app_constants.dart';
+import '../services/firebase_analytics_service.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  static const String _themeKey = 'theme_mode';
   ThemeMode _themeMode = ThemeMode.dark; // Default: Dark theme
 
   ThemeMode get themeMode => _themeMode;
@@ -14,7 +14,7 @@ class ThemeProvider extends ChangeNotifier {
 
   Future<void> _loadTheme() async {
     final prefs = await SharedPreferences.getInstance();
-    final themeModeIndex = prefs.getInt(_themeKey) ?? ThemeMode.dark.index; // Default: Dark
+    final themeModeIndex = prefs.getInt(AppConstants.themeKey) ?? ThemeMode.dark.index; // Default: Dark
     _themeMode = ThemeMode.values[themeModeIndex];
     notifyListeners();
   }
@@ -24,18 +24,13 @@ class ThemeProvider extends ChangeNotifier {
     notifyListeners();
     
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_themeKey, mode.index);
+    await prefs.setInt(AppConstants.themeKey, mode.index);
     
     // Log analytics
-    AnalyticsService.logEvent('theme_changed', {
+    FirebaseAnalyticsService.logEvent(name: AppConstants.themeChanged, parameters: {
       'theme': mode.toString(),
     });
   }
 
-  bool isDarkMode(BuildContext context) {
-    if (_themeMode == ThemeMode.system) {
-      return MediaQuery.of(context).platformBrightness == Brightness.dark;
-    }
-    return _themeMode == ThemeMode.dark;
-  }
+
 }

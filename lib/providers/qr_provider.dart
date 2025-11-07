@@ -4,7 +4,8 @@ import '../models/scanned_qr.dart';
 import '../models/generated_qr.dart';
 import '../models/qr_type.dart';
 import '../services/database_service.dart';
-import '../services/analytics_service.dart';
+import '../core/constants/app_constants.dart';
+import '../services/firebase_analytics_service.dart';
 
 class QRProvider extends ChangeNotifier {
   List<ScannedQR> _scannedQRs = [];
@@ -42,7 +43,7 @@ class QRProvider extends ChangeNotifier {
     if (success) {
       loadData();
       // Log analytics
-      AnalyticsService.logEvent('qr_scanned', {
+      FirebaseAnalyticsService.logEvent(name: AppConstants.qrScanned, parameters: {
         'type': type.toString(),
         'is_barcode': isBarcode,
       });
@@ -71,7 +72,7 @@ class QRProvider extends ChangeNotifier {
     if (success) {
       loadData();
       // Log analytics
-      AnalyticsService.logEvent('qr_generated', {
+      FirebaseAnalyticsService.logEvent(name: AppConstants.qrGenerated, parameters: {
         'type': type.toString(),
         'has_title': title != null,
       });

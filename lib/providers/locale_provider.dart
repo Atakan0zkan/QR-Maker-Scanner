@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:ui' as ui;
-import '../services/analytics_service.dart';
+import '../core/constants/app_constants.dart';
+import '../services/firebase_analytics_service.dart';
 
 class LocaleProvider extends ChangeNotifier {
-  static const String _localeKey = 'locale';
   Locale? _locale;
 
   Locale? get locale => _locale;
@@ -29,7 +29,7 @@ class LocaleProvider extends ChangeNotifier {
 
   Future<void> _loadLocale() async {
     final prefs = await SharedPreferences.getInstance();
-    final savedLanguageCode = prefs.getString(_localeKey);
+    final savedLanguageCode = prefs.getString(AppConstants.localeKey);
     
     if (savedLanguageCode != null && supportedLanguages.contains(savedLanguageCode)) {
       // Kullanıcı daha önce bir dil seçmiş, onu kullan
@@ -59,10 +59,10 @@ class LocaleProvider extends ChangeNotifier {
     notifyListeners();
     
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_localeKey, locale.languageCode);
+    await prefs.setString(AppConstants.localeKey, locale.languageCode);
     
     // Log analytics
-    AnalyticsService.logEvent('language_changed', {
+    FirebaseAnalyticsService.logEvent(name: AppConstants.languageChanged, parameters: {
       'language': locale.languageCode,
     });
   }

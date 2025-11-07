@@ -5,6 +5,8 @@ import '../models/scanned_qr.dart';
 import '../models/generated_qr.dart';
 import '../models/qr_type.dart';
 
+import '../core/constants/app_constants.dart';
+
 class DatabaseService {
   static const String scannedBoxName = 'scanned_qr';
   static const String generatedBoxName = 'generated_qr';
@@ -18,12 +20,12 @@ class DatabaseService {
     Hive.registerAdapter(GeneratedQRAdapter());
     
     // Open boxes
-    await Hive.openBox<ScannedQR>(scannedBoxName);
-    await Hive.openBox<GeneratedQR>(generatedBoxName);
+    await Hive.openBox<ScannedQR>(AppConstants.scannedQrBox);
+    await Hive.openBox<GeneratedQR>(AppConstants.generatedQrBox);
   }
 
   // Scanned QR operations
-  static Box<ScannedQR> get scannedBox => Hive.box<ScannedQR>(scannedBoxName);
+  static Box<ScannedQR> get scannedBox => Hive.box<ScannedQR>(AppConstants.scannedQrBox);
 
   static Future<bool> saveScannedQR(ScannedQR qr) async {
     try {
@@ -61,7 +63,7 @@ class DatabaseService {
   }
 
   // Generated QR operations
-  static Box<GeneratedQR> get generatedBox => Hive.box<GeneratedQR>(generatedBoxName);
+  static Box<GeneratedQR> get generatedBox => Hive.box<GeneratedQR>(AppConstants.generatedQrBox);
 
   static Future<bool> saveGeneratedQR(GeneratedQR qr) async {
     try {

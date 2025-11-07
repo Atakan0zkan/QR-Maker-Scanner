@@ -42,10 +42,9 @@ void main() async {
   
   // Initialize non-critical services lazily (don't wait)
   AdService.initialize().ignore();
-  AnalyticsService.init().ignore();
   
   // Log app opened to Firebase only (single source)
-  FirebaseAnalyticsService.logEvent(name: 'app_opened').ignore();
+  FirebaseAnalyticsService.logEvent(name: AppConstants.appOpened).ignore();
   
   runApp(const MyApp());
 }
@@ -77,9 +76,9 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
               title: 'QR Scanner',
               debugShowCheckedModeBanner: false,
-              theme: AppTheme.darkTheme,
+              theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
-              themeMode: ThemeMode.dark,
+              themeMode: themeProvider.themeMode,
               locale: localeProvider.locale,
               localizationsDelegates: const [
                 AppLocalizations.delegate,
