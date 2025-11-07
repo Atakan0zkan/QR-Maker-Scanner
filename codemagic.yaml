@@ -24,6 +24,9 @@ workflows:
       - name: Flutter analyze
         script: | 
           flutter analyze
+      - name: Flutter test
+        script: |
+          flutter test -j 1
       - name: Build APK
         script: | 
           flutter build apk --release
@@ -34,7 +37,6 @@ workflows:
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/*.aab
       - build/**/outputs/**/mapping.txt
-      - flutter_drive.log
     publishing:
       email:
         recipients:
@@ -76,14 +78,15 @@ workflows:
       - name: Flutter analyze
         script: | 
           flutter analyze
+      - name: Flutter test
+        script: |
+          flutter test -j 1
       - name: Build ipa
         script: | 
-          flutter build ipa --release \
-            --export-options-plist=/Users/builder/export_options.plist
+          flutter build ipa --release
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
-      - flutter_drive.log
     publishing:
       email:
         recipients:
@@ -145,6 +148,9 @@ workflows:
       - name: Flutter analyze
         script: | 
           flutter analyze
+      - name: Flutter test
+        script: |
+          flutter test -j 1
       - name: Build Android APK
         script: | 
           flutter build apk --release
@@ -153,15 +159,13 @@ workflows:
           flutter build appbundle --release
       - name: Build iOS
         script: | 
-          flutter build ipa --release \
-            --export-options-plist=/Users/builder/export_options.plist
+          flutter build ipa --release
     artifacts:
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/*.aab
       - build/**/outputs/**/mapping.txt
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
-      - flutter_drive.log
     publishing:
       email:
         recipients:

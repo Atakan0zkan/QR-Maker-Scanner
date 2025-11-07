@@ -8,8 +8,7 @@ import '../models/qr_type.dart';
 import '../core/constants/app_constants.dart';
 
 class DatabaseService {
-  static const String scannedBoxName = 'scanned_qr';
-  static const String generatedBoxName = 'generated_qr';
+  // Box names centralized in AppConstants.
 
   static Future<void> init() async {
     await Hive.initFlutter();

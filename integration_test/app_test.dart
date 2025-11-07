@@ -16,8 +16,8 @@ void main() {
 
       // A simple check to ensure the main screen is loaded.
       // We can check for a widget that is expected to be on the main screen.
-      // For example, a BottomNavigationBar.
-      expect(find.byType(BottomNavigationBar), findsOneWidget);
+      // For example, a NavigationBar.
+      expect(find.byType(NavigationBar), findsOneWidget);
     });
   });
 }
