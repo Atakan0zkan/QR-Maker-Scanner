@@ -12,8 +12,8 @@ import 'providers/locale_provider.dart';
 import 'providers/qr_provider.dart';
 import 'services/database_service.dart';
 import 'services/ad_service.dart';
-import 'services/analytics_service.dart';
 import 'services/firebase_analytics_service.dart';
+import 'core/constants/app_constants.dart';
 import 'firebase_options.dart';
 import 'screens/main_screen.dart';
 
