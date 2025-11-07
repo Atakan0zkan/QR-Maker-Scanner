@@ -368,6 +368,7 @@ Widget _buildInfoRow(AppLocalizations l10n, String label, String value) {
       ),
     );
 
+    if (!context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('QR kod içeriği paylaşıldı'),
