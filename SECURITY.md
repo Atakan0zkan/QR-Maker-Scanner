@@ -156,7 +156,6 @@ dart analyze
 - **Note**: Reklam görünmese bile uygulama tam özellikli çalışır
 
 ### No Other Services
-- ✅ No analytics (hiçbir analitik servisi yok)
 - ✅ No crash reporting (crash raporlama yok)
 - ✅ No cloud storage (bulut depolama yok)
 - ✅ No user accounts (kullanıcı hesabı yok)

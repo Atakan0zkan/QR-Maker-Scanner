@@ -6,6 +6,7 @@ import '../services/firebase_analytics_service.dart';
 
 class LocaleProvider extends ChangeNotifier {
   Locale? _locale;
+  bool _disposed = false;
 
   Locale? get locale => _locale;
 
@@ -25,6 +26,17 @@ class LocaleProvider extends ChangeNotifier {
 
   LocaleProvider() {
     _loadLocale();
+  }
+
+  void _notifySafe() {
+    if (_disposed) return;
+    notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
   }
 
   Future<void> _loadLocale() async {
@@ -47,7 +59,7 @@ class LocaleProvider extends ChangeNotifier {
       }
     }
     
-    notifyListeners();
+    _notifySafe();
   }
 
   Future<void> setLocale(Locale locale) async {
@@ -56,7 +68,7 @@ class LocaleProvider extends ChangeNotifier {
     }
     
     _locale = locale;
-    notifyListeners();
+    _notifySafe();
     
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(AppConstants.localeKey, locale.languageCode);

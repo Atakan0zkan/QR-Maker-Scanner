@@ -1,13 +1,13 @@
-# 📱 QR Scanner & Generator
+# QR Scanner & Generator
 
-[![Flutter](https://img.shields.io/badge/Flutter-3.9+-02569B?logo=flutter)](https://flutter.dev)
+[![Flutter](https://img.shields.io/badge/Flutter-3.38+-02569B?logo=flutter)](https://flutter.dev)
 [![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-blue)](https://github.com/Atakan0zkan/QR-Maker-Scanner)
 [![Version](https://img.shields.io/badge/Version-1.2.2-green)](https://github.com/Atakan0zkan/QR-Maker-Scanner/releases)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
 Hızlı, güvenilir ve kullanıcı dostu QR kod tarayıcı ve oluşturucu. Production-ready, 60% daha hızlı başlangıç, Firebase Analytics entegreli!
 
-> **⚠️ iOS Developers:** AdMob iOS App ID setup required before App Store submission. See [PRODUCTION_CHECKLIST.md](PRODUCTION_CHECKLIST.md)
+> **iOS Developers:** AdMob iOS App ID setup required before App Store submission. See [PRODUCTION_CHECKLIST.md](PRODUCTION_CHECKLIST.md)
 
 ## ✨ Özellikler
 
@@ -42,8 +42,8 @@ flutter run
 ## 📦 Teknolojiler
 
 ### Core
-- **Flutter** 3.35.5 (Dart 3.9.2+)
-- **QR Scanning:** `mobile_scanner` ^7.1.2
+- **Flutter** 3.38.0 (Dart 3.10.0)
+- **QR Scanning:** `mobile_scanner` ^7.1.3
 - **QR Generation:** `qr_flutter` ^4.1.0 + `pretty_qr_code` ^3.5.0
 - **Database:** `hive` ^2.2.3 + `hive_flutter` ^1.1.0
 - **State Management:** `provider` ^6.1.2
@@ -51,10 +51,10 @@ flutter run
 ### Features
 - **Localization:** `intl` ^0.20.2 (10 diller)
 - **Ads:** `google_mobile_ads` ^6.0.0 (AdMob production-ready)
-- **Analytics:** `firebase_analytics` ^11.3.40 + `firebase_core` ^3.8.1
+- **Analytics:** `firebase_analytics` ^12.0.4 + `firebase_core` ^4.2.1
 - **Feedback:** `feedback` ^3.1.0 (Bug reporting)
-- **Device Info:** `device_info_plus` ^10.1.2
-- **App Info:** `package_info_plus` ^8.3.1
+- **Device Info:** `device_info_plus` ^12.2.0
+- **App Info:** `package_info_plus` ^9.0.0
 
 ### Utils
 - **Sharing:** `share_plus` ^12.0.0
@@ -65,7 +65,7 @@ flutter run
 ### Code Quality
 - **Code Generation:** `build_runner`, `hive_generator`
 - **Logging:** `dart:developer` (production-safe)
-- **Analytics:** Firebase Analytics (anonymous usage data) + Local Hive analytics
+- **Analytics:** Firebase Analytics (anonymous usage data)
 
 ## 🏗️ Build
 
@@ -134,7 +134,6 @@ lib/
 ├── services/                    # İş mantığı
 │   ├── database_service.dart    # Hive operations
 │   ├── ad_service.dart          # AdMob (Production ready)
-│   ├── analytics_service.dart   # Local analytics
 │   ├── firebase_analytics_service.dart  # Firebase Analytics
 │   ├── feedback_service.dart    # Bug reporting
 │   └── qr_helper.dart           # QR utilities
@@ -143,7 +142,7 @@ lib/
     └── constants/
 ```
 
-## 🐛 Hata Bildirimi
+## Hata Bildirimi
 
 Uygulama içinden **Settings → Bug Report** ile:
 - 📸 Screenshot çek ve işaretle

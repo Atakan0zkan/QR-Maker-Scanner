@@ -19,6 +19,7 @@
 - [x] AdMob App ID: Production ID configured
 - [x] AdMob Banner ID: Production ID configured
 - [x] Google Services Plugin: Active
+- [x] NDK version pinned: `ndkVersion = 28.2.13676358` (android/app/build.gradle.kts)
 
 ### 3. ✅ Permissions
 - [x] Android: CAMERA, INTERNET

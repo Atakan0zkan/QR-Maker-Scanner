@@ -49,6 +49,7 @@ class _ScannerScreenState extends State<ScannerScreen>
 
   Future<void> _checkPermission() async {
     final hasPermission = await PermissionService.checkCameraPermission();
+    if (!mounted) return;
     setState(() {
       _hasPermission = hasPermission;
     });
@@ -58,6 +59,7 @@ class _ScannerScreenState extends State<ScannerScreen>
     } else {
       final granted = await PermissionService.requestCameraPermission();
       if (granted) {
+        if (!mounted) return;
         setState(() {
           _hasPermission = true;
         });
@@ -142,6 +144,7 @@ class _ScannerScreenState extends State<ScannerScreen>
               QRDetailScreen(content: code, type: qrType, isScanned: true),
         ),
       ).then((_) {
+        if (!mounted) return;
         setState(() {
           _isProcessing = false;
         });
@@ -162,6 +165,7 @@ class _ScannerScreenState extends State<ScannerScreen>
     final l10n = AppLocalizations.of(context)!;
     try {
       await _controller?.toggleTorch();
+      if (!mounted) return;
       setState(() {
         _isTorchOn = !_isTorchOn;
       });
