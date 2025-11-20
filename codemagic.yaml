@@ -64,7 +64,7 @@ workflows:
       groups:
         - app_store_connect # App Store Connect credentials
       vars:
-        APP_ID: 6755507752 # App Store Connect App ID
+        APP_ID: 62P947Q4HZ # App Store Connect App ID
       flutter: stable
       xcode: latest
       cocoapods: default
