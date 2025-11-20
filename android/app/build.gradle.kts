@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.qrscanner.qr_scanner_app"
+    namespace = "com.aozka.qrscannerapp"
     compileSdk = 36
     ndkVersion = "28.2.13676358"
 
