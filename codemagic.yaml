@@ -62,7 +62,6 @@ workflows:
         distribution_type: app_store
         bundle_identifier: com.qrscanner.qrScannerApp
       groups:
-        - app_store_connect # App Store Connect credentials
       vars:
         APP_ID: 6755507752 # App Store Connect App ID
       flutter: stable
@@ -133,7 +132,6 @@ workflows:
         bundle_identifier: com.qrscanner.qrScannerApp
       groups:
         - google_play
-        - app_store_connect
         - signing
       vars:
         PACKAGE_NAME: "com.aozka.qrscannerapp"
