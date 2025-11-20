@@ -22,7 +22,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.qrscanner.qr_scanner_app"
+        applicationId = "com.aozka.qrscannerapp"
         minSdk = flutter.minSdkVersion
         targetSdk = 36
         versionCode = 4
