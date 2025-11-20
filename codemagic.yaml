@@ -58,11 +58,11 @@ workflows:
     environment:
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: com.aozka.qrscannerapp
+        bundle_identifier: com.qrscanner.qrScannerApp
       groups:
         - app_store_connect # App Store Connect credentials
       vars:
-        APP_ID: 1234567890 # App Store Connect App ID
+        APP_ID: 6755507752 # App Store Connect App ID
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -126,14 +126,14 @@ workflows:
         - qr_scanner_keystore
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: com.aozka.qrscannerapp
+        bundle_identifier: com.qrscanner.qrScannerApp
       groups:
         - google_play
         - app_store_connect
         - signing
       vars:
         PACKAGE_NAME: "com.aozka.qrscannerapp"
-        APP_ID: 1234567890
+        APP_ID: 6755507752
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -171,7 +171,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - your-email@example.com
+          #your-email@example.com
         notify:
           success: true
           failure: true
