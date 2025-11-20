@@ -61,7 +61,6 @@ workflows:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.qrscanner.qrScannerApp
-      groups:
       vars:
         APP_ID: 6755507752 # App Store Connect App ID
       flutter: stable
