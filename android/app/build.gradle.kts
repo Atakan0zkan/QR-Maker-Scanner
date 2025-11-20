@@ -29,6 +29,21 @@ android {
         versionName = "1.2.2"
     }
 
+    // 👇 YENİ EKLENEN KISIM: İmzalama Ayarları
+    signingConfigs {
+        create("release") {
+            // Codemagic environment değişkenlerini okur
+            val keystorePath = System.getenv("CM_KEYSTORE_PATH")
+            // Eğer Codemagic bu yolu verdiyse şifreleri de oradan al
+            if (keystorePath != null) {
+                storeFile = file(keystorePath)
+                storePassword = System.getenv("CM_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("CM_KEY_ALIAS")
+                keyPassword = System.getenv("CM_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
             // Enable code shrinking, obfuscation, and optimization
@@ -38,9 +53,15 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            
+            // 👇 GÜNCELLENEN KISIM: Doğru İmzayı Seçme Mantığı
+            // Eğer Codemagic üzerindeysek (yani keystore yolu varsa) release imzasını kullan.
+            // Yoksa (bilgisayarında test ediyorsan) debug imzasını kullan.
+            if (System.getenv("CM_KEYSTORE_PATH") != null) {
+                signingConfig = signingConfigs.getByName("release")
+            } else {
+                signingConfig = signingConfigs.getByName("debug")
+            }
         }
     }
 }
