@@ -53,6 +53,8 @@ workflows:
   # iOS Build Workflow
   ios-workflow:
     name: iOS Build
+    integrations:
+      app_store_connect: Codemagic
     max_build_duration: 60
     instance_type: mac_mini_m1
     environment:
@@ -105,6 +107,8 @@ workflows:
   # Both Platforms Workflow
   all-platforms-workflow:
     name: Build All Platforms
+    integrations:
+      app_store_connect: Codemagic
     max_build_duration: 120
     instance_type: mac_mini_m1
     triggering:
