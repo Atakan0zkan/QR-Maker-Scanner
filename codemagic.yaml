@@ -6,7 +6,7 @@ workflows:
     instance_type: mac_mini_m1
     environment:
       android_signing:
-        - qr_scanner_keystore
+        - qr_scanner_dist_cert
       groups:
         - google_play # Google Play Console credentials
         - signing     # Keystore passwords and alias
@@ -127,7 +127,7 @@ workflows:
           include: true
     environment:
       android_signing:
-        - qr_scanner_keystore
+        - qr_scanner_dist_cert
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.qrscanner.qrScannerApp
