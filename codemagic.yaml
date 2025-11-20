@@ -41,7 +41,7 @@ workflows:
     publishing:
       email:
         recipients:
-         #- your-email@example.com
+         - atakanozkan2001@gmail.com
         notify:
           success: true
           failure: true
@@ -93,7 +93,7 @@ workflows:
     publishing:
       email:
         recipients:
-          #your-email@example.com
+          - atakanozkan2001@gmail.com
         notify:
           success: true
           failure: true
@@ -175,7 +175,7 @@ workflows:
     publishing:
       email:
         recipients:
-          # atakanozkan2001@gmail.com
+           atakanozkan2001@gmail.com
         notify:
           success: true
           failure: true
