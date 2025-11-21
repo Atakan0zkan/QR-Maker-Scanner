@@ -41,7 +41,9 @@ void main() async {
   await FirebaseAnalyticsService.initialize();
   
   // Initialize non-critical services lazily (don't wait)
-  AdService.initialize().ignore();
+  AdService.initialize().then((_) {
+    AdService.loadInterstitialAd();
+  }).ignore();
   
   // Log app opened to Firebase only (single source)
   FirebaseAnalyticsService.logEvent(name: AppConstants.appOpened).ignore();

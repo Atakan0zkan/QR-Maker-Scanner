@@ -9,6 +9,7 @@ import '../widgets/permission_dialog.dart';
 import '../widgets/scanner_overlay.dart';
 import '../l10n/app_localizations.dart';
 import 'qr_detail_screen.dart';
+import '../models/qr_type.dart';
 
 class ScannerScreen extends StatefulWidget {
   const ScannerScreen({super.key});
@@ -236,7 +237,7 @@ class _ScannerScreenState extends State<ScannerScreen>
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              subtitle: Text(QRHelper.getQRTypeLabel(item['type'])),
+                              subtitle: Text(_getTypeLabel(item['type'])),
                               trailing: IconButton(
                                 icon: const Icon(Icons.delete_outline),
                                 onPressed: () {
@@ -272,6 +273,30 @@ class _ScannerScreenState extends State<ScannerScreen>
         },
       ),
     );
+  }
+
+  String _getTypeLabel(QRType type) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (type) {
+      case QRType.url:
+        return l10n.url;
+      case QRType.text:
+        return l10n.text;
+      case QRType.wifi:
+        return l10n.wifi;
+      case QRType.contact:
+        return l10n.contact;
+      case QRType.email:
+        return l10n.email;
+      case QRType.sms:
+        return l10n.sms;
+      case QRType.phone:
+        return l10n.phone;
+      case QRType.location:
+        return l10n.location;
+      case QRType.social:
+        return l10n.social;
+    }
   }
 
   @override

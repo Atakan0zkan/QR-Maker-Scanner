@@ -427,25 +427,26 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
   }
 
   String _getTypeLabel(QRType type) {
+    final l10n = AppLocalizations.of(context)!;
     switch (type) {
       case QRType.url:
-        return 'URL';
+        return l10n.url;
       case QRType.text:
-        return 'Metin';
+        return l10n.text;
       case QRType.wifi:
-        return 'WiFi';
+        return l10n.wifi;
       case QRType.contact:
-        return 'Kişi';
+        return l10n.contact;
       case QRType.email:
-        return 'E-posta';
+        return l10n.email;
       case QRType.sms:
-        return 'SMS';
+        return l10n.sms;
       case QRType.phone:
-        return 'Telefon';
+        return l10n.phone;
       case QRType.location:
-        return 'Konum';
+        return l10n.location;
       case QRType.social:
-        return 'Sosyal Medya';
+        return l10n.social;
     }
   }
 

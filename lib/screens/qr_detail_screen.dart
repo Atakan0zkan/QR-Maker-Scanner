@@ -27,7 +27,7 @@ class QRDetailScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(_getTitle()),
+        title: Text(_getTitle(context)),
         actions: [
           IconButton(
             icon: const Icon(Icons.copy),
@@ -57,26 +57,27 @@ class QRDetailScreen extends StatelessWidget {
     );
   }
 
-  String _getTitle() {
+  String _getTitle(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     switch (type) {
       case QRType.url:
-        return 'URL';
+        return l10n.url;
       case QRType.text:
-        return 'Metin';
+        return l10n.text;
       case QRType.wifi:
-        return 'WiFi';
+        return l10n.wifi;
       case QRType.contact:
-        return 'Kişi';
+        return l10n.contact;
       case QRType.email:
-        return 'E-posta';
+        return l10n.email;
       case QRType.sms:
-        return 'SMS';
+        return l10n.sms;
       case QRType.phone:
-        return 'Telefon';
+        return l10n.phone;
       case QRType.location:
-        return 'Konum';
+        return l10n.location;
       case QRType.social:
-        return 'Sosyal Medya';
+        return l10n.social;
     }
   }
 
@@ -128,7 +129,7 @@ class QRDetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    _getTitle(),
+                    _getTitle(context),
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 4),
@@ -364,7 +365,7 @@ Widget _buildInfoRow(AppLocalizations l10n, String label, String value) {
     await SharePlus.instance.share(
       ShareParams(
         text: content,
-        subject: 'QR Kod - ${_getTitle()}',
+        subject: 'QR Kod - ${_getTitle(context)}',
       ),
     );
 

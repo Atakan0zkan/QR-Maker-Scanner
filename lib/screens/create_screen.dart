@@ -12,6 +12,7 @@ import '../models/qr_type.dart';
 import '../providers/qr_provider.dart';
 import '../services/qr_helper.dart';
 import '../core/constants/app_colors.dart';
+import '../services/ad_service.dart';
 
 class CreateScreen extends StatefulWidget {
   const CreateScreen({super.key});
@@ -699,6 +700,9 @@ class _CreateScreenState extends State<CreateScreen> {
     setState(() {
       _generatedQRData = qrData;
     });
+    
+    // Show Interstitial Ad
+    AdService.showInterstitialAd();
   }
 
   Future<void> _saveQR() async {
