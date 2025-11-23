@@ -4,6 +4,8 @@ import 'scanner_screen.dart';
 import 'create_screen.dart';
 import 'history_screen.dart';
 import 'settings_screen.dart';
+import 'package:provider/provider.dart';
+import '../providers/qr_provider.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -12,8 +14,24 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    // Defer data loading to after the first frame to ensure smooth startup
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<QRProvider>().loadData();
+    });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
   final List<Widget> _screens = [
     const ScannerScreen(),

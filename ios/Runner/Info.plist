@@ -48,11 +48,6 @@
 		<!-- Camera Permission -->
 		<key>NSCameraUsageDescription</key>
 		<string>QR kodları taramak için kamera erişimine ihtiyacımız var.</string>
-		<!-- Photo Library Permission -->
-		<key>NSPhotoLibraryUsageDescription</key>
-		<string>QR kodlarını kaydetmek için fotoğraf kütüphanesine erişim gerekli.</string>
-		<key>NSPhotoLibraryAddUsageDescription</key>
-		<string>QR kodlarını fotoğraf kütüphanesine kaydetmek için izin gerekli.</string>
 		<!-- App Transport Security (Secure Configuration) -->
 		<key>NSAppTransportSecurity</key>
 		<dict>

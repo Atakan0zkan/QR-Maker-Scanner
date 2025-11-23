@@ -15,7 +15,7 @@ class QRProvider extends ChangeNotifier {
   List<GeneratedQR> get generatedQRs => _generatedQRs;
 
   QRProvider() {
-    loadData();
+    // Data loading is now handled explicitly or lazily to improve startup performance
   }
 
   void loadData() {
