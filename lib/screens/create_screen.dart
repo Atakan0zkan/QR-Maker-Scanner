@@ -462,7 +462,7 @@ class _CreateScreenState extends State<CreateScreen> {
               decoration: InputDecoration(
                 labelText: l10n.latitudeLongitude,
                 hintText: '41.0082, 28.9784',
-                prefixIcon: Icon(Icons.location_on),
+                prefixIcon: const Icon(Icons.location_on),
               ),
               keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
             ),
@@ -502,7 +502,7 @@ class _CreateScreenState extends State<CreateScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(l10n.copyLocationUrlHint),
-            duration: Duration(seconds: 4),
+            duration: const Duration(seconds: 4),
           ),
         );
       }
@@ -521,7 +521,7 @@ class _CreateScreenState extends State<CreateScreen> {
       decoration: InputDecoration(
         labelText: l10n.profileURL,
         hintText: 'https://instagram.com/username',
-        prefixIcon: Icon(Icons.share),
+        prefixIcon: const Icon(Icons.share),
       ),
       keyboardType: TextInputType.url,
       validator: (value) {
@@ -1116,7 +1116,7 @@ class _CreateScreenState extends State<CreateScreen> {
                         errorBuilder: (context, error, stackTrace) {
                           // Debug: logo yüklenemedi
                           debugPrint('Logo yüklenemedi: $logoPath - Error: $error');
-                          return Column(
+                          return const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
@@ -1124,7 +1124,7 @@ class _CreateScreenState extends State<CreateScreen> {
                                 color: Colors.red,
                                 size: 20,
                               ),
-                              const SizedBox(height: 2),
+                              SizedBox(height: 2),
                               Text(
                                 'Error',
                                 style: TextStyle(fontSize: 8, color: Colors.red),
