@@ -7,7 +7,7 @@
 
 Hızlı, güvenilir ve kullanıcı dostu QR kod tarayıcı ve oluşturucu. Production-ready, 60% daha hızlı başlangıç, Firebase Analytics entegreli!
 
-> **iOS Developers:** AdMob iOS App ID setup required before App Store submission. See [PRODUCTION_CHECKLIST.md](PRODUCTION_CHECKLIST.md)
+> **iOS Developers:** AdMob iOS App ID setup must be checked in `ios/Runner/Info.plist` before App Store submission.
 
 ## ✨ Özellikler
 
@@ -43,21 +43,21 @@ flutter run
 
 ### Core
 - **Flutter** 3.38.0 (Dart 3.10.0)
-- **QR Scanning:** `mobile_scanner` ^7.1.3
+- **QR Scanning:** `mobile_scanner` ^7.1.4
 - **QR Generation:** `qr_flutter` ^4.1.0 + `pretty_qr_code` ^3.5.0
 - **Database:** `hive` ^2.2.3 + `hive_flutter` ^1.1.0
 - **State Management:** `provider` ^6.1.2
 
 ### Features
 - **Localization:** `intl` ^0.20.2 (17 diller)
-- **Ads:** `google_mobile_ads` ^6.0.0 (AdMob production-ready)
-- **Analytics:** `firebase_analytics` ^12.0.4 + `firebase_core` ^4.2.1
+- **Ads:** `google_mobile_ads` ^8.0.0 (AdMob production-ready)
+- **Analytics:** `firebase_analytics` ^12.1.0 + `firebase_core` ^4.3.0
 - **Feedback:** `feedback` ^3.1.0 (Bug reporting)
-- **Device Info:** `device_info_plus` ^12.2.0
-- **App Info:** `package_info_plus` ^9.0.0
+- **Device Info:** `device_info_plus` ^13.1.0
+- **App Info:** `package_info_plus` ^10.1.0
 
 ### Utils
-- **Sharing:** `share_plus` ^12.0.0
+- **Sharing:** `share_plus` ^13.1.0
 - **URL Launch:** `url_launcher` ^6.3.1
 - **Permissions:** `permission_handler` ^12.0.1
 - **Path Provider:** `path_provider` ^2.1.5
@@ -76,8 +76,6 @@ flutter run
 2. ✅ Android version synced: 1.2.3 (build 4)
 3. ⚠️ **iOS AdMob App ID** - Update in `ios/Runner/Info.plist`
 4. ⚠️ **Release Signing** - Configure keystore for Android
-
-See [PRODUCTION_CHECKLIST.md](PRODUCTION_CHECKLIST.md) for details.
 
 ### Production Build
 ```bash
@@ -220,4 +218,4 @@ Güvenlik açığı bulursanız [SECURITY.md](SECURITY.md) dosyasındaki talimat
 
 **Status:** ✅ Production Ready | 🔥 Firebase Analytics | ⚡ 60% Faster | 🐛 Bug-Free
 
-> **⚠️ Important:** Before App Store/Play Store submission, complete iOS AdMob setup. See [PRODUCTION_CHECKLIST.md](PRODUCTION_CHECKLIST.md)
+> **⚠️ Important:** Before App Store submission, verify the iOS AdMob app ID in `ios/Runner/Info.plist`.

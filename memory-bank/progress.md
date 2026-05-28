@@ -20,7 +20,7 @@
 - [x] Kişi formundan şirket alanı kaldırıldı
 
 ### v1.2.0 — Güvenlik (Ekim 2025)
-- [x] Environment variables desteği (.env)
+- [x] Secret file gitignore rules (`.env`, keystore, key.properties)
 - [x] İyileştirilmiş izin yönetimi
 - [x] Güvenli offline depolama
 - [x] Input validation
@@ -97,6 +97,13 @@
 - [x] `dart analyze` doğrulandı: `No issues found!`
 - [x] Güncellenmiş dependency lockfile ile `flutter build apk --debug --no-pub` başarılı oldu
 - [x] Güncellenmiş APK ADB ile kuruldu; uygulama foreground'da kaldı, `Displayed/Fully drawn` logları geldi ve scanner ekranı açıldı
+
+### 29 Mayıs 2026 — Repo Cleanup & Dokümantasyon
+- [x] Kullanılmayan `.env.example` kaldırıldı; kodda runtime dotenv/env variable okuma akışı yok
+- [x] Tracked generated/artifact dosyaları kaldırıldı: Gradle problem report, `android/build_log.txt`, eski `flutter_01.png`
+- [x] `.gitignore` generated Android build çıktıları, build logu ve `flutter_*.png` dosyalarını tekrar eklenmeyecek şekilde güncellendi
+- [x] README eski paket sürümleri ve olmayan `PRODUCTION_CHECKLIST.md` linklerinden temizlendi
+- [x] SECURITY.md `.env.example` talimatı yerine secret file gitignore kuralını belgeledi
 
 ## 🚧 Yapılacaklar
 

@@ -35,7 +35,8 @@
 - ✅ **No Phone**: Telefon özelliklerine erişim yok
 
 ### Code Security
-- ✅ **No Hardcoded Secrets**: API keys environment variables'da
+- ✅ **No Private Signing Secrets**: `.env`, keystore ve `android/key.properties` dosyaları git dışında tutulur
+- ℹ️ Firebase/AdMob client identifiers platform config içinde bulunur; bunlar private signing secret değildir
 - ✅ **Secure Storage**: Hassas veriler şifrelenir
 - ✅ **Input Validation**: Tüm kullanıcı girdileri valide edilir
 - ✅ **Safe URL Handling**: URL'ler güvenli şekilde açılır
@@ -64,9 +65,8 @@ Güvenlik açığı bulursanız lütfen **hemen** bildirin:
 
 ### For Developers
 ```bash
-# 1. Environment variables kullan
-cp .env.example .env
-# .env dosyasını ASLA commit etme!
+# 1. Gizli dosyaları commit etme
+# .env, *.jks, *.keystore ve android/key.properties gitignore'da kalmalı
 
 # 2. Dependencies güncel tut
 flutter pub outdated
@@ -124,7 +124,7 @@ dart analyze
 - ✅ Güvenli renk seçimi
 
 ### v1.2.0
-- ✅ Environment variables support
+- ✅ Secret file gitignore rules
 - ✅ Improved permission handling
 - ✅ Secure offline storage
 - ✅ Input validation

@@ -28,7 +28,7 @@ Hızlı, güvenilir ve kullanıcı dostu QR kod tarayıcı ve oluşturucu mobil 
 8. **Bug Reporting** - Uygulama içi hata bildirimi (screenshot + cihaz bilgisi + email)
 
 ### Teknik Gereksinimler
-- Production-ready güvenlik (AES şifreli Hive DB, env vars)
+- Production-ready güvenlik (AES şifreli Hive DB, private signing secrets git dışında)
 - Firebase Analytics entegrasyonu (anonim kullanım istatistikleri)
 - AdMob reklam entegrasyonu (interstitial ads)
 - Codemagic CI/CD pipeline (Android + iOS)

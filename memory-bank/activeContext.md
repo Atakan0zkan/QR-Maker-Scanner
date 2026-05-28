@@ -30,6 +30,11 @@ Uygulama **production-ready** durumda. Son değişiklikler Mayıs 2026'da yapıl
 12. **Analyze doğrulaması**: Sandbox içinde analyzer `CreateFile failed 5 / Erişim engellendi` verdiği için `dart analyze` escalated çalıştırıldı; sonuç `No issues found!`.
 13. **Final run doğrulaması**: Güncellenmiş lockfile ile `flutter build apk --debug --no-pub` başarılı oldu; APK ADB ile kuruldu, uygulama foreground'da kaldı, `mCurrentFocus` MainActivity gösterdi, `Displayed/Fully drawn` logları geldi ve kamera tarayıcı ekranı açıldı.
 
+### 29 Mayıs 2026 — Repo Cleanup
+1. **`.env.example` kaldırıldı**: Kodda `flutter_dotenv`, `dotenv`, `.env` veya AdMob env variable okuma akışı yok. AdMob/Firebase değerleri platform config ve service dosyalarında tutuluyor.
+2. **Dokümantasyon düzeltildi**: README/SECURITY/Memory Bank içinde `.env.example`, olmayan `PRODUCTION_CHECKLIST.md` linkleri ve eski paket sürümleri temizlendi.
+3. **Generated dosyalar kaldırıldı**: Tracked Gradle problem report, build log ve eski screenshot repo dışına çıkarıldı; `.gitignore` bunların tekrar eklenmesini engelleyecek şekilde güncellendi.
+
 ### Mart 2026 — Paket & Dil Güncellemesi
 1. **Paket Güncellemeleri**: Tüm bağımlılıklar güncel versiyonlara yükseltildi
 2. **Dil Desteği**: 10 dilden 17 dile genişletildi (Hi, Pt, Ko, Ru, Pl, Uk, Nl eklendi + El geri eklendi)

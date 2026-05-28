@@ -61,11 +61,13 @@ flutter build appbundle --release     # Android App Bundle (Google Play)
 flutter build ios --release           # iOS (Xcode'da archive)
 ```
 
-### Environment Variables
-- `.env` dosyası ile AdMob ID'leri yönetilir (`.env.example` mevcut)
-- `.env` ASLA commit edilmez (`.gitignore`'da)
-- Firebase config: `lib/firebase_options.dart` (FlutterFire CLI)
-- Firebase API anahtarları `firebase_options.dart` içinde (Google Cloud Console'da kısıtlanmalı)
+### Config ve Secret Dosyaları
+- Runtime dotenv kullanımı yok; `flutter_dotenv` dependency'si yok ve `.env.example` kaldırıldı.
+- AdMob Android app ID `android/app/src/main/AndroidManifest.xml` içinde, interstitial unit ID'leri `lib/services/ad_service.dart` içinde tutulur.
+- iOS AdMob app ID release öncesi `ios/Runner/Info.plist` içinde ayrıca doğrulanmalı.
+- Firebase config: `lib/firebase_options.dart` (FlutterFire CLI).
+- Firebase/AdMob client identifiers private signing secret değildir; yine de Google Cloud Console ve AdMob tarafında platform/package kısıtlamaları uygulanmalı.
+- Private dosyalar `.gitignore` ile dışarıda kalmalı: `.env`, `.env.local`, `*.jks`, `*.keystore`, `android/key.properties`.
 
 ### CI/CD: Codemagic
 - `codemagic.yaml` ile 3 workflow: `android-workflow`, `ios-workflow`, `all-platforms-workflow`
@@ -242,4 +244,5 @@ flutter devices  # emulator-5554 görünmeli
 - Firebase API anahtarları `firebase_options.dart` içinde (public repo'da görünür)
 - Google Cloud Console'da platform kısıtlamaları uygulanmalı
 - Hive DB şifreleme anahtarı `flutter_secure_storage` ile korunur
-- `.env`, `*.jks`, `*.keystore` gitignore'da
+- `.env`, `*.jks`, `*.keystore`, `android/key.properties` gitignore'da
+- `.env.example` kullanılmıyor; tekrar eklenirse önce gerçek runtime/config akışıyla ilişkilendirilmeli
