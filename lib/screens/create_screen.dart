@@ -1,18 +1,22 @@
-import 'package:flutter/material.dart';
-import '../l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-import 'package:pretty_qr_code/pretty_qr_code.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:share_plus/share_plus.dart';
+import 'dart:developer' as developer;
 import 'dart:io';
 import 'dart:ui' as ui;
+
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
+import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../core/constants/app_colors.dart';
+import '../core/constants/app_gradients.dart';
+import '../l10n/app_localizations.dart';
 import '../models/qr_type.dart';
 import '../providers/qr_provider.dart';
-import '../services/qr_helper.dart';
-import '../core/constants/app_colors.dart';
 import '../services/ad_service.dart';
+import '../services/qr_helper.dart';
 
 class CreateScreen extends StatefulWidget {
   const CreateScreen({super.key});
@@ -26,58 +30,59 @@ class _CreateScreenState extends State<CreateScreen> {
   QRType _selectedType = QRType.url;
   final _formKey = GlobalKey<FormState>();
   final _qrKey = GlobalKey();
-  
+
   // Common fields
   final _urlController = TextEditingController();
   final _textController = TextEditingController();
-  
+
   // WiFi fields
   final _ssidController = TextEditingController();
   final _passwordController = TextEditingController();
   String _securityType = 'WPA';
-  
+
   // Contact fields
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _companyController = TextEditingController();
-  
+
   // Email fields
   final _emailAddressController = TextEditingController();
   final _subjectController = TextEditingController();
   final _messageController = TextEditingController();
-  
+
   // SMS fields
   final _smsPhoneController = TextEditingController();
   final _smsMessageController = TextEditingController();
-  
+
   // Phone field
   final _phoneNumberController = TextEditingController();
-  
+
   // Location fields
   final _latitudeController = TextEditingController();
   final _longitudeController = TextEditingController();
-  
+
   // Social field
   final _profileUrlController = TextEditingController();
 
   String? _generatedQRData;
-  
+
   // QR Color customization
   Color _qrForegroundColor = Colors.black;
   Color _qrBackgroundColor = Colors.white;
   String _qrColorType = 'solid'; // solid, gradient
-  
+
   // QR Logo/Image
   String? _selectedLogo; // asset path
-  
+
   // QR Style customization
   String _eyeStyle = 'square'; // square, circle, rounded
   String _dataModuleShape = 'square'; // square, circle
-  
+
   // Gradient/Background
   String _backgroundType = 'color'; // color, gradient
-  String _selectedGradient = 'none'; // instagram, facebook, whatsapp, telegram, tiktok, youtube, linkedin, twitter, spotify, netflix, sunset, ocean, fire, purple, mint
+  String _selectedGradient =
+      'none'; // instagram, facebook, whatsapp, telegram, tiktok, youtube, linkedin, twitter, spotify, netflix, sunset, ocean, fire, purple, mint
 
   @override
   void dispose() {
@@ -151,27 +156,36 @@ class _CreateScreenState extends State<CreateScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              l10n.codeType,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
+            Text(l10n.codeType, style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 12),
             DropdownButtonFormField<QRType>(
               initialValue: _selectedType,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
               ),
               items: [
                 DropdownMenuItem(value: QRType.url, child: Text(l10n.url)),
                 DropdownMenuItem(value: QRType.text, child: Text(l10n.text)),
                 DropdownMenuItem(value: QRType.wifi, child: Text(l10n.wifi)),
-                DropdownMenuItem(value: QRType.contact, child: Text(l10n.contact)),
+                DropdownMenuItem(
+                  value: QRType.contact,
+                  child: Text(l10n.contact),
+                ),
                 DropdownMenuItem(value: QRType.email, child: Text(l10n.email)),
                 DropdownMenuItem(value: QRType.sms, child: Text(l10n.sms)),
                 DropdownMenuItem(value: QRType.phone, child: Text(l10n.phone)),
-                DropdownMenuItem(value: QRType.location, child: Text(l10n.location)),
-                DropdownMenuItem(value: QRType.social, child: Text(l10n.social)),
+                DropdownMenuItem(
+                  value: QRType.location,
+                  child: Text(l10n.location),
+                ),
+                DropdownMenuItem(
+                  value: QRType.social,
+                  child: Text(l10n.social),
+                ),
               ],
               onChanged: (value) {
                 setState(() {
@@ -447,10 +461,7 @@ class _CreateScreenState extends State<CreateScreen> {
         const SizedBox(height: 8),
         Text(
           l10n.searchAndSelectLocation,
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey[600],
-          ),
+          style: TextStyle(fontSize: 12, color: Colors.grey[600]),
         ),
         const SizedBox(height: 16),
         ExpansionTile(
@@ -464,39 +475,41 @@ class _CreateScreenState extends State<CreateScreen> {
                 hintText: '41.0082, 28.9784',
                 prefixIcon: const Icon(Icons.location_on),
               ),
-              keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+                signed: true,
+              ),
             ),
             const SizedBox(height: 8),
             Text(
               l10n.coordinateFormat,
-              style: TextStyle(
-                fontSize: 11,
-                color: Colors.grey[600],
-              ),
+              style: TextStyle(fontSize: 11, color: Colors.grey[600]),
             ),
           ],
         ),
       ],
     );
   }
-  
+
   Future<void> _openGoogleMapsSearch() async {
     final l10n = AppLocalizations.of(context)!;
     final query = _latitudeController.text.trim();
     if (query.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.enterLocationName)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.enterLocationName)));
       return;
     }
-    
+
     // Google Maps arama URL'i
     final encodedQuery = Uri.encodeComponent(query);
-    final url = Uri.parse('https://www.google.com/maps/search/?api=1&query=$encodedQuery');
-    
+    final url = Uri.parse(
+      'https://www.google.com/maps/search/?api=1&query=$encodedQuery',
+    );
+
     if (await canLaunchUrl(url)) {
       await launchUrl(url, mode: LaunchMode.externalApplication);
-      
+
       // Kullanıcıya bilgi ver
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -508,9 +521,9 @@ class _CreateScreenState extends State<CreateScreen> {
       }
     } else {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.cannotOpenMaps)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.cannotOpenMaps)));
       }
     }
   }
@@ -561,8 +574,12 @@ class _CreateScreenState extends State<CreateScreen> {
                       width: 220,
                       height: 220,
                       decoration: BoxDecoration(
-                        gradient: _backgroundType == 'gradient' ? _getSelectedGradient() : null,
-                        color: _backgroundType == 'color' ? _qrBackgroundColor : null,
+                        gradient: _backgroundType == 'gradient'
+                            ? _getSelectedGradient()
+                            : null,
+                        color: _backgroundType == 'color'
+                            ? _qrBackgroundColor
+                            : null,
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
@@ -571,7 +588,9 @@ class _CreateScreenState extends State<CreateScreen> {
                       width: 220,
                       height: 220,
                       child: PrettyQrView.data(
-                        key: ValueKey('$_eyeStyle-$_dataModuleShape'), // Force rebuild!
+                        key: ValueKey(
+                          '$_eyeStyle-$_dataModuleShape',
+                        ), // Force rebuild!
                         data: _generatedQRData!,
                         errorCorrectLevel: QrErrorCorrectLevel.H,
                         decoration: PrettyQrDecoration(
@@ -579,10 +598,11 @@ class _CreateScreenState extends State<CreateScreen> {
                           // Eye style öncelikli (daha görünür)
                           shape: _getCombinedShape(),
                           // Logo image
-                          image: _selectedLogo != null 
+                          image: _selectedLogo != null
                               ? PrettyQrDecorationImage(
                                   image: AssetImage(_selectedLogo!),
-                                  position: PrettyQrDecorationImagePosition.embedded,
+                                  position:
+                                      PrettyQrDecorationImagePosition.embedded,
                                 )
                               : null,
                         ),
@@ -648,14 +668,20 @@ class _CreateScreenState extends State<CreateScreen> {
       case QRType.email:
         qrData = QRHelper.formatEmailQR(
           email: _emailAddressController.text,
-          subject: _subjectController.text.isEmpty ? null : _subjectController.text,
-          body: _messageController.text.isEmpty ? null : _messageController.text,
+          subject: _subjectController.text.isEmpty
+              ? null
+              : _subjectController.text,
+          body: _messageController.text.isEmpty
+              ? null
+              : _messageController.text,
         );
         break;
       case QRType.sms:
         qrData = QRHelper.formatSMSQR(
           phone: _smsPhoneController.text,
-          message: _smsMessageController.text.isEmpty ? null : _smsMessageController.text,
+          message: _smsMessageController.text.isEmpty
+              ? null
+              : _smsMessageController.text,
         );
         break;
       case QRType.phone:
@@ -663,11 +689,12 @@ class _CreateScreenState extends State<CreateScreen> {
         break;
       case QRType.location:
         final locationInput = _latitudeController.text.trim();
-        
+
         // Google Maps linki mi kontrol et
-        if (locationInput.contains('google.com/maps') || locationInput.contains('goo.gl/maps')) {
+        if (locationInput.contains('google.com/maps') ||
+            locationInput.contains('goo.gl/maps')) {
           qrData = locationInput;
-        } 
+        }
         // Koordinat girişi mi kontrol et
         else if (_longitudeController.text.isNotEmpty) {
           try {
@@ -689,7 +716,8 @@ class _CreateScreenState extends State<CreateScreen> {
         // Konum adı girilmiş, Google Maps linki oluştur
         else {
           final encodedQuery = Uri.encodeComponent(locationInput);
-          qrData = 'https://www.google.com/maps/search/?api=1&query=$encodedQuery';
+          qrData =
+              'https://www.google.com/maps/search/?api=1&query=$encodedQuery';
         }
         break;
       case QRType.social:
@@ -700,7 +728,7 @@ class _CreateScreenState extends State<CreateScreen> {
     setState(() {
       _generatedQRData = qrData;
     });
-    
+
     // Show Interstitial Ad
     AdService.showInterstitialAd();
   }
@@ -710,7 +738,8 @@ class _CreateScreenState extends State<CreateScreen> {
 
     try {
       // QR kod widget'ını resme dönüştür ve byte array olarak al
-      final boundary = _qrKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final boundary =
+          _qrKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
       final image = await boundary.toImage(pixelRatio: 3.0);
       final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       final pngBytes = byteData!.buffer.asUint8List();
@@ -727,7 +756,7 @@ class _CreateScreenState extends State<CreateScreen> {
       );
 
       if (!mounted) return;
-      
+
       if (success) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -738,9 +767,9 @@ class _CreateScreenState extends State<CreateScreen> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${l10n.saveError}: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('${l10n.saveError}: $e')));
       }
     }
   }
@@ -751,7 +780,10 @@ class _CreateScreenState extends State<CreateScreen> {
       case QRType.url:
         return _urlController.text;
       case QRType.text:
-        return _textController.text.substring(0, _textController.text.length > 30 ? 30 : _textController.text.length);
+        return _textController.text.substring(
+          0,
+          _textController.text.length > 30 ? 30 : _textController.text.length,
+        );
       case QRType.wifi:
         return _ssidController.text;
       case QRType.contact:
@@ -772,26 +804,26 @@ class _CreateScreenState extends State<CreateScreen> {
   Future<void> _shareQR() async {
     final l10n = AppLocalizations.of(context)!;
     if (_generatedQRData == null) return;
-    
+
     try {
       // QR kod widget'ını resme dönüştür
-      final boundary = _qrKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final boundary =
+          _qrKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
       final image = await boundary.toImage(pixelRatio: 3.0);
       final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       final pngBytes = byteData!.buffer.asUint8List();
-      
+
       // Geçici dosya oluştur
       final tempDir = await getTemporaryDirectory();
       final file = File('${tempDir.path}/qr_code.png');
       await file.writeAsBytes(pngBytes);
-      
+
       // Paylaş
       // ignore: deprecated_member_use
-      await Share.shareXFiles(
-        [XFile(file.path)],
-        text: 'QR Kod: ${_getQRTitle()}\n\n$_generatedQRData',
-      );
-      
+      await Share.shareXFiles([
+        XFile(file.path),
+      ], text: 'QR Kod: ${_getQRTitle()}\n\n$_generatedQRData');
+
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -802,9 +834,9 @@ class _CreateScreenState extends State<CreateScreen> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${l10n.shareError}: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('${l10n.shareError}: $e')));
       }
     }
   }
@@ -816,9 +848,9 @@ class _CreateScreenState extends State<CreateScreen> {
       children: [
         Text(
           l10n.qrColorSettings,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 12),
         // QR Color
@@ -840,8 +872,16 @@ class _CreateScreenState extends State<CreateScreen> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      _buildColorTypeButton('solid', Icons.palette, l10n.plainColor),
-                      _buildColorTypeButton('gradient', Icons.gradient, l10n.gradient),
+                      _buildColorTypeButton(
+                        'solid',
+                        Icons.palette,
+                        l10n.plainColor,
+                      ),
+                      _buildColorTypeButton(
+                        'gradient',
+                        Icons.gradient,
+                        l10n.gradient,
+                      ),
                     ],
                   ),
                 ),
@@ -958,11 +998,11 @@ class _CreateScreenState extends State<CreateScreen> {
                   color: color,
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: isSelected 
-                        ? AppColors.primary 
+                    color: isSelected
+                        ? AppColors.primary
                         : Theme.of(context).brightness == Brightness.dark
-                            ? Colors.white.withValues(alpha: 0.2)
-                            : Colors.black.withValues(alpha: 0.15),
+                        ? Colors.white.withValues(alpha: 0.2)
+                        : Colors.black.withValues(alpha: 0.15),
                     width: isSelected ? 3 : 1.5,
                   ),
                   boxShadow: isSelected
@@ -994,7 +1034,7 @@ class _CreateScreenState extends State<CreateScreen> {
 
   Widget _buildLogoSelector() {
     final l10n = AppLocalizations.of(context)!;
-    
+
     // Hazır logolar (asset paths)
     final presetLogos = {
       'assets/logos/instagram.png': 'Instagram',
@@ -1027,18 +1067,18 @@ class _CreateScreenState extends State<CreateScreen> {
                 child: Container(
                   width: 70,
                   decoration: BoxDecoration(
-                    color: isSelected 
+                    color: isSelected
                         ? AppColors.primary.withValues(alpha: 0.12)
                         : Theme.of(context).brightness == Brightness.dark
-                            ? Colors.white.withValues(alpha: 0.05)
-                            : Colors.black.withValues(alpha: 0.03),
+                        ? Colors.white.withValues(alpha: 0.05)
+                        : Colors.black.withValues(alpha: 0.03),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: isSelected 
-                          ? AppColors.primary 
+                      color: isSelected
+                          ? AppColors.primary
                           : Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white.withValues(alpha: 0.1)
-                              : Colors.black.withValues(alpha: 0.08),
+                          ? Colors.white.withValues(alpha: 0.1)
+                          : Colors.black.withValues(alpha: 0.08),
                       width: isSelected ? 2 : 1,
                     ),
                   ),
@@ -1047,7 +1087,9 @@ class _CreateScreenState extends State<CreateScreen> {
                     children: [
                       Icon(
                         Icons.block,
-                        color: isSelected ? AppColors.primary : Colors.grey.shade600,
+                        color: isSelected
+                            ? AppColors.primary
+                            : Colors.grey.shade600,
                         size: 28,
                       ),
                       const SizedBox(height: 4),
@@ -1055,8 +1097,12 @@ class _CreateScreenState extends State<CreateScreen> {
                         l10n.none,
                         style: TextStyle(
                           fontSize: 11,
-                          color: isSelected ? AppColors.primary : Colors.grey.shade700,
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                          color: isSelected
+                              ? AppColors.primary
+                              : Colors.grey.shade700,
+                          fontWeight: isSelected
+                              ? FontWeight.bold
+                              : FontWeight.normal,
                         ),
                       ),
                     ],
@@ -1065,13 +1111,13 @@ class _CreateScreenState extends State<CreateScreen> {
               ),
             );
           }
-          
+
           // Preset logolar
           final logoIndex = index - 1;
           final logoPath = presetLogos.keys.elementAt(logoIndex);
           final logoName = presetLogos[logoPath]!;
           final isSelected = _selectedLogo == logoPath;
-          
+
           return Padding(
             padding: const EdgeInsets.only(right: 12),
             child: GestureDetector(
@@ -1083,18 +1129,18 @@ class _CreateScreenState extends State<CreateScreen> {
               child: Container(
                 width: 70,
                 decoration: BoxDecoration(
-                  color: isSelected 
+                  color: isSelected
                       ? AppColors.primary.withValues(alpha: 0.12)
                       : Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white.withValues(alpha: 0.05)
-                          : Colors.black.withValues(alpha: 0.03),
+                      ? Colors.white.withValues(alpha: 0.05)
+                      : Colors.black.withValues(alpha: 0.03),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: isSelected 
-                        ? AppColors.primary 
+                    color: isSelected
+                        ? AppColors.primary
                         : Theme.of(context).brightness == Brightness.dark
-                            ? Colors.white.withValues(alpha: 0.1)
-                            : Colors.black.withValues(alpha: 0.08),
+                        ? Colors.white.withValues(alpha: 0.1)
+                        : Colors.black.withValues(alpha: 0.08),
                     width: isSelected ? 2 : 1,
                   ),
                 ),
@@ -1107,7 +1153,7 @@ class _CreateScreenState extends State<CreateScreen> {
                       height: 40,
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
-                        color: Colors.transparent, 
+                        color: Colors.transparent,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Image.asset(
@@ -1115,7 +1161,10 @@ class _CreateScreenState extends State<CreateScreen> {
                         fit: BoxFit.contain,
                         errorBuilder: (context, error, stackTrace) {
                           // Debug: logo yüklenemedi
-                          debugPrint('Logo yüklenemedi: $logoPath - Error: $error');
+                          developer.log(
+                            'Logo yüklenemedi: $logoPath - Error: $error',
+                            name: 'CreateScreen',
+                          );
                           return const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -1127,7 +1176,10 @@ class _CreateScreenState extends State<CreateScreen> {
                               SizedBox(height: 2),
                               Text(
                                 'Error',
-                                style: TextStyle(fontSize: 8, color: Colors.red),
+                                style: TextStyle(
+                                  fontSize: 8,
+                                  color: Colors.red,
+                                ),
                               ),
                             ],
                           );
@@ -1139,8 +1191,12 @@ class _CreateScreenState extends State<CreateScreen> {
                       logoName,
                       style: TextStyle(
                         fontSize: 10,
-                        color: isSelected ? AppColors.primary : Colors.grey.shade700,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        color: isSelected
+                            ? AppColors.primary
+                            : Colors.grey.shade700,
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -1160,7 +1216,10 @@ class _CreateScreenState extends State<CreateScreen> {
     final eyeStyles = {
       'square': (l10n.square, Icons.crop_square),
       'circle': (l10n.circle, Icons.circle_outlined),
-      'rounded': ('Rounded', Icons.rounded_corner), // ✨ Custom Painter ile artık gerçek rounded!
+      'rounded': (
+        'Rounded',
+        Icons.rounded_corner,
+      ), // ✨ Custom Painter ile artık gerçek rounded!
     };
 
     return SizedBox(
@@ -1172,7 +1231,7 @@ class _CreateScreenState extends State<CreateScreen> {
           final styleKey = eyeStyles.keys.elementAt(index);
           final style = eyeStyles[styleKey]!;
           final isSelected = _eyeStyle == styleKey;
-          
+
           return Padding(
             padding: const EdgeInsets.only(right: 12),
             child: GestureDetector(
@@ -1182,20 +1241,23 @@ class _CreateScreenState extends State<CreateScreen> {
                 });
               },
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
-                  color: isSelected 
+                  color: isSelected
                       ? AppColors.primary.withValues(alpha: 0.12)
                       : Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white.withValues(alpha: 0.05)
-                          : Colors.black.withValues(alpha: 0.03),
+                      ? Colors.white.withValues(alpha: 0.05)
+                      : Colors.black.withValues(alpha: 0.03),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: isSelected 
-                        ? AppColors.primary 
+                    color: isSelected
+                        ? AppColors.primary
                         : Theme.of(context).brightness == Brightness.dark
-                            ? Colors.white.withValues(alpha: 0.1)
-                            : Colors.black.withValues(alpha: 0.08),
+                        ? Colors.white.withValues(alpha: 0.1)
+                        : Colors.black.withValues(alpha: 0.08),
                     width: isSelected ? 2 : 1,
                   ),
                 ),
@@ -1204,7 +1266,11 @@ class _CreateScreenState extends State<CreateScreen> {
                   children: [
                     Icon(
                       style.$2,
-                      color: isSelected ? AppColors.primary : Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.grey.shade600,
+                      color: isSelected
+                          ? AppColors.primary
+                          : Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white70
+                          : Colors.grey.shade600,
                       size: 24,
                     ),
                     const SizedBox(height: 4),
@@ -1212,8 +1278,14 @@ class _CreateScreenState extends State<CreateScreen> {
                       style.$1,
                       style: TextStyle(
                         fontSize: 11,
-                        color: isSelected ? AppColors.primary : Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.grey.shade700,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        color: isSelected
+                            ? AppColors.primary
+                            : Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white70
+                            : Colors.grey.shade700,
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
                       ),
                     ),
                   ],
@@ -1244,7 +1316,7 @@ class _CreateScreenState extends State<CreateScreen> {
           final shapeKey = shapes.keys.elementAt(index);
           final shape = shapes[shapeKey]!;
           final isSelected = _dataModuleShape == shapeKey;
-          
+
           return Padding(
             padding: const EdgeInsets.only(right: 12),
             child: GestureDetector(
@@ -1257,18 +1329,18 @@ class _CreateScreenState extends State<CreateScreen> {
                 width: 70,
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: isSelected 
+                  color: isSelected
                       ? AppColors.primary.withValues(alpha: 0.12)
                       : Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white.withValues(alpha: 0.05)
-                          : Colors.black.withValues(alpha: 0.03),
+                      ? Colors.white.withValues(alpha: 0.05)
+                      : Colors.black.withValues(alpha: 0.03),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: isSelected 
-                        ? AppColors.primary 
+                    color: isSelected
+                        ? AppColors.primary
                         : Theme.of(context).brightness == Brightness.dark
-                            ? Colors.white.withValues(alpha: 0.1)
-                            : Colors.black.withValues(alpha: 0.08),
+                        ? Colors.white.withValues(alpha: 0.1)
+                        : Colors.black.withValues(alpha: 0.08),
                     width: isSelected ? 2 : 1,
                   ),
                 ),
@@ -1283,8 +1355,14 @@ class _CreateScreenState extends State<CreateScreen> {
                       shape.$1,
                       style: TextStyle(
                         fontSize: 10,
-                        color: isSelected ? AppColors.primary : Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.grey.shade700,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        color: isSelected
+                            ? AppColors.primary
+                            : Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white70
+                            : Colors.grey.shade700,
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -1303,7 +1381,7 @@ class _CreateScreenState extends State<CreateScreen> {
   Widget _buildShapePreviewIcon(String shapeType) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final dotColor = isDark ? Colors.white70 : Colors.grey.shade800;
-    
+
     if (shapeType == 'circle') {
       // Circle pattern preview - Tam yuvarlak
       return SizedBox(
@@ -1311,8 +1389,9 @@ class _CreateScreenState extends State<CreateScreen> {
         height: 24,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: List.generate(4, (i) => 
-            Container(
+          children: List.generate(
+            4,
+            (i) => Container(
               width: 6,
               height: 6,
               decoration: BoxDecoration(
@@ -1330,13 +1409,16 @@ class _CreateScreenState extends State<CreateScreen> {
         height: 24,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: List.generate(4, (i) => 
-            Container(
+          children: List.generate(
+            4,
+            (i) => Container(
               width: 6,
               height: 6,
               decoration: BoxDecoration(
                 color: dotColor,
-                borderRadius: BorderRadius.circular(3), // Daha belirgin yumuşak köşeler
+                borderRadius: BorderRadius.circular(
+                  3,
+                ), // Daha belirgin yumuşak köşeler
               ),
             ),
           ),
@@ -1349,8 +1431,9 @@ class _CreateScreenState extends State<CreateScreen> {
         height: 24,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: List.generate(4, (i) => 
-            Container(
+          children: List.generate(
+            4,
+            (i) => Container(
               width: 6,
               height: 6,
               decoration: BoxDecoration(
@@ -1367,12 +1450,14 @@ class _CreateScreenState extends State<CreateScreen> {
 
   Widget _buildBackgroundTypeSelector() {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return SizedBox(
       height: 70,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: _backgroundType == 'gradient' ? 16 : 1, // Color veya 15 gradient
+        itemCount: _backgroundType == 'gradient'
+            ? 16
+            : 1, // Color veya 15 gradient
         itemBuilder: (context, index) {
           // İlk item her zaman "Color" toggle
           if (index == 0) {
@@ -1390,18 +1475,18 @@ class _CreateScreenState extends State<CreateScreen> {
                     child: Container(
                       width: 70,
                       decoration: BoxDecoration(
-                        color: _backgroundType == 'color' 
+                        color: _backgroundType == 'color'
                             ? AppColors.primary.withValues(alpha: 0.12)
                             : Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white.withValues(alpha: 0.05)
-                                : Colors.black.withValues(alpha: 0.03),
+                            ? Colors.white.withValues(alpha: 0.05)
+                            : Colors.black.withValues(alpha: 0.03),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: _backgroundType == 'color' 
-                              ? AppColors.primary 
+                          color: _backgroundType == 'color'
+                              ? AppColors.primary
                               : Theme.of(context).brightness == Brightness.dark
-                                  ? Colors.white.withValues(alpha: 0.1)
-                                  : Colors.black.withValues(alpha: 0.08),
+                              ? Colors.white.withValues(alpha: 0.1)
+                              : Colors.black.withValues(alpha: 0.08),
                           width: _backgroundType == 'color' ? 2 : 1,
                         ),
                       ),
@@ -1410,7 +1495,12 @@ class _CreateScreenState extends State<CreateScreen> {
                         children: [
                           Icon(
                             Icons.palette,
-                            color: _backgroundType == 'color' ? AppColors.primary : Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.grey.shade600,
+                            color: _backgroundType == 'color'
+                                ? AppColors.primary
+                                : Theme.of(context).brightness ==
+                                      Brightness.dark
+                                ? Colors.white70
+                                : Colors.grey.shade600,
                             size: 28,
                           ),
                           const SizedBox(height: 4),
@@ -1418,8 +1508,15 @@ class _CreateScreenState extends State<CreateScreen> {
                             l10n.qrColor,
                             style: TextStyle(
                               fontSize: 11,
-                              color: _backgroundType == 'color' ? AppColors.primary : Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.grey.shade700,
-                              fontWeight: _backgroundType == 'color' ? FontWeight.bold : FontWeight.normal,
+                              color: _backgroundType == 'color'
+                                  ? AppColors.primary
+                                  : Theme.of(context).brightness ==
+                                        Brightness.dark
+                                  ? Colors.white70
+                                  : Colors.grey.shade700,
+                              fontWeight: _backgroundType == 'color'
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
                             ),
                           ),
                         ],
@@ -1440,18 +1537,18 @@ class _CreateScreenState extends State<CreateScreen> {
                     child: Container(
                       width: 70,
                       decoration: BoxDecoration(
-                        color: _backgroundType == 'gradient' 
+                        color: _backgroundType == 'gradient'
                             ? AppColors.primary.withValues(alpha: 0.12)
                             : Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white.withValues(alpha: 0.05)
-                                : Colors.black.withValues(alpha: 0.03),
+                            ? Colors.white.withValues(alpha: 0.05)
+                            : Colors.black.withValues(alpha: 0.03),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: _backgroundType == 'gradient' 
-                              ? AppColors.primary 
+                          color: _backgroundType == 'gradient'
+                              ? AppColors.primary
                               : Theme.of(context).brightness == Brightness.dark
-                                  ? Colors.white.withValues(alpha: 0.1)
-                                  : Colors.black.withValues(alpha: 0.08),
+                              ? Colors.white.withValues(alpha: 0.1)
+                              : Colors.black.withValues(alpha: 0.08),
                           width: _backgroundType == 'gradient' ? 2 : 1,
                         ),
                       ),
@@ -1460,7 +1557,12 @@ class _CreateScreenState extends State<CreateScreen> {
                         children: [
                           Icon(
                             Icons.gradient,
-                            color: _backgroundType == 'gradient' ? AppColors.primary : Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.grey.shade600,
+                            color: _backgroundType == 'gradient'
+                                ? AppColors.primary
+                                : Theme.of(context).brightness ==
+                                      Brightness.dark
+                                ? Colors.white70
+                                : Colors.grey.shade600,
                             size: 28,
                           ),
                           const SizedBox(height: 4),
@@ -1468,8 +1570,15 @@ class _CreateScreenState extends State<CreateScreen> {
                             l10n.gradient,
                             style: TextStyle(
                               fontSize: 11,
-                              color: _backgroundType == 'gradient' ? AppColors.primary : Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.grey.shade700,
-                              fontWeight: _backgroundType == 'gradient' ? FontWeight.bold : FontWeight.normal,
+                              color: _backgroundType == 'gradient'
+                                  ? AppColors.primary
+                                  : Theme.of(context).brightness ==
+                                        Brightness.dark
+                                  ? Colors.white70
+                                  : Colors.grey.shade700,
+                              fontWeight: _backgroundType == 'gradient'
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
                             ),
                           ),
                         ],
@@ -1480,31 +1589,15 @@ class _CreateScreenState extends State<CreateScreen> {
               ),
             );
           }
-          
+
           // Gradient seçenekleri (sadece gradient modundayken göster) - Vibrant & Colorful!
-          final gradients = {
-            'instagram': ('Instagram', [const Color(0xFFf09433), const Color(0xFFe6683c), const Color(0xFFdc2743), const Color(0xFFcc2366), const Color(0xFFbc1888)]),
-            'tiktok': ('TikTok', [const Color(0xFF000000), const Color(0xFFFF0050), const Color(0xFF00F2EA), const Color(0xFFFFFFFF)]),
-            'facebook': ('Facebook', [const Color(0xFF0084ff), const Color(0xFF00C6FF), const Color(0xFF0051ff), const Color(0xFF667eea)]),
-            'whatsapp': ('WhatsApp', [const Color(0xFF25D366), const Color(0xFF128C7E), const Color(0xFF075E54), const Color(0xFF00BFA5)]),
-            'telegram': ('Telegram', [const Color(0xFF0088cc), const Color(0xFF00579C), const Color(0xFF64B5F6), const Color(0xFF2196F3)]),
-            'youtube': ('YouTube', [const Color(0xFFFF0000), const Color(0xFFFF5722), const Color(0xFFFF6F00), const Color(0xFF8B0000)]),
-            'spotify': ('Spotify', [const Color(0xFF1DB954), const Color(0xFF1ED760), const Color(0xFF191414), const Color(0xFF535353)]),
-            'linkedin': ('LinkedIn', [const Color(0xFF0077B5), const Color(0xFF00A0DC), const Color(0xFF004471), const Color(0xFF0073B1)]),
-            'twitter': ('Twitter', [const Color(0xFF1DA1F2), const Color(0xFF14B8FF), const Color(0xFF0e71c8), const Color(0xFF2196F3)]),
-            'netflix': ('Netflix', [const Color(0xFFE50914), const Color(0xFFFF0000), const Color(0xFF8B0000), const Color(0xFF000000)]),
-            'sunset': ('Sunset', [const Color(0xFFFF512F), const Color(0xFFFF8C42), const Color(0xFFDD2476), const Color(0xFFFF6B6B)]),
-            'ocean': ('Ocean', [const Color(0xFF2E3192), const Color(0xFF1BFFFF), const Color(0xFF00D4FF), const Color(0xFF0099CC)]),
-            'fire': ('Fire', [const Color(0xFFf12711), const Color(0xFFf5af19), const Color(0xFFFF6B6B), const Color(0xFFFF9500)]),
-            'purple': ('Purple Dream', [const Color(0xFF667eea), const Color(0xFF764ba2), const Color(0xFFa8edea), const Color(0xFFfed6e3)]),
-            'mint': ('Mint Fresh', [const Color(0xFF00b09b), const Color(0xFF96c93d), const Color(0xFF00D9A3), const Color(0xFFB4EC51)]),
-          };
-          
+          final gradients = AppGradients.presets;
+
           final gradientIndex = index - 1;
           final gradientKey = gradients.keys.elementAt(gradientIndex);
-          final gradient = gradients[gradientKey]!;
+          final preset = gradients[gradientKey]!;
           final isSelected = _selectedGradient == gradientKey;
-          
+
           return Padding(
             padding: const EdgeInsets.only(right: 12),
             child: GestureDetector(
@@ -1516,29 +1609,27 @@ class _CreateScreenState extends State<CreateScreen> {
               child: Container(
                 width: 70,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: gradient.$2,
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                  gradient: preset.toPreviewGradient(),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: isSelected 
-                        ? AppColors.primary 
+                    color: isSelected
+                        ? AppColors.primary
                         : Colors.white.withValues(alpha: 0.3),
                     width: isSelected ? 3 : 1.5,
                   ),
-                  boxShadow: isSelected ? [
-                    BoxShadow(
-                      color: AppColors.primary.withValues(alpha: 0.3),
-                      blurRadius: 8,
-                      spreadRadius: 1,
-                    ),
-                  ] : null,
+                  boxShadow: isSelected
+                      ? [
+                          BoxShadow(
+                            color: AppColors.primary.withValues(alpha: 0.3),
+                            blurRadius: 8,
+                            spreadRadius: 1,
+                          ),
+                        ]
+                      : null,
                 ),
                 child: Center(
                   child: Text(
-                    gradient.$1,
+                    preset.label,
                     style: const TextStyle(
                       fontSize: 11,
                       color: Colors.white,
@@ -1556,86 +1647,9 @@ class _CreateScreenState extends State<CreateScreen> {
     );
   }
 
-  // Helper methods - Vibrant Multi-Color Gradients!
+  // Helper methods — AppGradients merkezi tanımlarını kullanır
   LinearGradient _getSelectedGradient() {
-    final gradients = {
-      'instagram': const LinearGradient(
-        colors: [Color(0xFFf09433), Color(0xFFe6683c), Color(0xFFdc2743), Color(0xFFcc2366), Color(0xFFbc1888)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'tiktok': const LinearGradient(
-        colors: [Color(0xFF000000), Color(0xFFFF0050), Color(0xFF00F2EA), Color(0xFFFFFFFF)],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ),
-      'facebook': const LinearGradient(
-        colors: [Color(0xFF0084ff), Color(0xFF00C6FF), Color(0xFF0051ff), Color(0xFF667eea)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'whatsapp': const LinearGradient(
-        colors: [Color(0xFF25D366), Color(0xFF128C7E), Color(0xFF075E54), Color(0xFF00BFA5)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'telegram': const LinearGradient(
-        colors: [Color(0xFF0088cc), Color(0xFF00579C), Color(0xFF64B5F6), Color(0xFF2196F3)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'youtube': const LinearGradient(
-        colors: [Color(0xFFFF0000), Color(0xFFFF5722), Color(0xFFFF6F00), Color(0xFF8B0000)],
-        begin: Alignment.centerLeft,
-        end: Alignment.centerRight,
-      ),
-      'spotify': const LinearGradient(
-        colors: [Color(0xFF1DB954), Color(0xFF1ED760), Color(0xFF191414), Color(0xFF535353)],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ),
-      'linkedin': const LinearGradient(
-        colors: [Color(0xFF0077B5), Color(0xFF00A0DC), Color(0xFF004471), Color(0xFF0073B1)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'twitter': const LinearGradient(
-        colors: [Color(0xFF1DA1F2), Color(0xFF14B8FF), Color(0xFF0e71c8), Color(0xFF2196F3)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'netflix': const LinearGradient(
-        colors: [Color(0xFFE50914), Color(0xFFFF0000), Color(0xFF8B0000), Color(0xFF000000)],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ),
-      'sunset': const LinearGradient(
-        colors: [Color(0xFFFF512F), Color(0xFFFF8C42), Color(0xFFDD2476), Color(0xFFFF6B6B)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'ocean': const LinearGradient(
-        colors: [Color(0xFF2E3192), Color(0xFF1BFFFF), Color(0xFF00D4FF), Color(0xFF0099CC)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'fire': const LinearGradient(
-        colors: [Color(0xFFf12711), Color(0xFFf5af19), Color(0xFFFF6B6B), Color(0xFFFF9500)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'purple': const LinearGradient(
-        colors: [Color(0xFF667eea), Color(0xFF764ba2), Color(0xFFa8edea), Color(0xFFfed6e3)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'mint': const LinearGradient(
-        colors: [Color(0xFF00b09b), Color(0xFF96c93d), Color(0xFF00D9A3), Color(0xFFB4EC51)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-    };
-    return gradients[_selectedGradient] ?? gradients['instagram']!;
+    return AppGradients.getBackgroundGradient(_selectedGradient);
   }
 
   // Get combined shape for pretty_qr_code
@@ -1644,7 +1658,7 @@ class _CreateScreenState extends State<CreateScreen> {
   PrettyQrSmoothSymbol _getCombinedShape() {
     // Eye style öncelikli (daha belirgin ve önemli)
     double roundFactor = 0.0;
-    
+
     // Eye style belirleme
     if (_eyeStyle == 'circle') {
       roundFactor = 1.0; // Tam yuvarlak
@@ -1660,20 +1674,15 @@ class _CreateScreenState extends State<CreateScreen> {
         roundFactor = 0.0; // Tam kare
       }
     }
-    
+
     // QR Code color: solid or gradient
     final qrColor = _qrColorType == 'gradient'
-        ? PrettyQrBrush.gradient(
-            gradient: _getQrGradient(),
-          )
+        ? PrettyQrBrush.gradient(gradient: _getQrGradient())
         : _qrForegroundColor;
-    
-    return PrettyQrSmoothSymbol(
-      color: qrColor,
-      roundFactor: roundFactor,
-    );
+
+    return PrettyQrSmoothSymbol(color: qrColor, roundFactor: roundFactor);
   }
-  
+
   // Build color type toggle button
   Widget _buildColorTypeButton(String type, IconData icon, String label) {
     final isSelected = _qrColorType == type;
@@ -1689,7 +1698,7 @@ class _CreateScreenState extends State<CreateScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: isSelected 
+          color: isSelected
               ? AppColors.primary.withValues(alpha: 0.2)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(6),
@@ -1719,23 +1728,7 @@ class _CreateScreenState extends State<CreateScreen> {
 
   // Build QR gradient selector (horizontal scroll)
   Widget _buildQrGradientSelector() {
-    final gradients = {
-      'instagram': ('Instagram', [const Color(0xFFf09433), const Color(0xFFe6683c), const Color(0xFFdc2743), const Color(0xFFcc2366), const Color(0xFFbc1888)]),
-      'tiktok': ('TikTok', [const Color(0xFF000000), const Color(0xFFFF0050), const Color(0xFF00F2EA), const Color(0xFFFFFFFF)]),
-      'facebook': ('Facebook', [const Color(0xFF0084ff), const Color(0xFF00C6FF), const Color(0xFF0051ff), const Color(0xFF667eea)]),
-      'whatsapp': ('WhatsApp', [const Color(0xFF25D366), const Color(0xFF128C7E), const Color(0xFF075E54), const Color(0xFF00BFA5)]),
-      'telegram': ('Telegram', [const Color(0xFF0088cc), const Color(0xFF00579C), const Color(0xFF64B5F6), const Color(0xFF2196F3)]),
-      'youtube': ('YouTube', [const Color(0xFFFF0000), const Color(0xFFFF5722), const Color(0xFFFF6F00), const Color(0xFF8B0000)]),
-      'spotify': ('Spotify', [const Color(0xFF1DB954), const Color(0xFF1ED760), const Color(0xFF191414), const Color(0xFF535353)]),
-      'linkedin': ('LinkedIn', [const Color(0xFF0077B5), const Color(0xFF00A0DC), const Color(0xFF004471), const Color(0xFF0073B1)]),
-      'twitter': ('Twitter', [const Color(0xFF1DA1F2), const Color(0xFF14B8FF), const Color(0xFF0e71c8), const Color(0xFF2196F3)]),
-      'netflix': ('Netflix', [const Color(0xFFE50914), const Color(0xFFFF0000), const Color(0xFF8B0000), const Color(0xFF000000)]),
-      'sunset': ('Sunset', [const Color(0xFFFF512F), const Color(0xFFFF8C42), const Color(0xFFDD2476), const Color(0xFFFF6B6B)]),
-      'ocean': ('Ocean', [const Color(0xFF2E3192), const Color(0xFF1BFFFF), const Color(0xFF00D4FF), const Color(0xFF0099CC)]),
-      'fire': ('Fire', [const Color(0xFFf12711), const Color(0xFFf5af19), const Color(0xFFFF6B6B), const Color(0xFFFF9500)]),
-      'purple': ('Purple Dream', [const Color(0xFF667eea), const Color(0xFF764ba2), const Color(0xFFa8edea), const Color(0xFFfed6e3)]),
-      'mint': ('Mint Fresh', [const Color(0xFF00b09b), const Color(0xFF96c93d), const Color(0xFF00D9A3), const Color(0xFFB4EC51)]),
-    };
+    final gradients = AppGradients.presets;
 
     return SizedBox(
       height: 50,
@@ -1744,9 +1737,9 @@ class _CreateScreenState extends State<CreateScreen> {
         itemCount: gradients.length,
         itemBuilder: (context, index) {
           final gradientKey = gradients.keys.elementAt(index);
-          final gradient = gradients[gradientKey]!;
+          final preset = gradients[gradientKey]!;
           final isSelected = _selectedGradient == gradientKey;
-          
+
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: GestureDetector(
@@ -1758,20 +1751,18 @@ class _CreateScreenState extends State<CreateScreen> {
               child: Container(
                 width: 60,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: gradient.$2,
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                  gradient: preset.toPreviewGradient(),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: isSelected ? AppColors.primary : Colors.white.withValues(alpha: 0.3),
+                    color: isSelected
+                        ? AppColors.primary
+                        : Colors.white.withValues(alpha: 0.3),
                     width: isSelected ? 2.5 : 1,
                   ),
                 ),
                 child: Center(
                   child: Text(
-                    gradient.$1,
+                    preset.label,
                     style: const TextStyle(
                       fontSize: 9,
                       color: Colors.white,
@@ -1789,87 +1780,8 @@ class _CreateScreenState extends State<CreateScreen> {
     );
   }
 
-  // Get gradient for QR code
+  // Get gradient for QR code — AppGradients merkezi tanımlarını kullanır
   LinearGradient _getQrGradient() {
-    // Full gradient list matching the selector
-    final gradients = {
-      'instagram': const LinearGradient(
-        colors: [Color(0xFFf09433), Color(0xFFe6683c), Color(0xFFdc2743), Color(0xFFcc2366), Color(0xFFbc1888)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'tiktok': const LinearGradient(
-        colors: [Color(0xFF000000), Color(0xFFFF0050), Color(0xFF00F2EA), Color(0xFFFFFFFF)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'facebook': const LinearGradient(
-        colors: [Color(0xFF0084ff), Color(0xFF00C6FF), Color(0xFF0051ff), Color(0xFF667eea)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'whatsapp': const LinearGradient(
-        colors: [Color(0xFF25D366), Color(0xFF128C7E), Color(0xFF075E54), Color(0xFF00BFA5)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'telegram': const LinearGradient(
-        colors: [Color(0xFF0088cc), Color(0xFF00579C), Color(0xFF64B5F6), Color(0xFF2196F3)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'youtube': const LinearGradient(
-        colors: [Color(0xFFFF0000), Color(0xFFFF5722), Color(0xFFFF6F00), Color(0xFF8B0000)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'spotify': const LinearGradient(
-        colors: [Color(0xFF1DB954), Color(0xFF1ED760), Color(0xFF191414), Color(0xFF535353)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'linkedin': const LinearGradient(
-        colors: [Color(0xFF0077B5), Color(0xFF00A0DC), Color(0xFF004471), Color(0xFF0073B1)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'twitter': const LinearGradient(
-        colors: [Color(0xFF1DA1F2), Color(0xFF14B8FF), Color(0xFF0e71c8), Color(0xFF2196F3)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'netflix': const LinearGradient(
-        colors: [Color(0xFFE50914), Color(0xFFFF0000), Color(0xFF8B0000), Color(0xFF000000)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'sunset': const LinearGradient(
-        colors: [Color(0xFFFF512F), Color(0xFFFF8C42), Color(0xFFDD2476), Color(0xFFFF6B6B)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'ocean': const LinearGradient(
-        colors: [Color(0xFF2E3192), Color(0xFF1BFFFF), Color(0xFF00D4FF), Color(0xFF0099CC)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'fire': const LinearGradient(
-        colors: [Color(0xFFf12711), Color(0xFFf5af19), Color(0xFFFF6B6B), Color(0xFFFF9500)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'purple': const LinearGradient(
-        colors: [Color(0xFF667eea), Color(0xFF764ba2), Color(0xFFa8edea), Color(0xFFfed6e3)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      'mint': const LinearGradient(
-        colors: [Color(0xFF00b09b), Color(0xFF96c93d), Color(0xFF00D9A3), Color(0xFFB4EC51)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-    };
-    return gradients[_selectedGradient] ?? gradients['instagram']!;
+    return AppGradients.getQrGradient(_selectedGradient);
   }
-
 }

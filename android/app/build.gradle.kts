@@ -9,8 +9,8 @@ plugins {
 
 android {
     namespace = "com.aozka.qrscannerapp"
-    compileSdk = 36
-    ndkVersion = "28.2.13676358"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -24,9 +24,9 @@ android {
     defaultConfig {
         applicationId = "com.aozka.qrscannerapp"
         minSdk = flutter.minSdkVersion
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
     }
 
     // 👇 YENİ EKLENEN KISIM: İmzalama Ayarları

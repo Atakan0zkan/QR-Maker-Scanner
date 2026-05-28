@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../core/constants/app_colors.dart';
+import '../l10n/app_localizations.dart';
 
 class PermissionDialog extends StatelessWidget {
   const PermissionDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       title: Row(
         children: [
           Container(
@@ -28,17 +28,17 @@ class PermissionDialog extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-          const Expanded(
+          Expanded(
             child: Text(
-              'Kamera İzni Gerekli',
-              style: TextStyle(fontSize: 18),
+              l10n.cameraPermissionRequired,
+              style: const TextStyle(fontSize: 18),
             ),
           ),
         ],
       ),
-      content: const Text(
-        'Bu uygulama kamera izni olmadan çalışamaz. Lütfen ayarlardan kamera izni verin.',
-        style: TextStyle(fontSize: 14),
+      content: Text(
+        l10n.cameraPermissionMessage,
+        style: const TextStyle(fontSize: 14),
       ),
       actions: [
         TextButton(
@@ -51,7 +51,7 @@ class PermissionDialog extends StatelessWidget {
             }
           },
           child: Text(
-            'İptal',
+            l10n.cancel,
             style: TextStyle(
               color: Theme.of(context).textTheme.bodyMedium?.color,
             ),
@@ -66,7 +66,7 @@ class PermissionDialog extends StatelessWidget {
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
           ),
-          child: const Text('Ayarlara Git'),
+          child: Text(l10n.goToSettings),
         ),
       ],
     );

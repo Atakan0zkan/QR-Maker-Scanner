@@ -16,51 +16,67 @@ class DatabaseService {
   /// Şifreleme anahtarını güvenli depolamadan al veya oluştur
   static Future<List<int>> _getEncryptionKey() async {
     const storage = FlutterSecureStorage(
-      aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      aOptions: AndroidOptions(),
       iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
     );
-    
+
     final existingKey = await storage.read(key: _encryptionKeyName);
-    
+
     if (existingKey != null) {
       return base64Decode(existingKey);
     }
-    
+
     // Yeni anahtar oluştur ve kaydet
     final newKey = Hive.generateSecureKey();
     await storage.write(key: _encryptionKeyName, value: base64Encode(newKey));
-    if (kDebugMode) developer.log('New encryption key generated', name: 'DatabaseService');
+    if (kDebugMode) {
+      developer.log('New encryption key generated', name: 'DatabaseService');
+    }
     return newKey;
   }
 
   static Future<void> init() async {
     await Hive.initFlutter();
-    
+
     // Register adapters
     Hive.registerAdapter(QRTypeAdapter());
     Hive.registerAdapter(ScannedQRAdapter());
     Hive.registerAdapter(GeneratedQRAdapter());
-    
+
     // Şifreleme anahtarını al
     final encryptionKey = await _getEncryptionKey();
     final cipher = HiveAesCipher(encryptionKey);
-    
+
     // Şifreli box'ları aç
-    await Hive.openBox<ScannedQR>(AppConstants.scannedQrBox, encryptionCipher: cipher);
-    await Hive.openBox<GeneratedQR>(AppConstants.generatedQrBox, encryptionCipher: cipher);
-    
-    if (kDebugMode) developer.log('Encrypted boxes opened successfully', name: 'DatabaseService');
+    await Hive.openBox<ScannedQR>(
+      AppConstants.scannedQrBox,
+      encryptionCipher: cipher,
+    );
+    await Hive.openBox<GeneratedQR>(
+      AppConstants.generatedQrBox,
+      encryptionCipher: cipher,
+    );
+
+    if (kDebugMode) {
+      developer.log(
+        'Encrypted boxes opened successfully',
+        name: 'DatabaseService',
+      );
+    }
   }
 
   // Scanned QR operations
-  static Box<ScannedQR> get scannedBox => Hive.box<ScannedQR>(AppConstants.scannedQrBox);
+  static Box<ScannedQR> get scannedBox =>
+      Hive.box<ScannedQR>(AppConstants.scannedQrBox);
 
   static Future<bool> saveScannedQR(ScannedQR qr) async {
     try {
       await scannedBox.put(qr.id, qr);
       return true;
     } catch (e) {
-      if (kDebugMode) developer.log('Error saving scanned QR: $e', name: 'DatabaseService');
+      if (kDebugMode) {
+        developer.log('Error saving scanned QR: $e', name: 'DatabaseService');
+      }
       return false;
     }
   }
@@ -75,7 +91,9 @@ class DatabaseService {
       await scannedBox.delete(id);
       return true;
     } catch (e) {
-      if (kDebugMode) developer.log('Error deleting scanned QR: $e', name: 'DatabaseService');
+      if (kDebugMode) {
+        developer.log('Error deleting scanned QR: $e', name: 'DatabaseService');
+      }
       return false;
     }
   }
@@ -85,20 +103,28 @@ class DatabaseService {
       await scannedBox.clear();
       return true;
     } catch (e) {
-      if (kDebugMode) developer.log('Error clearing scanned QRs: $e', name: 'DatabaseService');
+      if (kDebugMode) {
+        developer.log(
+          'Error clearing scanned QRs: $e',
+          name: 'DatabaseService',
+        );
+      }
       return false;
     }
   }
 
   // Generated QR operations
-  static Box<GeneratedQR> get generatedBox => Hive.box<GeneratedQR>(AppConstants.generatedQrBox);
+  static Box<GeneratedQR> get generatedBox =>
+      Hive.box<GeneratedQR>(AppConstants.generatedQrBox);
 
   static Future<bool> saveGeneratedQR(GeneratedQR qr) async {
     try {
       await generatedBox.put(qr.id, qr);
       return true;
     } catch (e) {
-      if (kDebugMode) developer.log('Error saving generated QR: $e', name: 'DatabaseService');
+      if (kDebugMode) {
+        developer.log('Error saving generated QR: $e', name: 'DatabaseService');
+      }
       return false;
     }
   }
@@ -113,7 +139,12 @@ class DatabaseService {
       await generatedBox.delete(id);
       return true;
     } catch (e) {
-      if (kDebugMode) developer.log('Error deleting generated QR: $e', name: 'DatabaseService');
+      if (kDebugMode) {
+        developer.log(
+          'Error deleting generated QR: $e',
+          name: 'DatabaseService',
+        );
+      }
       return false;
     }
   }
@@ -123,7 +154,12 @@ class DatabaseService {
       await generatedBox.clear();
       return true;
     } catch (e) {
-      if (kDebugMode) developer.log('Error clearing generated QRs: $e', name: 'DatabaseService');
+      if (kDebugMode) {
+        developer.log(
+          'Error clearing generated QRs: $e',
+          name: 'DatabaseService',
+        );
+      }
       return false;
     }
   }

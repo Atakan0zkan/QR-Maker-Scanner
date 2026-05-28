@@ -2,7 +2,7 @@
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.38+-02569B?logo=flutter)](https://flutter.dev)
 [![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-blue)](https://github.com/Atakan0zkan/QR-Maker-Scanner)
-[![Version](https://img.shields.io/badge/Version-1.0.0-green)](https://github.com/Atakan0zkan/QR-Maker-Scanner/releases)
+[![Version](https://img.shields.io/badge/Version-1.2.3-green)](https://github.com/Atakan0zkan/QR-Maker-Scanner/releases)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
 Hızlı, güvenilir ve kullanıcı dostu QR kod tarayıcı ve oluşturucu. Production-ready, 60% daha hızlı başlangıç, Firebase Analytics entegreli!
@@ -73,7 +73,7 @@ flutter run
 
 **CRITICAL CHECKLIST:**
 1. ✅ Firebase Analytics debug mode DISABLED (done)
-2. ✅ Android version synced: 1.2.2 (build 4)
+2. ✅ Android version synced: 1.2.3 (build 4)
 3. ⚠️ **iOS AdMob App ID** - Update in `ios/Runner/Info.plist`
 4. ⚠️ **Release Signing** - Configure keystore for Android
 
@@ -195,7 +195,7 @@ Güvenlik açığı bulursanız [SECURITY.md](SECURITY.md) dosyasındaki talimat
 4. Push edin (`git push origin feature/amazing-feature`)
 5. Pull Request açın
 
-## 📝 Recent Updates (v1.2.2)
+## 📝 Recent Updates (v1.2.3)
 
 ### New Features
 - 🔥 Firebase Analytics integration
